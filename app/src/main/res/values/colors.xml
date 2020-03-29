@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="colorPrimary">#3F51B5</color>-->
+<!--    <color name="colorPrimaryDark">#303F9F</color>-->
+<!--    <color name="colorAccent">#03DAC5</color>-->
+
+    <color name="colorPrimary">#4caf50</color>
+    <color name="colorPrimaryDark">#388e3c</color>
+    <color name="colorAccent">#ffc107</color>
+<!--    <color name="colorAccent">#ff9800</color>-->
+
+    <color name="white">#ffffff</color>
+    <color name="black" >#000000</color>
+
+    <color name="main_text">#4a4a4a</color>
+    <color name="main_dark_text">#2f2f39</color>
+
+
+    <color name="view_cart_strip">#7bc242</color>  <!--  5fb709 -->
+    <color name="view_cart_strip1">#5fb709</color>
+
+    <color name="circular_pic_border">#5f707070</color>
+    <color name="activity_bg">#f6f6f6</color>
+    <color name="dark_red">#d22532</color>
+
+    <color name="orange_50">#fff3e0</color>
+    <color name="deep_orange">#ff3d00</color>
+    <color name="dark_orange">#f05421</color>
+    <color name="light_orange">#FF9E80</color>
+    <color name="orange">#FF9800</color>
+
+    <color name="light_green_500">#8bc34a</color>
+    <color name="light_green_700">#689F38</color>
+
+<!--    <color name="hint_gray">#a9aaac</color>-->
+    <color name="hint_gray">#9b9b9b</color>
+    <color name="view_light">#f5f5f5</color>
+    <color name="gray">#6f7279</color>
+
+    <color name="menu_active">#f15421</color>
+    <color name="menu_inactive">#c7c7cc</color>
+
+    <color name="divider_light">#f5f5f5</color>
+    <color name="divider_dark">#e2e2e2</color>
+    <color name="smokegray">#f2f2f2</color>
+</resources>

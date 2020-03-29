@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cl_rootLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottombar"
+        android:layout_marginBottom="55dp"
+        android:orientation="vertical">
+
+        <!--<include layout="@layout/toolbar_custom"/>-->
+
+        <FrameLayout
+            android:id="@+id/framelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+
+    </LinearLayout>
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="bottom"
+        app:bb_activeTabColor="@color/white"
+        android:layout_gravity="bottom"
+        app:bb_badgeBackgroundColor="@color/colorAccent"
+        app:bb_badgesHideWhenActive="false"
+        app:bb_inActiveTabColor="#a4ebfe"
+        app:bb_showShadow="true"
+        app:bb_behavior="iconsOnly"
+        app:bb_tabXmlResource="@xml/tab"
+        app:bb_titleTypeFace="fonts/Lato-Regular.ttf"
+        app:paddingStart="10dp" />
+
+    <!--    <com.roughike.bottombar.BottomBar-->
+    <!--        android:id="@+id/bottombar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="55dp"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:gravity="bottom"-->
+    <!--        app:bb_activeTabColor="@color/white"-->
+    <!--        android:layout_gravity="bottom"-->
+    <!--        app:bb_badgesHideWhenActive="false"-->
+    <!--        app:bb_inActiveTabColor="#a4ebfe"-->
+    <!--        app:bb_showShadow="true"-->
+    <!--        app:bb_behavior="iconsOnly"-->
+    <!--        app:bb_tabXmlResource="@xml/tab"-->
+    <!--        app:bb_titleTypeFace="fonts/Lato-Regular.ttf"-->
+    <!--        app:paddingStart="10dp" />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:orientation="vertical"-->
+    <!--    tools:context=".main.MainActivity">-->
+
+    <!--    &lt;!&ndash;    <FrameLayout&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:id="@+id/frame_container"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_height="match_parent"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        android:layout_marginBottom="60dp"&ndash;&gt;-->
+    <!--    &lt;!&ndash;        app:layout_behavior="@string/appbar_scrolling_view_behavior" />&ndash;&gt;-->
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/frame_container"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_above="@+id/bottomNavigation"/>-->
+
+    <!--    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation-->
+    <!--        android:id="@+id/bottomNavigation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_gravity="bottom" />-->
+
+    <!--&lt;!&ndash;    <com.roughike.bottombar.BottomBar&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:id="@+id/bottomBar"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_height="60dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_alignParentBottom="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_gravity="bottom"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:background="#FFFFFF"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_activeTabColor="@color/menu_active"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_inActiveTabColor="@color/menu_inactive"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_tabXmlResource="@xml/tab"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_titleTypeFace="fonts/Lato-Regular.ttf" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;    <com.roughike.bottombar.BottomBar&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:id="@+id/bottomBar"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_height="60dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_alignParentBottom="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:background="@color/white"&ndash;&gt;-->
+    <!--&lt;!&ndash;        android:layout_gravity="bottom"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_activeTabColor="@color/menu_active"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_inActiveTabColor="@color/menu_inactive"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_showShadow="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_tabXmlResource="@xml/tab"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_titleTextAppearance="@style/BottomBar_TextSize"&ndash;&gt;-->
+    <!--&lt;!&ndash;        app:bb_titleTypeFace="fonts/Lato-Regular.ttf"/>&ndash;&gt;-->
+
+    <!--</RelativeLayout>-->

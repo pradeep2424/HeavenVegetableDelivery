@@ -1,0 +1,98 @@
+<resources>
+    <string name="google_maps_key">AIzaSyC223E_1fOrNL7cpUZ_cuEbzBI-7xEmfbI</string>
+
+    <string name="app_name">My Application</string>
+
+    <string name="powered_by">Powered by</string>
+    <string name="powered_by_hotel">HOTEL</string>
+
+    <string name="powered_by_name">
+        <font fgcolor="#000000">MANO</font> <font fgcolor="#13c7ac">R</font><font fgcolor="#000000">A</font>
+    </string>
+
+    <string name="dronam">Dronam</string>
+    <string name="food_delivery">Food Delivery</string>
+    <string name="rupees">₹</string>
+
+    <string name="login_verify_awesome">Awesome,</string>
+    <string name="login_verify_otp_text">We will auto detect the OTP sent to your number</string>
+    <string name="otp_wait_for">Wait for</string>
+    <string name="otp_message">is your Dronam verification OTP.</string>
+
+    <string name="set_location">Set Location</string>
+    <string name="location_permission_title">Location Permission Denied</string>
+    <string name="location_permission_text">We use this permission to detect your current location and display restaurants near you.
+    \nGrant this permission now!!!</string>
+
+    <string name="no_internet">No internet connection</string>
+    <string name="something_went_wrong">Something went wrong, Please try again.</string>
+    <string name="server_conn_lost">Server connection lost, Please try again.</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="current_location">My Current Location</string>
+    <string name="using_gps">Using GPS</string>
+    <string name="toolbar_set_delivery_location">Set you delivery location</string>
+    <string name="location_search_box_text">Search for area or street...</string>
+
+    <string name="incorrect_otp">Incorrect OTP.</string>
+
+    <string name="get_started_with_mobile">Get started with your mobile number</string>
+    <string name="join_family">Join the Dronam family and wait no more, \nwhen you are hungry.</string>
+    <string name="mobile_number">Your 10 digit mobile number</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_cart">Cart</string>
+    <string name="menu_orders">Orders</string>
+    <string name="menu_profile">Profile</string>
+
+    <string name="food">Food &amp; Drink experiences</string>
+    <string name="browse_menu">Browse Menu</string>
+    <string name="view_cart">View Cart</string>
+    <string name="item">Item</string>
+    <string name="items">Items</string>
+    <string name="free">( Free )</string>
+    <string name="free_delivery_for_orders_above_200">Now get free delivery for order above ₹ 200.</string>
+    <string name="contact_not_found">Contact number not found.</string>
+    <string name="no_intent_available">No application available to handle this action.</string>
+
+    <string name="pay_using_referral_points">Pay using Referral Points</string>
+    <string name="balance">Balance : </string>
+    <string name="referral_points_you_will_save">You will save</string>
+    <string name="using">using</string>
+    <string name="referral_points">Referral Points</string>
+    <string name="balance_referral_points">Balance Referral Points</string>
+    <string name="earnings_through_friends">Earnings through Friends</string>
+    <string name="referral_credits">Referral Credits</string>
+
+    <string name="saved_addresses">Saved Addresses</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <string name="search_main_title">What can we \nserve you today?</string>
+    <string name="search_box_text">Search for restaurants or dish...</string>
+    <string name="search_button">SEARCH</string>
+
+    <string name="cart_empty_title">Oops! Your cart is empty</string>
+    <string name="cart_empty_text">Looks like you haven\'t added anything to your cart yet</string>
+
+    <string name="past_orders_empty_title">Your past order history is empty</string>
+    <string name="past_orders_empty_text">You haven\'t ordered anything yet. \nDon\'t stop hunger, Order now!!!</string>
+
+    <string name="profile_favourite_restaurants">Favourite Restaurant</string>
+    <string name="profile_manage_addresses">Manage Addresses</string>
+    <string name="profile_payment_methods">Payment Methods</string>
+    <string name="profile_reward_credits">Reward Credits</string>
+    <string name="profile_settings">Settings</string>
+    <string name="profile_invite_friends">Invite Friends</string>
+
+    <string name="order_placed_title">Order Placed</string>
+    <string name="order_placed_message">You order is placed successfully.
+        Delivery master will reach to you soon. Please provide exact change.</string>
+
+    <string name="vegetable">Vegetable</string>
+    <string name="popular">Popular</string>
+    <string name="categories">Categories</string>
+</resources>

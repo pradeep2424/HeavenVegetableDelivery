@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="25dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_restaurantImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_restaurantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="9dp"
+                android:paddingLeft="12.5dp"
+                android:text="Wild Honey at Scotts Square"
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_restaurantAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="12.5dp"
+                android:text="473 Keeling Station" />
+
+            <LinearLayout
+                android:id="@+id/ll_restaurantReviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6.7dp"
+                android:layout_marginBottom="13.5dp"
+                android:orientation="horizontal"
+                android:paddingLeft="12.5dp">
+
+                <RatingBar
+                    android:id="@+id/ratingBar_restaurantReviews"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:progressTint="@color/colorAccent"
+                    android:progressBackgroundTint="@color/colorAccent"
+                    android:rating="4"
+                    android:stepSize="0.1" />
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:id="@+id/tv_restaurantReviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.6dp"
+                    android:text="238 reviews"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

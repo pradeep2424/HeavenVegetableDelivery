@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/view_cart_strip">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="17dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_itemQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 Item"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="|"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹ 250"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/td"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/view_cart"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_cart_bag"
+                android:tint="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:background="@color/white">-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingTop="10dp"-->
+    <!--        android:paddingBottom="10dp">-->
+
+    <!--        <ImageView-->
+    <!--            android:layout_width="18dp"-->
+    <!--            android:layout_height="18dp"-->
+    <!--            android:src="@mipmap/ic_places" />-->
+
+    <!--        <dronamhotel.custom.MyTextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="15dp"-->
+    <!--            android:text="Home - 7, Karnatak School, Chembur"-->
+    <!--            android:textColor="@color/main_text"-->
+    <!--            android:textSize="16sp" />-->
+
+    <!--    </LinearLayout>-->
+
+    <!--</androidx.appcompat.widget.Toolbar>-->

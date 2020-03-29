@@ -1,0 +1,11 @@
+<resources>
+  <string name="app_name">PlacePicker</string>
+  <string name="title_activity_place_picker">Map</string>
+
+  <string name="no_address">Not a valid Address</string>
+  <string name="picker_location_unavailable">Location is unavailable</string>
+
+  <string name="places_try_again">Try again</string>
+
+
+</resources>

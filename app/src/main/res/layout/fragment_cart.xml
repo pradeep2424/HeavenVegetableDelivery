@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/view_emptyCart"
+        layout="@layout/fragment_cart_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_cartItemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_bottomPaymentLayout"
+            android:descendantFocusability="blocksDescendants">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_orderDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/iv_foodImage"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/temp_order"
+                            app:riv_corner_radius="4dip" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="12dp"
+                            android:orientation="vertical">
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:id="@+id/tv_restaurantName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Dronam"
+                                android:textColor="#262628"
+                                android:textSize="16sp" />
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:id="@+id/tv_restaurantAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Rajarampuri, Kolhapur"
+                                android:textColor="#9b9b9b"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal">
+
+                                <RatingBar
+                                    android:id="@+id/ratingBar"
+                                    style="?android:attr/ratingBarStyleSmall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:numStars="5"
+                                    android:progressBackgroundTint="@color/colorAccent"
+                                    android:progressTint="@color/colorAccent"
+                                    android:rating="4" />
+
+                                <com.heaven.vegetable.custom.MyTextView
+                                    android:id="@+id/tv_restaurantReview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8.4dp"
+                                    android:text="238 reviews"
+                                    android:textColor="#9b9b9b"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <!--                <LinearLayout-->
+                            <!--                    android:layout_width="match_parent"-->
+                            <!--                    android:layout_height="wrap_content"-->
+                            <!--                    android:layout_marginTop="5dp"-->
+                            <!--                    android:orientation="horizontal">-->
+
+                            <!--                    <RatingBar-->
+                            <!--                        android:id="@+id/ratingBar"-->
+                            <!--                        style="?android:attr/ratingBarStyleSmall"-->
+                            <!--                        android:layout_width="wrap_content"-->
+                            <!--                        android:layout_height="wrap_content"-->
+                            <!--                        android:numStars="5"-->
+                            <!--                        android:progressBackgroundTint="@color/colorAccent"-->
+                            <!--                        android:progressTint="@color/colorAccent"-->
+                            <!--                        android:rating="4" />-->
+
+                            <!--                    <com.example.myapplication.custom.MyTextView-->
+                            <!--                        android:id="@+id/tv_restaurantReview"-->
+                            <!--                        android:layout_width="wrap_content"-->
+                            <!--                        android:layout_height="wrap_content"-->
+                            <!--                        android:layout_marginLeft="8.4dp"-->
+                            <!--                        android:text="238 reviews"-->
+                            <!--                        android:textColor="#9b9b9b"-->
+                            <!--                        android:textSize="12sp" />-->
+
+                            <!--                </LinearLayout>-->
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider_dark" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_orderedItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:clipToPadding="false"
+                        android:divider="#fff"
+                        android:dividerHeight="0dp"
+                        android:scrollbars="none" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/ll_orderDetails"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/smokegray" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_referralPointsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/orange_50">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.heaven.vegetable.custom.MyTextView
+                                    android:id="@+id/tv_payUsingReferralPointsText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/pay_using_referral_points"
+                                    android:textColor="@color/main_text"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <com.suke.widget.SwitchButton
+                                    android:id="@+id/switchButton_applyPoints"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    app:sb_checked="false"
+                                    app:sb_enable_effect="true"
+                                    app:sb_shadow_effect="true"
+                                    app:sb_show_indicator="true" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/tv_payUsingReferralPointsText"
+                                    android:layout_marginTop="8dp">
+
+                                    <com.heaven.vegetable.custom.MyTextView
+                                        android:id="@+id/tv_balanceText"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="right"
+                                        android:text="@string/balance"
+                                        android:textColor="@color/main_text"
+                                        android:textSize="14sp" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_referralPointsIcon"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_toRightOf="@+id/tv_balanceText"
+                                        android:src="@drawable/ic_temp_coin2" />
+
+                                    <com.heaven.vegetable.custom.MyTextView
+                                        android:id="@+id/tv_balanceReferralPoints"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_toRightOf="@+id/iv_referralPointsIcon"
+                                        android:ellipsize="end"
+                                        android:maxLines="1"
+                                        android:text="₹"
+                                        android:textColor="@color/main_text"
+                                        android:textSize="14sp" />
+
+                                </RelativeLayout>
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <com.heaven.vegetable.custom.MyTextView
+                            android:id="@+id/tv_referralPointsSaveMessage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:text="@string/referral_points_you_will_save"
+                            android:textColor="@color/light_green_700"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/ll_orderDetails"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/smokegray" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_billDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.heaven.vegetable.custom.MyTextView
+                            android:id="@+id/tv_billDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Bill Details"
+                            android:textColor="@color/main_dark_text"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:id="@+id/tv_itemTotalTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Item Total"
+                                android:textColor="@color/main_text"
+                                android:textSize="14sp" />
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right">
+
+                                <RelativeLayout
+                                    android:id="@+id/rl_addReferralPointsBillDetails"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toLeftOf="@+id/tv_itemTotalText">
+
+                                    <com.heaven.vegetable.custom.MyTextView
+                                        android:id="@+id/tv_addReferralMoneyBillDetails"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_toLeftOf="@+id/iv_referralBalanceIconBillDetails"
+                                        android:gravity="right"
+                                        android:text=" ₹ 150"
+                                        android:textColor="@color/main_text"
+                                        android:textSize="14sp" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_referralBalanceIconBillDetails"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_toLeftOf="@+id/tv_addBillDetails"
+                                        android:src="@drawable/ic_temp_coin2" />
+
+                                    <com.heaven.vegetable.custom.MyTextView
+                                        android:id="@+id/tv_addBillDetails"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginLeft="8dp"
+                                        android:gravity="right"
+                                        android:text=" + "
+                                        android:textColor="@color/main_text"
+                                        android:textSize="14sp" />
+
+                                </RelativeLayout>
+
+                                <com.heaven.vegetable.custom.MyTextView
+                                    android:id="@+id/tv_itemTotalText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="₹ 607"
+                                    android:textColor="@color/main_text"
+                                    android:textSize="14sp" />
+
+                            </RelativeLayout>
+
+                            <!--                            <com.example.myapplication.custom.MyTextView-->
+                            <!--                                android:id="@+id/tv_itemTotalText"-->
+                            <!--                                android:layout_width="0dp"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_weight="0.8"-->
+                            <!--                                android:gravity="right"-->
+                            <!--                                android:text="₹ 607"-->
+                            <!--                                android:textColor="@color/main_text"-->
+                            <!--                                android:textSize="14sp" />-->
+
+                        </LinearLayout>
+
+                        <!--                        <LinearLayout-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:layout_marginTop="10dp"-->
+                        <!--                            android:gravity="center"-->
+                        <!--                            android:orientation="horizontal"-->
+                        <!--                            android:weightSum="2">-->
+
+                        <!--                            <com.example.myapplication.custom.MyTextView-->
+                        <!--                                android:id="@+id/tv_restaurantChargesTitle"-->
+                        <!--                                android:layout_width="0dp"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_weight="1"-->
+                        <!--                                android:text="Taxes and Charges"-->
+                        <!--                                android:textColor="@color/main_text"-->
+                        <!--                                android:textSize="14sp" />-->
+
+                        <!--                            <com.example.myapplication.custom.MyTextView-->
+                        <!--                                android:id="@+id/tv_restaurantChargesText"-->
+                        <!--                                android:layout_width="0dp"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_weight="1"-->
+                        <!--                                android:gravity="right"-->
+                        <!--                                android:text="₹ 60"-->
+                        <!--                                android:textColor="@color/main_text"-->
+                        <!--                                android:textSize="14sp" />-->
+
+                        <!--                        </LinearLayout>-->
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/divider_light" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:id="@+id/tv_deliveryFeesTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Delivery Fee"
+                                android:textColor="@color/main_text"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:orientation="horizontal">
+
+                                <com.heaven.vegetable.custom.MyTextView
+                                    android:id="@+id/tv_deliveryFeeTextFree"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:gravity="right"
+                                    android:text="@string/free"
+                                    android:textColor="@color/light_green_700"
+                                    android:textSize="16sp" />
+
+                                <com.heaven.vegetable.custom.MyTextView
+                                    android:id="@+id/tv_deliveryFeeText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="right"
+                                    android:text="₹ 35"
+                                    android:textColor="@color/main_text"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:id="@+id/tv_deliveryFeeMessageText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="left"
+                                android:text="@string/free_delivery_for_orders_above_200"
+                                android:textColor="@color/light_green_700"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/divider_light" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_addReferralPointsTotalPay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:id="@+id/tv_totalPayTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Total Pay"
+                                android:textColor="@color/main_text"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right">
+
+                                <RelativeLayout
+                                    android:id="@+id/rl_addReferralPointsTotalPay"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toLeftOf="@+id/tv_totalPayText">
+
+                                    <com.heaven.vegetable.custom.MyTextView
+                                        android:id="@+id/tv_addReferralMoneyTotalPay"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_toLeftOf="@+id/iv_referralBalanceIconTotalPay"
+                                        android:gravity="right"
+                                        android:text=" ₹ 150"
+                                        android:textColor="@color/main_text"
+                                        android:textSize="14sp" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_referralBalanceIconTotalPay"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_toLeftOf="@+id/tv_addTotalPay"
+                                        android:src="@drawable/ic_temp_coin2" />
+
+                                    <com.heaven.vegetable.custom.MyTextView
+                                        android:id="@+id/tv_addTotalPay"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginLeft="8dp"
+                                        android:gravity="right"
+                                        android:text=" + "
+                                        android:textColor="@color/main_text"
+                                        android:textSize="14sp" />
+
+                                </RelativeLayout>
+
+                                <com.heaven.vegetable.custom.MyTextView
+                                    android:id="@+id/tv_totalPayText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="₹ 870"
+                                    android:textColor="@color/main_text"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                            <!--                            <com.example.myapplication.custom.MyTextView-->
+                            <!--                                android:id="@+id/tv_totalPayText"-->
+                            <!--                                android:layout_width="0dp"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_weight="1"-->
+                            <!--                                android:gravity="right"-->
+                            <!--                                android:text="₹ 870"-->
+                            <!--                                android:textColor="@color/main_text"-->
+                            <!--                                android:textSize="15sp"-->
+                            <!--                                android:textStyle="bold" />-->
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/ll_orderDetails"
+                    android:background="@color/smokegray" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/ll_bottomPaymentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black"
+            android:elevation="30dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="2">
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_paymentButtonAmount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="Rs 8,750"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_paymentButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/deep_orange"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="ORDER NOW"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!--            <com.example.myapplication.custom.MyTextView-->
+            <!--                android:id="@+id/tv_paymentButton"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:background="@color/deep_orange"-->
+            <!--                android:gravity="center"-->
+            <!--                android:padding="15dp"-->
+            <!--                android:text="PAYMENT"-->
+            <!--                android:textColor="@color/white"-->
+            <!--                android:textSize="14sp"-->
+            <!--                android:textStyle="bold" />-->
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

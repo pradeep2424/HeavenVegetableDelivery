@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/logo"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:src="@mipmap/empty_cart" />-->
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@mipmap/empty_past_orders" />
+
+        <com.heaven.vegetable.custom.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="@string/past_orders_empty_title"
+            android:textColor="@color/main_dark_text"
+            android:textSize="20sp" />
+
+        <com.heaven.vegetable.custom.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:text="@string/past_orders_empty_text"
+            android:textColor="@color/main_dark_text"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_browseMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rect_red_border"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="8dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="8dp">
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/browse_menu"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_red"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

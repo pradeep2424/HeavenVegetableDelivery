@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_white"
+            android:tint="@color/main_text" />
+
+        <com.heaven.vegetable.custom.MyTextView
+            android:id="@+id/tv_toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text=""
+            android:textColor="@color/main_text"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.Toolbar>

@@ -1,0 +1,37 @@
+    <tabs>
+        <tab
+            activeColor="@color/menu_active"
+            badgeHidesWhenActive="true"
+            icon="@drawable/ic_home"
+            id="@+id/tab_home"
+            inActiveColor="@color/menu_inactive"
+            title="@string/menu_home" />
+
+<!--        <tab-->
+<!--            activeColor="@color/menu_active"-->
+<!--            icon="@drawable/ic_search"-->
+<!--            id="@+id/tab_search"-->
+<!--            inActiveColor="@color/menu_inactive"-->
+<!--            title="@string/menu_search" />-->
+
+        <tab
+            activeColor="@color/menu_active"
+            icon="@drawable/ic_cart_bag"
+            id="@+id/tab_cart"
+            inActiveColor="@color/menu_inactive"
+            title="@string/menu_cart" />
+
+        <tab
+            activeColor="@color/menu_active"
+            icon="@drawable/ic_orders"
+            id="@+id/tab_orders"
+            inActiveColor="@color/menu_inactive"
+            title="@string/menu_orders" />
+
+        <tab
+            activeColor="@color/menu_active"
+            icon="@drawable/ic_profile"
+            id="@+id/tab_profile"
+            inActiveColor="@color/menu_inactive"
+            title="@string/menu_profile" />
+    </tabs>

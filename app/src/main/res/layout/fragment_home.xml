@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_bg"
+    android:fitsSystemWindows="true">
+
+    <!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    android:id="@+id/main_content"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:fitsSystemWindows="true">-->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:id="@+id/toolbar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="?attr/actionBarSize"-->
+        <!--            android:background="?attr/colorPrimary"-->
+        <!--            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+        <!--            app:layout_scrollFlags="scroll|enterAlways"-->
+        <!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+
+        <include
+            android:id="@+id/view_toolbarLocation"
+            layout="@layout/toolbar_home_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical">-->
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBar"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--                <include layout="@layout/toolbar_home_location" />-->
+
+            <!--            <include layout="@layout/toolbar_home_search" />-->
+
+            <!--            <FrameLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content">-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@mipmap/temp_white_img"
+                    app:auto_cycle="true"
+                    app:indicator_visibility="visible"
+                    app:pager_animation="Accordion"
+                    app:pager_animation_span="1100" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18.5sp"
+                    android:layout_marginTop="27sp"
+                    android:text="@string/popular"
+                    android:textColor="@color/main_dark_text"
+                    android:textSize="18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_popular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:divider="#fff"
+                    android:layout_marginTop="15dp"
+                    android:dividerHeight="0dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:scrollbars="none" />
+
+
+                <!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_image8"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12dp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_image9"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12dp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_imag10"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_imag11"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="22dp"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_image12"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_image13"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_imag14"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="27dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                            android:id="@+id/profile_image15"-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@mipmap/ic_launcher"-->
+<!--                            app:civ_border_color="@color/circular_pic_border"-->
+<!--                            app:civ_border_width="1dp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="@string/vegetable"-->
+<!--                            android:textColor="@color/main_text"-->
+<!--                            android:textSize="12sp" />-->
+
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="13dp"
+                android:orientation="vertical">
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18.5sp"
+                    android:layout_marginTop="27sp"
+                    android:text="@string/categories"
+                    android:textColor="@color/main_dark_text"
+                    android:textSize="18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_vegetableCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:divider="#fff"
+                    android:layout_marginTop="15dp"
+                    android:dividerHeight="0dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:scrollbars="none" />
+            </LinearLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="188dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:clipToPadding="false"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/powered_by"
+                    android:textColor="@color/hint_gray"
+                    android:textSize="12sp" />
+
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/powered_by_hotel"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/powered_by_name"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!--    </LinearLayout>-->
+
+</RelativeLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000">
+
+
+    <com.heaven.vegetable.custom.MyTextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginRight="19dp"
+        android:text="Log Out"
+        android:textColor="@color/white"
+        android:textSize="14.4sp"
+        android:tint="#ffffff" />
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="17.3dp"-->
+    <!--        android:layout_height="17.3dp"-->
+    <!--        android:tint="#ffffff"-->
+    <!--        android:src="@drawable/ic_settings"-->
+    <!--       android:layout_gravity="end"-->
+    <!--        android:layout_marginRight="19dp"/>-->
+
+</androidx.appcompat.widget.Toolbar>

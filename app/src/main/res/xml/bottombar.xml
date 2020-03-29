@@ -1,0 +1,56 @@
+<tabs>
+    <tab
+        activeColor="@colors/menu_active"
+        icon="@drawable/ic_home"
+        id="@+id/tab_home"
+        inActiveColor="@colors/menu_inactive" />
+
+    <tab
+        activeColor="@colors/menu_active"
+        icon="@drawable/ic_search"
+        id="@+id/tab_search"
+        inActiveColor="@colors/menu_inactive" />
+
+    <tab
+        activeColor="@colors/menu_active"
+        icon="@drawable/ic_like"
+        id="@+id/tab_orders"
+        inActiveColor="@colors/menu_inactive" />
+
+    <tab
+        activeColor="@colors/menu_active"
+        icon="@drawable/ic_person"
+        id="@+id/tab_profile"
+        inActiveColor="@colors/menu_inactive" />
+
+    <!--    <tab-->
+    <!--        id="@+id/tab_home"-->
+    <!--        icon="@drawable/ic_home"-->
+    <!--        activeColor="@colors/menu_active"-->
+    <!--        title="@string/menu_home"-->
+    <!--        inActiveColor="@colors/menu_inactive"/>-->
+
+    <!--    <tab-->
+    <!--        id="@+id/tab_search"-->
+    <!--        icon="@drawable/ic_search"-->
+    <!--        title="@string/menu_search"-->
+    <!--        activeColor="@colors/menu_active"-->
+    <!--        inActiveColor="@colors/menu_inactive"/>-->
+
+    <!--    <tab-->
+    <!--        id="@+id/tab_orders"-->
+    <!--        icon="@drawable/ic_like"-->
+    <!--        title="@string/menu_orders"-->
+    <!--        activeColor="@colors/menu_active"-->
+    <!--        inActiveColor="@colors/menu_inactive" />-->
+
+    <!--    <tab-->
+    <!--        id="@+id/tab_profile"-->
+    <!--        icon="@drawable/ic_person"-->
+    <!--        title="@string/menu_profile"-->
+    <!--        activeColor="@colors/menu_active"-->
+    <!--        inActiveColor="@colors/menu_inactive"/>-->
+</tabs>
+
+
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listview_background_shape">
+    <stroke
+        android:width="0dp"
+        android:color="#4caf50" />
+    <!--<padding android:left="2dp"-->
+    <!--android:top="2dp"-->
+    <!--android:right="2dp"-->
+    <!--android:bottom="2dp" />-->
+    <corners android:radius="3.5dp" />
+    <solid android:color="@color/dark_red" />
+    <!--    <solid android:color="@color/light_green_500" />-->
+</shape>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/listview_background_shape">-->
+<!--    <stroke android:width="0dp" android:color="#ff207d94" />-->
+<!--    &lt;!&ndash;<padding android:left="2dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;android:top="2dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;android:right="2dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;android:bottom="2dp" />&ndash;&gt;-->
+<!--    <corners android:radius="3.5dp" />-->
+<!--    <solid android:color="#21549c" />-->
+<!--</shape>-->
+
