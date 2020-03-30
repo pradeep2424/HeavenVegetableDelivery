@@ -2,9 +2,10 @@ package com.heaven.vegetable.model;
 
 import java.io.Serializable;
 
-public class RestaurantObject implements Serializable {
+public class CateogryObject implements Serializable {
     int categoryID;
     String categoryName;
+    String categoryImage;
     int restaurantID;
     String restaurantName ;
     String restaurantAddress;
@@ -21,6 +22,14 @@ public class RestaurantObject implements Serializable {
     String taxID ;
     boolean taxable ;
     boolean includeTax ;
+
+    public String getCategoryImage() {
+        return categoryImage;
+    }
+
+    public void setCategoryImage(String categoryImage) {
+        this.categoryImage = categoryImage;
+    }
 
     public int getCategoryID() {
         return categoryID;

@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -30,15 +29,15 @@ import com.heaven.vegetable.activity.LocationGoogleMapActivity;
 import com.heaven.vegetable.activity.RestaurantDetailsActivity;
 import com.heaven.vegetable.adapter.PagerAdapterBanner;
 import com.heaven.vegetable.adapter.RecycleAdapterPopularItem;
-import com.heaven.vegetable.adapter.RecycleAdapterRestaurant;
+import com.heaven.vegetable.adapter.RecycleAdapterCategory;
 import com.heaven.vegetable.listeners.OnCuisineClickListener;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.listeners.OnUserMayLikedClickListener;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.BannerDetailsObject;
-import com.heaven.vegetable.model.DishObject;
-import com.heaven.vegetable.model.RestaurantObject;
+import com.heaven.vegetable.model.ProductObject;
+import com.heaven.vegetable.model.CateogryObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
@@ -75,19 +74,19 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     private SliderLayout imageSliderLayout;
 
-    private ArrayList<DishObject> listDishObject;
+    private ArrayList<ProductObject> listProductObject;
     private RecyclerView rvPopular;
     private RecycleAdapterPopularItem adapterDish;
-    Integer image[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-            R.mipmap.temp_paneer, R.mipmap.ic_launcher};
-    String dish_name[] = {"Paratha", "Cheese Butter", "Paneer Handi", "Paneer Kopta", "Chiken"};
-    String dish_type[] = {"Punjabi", "Maxican", "Punjabi", "Punjabi", "Non Veg"};
-    double price[] = {250, 150, 200, 220, 350};
+    Integer image[] = {R.mipmap.ic_launcher_round, R.mipmap.temp_paneer, R.mipmap.ic_launcher_round,
+            R.mipmap.temp_paneer, R.mipmap.ic_launcher_round, R.mipmap.temp_paneer, R.mipmap.ic_launcher_round};
+    String dish_name[] = {"Paratha", "Cheese", "Paneer", "Paneer", "Chiken", "Paneer Kopta", "Chiken"};
+    String dish_type[] = {"Punjabi", "Maxican", "Punjabi", "Punjabi", "Non Veg", "Punjabi", "Non Veg"};
+    double price[] = {250, 150, 200, 220, 350, 200, 100};
 
-    private ArrayList<RestaurantObject> listRestaurantObject;
+    private ArrayList<CateogryObject> listRestaurantObject;
     //    private TextView tvSeeMoreRestaurants;
     private RecyclerView rvVegetableCategories;
-    private RecycleAdapterRestaurant adapterRestaurant;
+    private RecycleAdapterCategory adapterRestaurant;
 //    Integer image2[] = {R.mipmap.temp_img1, R.mipmap.temp_img2, R.mipmap.temp_img3,
 //            R.mipmap.temp_img4, R.mipmap.temp_img5, R.mipmap.temp_img6, R.mipmap.temp_img7};
 
@@ -139,12 +138,15 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         initComponents();
         componentEvents();
         setToolbarDetails();
-        setupRecyclerPopular();
         setupViewPagerBanner();
 
-        getSliderDetails();
-        getUserLikeTopItems();
-        getRestaurantData();
+        setupRecyclerPopular();
+        setupSlidingImages();
+        setupRecyclerViewRestaurant();
+
+//        getSliderDetails();
+//        getUserLikeTopItems();
+//        getRestaurantData();
 
         return rootView;
     }
@@ -161,9 +163,9 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
         imageSliderLayout = (SliderLayout) rootView.findViewById(R.id.slider);
 
-        rvPopular = (RecyclerView) rootView.findViewById(R.id.recyclerView_popular);
-        rvVegetableCategories = (RecyclerView) rootView.findViewById(R.id.recyclerView_vegetableCategories);
-        viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        rvPopular = rootView.findViewById(R.id.recyclerView_popular);
+        rvVegetableCategories = rootView.findViewById(R.id.recyclerView_vegetableCategories);
+        viewPager = rootView.findViewById(R.id.viewpager);
 
 //        tvSeeMoreDish = (TextView) rootView.findViewById(R.id.tv_seeMoreDish);
 //        tvSeeMoreCuisines = (TextView) rootView.findViewById(R.id.tv_seeMoreCuisine);
@@ -208,11 +210,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     }
 
     private void setupSlidingImages() {
-//        HashMap<String,String> url_maps = new HashMap<String, String>();
-//        url_maps.put("Best Offer", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-//        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-//        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-//        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+        HashMap<String, String> url_maps = new HashMap<String, String>();
+        url_maps.put("Best Offer", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
+        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
+        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
+        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
 
 //        HashMap<String, Integer> url_maps = new HashMap<String, Integer>();
 //        url_maps.put("50% off on Lunch", R.mipmap.temp_img1);
@@ -220,8 +222,8 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 //        url_maps.put("House of Cards", R.mipmap.temp_img3);
 //        url_maps.put("Game of Thrones", R.mipmap.temp_img4);
 
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.putAll(mapBannerDetails);
+//        HashMap<String, String> url_maps = new HashMap<String, String>();
+//        url_maps.putAll(mapBannerDetails);
 
         for (String name : url_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(getActivity());
@@ -249,45 +251,48 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     private void setupRecyclerPopular() {
         getPopularItemsData();
 
-        adapterDish = new RecycleAdapterPopularItem(getActivity(), listDishObject);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 4);
-        rvPopular.setLayoutManager(mLayoutManager);
+        adapterDish = new RecycleAdapterPopularItem(getActivity(), listProductObject);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);
+        rvPopular.setLayoutManager(gridLayoutManager);
         rvPopular.setItemAnimator(new DefaultItemAnimator());
         rvPopular.setAdapter(adapterDish);
         adapterDish.setClickListener(this);
     }
 
     private void getPopularItemsData() {
-        listDishObject = new ArrayList<>();
+        listProductObject = new ArrayList<>();
         for (int i = 0; i < image.length; i++) {
 //            DishObject dishObject = new DishObject(image[i], dish_name[i], dish_type[i], price[i]);
-            DishObject dishObject = new DishObject();
-            dishObject.setProductName(dish_name[i]);
-            dishObject.setProductImage(String.valueOf(image[i]));
-            dishObject.setCategoryName(dish_type[i]);
-            dishObject.setPrice(price[i]);
-            listDishObject.add(dishObject);
+            ProductObject productObject = new ProductObject();
+            productObject.setProductName(dish_name[i]);
+            productObject.setProductImage(String.valueOf(image[i]));
+            productObject.setCategoryName(dish_type[i]);
+            productObject.setPrice(price[i]);
+            listProductObject.add(productObject);
         }
     }
 
     private void setupRecyclerViewRestaurant() {
-//        getRestaurantData();
+        getCategoryData();
 
-        adapterRestaurant = new RecycleAdapterRestaurant(getActivity(), listRestaurantObject);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvVegetableCategories.setLayoutManager(layoutManager);
+        adapterRestaurant = new RecycleAdapterCategory(getActivity(), listRestaurantObject);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        rvVegetableCategories.setLayoutManager(gridLayoutManager);
         rvVegetableCategories.setItemAnimator(new DefaultItemAnimator());
         rvVegetableCategories.setAdapter(adapterRestaurant);
         adapterRestaurant.setClickListener(this);
     }
 
-//    private void getRestaurantData() {
-//        listRestaurantObject = new ArrayList<>();
-//        for (int i = 0; i < image2.length; i++) {
-//            RestaurantObject restaurantObject = new RestaurantObject(image2[i]);
-//            listRestaurantObject.add(restaurantObject);
-//        }
-//    }
+    private void getCategoryData() {
+        listRestaurantObject = new ArrayList<>();
+        for (int i = 0; i < image.length; i++) {
+            CateogryObject cateogryObject = new CateogryObject();
+            cateogryObject.setCategoryName("Category " + 1);
+            cateogryObject.setCategoryImage(String.valueOf(image[i]));
+            listRestaurantObject.add(cateogryObject);
+        }
+    }
 
 
     private void setupViewPagerBanner() {
@@ -370,7 +375,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
                                 boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
 
-                                RestaurantObject restaurantObject = new RestaurantObject();
+                                CateogryObject restaurantObject = new CateogryObject();
                                 restaurantObject.setCategoryID(categoryID);
                                 restaurantObject.setCategoryName(categoryName);
                                 restaurantObject.setRestaurantID(restaurantID);
@@ -468,7 +473,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
                         }
 
-                        setupSlidingImages();
+//                        setupSlidingImages();
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -527,11 +532,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
                                 for (int ii = 0; i < image.length; i++) {
 //            DishObject dishObject = new DishObject(image[i], dish_name[i], dish_type[i], price[i]);
-                                    DishObject dishObject = new DishObject();
-                                    dishObject.setProductName(dish_name[i]);
-                                    dishObject.setProductImage(String.valueOf(image[i]));
-                                    dishObject.setCategoryName(dish_type[i]);
-                                    listDishObject.add(dishObject);
+                                    ProductObject productObject = new ProductObject();
+                                    productObject.setProductName(dish_name[i]);
+                                    productObject.setProductImage(String.valueOf(image[i]));
+                                    productObject.setCategoryName(dish_type[i]);
+                                    listProductObject.add(productObject);
                                 }
 
                                 mapBannerDetails.put(title, photoURL);
@@ -596,7 +601,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     @Override
     public void onCuisineClick(View view, int position) {
         if (listRestaurantObject.size() > 0) {
-            RestaurantObject restaurantObject = listRestaurantObject.get(0);
+            CateogryObject restaurantObject = listRestaurantObject.get(0);
             Intent intent = new Intent(getActivity(), RestaurantDetailsActivity.class);
             intent.putExtra("RestaurantObject", restaurantObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
@@ -606,7 +611,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     @Override
     public void onUserMayLikedClick(View view, int position) {
         if (listRestaurantObject.size() > 0) {
-            RestaurantObject restaurantObject = listRestaurantObject.get(0);
+            CateogryObject restaurantObject = listRestaurantObject.get(0);
             Intent intent = new Intent(getActivity(), RestaurantDetailsActivity.class);
             intent.putExtra("RestaurantObject", restaurantObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
@@ -616,7 +621,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     @Override
     public void onClick(View view, int position) {
-        RestaurantObject restaurantObject = listRestaurantObject.get(position);
+        CateogryObject restaurantObject = listRestaurantObject.get(position);
         Application.restaurantObject = restaurantObject;
 
         Intent intent = new Intent(getActivity(), RestaurantDetailsActivity.class);

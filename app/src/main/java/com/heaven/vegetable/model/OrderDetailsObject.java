@@ -30,13 +30,13 @@ public class OrderDetailsObject implements Serializable {
     boolean isIncludeTax;
     boolean isTaxApplicable;
 
-    ArrayList<DishObject> listProducts;
+    ArrayList<ProductObject> listProducts;
 
-    public ArrayList<DishObject> getListProducts() {
+    public ArrayList<ProductObject> getListProducts() {
         return listProducts;
     }
 
-    public void setListProducts(ArrayList<DishObject> listProducts) {
+    public void setListProducts(ArrayList<ProductObject> listProducts) {
         this.listProducts = listProducts;
     }
 //    double deliveryCharge;

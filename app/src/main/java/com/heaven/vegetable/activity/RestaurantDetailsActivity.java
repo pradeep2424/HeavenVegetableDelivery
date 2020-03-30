@@ -1,39 +1,10 @@
 package com.heaven.vegetable.activity;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnItemAddedToCart;
-import com.heaven.vegetable.loader.DialogLoadingIndicator;
-import com.heaven.vegetable.model.RestaurantObject;
-import com.travijuu.numberpicker.library.Enums.ActionEnum;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RestaurantDetailsActivity extends AppCompatActivity  {
 

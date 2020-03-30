@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.listeners.OnUserMayLikedClickListener;
-import com.heaven.vegetable.model.DishObject;
+import com.heaven.vegetable.model.ProductObject;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class RecycleAdapterPopularItem extends RecyclerView.Adapter<RecycleAdapt
     Context context;
     private OnUserMayLikedClickListener clickListener;
 
-    private List<DishObject> listDish;
+    private List<ProductObject> listDish;
 
-    public RecycleAdapterPopularItem(Context context, List<DishObject> listDish) {
+    public RecycleAdapterPopularItem(Context context, List<ProductObject> listDish) {
         this.listDish = listDish;
         this.context = context;
     }
@@ -61,7 +61,7 @@ public class RecycleAdapterPopularItem extends RecyclerView.Adapter<RecycleAdapt
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        DishObject movie = listDish.get(position);
+        ProductObject movie = listDish.get(position);
 
         holder.tvItemName.setText(movie.getProductName());
         holder.ivItemIcon.setImageResource(Integer.parseInt(movie.getProductImage()));

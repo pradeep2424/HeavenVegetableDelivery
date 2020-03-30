@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Wolf Soft on 8/3/2017.
  */
 
-public class DishObject implements Serializable {
+public class ProductObject implements Serializable {
     double cgst;
     int categoryID;
     String categoryName;

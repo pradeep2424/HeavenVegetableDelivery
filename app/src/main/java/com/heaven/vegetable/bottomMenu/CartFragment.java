@@ -28,7 +28,7 @@ import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.main.GetStartedMobileNumberActivity;
 import com.heaven.vegetable.model.CartObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
-import com.heaven.vegetable.model.RestaurantObject;
+import com.heaven.vegetable.model.CateogryObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -650,7 +650,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     private JsonObject createJsonCart(CartObject cartObject) {
         double totalPrice;
 
-        RestaurantObject restaurantObject = Application.restaurantObject;
+        CateogryObject restaurantObject = Application.restaurantObject;
 
         if (restaurantObject.getTaxable()) {
             double productPrice = cartObject.getProductAmount();
