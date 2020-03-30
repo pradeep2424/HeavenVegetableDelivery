@@ -17,11 +17,16 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".main.GetStartedVerifyOTPActivity"
-            android:theme="@style/NoActionBarShowStatusBar" />
+            android:name=".main.SplashActivity"
+            android:theme="@style/NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
-            android:name=".activity.LocationGoogleMapActivity"
+            android:name=".main.GetStartedVerifyOTPActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
 
         <activity
@@ -30,13 +35,12 @@
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <activity
-            android:name=".main.SplashActivity"
-            android:theme="@style/NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".activity.LocationGoogleMapActivity"
+            android:theme="@style/NoActionBarShowStatusBar" />
+
+        <activity
+            android:name=".main.MainActivity"
+            android:theme="@style/NoActionBarShowStatusBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
