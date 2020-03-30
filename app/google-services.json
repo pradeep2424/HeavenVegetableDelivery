@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "837787190414",
+    "firebase_url": "https://heavenvegetabledelivery.firebaseio.com",
+    "project_id": "heavenvegetabledelivery",
+    "storage_bucket": "heavenvegetabledelivery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837787190414:android:a84aeb72981bf02fda75df",
+        "android_client_info": {
+          "package_name": "com.heaven.vegetable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837787190414-2u1j71efs4vm9b57m8r8m3ollhpmeot4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.heaven.vegetable",
+            "certificate_hash": "34fab2417ffcc87b05842e2cc291042ecc74c907"
+          }
+        },
+        {
+          "client_id": "837787190414-2gbeohsfi9rlij8duveudq7cdc5f0vmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5RtypJZUzxjMp9ftZo3N28JGuRzWsP2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837787190414-2gbeohsfi9rlij8duveudq7cdc5f0vmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
