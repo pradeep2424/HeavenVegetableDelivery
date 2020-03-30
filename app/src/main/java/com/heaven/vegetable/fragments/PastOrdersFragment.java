@@ -23,9 +23,9 @@ import com.heaven.vegetable.listeners.OnPastOrderOptionsClickListener;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.CartObject;
-import com.heaven.vegetable.model.DishObject;
+import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
-import com.heaven.vegetable.model.RestaurantObject;
+import com.heaven.vegetable.model.CateogryObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
@@ -192,22 +192,22 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
             int orderNo = listAllOrders.get(i).getOrderNumber();
             int orderNoInList = 0;
 
-            ArrayList<DishObject> listProducts = new ArrayList<>();
+            ArrayList<ProductObject> listProducts = new ArrayList<>();
             for (int j = 0; j < tempAllOrders.size(); ) {
                 orderNoInList = tempAllOrders.get(j).getOrderNumber();
 
                 if (orderNo == orderNoInList) {
-                    DishObject dishObject = new DishObject();
+                    ProductObject productObject = new ProductObject();
 
-                    dishObject.setProductID(tempAllOrders.get(j).getProductID());
-                    dishObject.setProductName(tempAllOrders.get(j).getProductName());
-                    dishObject.setProductQuantity(tempAllOrders.get(j).getProductQuantity());
-                    dishObject.setPrice(tempAllOrders.get(j).getProductRate());
-                    dishObject.setCgst(tempAllOrders.get(j).getCgst());
-                    dishObject.setSgst(tempAllOrders.get(j).getSgst());
-                    dishObject.setTaxID(tempAllOrders.get(j).getTaxID());
+                    productObject.setProductID(tempAllOrders.get(j).getProductID());
+                    productObject.setProductName(tempAllOrders.get(j).getProductName());
+                    productObject.setProductQuantity(tempAllOrders.get(j).getProductQuantity());
+                    productObject.setPrice(tempAllOrders.get(j).getProductRate());
+                    productObject.setCgst(tempAllOrders.get(j).getCgst());
+                    productObject.setSgst(tempAllOrders.get(j).getSgst());
+                    productObject.setTaxID(tempAllOrders.get(j).getTaxID());
 
-                    listProducts.add(dishObject);
+                    listProducts.add(productObject);
                     tempAllOrders.remove(j);
                     j = 0;
                 } else {
@@ -234,10 +234,10 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
     @Override
     public void onClickReorder(View view, int position) {
         OrderDetailsObject orderDetailsObject = listFormattedPastOrders.get(position);
-        ArrayList<DishObject> listProducts = orderDetailsObject.getListProducts();
+        ArrayList<ProductObject> listProducts = orderDetailsObject.getListProducts();
 
 //        adding restaurant details to application class
-        RestaurantObject restaurantObject = new RestaurantObject();
+        CateogryObject restaurantObject = new CateogryObject();
         restaurantObject.setRestaurantID(orderDetailsObject.getClientID());
         restaurantObject.setRestaurantName(orderDetailsObject.getRestaurantName());
         restaurantObject.setIncludeTax(orderDetailsObject.getIsIncludeTax());
@@ -381,29 +381,29 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
         }
     }
 
-    private JsonObject createJsonCart(DishObject dishObject) {
-        RestaurantObject restaurantObject = Application.restaurantObject;
+    private JsonObject createJsonCart(ProductObject productObject) {
+        CateogryObject restaurantObject = Application.restaurantObject;
 
         JsonObject postParam = new JsonObject();
 
         try {
-            postParam.addProperty("ProductId", dishObject.getProductID());
-            postParam.addProperty("ProductName", dishObject.getProductName());
-            postParam.addProperty("ProductRate", dishObject.getPrice());
-            postParam.addProperty("ProductAmount", dishObject.getPrice());
+            postParam.addProperty("ProductId", productObject.getProductID());
+            postParam.addProperty("ProductName", productObject.getProductName());
+            postParam.addProperty("ProductRate", productObject.getPrice());
+            postParam.addProperty("ProductAmount", productObject.getPrice());
             postParam.addProperty("ProductSize", "Regular");
             postParam.addProperty("cartId", 0);
-            postParam.addProperty("ProductQnty", dishObject.getProductQuantity());
-            postParam.addProperty("Taxableval", dishObject.getPrice());    // doubt
-            postParam.addProperty("CGST", dishObject.getCgst());
-            postParam.addProperty("SGST", dishObject.getSgst());
+            postParam.addProperty("ProductQnty", productObject.getProductQuantity());
+            postParam.addProperty("Taxableval", productObject.getPrice());    // doubt
+            postParam.addProperty("CGST", productObject.getCgst());
+            postParam.addProperty("SGST", productObject.getSgst());
             postParam.addProperty("HotelName", restaurantObject.getRestaurantName());
             postParam.addProperty("IsIncludeTax", restaurantObject.getIncludeTax());
             postParam.addProperty("IsTaxApplicable", restaurantObject.getTaxable());
             postParam.addProperty("DeliveryCharge", 20);
             postParam.addProperty("Userid", Application.userDetails.getUserID());
             postParam.addProperty("Clientid", restaurantObject.getRestaurantID());
-            postParam.addProperty("TotalAmount", dishObject.getPrice());
+            postParam.addProperty("TotalAmount", productObject.getPrice());
             postParam.addProperty("TaxId", 0);
 
         } catch (Exception e) {
@@ -412,16 +412,16 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
         return postParam;
     }
 
-    public void addItemToCart(final ArrayList<DishObject> listProducts) {
+    public void addItemToCart(final ArrayList<ProductObject> listProducts) {
         if (InternetConnection.checkConnection(getActivity())) {
             showDialog();
 
             for (int i = 0; i < listProducts.size(); i++) {
                 final int currentIndex = i;
-                final DishObject dishObject = listProducts.get(i);
+                final ProductObject productObject = listProducts.get(i);
 
                 ApiInterface apiService = RetroClient.getApiService(getActivity());
-                Call<ResponseBody> call = apiService.addItemToCart(createJsonCart(dishObject));
+                Call<ResponseBody> call = apiService.addItemToCart(createJsonCart(productObject));
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -477,28 +477,28 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
         }
     }
 
-    private void addItemToLocal(final ArrayList<DishObject> listProducts) {
+    private void addItemToLocal(final ArrayList<ProductObject> listProducts) {
         for (int i = 0; i < listProducts.size(); i++) {
             final int currentIndex = i;
-            DishObject dishObject = listProducts.get(i);
+            ProductObject productObject = listProducts.get(i);
 
             CartObject cartObject = new CartObject();
-            cartObject.setCgst(dishObject.getCgst());
+            cartObject.setCgst(productObject.getCgst());
             cartObject.setRestaurantID(Application.restaurantObject.getRestaurantID());
             cartObject.setDeliveryCharge(30);
             cartObject.setRestaurantName(Application.restaurantObject.getRestaurantName());
             cartObject.setIsIncludeTax(Application.restaurantObject.getIncludeTax());
             cartObject.setIsTaxApplicable(Application.restaurantObject.getTaxable());
-            cartObject.setProductAmount(dishObject.getPrice());
-            cartObject.setProductID(dishObject.getProductID());
-            cartObject.setProductName(dishObject.getProductName());
-            cartObject.setProductQuantity(dishObject.getProductQuantity());
-            cartObject.setProductRate(dishObject.getPrice());
+            cartObject.setProductAmount(productObject.getPrice());
+            cartObject.setProductID(productObject.getProductID());
+            cartObject.setProductName(productObject.getProductName());
+            cartObject.setProductQuantity(productObject.getProductQuantity());
+            cartObject.setProductRate(productObject.getPrice());
             cartObject.setProductSize("Regular");
-            cartObject.setSgst(dishObject.getSgst());
-            cartObject.setTaxID(dishObject.getTaxID());
-            cartObject.setTaxableVal(dishObject.getPrice());
-            cartObject.setTotalAmount(dishObject.getPrice());
+            cartObject.setSgst(productObject.getSgst());
+            cartObject.setTaxID(productObject.getTaxID());
+            cartObject.setTaxableVal(productObject.getPrice());
+            cartObject.setTotalAmount(productObject.getPrice());
             cartObject.setUserID(Application.userDetails.getUserID());
             cartObject.setCartID(Application.listCartItems.size());
             Application.listCartItems.add(cartObject);
@@ -508,7 +508,7 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
     }
 
 
-    private void successOnAddToCart(int currentIndex, ArrayList<DishObject> listProducts) {
+    private void successOnAddToCart(int currentIndex, ArrayList<ProductObject> listProducts) {
         if (currentIndex == listProducts.size() - 1) {
             triggerTabChangeListener.setTab(1);
             dismissDialog();

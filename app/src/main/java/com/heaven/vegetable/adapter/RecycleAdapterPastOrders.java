@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.listeners.OnPastOrderOptionsClickListener;
-import com.heaven.vegetable.model.DishObject;
+import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
 
 import java.text.NumberFormat;
@@ -91,7 +91,7 @@ public class RecycleAdapterPastOrders extends RecyclerView.Adapter<RecycleAdapte
         setupRecyclerViewPastOrders(holder.rvProductList, orderDetailsObject.getListProducts());
     }
 
-    private void setupRecyclerViewPastOrders(RecyclerView recyclerView, ArrayList<DishObject> listDish) {
+    private void setupRecyclerViewPastOrders(RecyclerView recyclerView, ArrayList<ProductObject> listDish) {
         RecycleAdapterPastOrderProductView  adapter = new RecycleAdapterPastOrderProductView(context, listDish);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);

@@ -30,7 +30,7 @@ public class DialogLoadingIndicator {
         mDialog= new Dialog(mContext);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mDialog.setContentView(R.layout.loading_indicator);
-        mDialog.findViewById(R.id.spin_kit).setVisibility(View.VISIBLE);
+        mDialog.findViewById(R.id.avi_loading).setVisibility(View.VISIBLE);
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         mDialog.setCancelable(false);
         mDialog.setCanceledOnTouchOutside(false);

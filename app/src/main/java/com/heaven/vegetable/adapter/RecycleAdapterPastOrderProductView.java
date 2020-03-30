@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
-import com.heaven.vegetable.model.DishObject;
+import com.heaven.vegetable.model.ProductObject;
 
 import java.util.ArrayList;
 
@@ -22,11 +22,11 @@ import java.util.ArrayList;
 public class RecycleAdapterPastOrderProductView extends RecyclerView.Adapter<RecycleAdapterPastOrderProductView.ViewHolder> {
 
     private Context context;
-    private ArrayList<DishObject> listDish;
+    private ArrayList<ProductObject> listDish;
 
     private OnRecyclerViewClickListener clickListener;
 
-    public RecycleAdapterPastOrderProductView(Context context, ArrayList<DishObject> listDish) {
+    public RecycleAdapterPastOrderProductView(Context context, ArrayList<ProductObject> listDish) {
         this.context = context;
         this.listDish = listDish;
     }
@@ -44,10 +44,10 @@ public class RecycleAdapterPastOrderProductView extends RecyclerView.Adapter<Rec
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        DishObject dishObject = listDish.get(position);
+        ProductObject productObject = listDish.get(position);
 
-        holder.tvItemName.setText(dishObject.getProductName());
-        holder.tvItemQuantity.setText(dishObject.getProductQuantity() + "");
+        holder.tvItemName.setText(productObject.getProductName());
+        holder.tvItemQuantity.setText(productObject.getProductQuantity() + "");
     }
 
     @Override
