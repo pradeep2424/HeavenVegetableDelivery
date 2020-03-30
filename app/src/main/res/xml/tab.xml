@@ -7,12 +7,12 @@
             inActiveColor="@color/menu_inactive"
             title="@string/menu_home" />
 
-<!--        <tab-->
-<!--            activeColor="@color/menu_active"-->
-<!--            icon="@drawable/ic_search"-->
-<!--            id="@+id/tab_search"-->
-<!--            inActiveColor="@color/menu_inactive"-->
-<!--            title="@string/menu_search" />-->
+        <tab
+            activeColor="@color/menu_active"
+            icon="@drawable/ic_search"
+            id="@+id/tab_search"
+            inActiveColor="@color/menu_inactive"
+            title="@string/menu_search" />
 
         <tab
             activeColor="@color/menu_active"

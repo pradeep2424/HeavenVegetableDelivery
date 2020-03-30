@@ -15,6 +15,7 @@
     <color name="main_text">#4a4a4a</color>
     <color name="main_dark_text">#2f2f39</color>
 
+    <color name="green">#00a306</color>    <!--  dark green grocery app  -->
 
     <color name="view_cart_strip">#7bc242</color>  <!--  5fb709 -->
     <color name="view_cart_strip1">#5fb709</color>
@@ -37,7 +38,7 @@
     <color name="view_light">#f5f5f5</color>
     <color name="gray">#6f7279</color>
 
-    <color name="menu_active">#4caf50</color>
+    <color name="menu_active">#2A313B</color>
     <color name="menu_inactive">#c7c7cc</color>
 
     <color name="divider_light">#f5f5f5</color>

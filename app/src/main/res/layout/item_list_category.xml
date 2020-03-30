@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:padding="5dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp">
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="6dp"
+        app:cardCornerRadius="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,20 +25,18 @@
             <ImageView
                 android:id="@+id/iv_categoryImage"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher" />
 
             <com.heaven.vegetable.custom.MyTextView
                 android:id="@+id/tv_categoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="12.5dp"
                 android:padding="10dp"
                 android:text="Wild Honey at Scotts Square"
-                android:textColor="@android:color/black"
-                android:textSize="16dp" />
+                android:textColor="@color/main_dark_text"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

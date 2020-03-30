@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_above="@+id/bottombar"-->
+<!--        android:layout_marginBottom="55dp"-->
+<!--        android:orientation="vertical">-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottombar"
-        android:layout_marginBottom="55dp"
         android:orientation="vertical">
-
-        <!--<include layout="@layout/toolbar_custom"/>-->
 
         <FrameLayout
             android:id="@+id/framelayout"
@@ -35,7 +38,7 @@
         app:bb_badgesHideWhenActive="false"
         app:bb_inActiveTabColor="#a4ebfe"
         app:bb_showShadow="true"
-        app:bb_behavior="iconsOnly"
+        app:bb_behavior="shy"
         app:bb_tabXmlResource="@xml/tab"
         app:bb_titleTypeFace="fonts/Lato-Regular.ttf"
         app:paddingStart="10dp" />

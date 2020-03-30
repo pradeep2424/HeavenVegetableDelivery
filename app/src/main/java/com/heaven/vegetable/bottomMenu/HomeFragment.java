@@ -77,11 +77,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     private ArrayList<ProductObject> listProductObject;
     private RecyclerView rvPopular;
     private RecycleAdapterPopularItem adapterDish;
-    Integer image[] = {R.mipmap.ic_launcher_round, R.mipmap.temp_paneer, R.mipmap.ic_launcher_round,
-            R.mipmap.temp_paneer, R.mipmap.ic_launcher_round, R.mipmap.temp_paneer, R.mipmap.ic_launcher_round};
-    String dish_name[] = {"Paratha", "Cheese", "Paneer", "Paneer", "Chiken", "Paneer Kopta", "Chiken"};
-    String dish_type[] = {"Punjabi", "Maxican", "Punjabi", "Punjabi", "Non Veg", "Punjabi", "Non Veg"};
-    double price[] = {250, 150, 200, 220, 350, 200, 100};
+    Integer image[] = {R.mipmap.temp_paneer, R.mipmap.temp_order, R.mipmap.temp_ice_cream, R.mipmap.temp_paneer,
+            R.mipmap.temp_order, R.mipmap.temp_ice_cream, R.mipmap.temp_paneer, R.mipmap.temp_order};
+    String dish_name[] = {"Paratha", "Cheese", "Paneer", "Paneer", "Chiken", "Paneer Kopta", "Chiken", "Vegetable"};
+    String dish_type[] = {"Punjabi", "Maxican", "Punjabi", "Punjabi", "Non Veg", "Punjabi", "Non Veg", "Veg"};
+    double price[] = {250, 150, 200, 220, 350, 200, 100, 500};
 
     private ArrayList<CateogryObject> listRestaurantObject;
     //    private TextView tvSeeMoreRestaurants;
