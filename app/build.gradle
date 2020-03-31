@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
@@ -30,7 +32,7 @@ android {
         abortOnError false
         disable 'MissingTranslation'
     }
- }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -79,4 +81,5 @@ dependencies {
 
     implementation project(path: ':vanillaplacepicker')
     implementation project(path: ':placepicker')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
