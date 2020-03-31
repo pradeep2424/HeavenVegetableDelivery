@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.heaven.vegetable.R;
 
-public class RestaurantDetailsActivity extends AppCompatActivity  {
+public class ProductDetailsActivity extends AppCompatActivity  {
 
 //public class RestaurantDetailsActivity extends AppCompatActivity implements OnItemAddedToCart {
 //    DialogLoadingIndicator progressIndicator;

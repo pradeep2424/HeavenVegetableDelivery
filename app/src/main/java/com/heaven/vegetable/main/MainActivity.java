@@ -18,6 +18,7 @@ import com.heaven.vegetable.R;
 import com.heaven.vegetable.bottomMenu.CartFragment;
 import com.heaven.vegetable.bottomMenu.HomeFragment;
 import com.heaven.vegetable.bottomMenu.ProfileFragment;
+import com.heaven.vegetable.bottomMenu.SearchFragment;
 import com.heaven.vegetable.fragments.PastOrdersFragment;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
@@ -78,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
                         replaceFragment(new HomeFragment());
                         break;
 
-//                    case R.id.tab_search:
-//                        replaceFragment(new SearchFragment());
-//                        break;
+                    case R.id.tab_search:
+                        replaceFragment(new SearchFragment());
+                        break;
 
                     case R.id.tab_cart:
                         replaceFragment(new CartFragment());

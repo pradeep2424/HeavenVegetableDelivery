@@ -42,6 +42,10 @@
             android:name=".main.MainActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
 
+        <activity
+            android:name=".activity.ProductDetailsActivity"
+            android:theme="@style/NoActionBarShowStatusBar" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

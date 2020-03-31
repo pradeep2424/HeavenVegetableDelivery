@@ -26,7 +26,7 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.activity.LocationGoogleMapActivity;
-import com.heaven.vegetable.activity.RestaurantDetailsActivity;
+import com.heaven.vegetable.activity.ProductDetailsActivity;
 import com.heaven.vegetable.adapter.PagerAdapterBanner;
 import com.heaven.vegetable.adapter.RecycleAdapterPopularItem;
 import com.heaven.vegetable.adapter.RecycleAdapterCategory;
@@ -156,6 +156,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         viewToolbarLocation = rootView.findViewById(R.id.view_toolbarLocation);
 
         llToolbarLocation = viewToolbarLocation.findViewById(R.id.ll_toolbarLocation);
+        llToolbarAddress = viewToolbarLocation.findViewById(R.id.ll_toolbarAddress);
         llToolbarAddress = viewToolbarLocation.findViewById(R.id.ll_toolbarAddress);
         llToolbarReferralPoints = viewToolbarLocation.findViewById(R.id.ll_toolbarReferralPoints);
         tvToolbarTitle = viewToolbarLocation.findViewById(R.id.tv_toolbarTitle);
@@ -602,7 +603,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onCuisineClick(View view, int position) {
         if (listRestaurantObject.size() > 0) {
             CateogryObject restaurantObject = listRestaurantObject.get(0);
-            Intent intent = new Intent(getActivity(), RestaurantDetailsActivity.class);
+            Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
             intent.putExtra("RestaurantObject", restaurantObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
@@ -612,7 +613,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onUserMayLikedClick(View view, int position) {
         if (listRestaurantObject.size() > 0) {
             CateogryObject restaurantObject = listRestaurantObject.get(0);
-            Intent intent = new Intent(getActivity(), RestaurantDetailsActivity.class);
+            Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
             intent.putExtra("RestaurantObject", restaurantObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
@@ -624,7 +625,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         CateogryObject restaurantObject = listRestaurantObject.get(position);
         Application.restaurantObject = restaurantObject;
 
-        Intent intent = new Intent(getActivity(), RestaurantDetailsActivity.class);
+        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
         intent.putExtra("RestaurantObject", restaurantObject);
         startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
     }
