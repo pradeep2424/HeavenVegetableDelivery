@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:background="@drawable/dish_rectangle"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/iv_productImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/temp_paneer" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.8"
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_productCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_foodName"
+                android:layout_marginTop="6dp"
+                android:text="Vegetable Category"
+                android:textColor="@color/green"
+                android:textSize="12sp" />
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="Vegetable Name"
+                android:textColor="@color/main_dark_text"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="#f5f5f5" />
+
+
+            <!--            <com.heaven.vegetable.custom.MyTextView-->
+            <!--                android:id="@+id/tv_foodPrice"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/tv_foodCategory"-->
+            <!--                android:layout_marginTop="15dp"-->
+            <!--                android:text="₹ 50.00"-->
+            <!--                android:textColor="@color/main_text"-->
+            <!--                android:textSize="18sp" />-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_250Gram"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:background="@drawable/rect1"
+                    android:orientation="vertical">
+
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="250 gm"
+                        android:textColor="#4a4a4a"
+                        android:textSize="11sp" />
+
+                    <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:text="Small"-->
+                    <!--                            android:textColor="#9b9b9b"-->
+                    <!--                            android:textSize="11sp" />-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_500Gram"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:background="@drawable/rect1"
+                    android:orientation="vertical">
+
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="500 gm"
+                        android:textColor="#4a4a4a"
+                        android:textSize="11sp" />
+
+                    <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:text="Medium"-->
+                    <!--                            android:textColor="#9b9b9b"-->
+                    <!--                            android:textSize="11sp" />-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_1Kilo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:background="@drawable/rect1"
+                    android:orientation="vertical">
+
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 kg"
+                        android:textColor="#4a4a4a"
+                        android:textSize="11sp" />
+
+                    <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:text="Regular"-->
+                    <!--                            android:textColor="#9b9b9b"-->
+                    <!--                            android:textSize="11sp" />-->
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_foodCategory"
+                android:layout_marginTop="15dp">
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:id="@+id/tv_ProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:text="₹ 50.00"
+                    android:textColor="@color/main_text"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/ll_addButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rect_gray_border"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="6dp"
+                        android:visibility="visible">
+
+                        <com.heaven.vegetable.custom.MyTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/add"
+                            android:textAllCaps="true"
+                            android:textColor="@color/green"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/green" />
+
+                    </LinearLayout>
+
+                    <com.travijuu.numberpicker.library.NumberPicker
+                        android:id="@+id/numberPicker_quantity"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        app:custom_layout="@layout/custom_layout_number_picker"
+                        app:focusable="false"
+                        app:unit="1"
+                        app:value="1" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -26,7 +26,7 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.activity.LocationGoogleMapActivity;
-import com.heaven.vegetable.activity.ProductDetailsActivity;
+import com.heaven.vegetable.activity.ProductListActivity;
 import com.heaven.vegetable.adapter.PagerAdapterBanner;
 import com.heaven.vegetable.adapter.RecycleAdapterPopularItem;
 import com.heaven.vegetable.adapter.RecycleAdapterCategory;
@@ -212,10 +212,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     private void setupSlidingImages() {
         HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put("Best Offer", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+        url_maps.put("Best Offer", "https://c4.wallpaperflare.com/wallpaper/563/7/828/peas-pod-food-wallpaper-preview.jpg");
+        url_maps.put("Big Bang Theory", "https://c4.wallpaperflare.com/wallpaper/755/380/1002/vegetables-paprika-food-tomatoes-mushroom-wallpaper-preview.jpg");
+        url_maps.put("House of Cards", "https://c4.wallpaperflare.com/wallpaper/401/129/264/food-vegetables-mushrooms-peppers-tomatoes-spoons-wallpaper-preview.jpg");
+        url_maps.put("Game of Thrones", "https://c4.wallpaperflare.com/wallpaper/53/520/935/food-vegetables-tomatoes-eggplant-wallpaper-preview.jpg");
+        url_maps.put("Game of Thrones", "https://c0.wallpaperflare.com/preview/218/234/443/asparagus-avocado-colorful-eating.jpg");
 
 //        HashMap<String, Integer> url_maps = new HashMap<String, Integer>();
 //        url_maps.put("50% off on Lunch", R.mipmap.temp_img1);
@@ -603,7 +604,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onCuisineClick(View view, int position) {
         if (listRestaurantObject.size() > 0) {
             CateogryObject restaurantObject = listRestaurantObject.get(0);
-            Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+            Intent intent = new Intent(getActivity(), ProductListActivity.class);
             intent.putExtra("RestaurantObject", restaurantObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
@@ -613,7 +614,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onUserMayLikedClick(View view, int position) {
         if (listRestaurantObject.size() > 0) {
             CateogryObject restaurantObject = listRestaurantObject.get(0);
-            Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+            Intent intent = new Intent(getActivity(), ProductListActivity.class);
             intent.putExtra("RestaurantObject", restaurantObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
@@ -625,7 +626,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         CateogryObject restaurantObject = listRestaurantObject.get(position);
         Application.restaurantObject = restaurantObject;
 
-        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        Intent intent = new Intent(getActivity(), ProductListActivity.class);
         intent.putExtra("RestaurantObject", restaurantObject);
         startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
     }

@@ -5,52 +5,64 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.listeners.OnCuisineClickListener;
+import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.model.CuisineObject;
+import com.heaven.vegetable.model.ProductObject;
 
 import java.util.List;
 
-public class RecycleAdapterCuisine extends RecyclerView.Adapter<RecycleAdapterCuisine.MyViewHolder> {
+public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapterProductList.MyViewHolder> {
     Context context;
-    private OnCuisineClickListener clickListener;
+    private OnRecyclerViewClickListener clickListener;
 
-    private List<CuisineObject> listCuisine;
+    private List<ProductObject> listProducts;
 
-    public RecycleAdapterCuisine(Context context, List<CuisineObject> listCuisine) {
-        this.listCuisine = listCuisine;
+    public RecycleAdapterProductList(Context context, List<ProductObject> listProducts) {
+        this.listProducts = listProducts;
         this.context = context;
     }
 
-    public void setClickListener(OnCuisineClickListener clickListener) {
+    public void setClickListener(OnRecyclerViewClickListener clickListener) {
         this.clickListener = clickListener;
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView image;
-        TextView cuisineName;
-        TextView price;
-        TextView city;
+        ImageView tvProductImage;
+        TextView tvProductName;
+        TextView tvProductCategory;
+        TextView tvProductPrice;
+
+        LinearLayout ll250Gram;
+        LinearLayout ll500Gram;
+        LinearLayout ll1Kilo;
 
         public MyViewHolder(View view) {
             super(view);
 
-            image = (ImageView) view.findViewById(R.id.image);
-            cuisineName = (TextView) view.findViewById(R.id.tv_cuisine_name);
-            price = (TextView) view.findViewById(R.id.tv_price);
-            city = (TextView) view.findViewById(R.id.tv_city);
+            tvProductImage =  view.findViewById(R.id.iv_productImage);
+            tvProductName =  view.findViewById(R.id.tv_productName);
+            tvProductCategory =  view.findViewById(R.id.tv_productCategory);
+            tvProductPrice =  view.findViewById(R.id.tv_ProductPrice);
+
+            ll250Gram =  view.findViewById(R.id.ll_250Gram);
+            ll500Gram =  view.findViewById(R.id.ll_500Gram);
+            ll1Kilo =  view.findViewById(R.id.ll_1Kilo);
+
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (clickListener != null) {
-                clickListener.onCuisineClick(view, getAdapterPosition());
+                clickListener.onClick(view, getAdapterPosition());
             }
         }
     }
@@ -58,18 +70,20 @@ public class RecycleAdapterCuisine extends RecyclerView.Adapter<RecycleAdapterCu
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list_cuisine, parent, false);
+                .inflate(R.layout.item_list_product_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        CuisineObject cuisineObject = listCuisine.get(position);
-        holder.cuisineName.setText(cuisineObject.getCuisineName());
-        holder.price.setText(cuisineObject.getPrice());
-        holder.city.setText(cuisineObject.getCity());
-        holder.image.setImageResource(cuisineObject.getImage());
+        ProductObject productObject = listProducts.get(position);
+
+//        String price = context.getResources().getString(R.string.rupees) + " " + productObject.getPrice();
+//        holder.tvProductName.setText(productObject.getProductName());
+//        holder.tvProductCategory.setText(productObject.getCategoryName());
+//        holder.tvProductPrice.setText(price);
+//        holder.tvProductImage.setImageResource(productObject.getProductImage());
 
 
 //        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
@@ -91,7 +105,7 @@ public class RecycleAdapterCuisine extends RecyclerView.Adapter<RecycleAdapterCu
 
     @Override
     public int getItemCount() {
-        return listCuisine.size();
+        return listProducts.size();
     }
 }
 

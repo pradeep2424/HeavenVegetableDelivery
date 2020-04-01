@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.TestActivity"></activity>
+
         <activity
             android:name=".main.SplashActivity"
             android:theme="@style/NoActionBar">
@@ -25,22 +25,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".main.GetStartedVerifyOTPActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
+
         <activity
             android:name=".main.GetStartedMobileNumberActivity"
             android:theme="@style/NoActionBarShowStatusBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+
         <activity
             android:name=".activity.LocationGoogleMapActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
+
         <activity
             android:name=".main.MainActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
+
+        <activity android:name=".activity.ProductListActivity"
+            android:theme="@style/NoActionBarShowStatusBar" />
+
         <activity
             android:name=".activity.ProductDetailsActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
+
+        <activity
+            android:name=".activity.ManageAddressesActivity"
+            android:theme="@style/NoActionBarShowStatusBar" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

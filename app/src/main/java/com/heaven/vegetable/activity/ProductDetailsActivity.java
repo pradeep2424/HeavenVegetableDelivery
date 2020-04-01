@@ -61,6 +61,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     private int totalCartQuantity;
     private double totalCartPrice;
 
+    LinearLayout ll250Gram;
+    LinearLayout ll500Gram;
+    LinearLayout ll1Kilo;
+
     ProductObject productObject;
 
     @Override
@@ -98,6 +102,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         tvItemQuantity = viewViewCart.findViewById(R.id.tv_itemQuantity);
         tvTotalPrice = viewViewCart.findViewById(R.id.tv_totalPrice);
 
+        ll250Gram = findViewById(R.id.ll_250Gram);
+        ll500Gram = findViewById(R.id.ll_500Gram);
+        ll1Kilo = findViewById(R.id.ll_1Kilo);
+
 //        viewPager = (ViewPager) findViewById(R.id.viewPager_slidingRestaurantImages);
     }
 
@@ -119,6 +127,32 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
             }
         });
 
+        ll250Gram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
+                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
+            }
+        });
+
+        ll500Gram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
+                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
+            }
+        });
+
+        ll1Kilo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect2));
+            }
+        });
     }
 
     private void setupRestaurantDetails() {
