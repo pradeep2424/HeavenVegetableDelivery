@@ -14,30 +14,46 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/iv_productImage"
+        <!--        <ImageView-->
+        <!--            android:id="@+id/iv_productImage"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_weight="1.2"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:src="@mipmap/temp_paneer" />-->
+
+
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/temp_paneer" />
+            android:layout_weight="1.2">
+
+            <ImageView
+                android:id="@+id/iv_productImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/temp_paneer" />
+
+                        <ImageView
+                            android:id="@+id/iv_veg"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="bottom|left"
+                            android:layout_margin="5dp"
+                            android:src="@mipmap/ic_veg" />
+
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.8"
             android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:paddingLeft="10dp">
-
-            <com.heaven.vegetable.custom.MyTextView
-                android:id="@+id/tv_productCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_foodName"
-                android:layout_marginTop="6dp"
-                android:text="Vegetable Category"
-                android:textColor="@color/green"
-                android:textSize="12sp" />
 
             <com.heaven.vegetable.custom.MyTextView
                 android:id="@+id/tv_productName"
@@ -46,132 +62,143 @@
                 android:maxLines="2"
                 android:text="Vegetable Name"
                 android:textColor="@color/main_dark_text"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="#f5f5f5" />
-
-
-            <!--            <com.heaven.vegetable.custom.MyTextView-->
-            <!--                android:id="@+id/tv_foodPrice"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_below="@+id/tv_foodCategory"-->
-            <!--                android:layout_marginTop="15dp"-->
-            <!--                android:text="₹ 50.00"-->
-            <!--                android:textColor="@color/main_text"-->
-            <!--                android:textSize="18sp" />-->
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_productCategory"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="3"
-                android:orientation="horizontal">
+                android:layout_below="@+id/tv_foodName"
+                android:text="Category"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
 
-                <LinearLayout
-                    android:id="@+id/ll_250Gram"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:background="@drawable/rect1"
-                    android:orientation="vertical">
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_productSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_foodName"
+                android:layout_marginTop="3dp"
+                android:text="1 Kg"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
 
-                    <com.heaven.vegetable.custom.MyTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="250 gm"
-                        android:textColor="#4a4a4a"
-                        android:textSize="11sp" />
 
-                    <!--                        <com.heaven.vegetable.custom.MyTextView-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:text="Small"-->
-                    <!--                            android:textColor="#9b9b9b"-->
-                    <!--                            android:textSize="11sp" />-->
+            <!--            <View-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="1dp"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:background="@color/view_light" />-->
 
-                </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_500Gram"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:background="@drawable/rect1"
-                    android:orientation="vertical">
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:layout_weight="3"-->
+            <!--                android:orientation="horizontal">-->
 
-                    <com.heaven.vegetable.custom.MyTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="500 gm"
-                        android:textColor="#4a4a4a"
-                        android:textSize="11sp" />
+            <!--                <LinearLayout-->
+            <!--                    android:id="@+id/ll_250Gram"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:padding="8dp"-->
+            <!--                    android:background="@drawable/rect1"-->
+            <!--                    android:orientation="vertical">-->
 
-                    <!--                        <com.heaven.vegetable.custom.MyTextView-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:text="Medium"-->
-                    <!--                            android:textColor="#9b9b9b"-->
-                    <!--                            android:textSize="11sp" />-->
+            <!--                    <com.heaven.vegetable.custom.MyTextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="250 gm"-->
+            <!--                        android:textColor="#4a4a4a"-->
+            <!--                        android:textSize="11sp" />-->
 
-                </LinearLayout>
+            <!--                    &lt;!&ndash;                        <com.heaven.vegetable.custom.MyTextView&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:text="Small"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:textColor="#9b9b9b"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:textSize="11sp" />&ndash;&gt;-->
 
-                <LinearLayout
-                    android:id="@+id/ll_1Kilo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:background="@drawable/rect1"
-                    android:orientation="vertical">
+            <!--                </LinearLayout>-->
 
-                    <com.heaven.vegetable.custom.MyTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1 kg"
-                        android:textColor="#4a4a4a"
-                        android:textSize="11sp" />
+            <!--                <LinearLayout-->
+            <!--                    android:id="@+id/ll_500Gram"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginLeft="5dp"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:padding="8dp"-->
+            <!--                    android:background="@drawable/rect1"-->
+            <!--                    android:orientation="vertical">-->
 
-                    <!--                        <com.heaven.vegetable.custom.MyTextView-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:text="Regular"-->
-                    <!--                            android:textColor="#9b9b9b"-->
-                    <!--                            android:textSize="11sp" />-->
+            <!--                    <com.heaven.vegetable.custom.MyTextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="500 gm"-->
+            <!--                        android:textColor="#4a4a4a"-->
+            <!--                        android:textSize="11sp" />-->
 
-                </LinearLayout>
-            </LinearLayout>
+            <!--                    &lt;!&ndash;                        <com.heaven.vegetable.custom.MyTextView&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:text="Medium"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:textColor="#9b9b9b"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:textSize="11sp" />&ndash;&gt;-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:id="@+id/ll_1Kilo"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginLeft="5dp"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:padding="8dp"-->
+            <!--                    android:background="@drawable/rect1"-->
+            <!--                    android:orientation="vertical">-->
+
+            <!--                    <com.heaven.vegetable.custom.MyTextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="1 kg"-->
+            <!--                        android:textColor="#4a4a4a"-->
+            <!--                        android:textSize="11sp" />-->
+
+            <!--                    &lt;!&ndash;                        <com.heaven.vegetable.custom.MyTextView&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:text="Regular"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:textColor="#9b9b9b"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                            android:textSize="11sp" />&ndash;&gt;-->
+
+            <!--                </LinearLayout>-->
+            <!--            </LinearLayout>-->
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_foodCategory"
+                android:layout_gravity="bottom"
                 android:layout_marginTop="15dp">
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.heaven.vegetable.custom.MyTextViewBold
                     android:id="@+id/tv_ProductPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:text="₹ 50.00"
-                    android:textColor="@color/main_text"
-                    android:textSize="16sp" />
+                    android:textColor="@color/main_dark_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
 
                     <LinearLayout
                         android:id="@+id/ll_addButton"
@@ -180,10 +207,10 @@
                         android:background="@drawable/rect_gray_border"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:paddingLeft="15dp"
-                        android:paddingTop="6dp"
-                        android:paddingRight="15dp"
-                        android:paddingBottom="6dp"
+                        android:paddingLeft="18dp"
+                        android:paddingTop="7dp"
+                        android:paddingRight="18dp"
+                        android:paddingBottom="7dp"
                         android:visibility="visible">
 
                         <com.heaven.vegetable.custom.MyTextView
@@ -192,7 +219,7 @@
                             android:layout_gravity="center"
                             android:text="@string/add"
                             android:textAllCaps="true"
-                            android:textColor="@color/green"
+                            android:textColor="@color/light_green_700"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -201,9 +228,42 @@
                             android:layout_height="10dp"
                             android:layout_marginLeft="8dp"
                             android:src="@drawable/ic_add"
-                            android:tint="@color/green" />
+                            android:tint="@color/light_green_700" />
 
                     </LinearLayout>
+
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:id="@+id/ll_addButton"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:background="@drawable/rect_gray_border"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:orientation="horizontal"-->
+                    <!--                        android:paddingLeft="15dp"-->
+                    <!--                        android:paddingTop="7dp"-->
+                    <!--                        android:paddingRight="15dp"-->
+                    <!--                        android:paddingBottom="7dp"-->
+                    <!--                        android:visibility="visible">-->
+
+                    <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_gravity="center"-->
+                    <!--                            android:text="@string/add"-->
+                    <!--                            android:textAllCaps="true"-->
+                    <!--                            android:textColor="@color/white"-->
+                    <!--                            android:textSize="14sp"-->
+                    <!--                            android:textStyle="bold" />-->
+
+                    <!--                        <ImageView-->
+                    <!--                            android:layout_width="10dp"-->
+                    <!--                            android:layout_height="10dp"-->
+                    <!--                            android:layout_marginLeft="8dp"-->
+                    <!--                            android:src="@drawable/ic_add"-->
+                    <!--                            android:tint="@color/white" />-->
+
+                    <!--                    </LinearLayout>-->
 
                     <com.travijuu.numberpicker.library.NumberPicker
                         android:id="@+id/numberPicker_quantity"

@@ -1,6 +1,7 @@
 package com.heaven.vegetable.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -41,9 +43,11 @@ import retrofit2.Response;
 public class ProductListActivity extends AppCompatActivity implements OnRecyclerViewClickListener {
     private RelativeLayout rlRootLayout;
 
-    View viewToolbarAddresses;
-    ImageView ivBack;
+//    View viewToolbarAddresses;
+//    ImageView ivBack;
     TextView tvToolbarTitle;
+
+    private Toolbar toolbar;
 
     private PrefManagerConfig prefManagerConfig;
     String mobileNumber;
@@ -67,32 +71,41 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     }
 
     private void initComponents() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tvToolbarTitle =  findViewById(R.id.tv_toolbarTitle);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvToolbarTitle.setText("Vegetables");
+
         prefManagerConfig = new PrefManagerConfig(this);
         mobileNumber = prefManagerConfig.getMobileNo();
 
         rlRootLayout = findViewById(R.id.rl_rootLayout);
         rvProductList = findViewById(R.id.rv_productList);
 
-        viewToolbarAddresses = findViewById(R.id.view_toolbarProductList);
-        ivBack = viewToolbarAddresses.findViewById(R.id.iv_back);
-        tvToolbarTitle = viewToolbarAddresses.findViewById(R.id.tv_toolbarTitle);
-        tvToolbarTitle.setText(getResources().getString(R.string.profile_manage_addresses));
+//        viewToolbarAddresses = findViewById(R.id.view_toolbarProductList);
+//        ivBack = viewToolbarAddresses.findViewById(R.id.iv_back);
+//        tvToolbarTitle = viewToolbarAddresses.findViewById(R.id.tv_toolbarTitle);
+//        tvToolbarTitle.setText(getResources().getString(R.string.profile_manage_addresses));
     }
 
     private void componentEvents() {
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+//        ivBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
 
     }
 
     private void setupRecyclerAddresses() {
         getProductDummyData();
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvProductList.setLayoutManager(layoutManager);
         rvProductList.setItemAnimator(new DefaultItemAnimator());
 
@@ -100,11 +113,11 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         rvProductList.setAdapter(adapterProductList);
         adapterProductList.setClickListener(this);
 
-        rvProductList.addItemDecoration(new SimpleDividerItemDecoration(this));
+//        rvProductList.addItemDecoration(new SimpleDividerItemDecoration(this));
 
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvProductList.getContext(),
-//                layoutManager.getOrientation());
-//        rvProductList.addItemDecoration(dividerItemDecoration);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvProductList.getContext(),
+                layoutManager.getOrientation());
+        rvProductList.addItemDecoration(dividerItemDecoration);
 
     }
 
@@ -216,6 +229,19 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         snackTextView.setMaxLines(4);
         snackbar.show();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     public void onBackPressed() {

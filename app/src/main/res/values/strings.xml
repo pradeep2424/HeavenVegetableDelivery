@@ -15,6 +15,8 @@
     <string name="vegetable_delivery">Vegetable Delivery</string>
     <string name="rupees">₹</string>
 
+    <string name="toolbar_products">Products</string>
+
     <string name="login_verify_awesome">Awesome,</string>
     <string name="login_verify_otp_text">We will auto detect the OTP sent to your number</string>
     <string name="otp_wait_for">Wait for</string>
@@ -97,4 +99,8 @@
     <string name="popular">Popular</string>
     <string name="categories">Categories</string>
     <string name="add">Add</string>
+    <string name="add_to_cart">Add To Cart</string>
+
+    <string name="pack_size">Pack Size</string>
+    <string name="about_this_product">About This Product</string>
 </resources>

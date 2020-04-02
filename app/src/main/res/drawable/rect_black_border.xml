@@ -9,7 +9,7 @@
     <!--android:right="2dp"-->
     <!--android:bottom="2dp" />-->
     <corners android:radius="2dp" />
-    <solid android:color="@color/white" />
+    <solid android:color="@color/menu_active" />
 <!--    <solid android:color="@color/green" />-->
 </shape>
 

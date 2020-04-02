@@ -44,7 +44,7 @@
             android:theme="@style/NoActionBarShowStatusBar" />
 
         <activity android:name=".activity.ProductListActivity"
-            android:theme="@style/NoActionBarShowStatusBar" />
+            android:theme="@style/NoActionBarShowStatusBar"/>
 
         <activity
             android:name=".activity.ProductDetailsActivity"

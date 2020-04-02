@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_rootLayout"
+    android:id="@+id/cl_rootLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <FrameLayout
@@ -33,6 +34,7 @@
                     android:id="@+id/iv_restaurantImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/temp_paneer" />
 
                 <!--circleindicator used-->
@@ -50,8 +52,8 @@
 
                 <ImageView
                     android:id="@+id/iv_veg"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="bottom|left"
                     android:layout_margin="15dp"
                     android:src="@mipmap/ic_veg" />
@@ -61,27 +63,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
                 android:orientation="vertical"
                 android:padding="15dp">
-
-
-                <!--                    <ImageView-->
-                <!--                        android:id="@+id/iv_veg"-->
-                <!--                        android:layout_width="20dp"-->
-                <!--                        android:layout_height="20dp"-->
-                <!--                        android:layout_alignParentLeft="true"-->
-                <!--                        android:layout_gravity="top"-->
-                <!--                        android:layout_centerVertical="true"-->
-                <!--                        android:src="@mipmap/ic_veg" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.heaven.vegetable.custom.MyTextView
+                    <com.heaven.vegetable.custom.MyTextViewBold
                         android:id="@+id/tv_foodName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,10 +94,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="15dp"
-                        android:background="#f5f5f5" />
+                        android:background="@color/smokegray" />
 
 
-                    <com.heaven.vegetable.custom.MyTextView
+                    <com.heaven.vegetable.custom.MyTextViewBold
                         android:id="@+id/tv_foodPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -117,155 +107,132 @@
                         android:textColor="@color/main_text"
                         android:textSize="18sp" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pack_size"
+                        android:textColor="@color/main_text"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical">
-
-                        <com.heaven.vegetable.custom.MyTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Size"
-                            android:textColor="#4a4a4a"
-                            android:textSize="16sp" />
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="3"
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:id="@+id/ll_250Gram"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="3"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:id="@+id/ll_250Gram"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/rect1"
-                                android:orientation="vertical">
-
-                                <com.heaven.vegetable.custom.MyTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="250 gm"
-                                    android:textColor="#4a4a4a"
-                                    android:textSize="16sp" />
-
-                                <com.heaven.vegetable.custom.MyTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Small"
-                                    android:textColor="#9b9b9b"
-                                    android:textSize="11sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/ll_500Gram"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rect1"
-                                android:orientation="vertical">
-
-                                <com.heaven.vegetable.custom.MyTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="500 gm"
-                                    android:textColor="#4a4a4a"
-                                    android:textSize="16sp" />
-
-                                <com.heaven.vegetable.custom.MyTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Medium"
-                                    android:textColor="#9b9b9b"
-                                    android:textSize="11sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/ll_1Kilo"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/rect1"
-                                android:orientation="vertical">
-
-                                <com.heaven.vegetable.custom.MyTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1 kg"
-                                    android:textColor="#4a4a4a"
-                                    android:textSize="16sp" />
-
-                                <com.heaven.vegetable.custom.MyTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Regular"
-                                    android:textColor="#9b9b9b"
-                                    android:textSize="11sp" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_foodCategory"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="10dp">
-
-                        <LinearLayout
-                            android:id="@+id/ll_addButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rect_gray_border"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingLeft="20dp"
-                            android:paddingTop="7dp"
-                            android:paddingRight="20dp"
-                            android:paddingBottom="7dp"
-                            android:visibility="visible">
+                            android:layout_weight="1"
+                            android:background="@drawable/rect1"
+                            android:orientation="vertical">
 
                             <com.heaven.vegetable.custom.MyTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Add To Cart"
-                                android:textAllCaps="true"
-                                android:textColor="@color/white"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:text="250 gm"
+                                android:textColor="#4a4a4a"
+                                android:textSize="16sp" />
 
-                            <ImageView
-                                android:layout_width="10dp"
-                                android:layout_height="10dp"
-                                android:layout_marginLeft="8dp"
-                                android:src="@drawable/ic_add"
-                                android:tint="@color/white" />
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Small"
+                                android:textColor="#9b9b9b"
+                                android:textSize="11sp" />
 
                         </LinearLayout>
 
-                        <com.travijuu.numberpicker.library.NumberPicker
-                            android:id="@+id/numberPicker_quantity"
-                            android:layout_width="100dp"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:visibility="gone"
-                            app:custom_layout="@layout/custom_layout_number_picker"
-                            app:focusable="false"
-                            app:unit="1"
-                            app:value="1" />
+                        <LinearLayout
+                            android:id="@+id/ll_500Gram"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rect1"
+                            android:orientation="vertical">
 
-                    </RelativeLayout>
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="500 gm"
+                                android:textColor="#4a4a4a"
+                                android:textSize="16sp" />
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Medium"
+                                android:textColor="#9b9b9b"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_1Kilo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rect1"
+                            android:orientation="vertical">
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 kg"
+                                android:textColor="#4a4a4a"
+                                android:textSize="16sp" />
+
+                            <com.heaven.vegetable.custom.MyTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Regular"
+                                android:textColor="#9b9b9b"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#f5f5f5"
+                android:padding="6dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_this_product"
+                    android:textColor="@color/main_text"
+                    android:textSize="16sp" />
+
+                <com.heaven.vegetable.custom.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Vegetables are parts of plants that are eaten by humans as food as part of a meal. This meaning is often used: it is applied to plants collectively to mean all edible plant matter, including the flowers, fruits, stems, leaves, roots, and seeds."
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -292,7 +259,6 @@
                     android:textSize="14.4sp" />
 
 
-
                 <LinearLayout
                     android:id="@+id/ll_restaurantReviews"
                     android:layout_width="wrap_content"
@@ -314,7 +280,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8.4dp"
-                        android:text="238 reviews"
+                        android:text="238 Total Reviews"
                         android:textColor="#9b9b9b"
                         android:textSize="11.5sp" />
 
@@ -465,8 +431,83 @@
 
                 </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#f5f5f5"
+                android:padding="10dp" />
+
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_bottomPaymentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="@color/black"
+        android:elevation="30dp"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="2">
+
+        <com.heaven.vegetable.custom.MyTextView
+            android:id="@+id/tv_paymentButtonAmount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Rs 8,750"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll_addCartLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/divider_light"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_paymentButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/deep_orange"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/numberPicker_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:visibility="gone"
+                app:custom_layout="@layout/custom_layout_number_picker"
+                app:focusable="false"
+                app:unit="1"
+                app:value="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <include
         android:id="@+id/view_bottomViewCart"
@@ -483,4 +524,4 @@
     <!--        android:layout_height="wrap_content"-->
     <!--        android:layout_alignParentBottom="true" />-->
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

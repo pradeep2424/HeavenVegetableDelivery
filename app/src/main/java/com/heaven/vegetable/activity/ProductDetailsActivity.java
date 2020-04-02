@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
@@ -21,7 +21,6 @@ import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
-import com.heaven.vegetable.utils.ConstantValues;
 import com.heaven.vegetable.utils.InternetConnection;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 
@@ -29,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -40,7 +38,7 @@ import retrofit2.Response;
 
 public class ProductDetailsActivity extends AppCompatActivity implements OnItemAddedToCart {
     DialogLoadingIndicator progressIndicator;
-    public RelativeLayout rlRootLayout;
+     CoordinatorLayout clRootLayout;
 
     View viewToolbar;
     ImageView ivBack;
@@ -70,7 +68,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_details);
+        setContentView(R.layout.activity_product_details);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -79,7 +77,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 
         initComponents();
         componentEvents();
-        setupRestaurantDetails();
+//        setupRestaurantDetails();
 //        setupRecyclerViewPhotos();
 //        setupRecyclerViewMenu();
 
@@ -90,7 +88,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     private void initComponents() {
         progressIndicator = DialogLoadingIndicator.getInstance();
 
-        rlRootLayout = findViewById(R.id.rl_rootLayout);
+        clRootLayout = findViewById(R.id.cl_rootLayout);
         viewToolbar = findViewById(R.id.view_toolbarRestaurantDetails);
         ivBack = viewToolbar.findViewById(R.id.iv_back);
 
@@ -361,7 +359,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         } else {
 //            signOutFirebaseAccounts();
 
-            Snackbar.make(rlRootLayout, getResources().getString(R.string.no_internet),
+            Snackbar.make(clRootLayout, getResources().getString(R.string.no_internet),
                     Snackbar.LENGTH_INDEFINITE)
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
@@ -513,7 +511,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     public void showSnackbarErrorMsg(String erroMsg) {
 //        Snackbar.make(fragmentRootView, erroMsg, Snackbar.LENGTH_LONG).show();
 
-        Snackbar snackbar = Snackbar.make(rlRootLayout, erroMsg, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(clRootLayout, erroMsg, Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         TextView snackTextView = (TextView) snackbarView
                 .findViewById(R.id.snackbar_text);
@@ -522,7 +520,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     }
 
     public void showSnackBarErrorMsgWithButton(String erroMsg) {
-        Snackbar.make(rlRootLayout, erroMsg, Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(clRootLayout, erroMsg, Snackbar.LENGTH_INDEFINITE)
                 .setAction("OK", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
