@@ -43,8 +43,9 @@
             android:name=".main.MainActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
 
-        <activity android:name=".activity.ProductListActivity"
-            android:theme="@style/NoActionBarShowStatusBar"/>
+        <activity
+            android:name=".activity.ProductListActivity"
+            android:theme="@style/NoActionBarShowStatusBar" />
 
         <activity
             android:name=".activity.ProductDetailsActivity"
@@ -54,6 +55,9 @@
             android:name=".activity.ManageAddressesActivity"
             android:theme="@style/NoActionBarShowStatusBar" />
 
+        <activity
+            android:name=".activity.EditProfileActivity"
+            android:theme="@style/NoActionBarShowStatusBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

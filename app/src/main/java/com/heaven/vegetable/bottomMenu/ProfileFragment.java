@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.BuildConfig;
 import com.heaven.vegetable.R;
+import com.heaven.vegetable.activity.EditProfileActivity;
 import com.heaven.vegetable.activity.ManageAddressesActivity;
 import com.heaven.vegetable.adapter.RecycleAdapterProfile;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
@@ -38,6 +39,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
     TextView tvName;
     TextView tvEmail;
     TextView tvMobile;
+    TextView tvEditProfile;
 
     private RecyclerView rvProfile;
     private LinearLayout llManageAddresses;
@@ -58,8 +60,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 
         initComponents();
         componentEvents();
-        setUserInformation();
-//        setupToolbar();
+//        setUserInformation();
         setupRecyclerViewProfile();
 
         return rootView;
@@ -70,14 +71,24 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 
         rvProfile = rootView.findViewById(R.id.rv_profile);
         llManageAddresses = rootView.findViewById(R.id.ll_manageAddresses);
-        viewToolbar = rootView.findViewById(R.id.view_toolbar);
+//        viewToolbar = rootView.findViewById(R.id.view_toolbar);
 
-        tvName = rootView.findViewById(R.id.tv_name);
-        tvEmail = rootView.findViewById(R.id.tv_email);
-        tvMobile = rootView.findViewById(R.id.tv_mobile);
+        tvEditProfile = rootView.findViewById(R.id.tv_editProfile);
+
+//        tvName = rootView.findViewById(R.id.tv_name);
+//        tvEmail = rootView.findViewById(R.id.tv_email);
+//        tvMobile = rootView.findViewById(R.id.tv_mobile);
     }
 
     private void componentEvents() {
+        tvEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
         llManageAddresses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,20 +97,20 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
             }
         });
 
-        viewToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prefManagerConfig.clearPrefOnLogout();
-                Application.userDetails = new UserDetails();
-                Application.restaurantObject = new CateogryObject();
-                Application.productObject = new ProductObject();
-                Application.listCartItems.clear();
-
-                Intent intent = new Intent(getActivity(), GetStartedMobileNumberActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
+//        viewToolbar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                prefManagerConfig.clearPrefOnLogout();
+//                Application.userDetails = new UserDetails();
+//                Application.restaurantObject = new CateogryObject();
+//                Application.productObject = new ProductObject();
+//                Application.listCartItems.clear();
+//
+//                Intent intent = new Intent(getActivity(), GetStartedMobileNumberActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
     }
 
 //    private void setupToolbar() {

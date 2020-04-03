@@ -78,6 +78,8 @@ dependencies {
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.github.travijuu:numberpicker:1.0.7'
     implementation 'com.github.Shashank02051997:FancyGifDialog-Android:1.2'
+    implementation 'com.github.IntruderShanky:Frisson:2.1.1'
+
 
     implementation project(path: ':vanillaplacepicker')
     implementation project(path: ':placepicker')

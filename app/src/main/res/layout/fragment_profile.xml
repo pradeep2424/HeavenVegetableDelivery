@@ -16,67 +16,149 @@
             android:orientation="vertical"
             android:paddingBottom="60dp">
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="233dp">
+                android:layout_height="wrap_content">
+
+                <com.intrusoft.library.FrissonView
+                    android:id="@+id/wave_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    app:alphaValue="70"
+                    app:autoTint="true"
+                    app:src="@mipmap/temp_taylor"
+                    app:tideCount="3"
+                    app:tideHeight="50dp" />
+
+                <!--                <include-->
+                <!--                    android:id="@+id/view_toolbar"-->
+                <!--                    layout="@layout/toolbar_profile" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="233dp"
-                    android:background="@drawable/profile_gradient"
-                    android:orientation="vertical" />
-
-                <include
-                    android:id="@+id/view_toolbar"
-                    layout="@layout/toolbar_profile" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_image"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginLeft="22dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@mipmap/temp_taylor" />
 
-                    <LinearLayout
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="16dp"
-                        android:orientation="vertical">
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:layout_marginTop="10dp"
+                        android:text="Pradeep Jadhav"
+                        android:textColor="#ccffffff"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
-                        <com.heaven.vegetable.custom.MyTextView
-                            android:id="@+id/tv_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="23sp" />
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:id="@+id/about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/name"
+                        android:layout_marginTop="4dp"
+                        android:text="pradeep@gmail.com"
+                        android:textColor="#aaffffff" />
 
-                        <com.heaven.vegetable.custom.MyTextView
-                            android:id="@+id/tv_email"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14.4sp" />
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:id="@+id/about1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/about"
+                        android:layout_marginTop="4dp"
+                        android:text="9876543210"
+                        android:textColor="#aaffffff" />
 
-                        <com.heaven.vegetable.custom.MyTextView
-                            android:id="@+id/tv_mobile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/white"
-                            android:textSize="14.4sp" />
-                    </LinearLayout>
+                    <com.heaven.vegetable.custom.MyTextView
+                        android:id="@+id/tv_editProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/about1"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:text="Edit Profile"
+                        android:textColor="#ccffffff" />
                 </LinearLayout>
-            </FrameLayout>
+
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="24dp"-->
+                <!--                    android:layout_marginTop="120dp"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:orientation="horizontal">-->
+
+                <!--                    <de.hdodenhof.circleimageview.CircleImageView-->
+                <!--                        android:id="@+id/profile_image"-->
+                <!--                        android:layout_width="120dp"-->
+                <!--                        android:layout_height="120dp"-->
+                <!--                        android:src="@mipmap/temp_taylor" />-->
+
+                <!--                    <RelativeLayout-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignTop="@+id/profile_image"-->
+                <!--                        android:layout_toRightOf="@+id/profile_image">-->
+
+                <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                <!--                            android:id="@+id/name"-->
+                <!--                            android:layout_width="match_parent"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_marginLeft="28dp"-->
+                <!--                            android:fontFamily="sans-serif-smallcaps"-->
+                <!--                            android:text="Pradeep Jadhav"-->
+                <!--                            android:textColor="#ccffffff"-->
+                <!--                            android:textSize="22sp"-->
+                <!--                            android:textStyle="bold" />-->
+
+                <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                <!--                            android:id="@+id/about"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_below="@id/name"-->
+                <!--                            android:layout_marginLeft="28dp"-->
+                <!--                            android:layout_marginTop="4dp"-->
+                <!--                            android:text="pradeep@gmail.com"-->
+                <!--                            android:textColor="#aaffffff" />-->
+
+                <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                <!--                            android:id="@+id/about1"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_below="@id/about"-->
+                <!--                            android:layout_marginLeft="28dp"-->
+                <!--                            android:layout_marginTop="4dp"-->
+                <!--                            android:text="9876543210"-->
+                <!--                            android:textColor="#aaffffff" />-->
+
+                <!--                        <com.heaven.vegetable.custom.MyTextView-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_below="@+id/about1"-->
+                <!--                            android:layout_marginLeft="28dp"-->
+                <!--                            android:layout_marginTop="10dp"-->
+                <!--                            android:background="@drawable/border"-->
+                <!--                            android:gravity="center"-->
+                <!--                            android:paddingLeft="20dp"-->
+                <!--                            android:paddingRight="20dp"-->
+                <!--                            android:text="Edit Profile"-->
+                <!--                            android:textColor="#ccffffff" />-->
+                <!--                    </RelativeLayout>-->
+                <!--                </LinearLayout>-->
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/ll_manageAddresses"
