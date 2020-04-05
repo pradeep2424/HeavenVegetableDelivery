@@ -12,10 +12,17 @@
 
         <ImageView
             android:id="@+id/iv_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15.4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
             android:src="@mipmap/profile_settings" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_icon"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:src="@mipmap/profile_settings" />-->
 
         <com.heaven.vegetable.custom.MyTextView
             android:id="@+id/tv_title"

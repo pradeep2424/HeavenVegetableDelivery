@@ -30,8 +30,8 @@
 
         <tab
             activeColor="@color/menu_active"
-            icon="@drawable/ic_profile"
-            id="@+id/tab_profile"
+            icon="@drawable/ic_settings"
+            id="@+id/tab_settings"
             inActiveColor="@color/menu_inactive"
-            title="@string/menu_profile" />
+            title="@string/menu_settings" />
     </tabs>

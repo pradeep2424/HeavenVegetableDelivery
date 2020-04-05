@@ -443,7 +443,7 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
     }
 
 
-    private void getUserDetails() {
+    private void    getUserDetails() {
         if (InternetConnection.checkConnection(this)) {
 
             ApiInterface apiService = RetroClient.getApiService(this);

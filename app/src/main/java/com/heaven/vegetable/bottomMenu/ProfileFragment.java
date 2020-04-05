@@ -89,13 +89,13 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
             }
         });
 
-        llManageAddresses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ManageAddressesActivity.class);
-                startActivity(intent);
-            }
-        });
+//        llManageAddresses.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), ManageAddressesActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 //        viewToolbar.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -158,13 +158,15 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 //        Integer[] icon = {R.mipmap.profile_payment_method, R.mipmap.profile_reward_credits,
 //                R.mipmap.profile_settings, R.mipmap.profile_invite_friends};
 
-        String[] title = {getString(R.string.profile_payment_methods),
-                getString(R.string.profile_reward_credits),
-                getString(R.string.profile_invite_friends)};
+        String[] title = {getString(R.string.profile_manage_addresses),
+                getString(R.string.profile_payment_methods),
+                getString(R.string.profile_invite_friends),
+                getString(R.string.logout)};
 
-        Integer[] icon = {R.mipmap.profile_payment_method, R.mipmap.profile_reward_credits,
-                 R.mipmap.profile_invite_friends};
-
+        Integer[] icon = {R.mipmap.profile_favorite_restaurants,
+                R.mipmap.profile_payment_method,
+                R.mipmap.profile_invite_friends,
+                R.drawable.ic_logout};
 
         listProfile = new ArrayList<>();
         for (int i = 0; i < icon.length; i++) {
@@ -265,8 +267,12 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 //                startActivity(intent1);
                 break;
 
-            case 3:
+            case 2:
                 shareApp();
+                break;
+
+            case 3:
+
                 break;
         }
     }
