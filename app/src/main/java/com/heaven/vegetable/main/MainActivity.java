@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
 //                        replaceFragment(new OrdersFragment());
                         break;
 
-                    case R.id.tab_profile:
+                    case R.id.tab_settings:
                         replaceFragment(new ProfileFragment());
                         break;
                 }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
 
             int userID = Application.userDetails.getUserID();
             int restaurantID = 0;
-//            int restaurantID = Application.restaurantObject.getRestaurantID();
+//            int restaurantID = Application.categoryObject.getRestaurantID();
 
             ApiInterface apiService = RetroClient.getApiService(this);
             Call<ResponseBody> call = apiService.getCartItem(userID, restaurantID);

@@ -111,7 +111,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 
         userID = Application.userDetails.getUserID();
         mobileNo = Application.userDetails.getMobile();
-        restaurantID = Application.restaurantObject.getRestaurantID();
+        restaurantID = Application.categoryObject.getRestaurantID();
         referralPoints = Application.userDetails.getTotalReferralPoints();
     }
 
@@ -650,9 +650,9 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     private JsonObject createJsonCart(CartObject cartObject) {
         double totalPrice;
 
-        CateogryObject restaurantObject = Application.restaurantObject;
+        CateogryObject categoryObject = Application.categoryObject;
 
-        if (restaurantObject.getTaxable()) {
+        if (categoryObject.getTaxable()) {
             double productPrice = cartObject.getProductAmount();
             double cgst = cartObject.getCgst();
             double sgst = cartObject.getCgst();
@@ -673,12 +673,12 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             postParam.addProperty("Taxableval", cartObject.getProductAmount());    // doubt
             postParam.addProperty("CGST", cartObject.getCgst());
             postParam.addProperty("SGST", cartObject.getSgst());
-            postParam.addProperty("HotelName", restaurantObject.getRestaurantName());
-            postParam.addProperty("IsIncludeTax", restaurantObject.getIncludeTax());
-            postParam.addProperty("IsTaxApplicable", restaurantObject.getTaxable());
+            postParam.addProperty("HotelName", categoryObject.getRestaurantName());
+            postParam.addProperty("IsIncludeTax", categoryObject.getIncludeTax());
+            postParam.addProperty("IsTaxApplicable", categoryObject.getTaxable());
             postParam.addProperty("DeliveryCharge", 30.00);
             postParam.addProperty("Userid", Application.userDetails.getUserID());
-            postParam.addProperty("Clientid", restaurantObject.getRestaurantID());
+            postParam.addProperty("Clientid", categoryObject.getRestaurantID());
             postParam.addProperty("TotalAmount", cartObject.getTotalAmount());
             postParam.addProperty("TaxId", 0);
 
@@ -1114,7 +1114,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //                UserDetails userDetails = Application.userDetails;
 //                ArrayList<CartObject> listCartItems = Application.listCartItems;
 //
-////                RestaurantObject restaurantObj = Application.restaurantObject;
+////                RestaurantObject restaurantObj = Application.categoryObject;
 ////                String userTypeID = Application.userDetails.getUserType();
 ////                String restaurantID = "1";
 //
@@ -1220,7 +1220,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     }
 
 //    private JsonObject createJsonPlaceOrder(OrderDetailsObject orderDetailsObject) {
-////        RestaurantObject restaurantObject = Application.restaurantObject;
+////        RestaurantObject categoryObject = Application.categoryObject;
 //
 //        JsonObject postParam = new JsonObject();
 //
@@ -1262,7 +1262,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //            try {
 //
 //                UserDetails userDetails = Application.userDetails;
-//                RestaurantObject restaurantObj = Application.restaurantObject;
+//                RestaurantObject restaurantObj = Application.categoryObject;
 //
 //                CartObject cartObject = Application.listCartItems.get(0);
 //

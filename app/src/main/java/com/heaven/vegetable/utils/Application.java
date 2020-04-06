@@ -18,7 +18,7 @@ public class Application extends android.app.Application {
     private static Application mInstance;
 
     public static UserDetails userDetails = new UserDetails();
-    public static CateogryObject restaurantObject = new CateogryObject();
+    public static CateogryObject categoryObject = new CateogryObject();
     public static ProductObject productObject = new ProductObject();
     //    public static CartObject cartObject = new CartObject();
     public static ArrayList<CartObject> listCartItems = new ArrayList();

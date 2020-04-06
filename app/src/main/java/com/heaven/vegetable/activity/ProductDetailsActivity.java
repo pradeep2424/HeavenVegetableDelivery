@@ -12,9 +12,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
+import com.heaven.vegetable.adapter.RecycleAdapterRestaurantFoodPhotos;
 import com.heaven.vegetable.listeners.OnItemAddedToCart;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.ProductObject;
@@ -28,6 +32,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -47,6 +53,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     Integer[] foodImage = {R.mipmap.temp_order, R.mipmap.temp_order,
             R.mipmap.temp_order, R.mipmap.temp_order, R.mipmap.temp_order};
 
+    private RecyclerView rvPhotos;
+    private RecycleAdapterRestaurantFoodPhotos adapterRestaurantPhotos;
+    private ArrayList<Integer> listPhotos;
 
     private View viewViewCart;
     private TextView tvItemQuantity;
@@ -77,8 +86,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 
         initComponents();
         componentEvents();
+        setupRecyclerViewPhotos();
+
 //        setupRestaurantDetails();
-//        setupRecyclerViewPhotos();
+
 //        setupRecyclerViewMenu();
 
 //        getProductsPhotoGallery();
@@ -159,6 +170,24 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 //            tvRestaurantReviews.setText(productObject.ge());
 //            ratingBarReviews.setText(productObject.getRestaurantName());
         }
+    }
+
+    private void setupRecyclerViewPhotos() {
+        getPhotosData();
+
+        adapterRestaurantPhotos = new RecycleAdapterRestaurantFoodPhotos(this, listPhotos);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvPhotos.setLayoutManager(layoutManager);
+        rvPhotos.setItemAnimator(new DefaultItemAnimator());
+        rvPhotos.setAdapter(adapterRestaurantPhotos);
+    }
+
+
+    private void getPhotosData() {
+        listPhotos = new ArrayList<>();
+
+        Integer icons[] = productObject.getProductImage();
+        listPhotos.addAll(new ArrayList<Integer>(Arrays.asList(icons)));
     }
 
     private void calculateViewCartDetails(double itemPrice, String incrementOrDecrement) {

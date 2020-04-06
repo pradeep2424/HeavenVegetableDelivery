@@ -237,12 +237,12 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
         ArrayList<ProductObject> listProducts = orderDetailsObject.getListProducts();
 
 //        adding restaurant details to application class
-        CateogryObject restaurantObject = new CateogryObject();
-        restaurantObject.setRestaurantID(orderDetailsObject.getClientID());
-        restaurantObject.setRestaurantName(orderDetailsObject.getRestaurantName());
-        restaurantObject.setIncludeTax(orderDetailsObject.getIsIncludeTax());
-        restaurantObject.setTaxable(orderDetailsObject.getIsTaxApplicable());
-        Application.restaurantObject = restaurantObject;
+        CateogryObject categoryObject = new CateogryObject();
+        categoryObject.setRestaurantID(orderDetailsObject.getClientID());
+        categoryObject.setRestaurantName(orderDetailsObject.getRestaurantName());
+        categoryObject.setIncludeTax(orderDetailsObject.getIsIncludeTax());
+        categoryObject.setTaxable(orderDetailsObject.getIsTaxApplicable());
+        Application.categoryObject = categoryObject;
 
         String mobileNo = Application.userDetails.getMobile();
         if (mobileNo != null) {
@@ -382,7 +382,7 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
     }
 
     private JsonObject createJsonCart(ProductObject productObject) {
-        CateogryObject restaurantObject = Application.restaurantObject;
+        CateogryObject categoryObject = Application.categoryObject;
 
         JsonObject postParam = new JsonObject();
 
@@ -397,12 +397,12 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
             postParam.addProperty("Taxableval", productObject.getPrice());    // doubt
             postParam.addProperty("CGST", productObject.getCgst());
             postParam.addProperty("SGST", productObject.getSgst());
-            postParam.addProperty("HotelName", restaurantObject.getRestaurantName());
-            postParam.addProperty("IsIncludeTax", restaurantObject.getIncludeTax());
-            postParam.addProperty("IsTaxApplicable", restaurantObject.getTaxable());
+            postParam.addProperty("HotelName", categoryObject.getRestaurantName());
+            postParam.addProperty("IsIncludeTax", categoryObject.getIncludeTax());
+            postParam.addProperty("IsTaxApplicable", categoryObject.getTaxable());
             postParam.addProperty("DeliveryCharge", 20);
             postParam.addProperty("Userid", Application.userDetails.getUserID());
-            postParam.addProperty("Clientid", restaurantObject.getRestaurantID());
+            postParam.addProperty("Clientid", categoryObject.getRestaurantID());
             postParam.addProperty("TotalAmount", productObject.getPrice());
             postParam.addProperty("TaxId", 0);
 
@@ -484,11 +484,11 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
 
             CartObject cartObject = new CartObject();
             cartObject.setCgst(productObject.getCgst());
-            cartObject.setRestaurantID(Application.restaurantObject.getRestaurantID());
+            cartObject.setRestaurantID(Application.categoryObject.getRestaurantID());
             cartObject.setDeliveryCharge(30);
-            cartObject.setRestaurantName(Application.restaurantObject.getRestaurantName());
-            cartObject.setIsIncludeTax(Application.restaurantObject.getIncludeTax());
-            cartObject.setIsTaxApplicable(Application.restaurantObject.getTaxable());
+            cartObject.setRestaurantName(Application.categoryObject.getRestaurantName());
+            cartObject.setIsIncludeTax(Application.categoryObject.getIncludeTax());
+            cartObject.setIsTaxApplicable(Application.categoryObject.getTaxable());
             cartObject.setProductAmount(productObject.getPrice());
             cartObject.setProductID(productObject.getProductID());
             cartObject.setProductName(productObject.getProductName());

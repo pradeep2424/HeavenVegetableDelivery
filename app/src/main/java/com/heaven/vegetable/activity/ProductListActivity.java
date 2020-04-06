@@ -43,7 +43,7 @@ import retrofit2.Response;
 public class ProductListActivity extends AppCompatActivity implements OnRecyclerViewClickListener {
     private RelativeLayout rlRootLayout;
 
-//    View viewToolbarAddresses;
+    //    View viewToolbarAddresses;
 //    ImageView ivBack;
     TextView tvToolbarTitle;
 
@@ -72,7 +72,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 
     private void initComponents() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        tvToolbarTitle =  findViewById(R.id.tv_toolbarTitle);
+        tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -124,15 +124,80 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     private void getProductDummyData() {
         listProducts = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            ProductObject productObject = new ProductObject();
-            productObject.setProductName("Vegetable Name " + i);
-            productObject.setCategoryName("Vegetable Category " + i);
-            productObject.setPrice(100);
-            productObject.setProductImage("");
+        Integer broccoli[] = {R.mipmap.temp_broccoli_1, R.mipmap.temp_broccoli_2, R.mipmap.temp_broccoli_3};
+        Integer cabbage[] = {R.mipmap.temp_cabbage_1, R.mipmap.temp_cabbage_2, R.mipmap.temp_cabbage_3};
+        Integer capsicum[] = {R.mipmap.temp_capsicum_1, R.mipmap.temp_capsicum_2, R.mipmap.temp_capsicum_3,
+                R.mipmap.temp_capsicum_4, R.mipmap.temp_capsicum_5};
+        Integer carrots[] = {R.mipmap.temp_carrots_1, R.mipmap.temp_carrots_2, R.mipmap.temp_carrots_3};
+        Integer chilli[] = {R.mipmap.temp_chilli_1, R.mipmap.temp_chilli_2, R.mipmap.temp_chilli_3, R.mipmap.temp_chilli_4};
+        Integer lemon[] = {R.mipmap.temp_lemon_1, R.mipmap.temp_lemon_2, R.mipmap.temp_lemon_3, R.mipmap.temp_lemon_4};
+        Integer melons[] = {R.mipmap.temp_melons_1, R.mipmap.temp_melons_2, R.mipmap.temp_melons_3, R.mipmap.temp_melons_4};
+        Integer potato[] = {R.mipmap.temp_potato_1, R.mipmap.temp_potato_2, R.mipmap.temp_potato_3, R.mipmap.temp_potato_4};
+        Integer tomato[] = {R.mipmap.temp_tomato_1, R.mipmap.temp_tomato_2, R.mipmap.temp_tomato_3, R.mipmap.temp_tomato_4};
 
-            listProducts.add(productObject);
-        }
+        ProductObject productObject = new ProductObject();
+        productObject.setProductName("Broccoli");
+        productObject.setProductImage(broccoli);
+        productObject.setCategoryName("Vegetable");
+        productObject.setPrice(40);
+
+        ProductObject productObject1 = new ProductObject();
+        productObject1.setProductName("Cabbage");
+        productObject1.setProductImage(cabbage);
+        productObject1.setCategoryName("Leaf Vegetable");
+        productObject1.setPrice(30);
+
+        ProductObject productObject2 = new ProductObject();
+        productObject2.setProductName("Capsicum");
+        productObject2.setProductImage(capsicum);
+        productObject2.setCategoryName("Green Vegetable");
+        productObject2.setPrice(50);
+
+        ProductObject productObject3 = new ProductObject();
+        productObject3.setProductName("Carrots");
+        productObject3.setProductImage(carrots);
+        productObject3.setCategoryName("Fruit Vegetable");
+        productObject3.setPrice(35);
+
+        ProductObject productObject4 = new ProductObject();
+        productObject4.setProductName("Chili");
+        productObject4.setProductImage(chilli);
+        productObject4.setCategoryName("Green Vegetable");
+        productObject4.setPrice(25);
+
+        ProductObject productObject5 = new ProductObject();
+        productObject5.setProductName("Lemon");
+        productObject5.setProductImage(lemon);
+        productObject5.setCategoryName("Fruit Vegetable");
+        productObject5.setPrice(15);
+
+        ProductObject productObject6 = new ProductObject();
+        productObject6.setProductName("Potato");
+        productObject6.setProductImage(potato);
+        productObject6.setCategoryName("Root Vegetable");
+        productObject6.setPrice(55);
+
+        ProductObject productObject7 = new ProductObject();
+        productObject7.setProductName("Tomato");
+        productObject7.setProductImage(tomato);
+        productObject7.setCategoryName("Fruit Vegetable");
+        productObject7.setPrice(45);
+
+        ProductObject productObject8 = new ProductObject();
+        productObject8.setProductName("Water Melons");
+        productObject8.setProductImage(melons);
+        productObject8.setCategoryName("Fruit");
+        productObject8.setPrice(80);
+
+        listProducts.add(productObject);
+        listProducts.add(productObject1);
+        listProducts.add(productObject2);
+        listProducts.add(productObject3);
+        listProducts.add(productObject4);
+        listProducts.add(productObject5);
+        listProducts.add(productObject6);
+        listProducts.add(productObject7);
+        listProducts.add(productObject8);
 
 
     }

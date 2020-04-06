@@ -77,13 +77,13 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     private ArrayList<ProductObject> listProductObject;
     private RecyclerView rvPopular;
     private RecycleAdapterPopularItem adapterDish;
-    Integer image[] = {R.mipmap.temp_paneer, R.mipmap.temp_order, R.mipmap.temp_ice_cream, R.mipmap.temp_paneer,
-            R.mipmap.temp_order, R.mipmap.temp_ice_cream, R.mipmap.temp_paneer, R.mipmap.temp_order};
-    String dish_name[] = {"Paratha", "Cheese", "Paneer", "Paneer", "Chiken", "Paneer Kopta", "Chiken", "Vegetable"};
-    String dish_type[] = {"Punjabi", "Maxican", "Punjabi", "Punjabi", "Non Veg", "Punjabi", "Non Veg", "Veg"};
-    double price[] = {250, 150, 200, 220, 350, 200, 100, 500};
+//    Integer image[] = {R.mipmap.temp_paneer, R.mipmap.temp_order, R.mipmap.temp_ice_cream, R.mipmap.temp_paneer,
+//            R.mipmap.temp_order, R.mipmap.temp_ice_cream, R.mipmap.temp_paneer, R.mipmap.temp_order};
+//    String dish_name[] = {"Paratha", "Cheese", "Paneer", "Paneer", "Chiken", "Paneer Kopta", "Chiken", "Vegetable"};
+//    String dish_type[] = {"Punjabi", "Maxican", "Punjabi", "Punjabi", "Non Veg", "Punjabi", "Non Veg", "Veg"};
+//    double price[] = {250, 150, 200, 220, 350, 200, 100, 500};
 
-    private ArrayList<CateogryObject> listRestaurantObject;
+    private ArrayList<CateogryObject> listCategoryObject;
     //    private TextView tvSeeMoreRestaurants;
     private RecyclerView rvVegetableCategories;
     private RecycleAdapterCategory adapterRestaurant;
@@ -125,7 +125,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        restaurantID = Application.restaurantObject.getRestaurantID();
+        restaurantID = Application.categoryObject.getRestaurantID();
         userID = Application.userDetails.getUserID();
         zipCode = Application.userDetails.getZipCode();
         referralPoints = Application.userDetails.getTotalReferralPoints();
@@ -263,21 +263,105 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     private void getPopularItemsData() {
         listProductObject = new ArrayList<>();
-        for (int i = 0; i < image.length; i++) {
-//            DishObject dishObject = new DishObject(image[i], dish_name[i], dish_type[i], price[i]);
-            ProductObject productObject = new ProductObject();
-            productObject.setProductName(dish_name[i]);
-            productObject.setProductImage(String.valueOf(image[i]));
-            productObject.setCategoryName(dish_type[i]);
-            productObject.setPrice(price[i]);
-            listProductObject.add(productObject);
-        }
+
+        Integer broccoli[] = {R.mipmap.temp_broccoli_1, R.mipmap.temp_broccoli_2, R.mipmap.temp_broccoli_3};
+        Integer cabbage[] = {R.mipmap.temp_cabbage_1, R.mipmap.temp_cabbage_2, R.mipmap.temp_cabbage_3};
+        Integer capsicum[] = {R.mipmap.temp_capsicum_1, R.mipmap.temp_capsicum_2, R.mipmap.temp_capsicum_3,
+                R.mipmap.temp_capsicum_4, R.mipmap.temp_capsicum_5};
+        Integer carrots[] = {R.mipmap.temp_carrots_1, R.mipmap.temp_carrots_2, R.mipmap.temp_carrots_3};
+        Integer chilli[] = {R.mipmap.temp_chilli_1, R.mipmap.temp_chilli_2, R.mipmap.temp_chilli_3, R.mipmap.temp_chilli_4};
+        Integer lemon[] = {R.mipmap.temp_lemon_1, R.mipmap.temp_lemon_2, R.mipmap.temp_lemon_3, R.mipmap.temp_lemon_4};
+        Integer melons[] = {R.mipmap.temp_melons_1, R.mipmap.temp_melons_2, R.mipmap.temp_melons_3, R.mipmap.temp_melons_4};
+        Integer potato[] = {R.mipmap.temp_potato_1, R.mipmap.temp_potato_2, R.mipmap.temp_potato_3, R.mipmap.temp_potato_4};
+        Integer tomato[] = {R.mipmap.temp_tomato_1, R.mipmap.temp_tomato_2, R.mipmap.temp_tomato_3, R.mipmap.temp_tomato_4};
+        Integer strawberry[] = {R.mipmap.temp_strawberry_1, R.mipmap.temp_strawberry_2, R.mipmap.temp_strawberry_3};
+
+        ProductObject productObject = new ProductObject();
+        productObject.setProductName("Broccoli");
+        productObject.setProductImage(broccoli);
+        productObject.setCategoryName("Vegetable");
+        productObject.setPrice(40);
+
+        ProductObject productObject1 = new ProductObject();
+        productObject1.setProductName("Cabbage");
+        productObject1.setProductImage(cabbage);
+        productObject1.setCategoryName("Leaf Vegetable");
+        productObject1.setPrice(30);
+
+        ProductObject productObject2 = new ProductObject();
+        productObject2.setProductName("Capsicum");
+        productObject2.setProductImage(capsicum);
+        productObject2.setCategoryName("Green Vegetable");
+        productObject2.setPrice(50);
+
+        ProductObject productObject3 = new ProductObject();
+        productObject3.setProductName("Carrots");
+        productObject3.setProductImage(carrots);
+        productObject3.setCategoryName("Fruit Vegetable");
+        productObject3.setPrice(35);
+
+        ProductObject productObject4 = new ProductObject();
+        productObject4.setProductName("Chili");
+        productObject4.setProductImage(chilli);
+        productObject4.setCategoryName("Green Vegetable");
+        productObject4.setPrice(25);
+
+        ProductObject productObject5 = new ProductObject();
+        productObject5.setProductName("Lemon");
+        productObject5.setProductImage(lemon);
+        productObject5.setCategoryName("Fruit Vegetable");
+        productObject5.setPrice(15);
+
+        ProductObject productObject6 = new ProductObject();
+        productObject6.setProductName("Potato");
+        productObject6.setProductImage(potato);
+        productObject6.setCategoryName("Root Vegetable");
+        productObject6.setPrice(55);
+
+        ProductObject productObject7 = new ProductObject();
+        productObject7.setProductName("Tomato");
+        productObject7.setProductImage(tomato);
+        productObject7.setCategoryName("Fruit Vegetable");
+        productObject7.setPrice(45);
+
+        ProductObject productObject8 = new ProductObject();
+        productObject8.setProductName("Water Melons");
+        productObject8.setProductImage(melons);
+        productObject8.setCategoryName("Fruit");
+        productObject8.setPrice(80);
+
+        ProductObject productObject9 = new ProductObject();
+        productObject9.setProductName("Strawberry");
+        productObject9.setProductImage(strawberry);
+        productObject9.setCategoryName("Fruit");
+        productObject9.setPrice(250);
+
+        listProductObject.add(productObject);
+        listProductObject.add(productObject1);
+        listProductObject.add(productObject2);
+        listProductObject.add(productObject3);
+        listProductObject.add(productObject4);
+        listProductObject.add(productObject5);
+        listProductObject.add(productObject6);
+        listProductObject.add(productObject7);
+        listProductObject.add(productObject8);
+        listProductObject.add(productObject9);
+
+//        for (int i = 0; i < image.length; i++) {
+////            DishObject dishObject = new DishObject(image[i], dish_name[i], dish_type[i], price[i]);
+//            ProductObject productObject = new ProductObject();
+//            productObject.setProductName(dish_name[i]);
+//            productObject.setProductImage(String.valueOf(image[i]));
+//            productObject.setCategoryName(dish_type[i]);
+//            productObject.setPrice(price[i]);
+//            listProductObject.add(productObject);
+//        }
     }
 
     private void setupRecyclerViewRestaurant() {
         getCategoryData();
 
-        adapterRestaurant = new RecycleAdapterCategory(getActivity(), listRestaurantObject);
+        adapterRestaurant = new RecycleAdapterCategory(getActivity(), listCategoryObject);
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rvVegetableCategories.setLayoutManager(gridLayoutManager);
@@ -287,13 +371,66 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     }
 
     private void getCategoryData() {
-        listRestaurantObject = new ArrayList<>();
-        for (int i = 0; i < image.length; i++) {
-            CateogryObject cateogryObject = new CateogryObject();
-            cateogryObject.setCategoryName("Category " + 1);
-            cateogryObject.setCategoryImage(String.valueOf(image[i]));
-            listRestaurantObject.add(cateogryObject);
-        }
+        listCategoryObject = new ArrayList<>();
+
+        CateogryObject categoryObject1 = new CateogryObject();
+        categoryObject1.setCategoryName("Vegetables");
+        categoryObject1.setCategoryImage(String.valueOf(R.mipmap.temp_cabbage_1));
+
+        CateogryObject categoryObject2 = new CateogryObject();
+        categoryObject2.setCategoryName("Fresh Fruits");
+        categoryObject2.setCategoryImage(String.valueOf(R.mipmap.temp_capsicum_1));
+
+        CateogryObject categoryObject3 = new CateogryObject();
+        categoryObject3.setCategoryName("Organic");
+        categoryObject3.setCategoryImage(String.valueOf(R.mipmap.temp_carrots_1));
+
+        CateogryObject categoryObject4 = new CateogryObject();
+        categoryObject4.setCategoryName("Herbs & Seasoning");
+        categoryObject4.setCategoryImage(String.valueOf(R.mipmap.temp_chilli_1));
+
+        CateogryObject categoryObject5 = new CateogryObject();
+        categoryObject5.setCategoryName("Exotic");
+        categoryObject5.setCategoryImage(String.valueOf(R.mipmap.temp_lemon_1));
+
+        CateogryObject categoryObject6 = new CateogryObject();
+        categoryObject6.setCategoryName("Seasonal");
+        categoryObject6.setCategoryImage(String.valueOf(R.mipmap.temp_melons_1));
+
+        CateogryObject categoryObject7 = new CateogryObject();
+        categoryObject7.setCategoryName("Flowers");
+        categoryObject7.setCategoryImage(String.valueOf(R.mipmap.temp_potato_1));
+
+        CateogryObject categoryObject8 = new CateogryObject();
+        categoryObject8.setCategoryName("Cut Fruits");
+        categoryObject8.setCategoryImage(String.valueOf(R.mipmap.temp_tomato_1));
+
+        CateogryObject categoryObject9 = new CateogryObject();
+        categoryObject9.setCategoryName("Organic Fruits");
+        categoryObject9.setCategoryImage(String.valueOf(R.mipmap.temp_strawberry_1));
+
+        CateogryObject categoryObject10 = new CateogryObject();
+        categoryObject10.setCategoryName("Cuts & Sprouts");
+        categoryObject10.setCategoryImage(String.valueOf(R.mipmap.temp_vegetable));
+
+        listCategoryObject.add(categoryObject1);
+        listCategoryObject.add(categoryObject2);
+        listCategoryObject.add(categoryObject3);
+        listCategoryObject.add(categoryObject4);
+        listCategoryObject.add(categoryObject5);
+        listCategoryObject.add(categoryObject6);
+        listCategoryObject.add(categoryObject7);
+        listCategoryObject.add(categoryObject8);
+        listCategoryObject.add(categoryObject9);
+        listCategoryObject.add(categoryObject10);
+
+
+//        for (int i = 0; i < image.length; i++) {
+//            CateogryObject cateogryObject = new CateogryObject();
+//            cateogryObject.setCategoryName("Category " + 1);
+//            cateogryObject.setCategoryImage(String.valueOf(image[i]));
+//            listCategoryObject.add(cateogryObject);
+//        }
     }
 
 
@@ -352,7 +489,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
                         if (response.isSuccessful()) {
                             String responseString = response.body().string();
-                            listRestaurantObject = new ArrayList<>();
+                            listCategoryObject = new ArrayList<>();
 
                             JSONArray jsonArray = new JSONArray(responseString);
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -377,27 +514,27 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
                                 boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
 
-                                CateogryObject restaurantObject = new CateogryObject();
-                                restaurantObject.setCategoryID(categoryID);
-                                restaurantObject.setCategoryName(categoryName);
-                                restaurantObject.setRestaurantID(restaurantID);
-                                restaurantObject.setRestaurantName(restaurantName);
-                                restaurantObject.setRestaurantAddress(restaurantAddress);
-                                restaurantObject.setOpenTime(openTime);
-                                restaurantObject.setCloseTime(closeTime);
-                                restaurantObject.setContact(contact);
-                                restaurantObject.setDescription(description);
-                                restaurantObject.setLongitude(longitude);
-                                restaurantObject.setLatitude(latitude);
-                                restaurantObject.setRating(rating);
-                                restaurantObject.setFoodTypeID(foodTypeID);
-                                restaurantObject.setFoodTypeName(foodTypeName);
-                                restaurantObject.setLogo(logo);
-                                restaurantObject.setTaxID(taxID);
-                                restaurantObject.setTaxable(taxable);
-                                restaurantObject.setIncludeTax(includeTax);
+                                CateogryObject categoryObject = new CateogryObject();
+                                categoryObject.setCategoryID(categoryID);
+                                categoryObject.setCategoryName(categoryName);
+                                categoryObject.setRestaurantID(restaurantID);
+                                categoryObject.setRestaurantName(restaurantName);
+                                categoryObject.setRestaurantAddress(restaurantAddress);
+                                categoryObject.setOpenTime(openTime);
+                                categoryObject.setCloseTime(closeTime);
+                                categoryObject.setContact(contact);
+                                categoryObject.setDescription(description);
+                                categoryObject.setLongitude(longitude);
+                                categoryObject.setLatitude(latitude);
+                                categoryObject.setRating(rating);
+                                categoryObject.setFoodTypeID(foodTypeID);
+                                categoryObject.setFoodTypeName(foodTypeName);
+                                categoryObject.setLogo(logo);
+                                categoryObject.setTaxID(taxID);
+                                categoryObject.setTaxable(taxable);
+                                categoryObject.setIncludeTax(includeTax);
 
-                                listRestaurantObject.add(restaurantObject);
+                                listCategoryObject.add(categoryObject);
                             }
 
                         } else {
@@ -509,78 +646,78 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         }
     }
 
-    private void getUserLikeTopItems() {
-        if (InternetConnection.checkConnection(getActivity())) {
-
-            ApiInterface apiService = RetroClient.getApiService(getActivity());
-            Call<ResponseBody> call = apiService.getUserLikeTopItems();
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                    try {
-                        int statusCode = response.code();
-
-                        if (response.isSuccessful()) {
-                            String responseString = response.body().string();
-                            mapBannerDetails = new HashMap<>();
-
-                            JSONArray jsonArray = new JSONArray(responseString);
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObj = jsonArray.getJSONObject(i);
-
-                                String photoURL = jsonObj.optString("PhotoData");
-                                String title = jsonObj.optString("Text");
-
-                                for (int ii = 0; i < image.length; i++) {
-//            DishObject dishObject = new DishObject(image[i], dish_name[i], dish_type[i], price[i]);
-                                    ProductObject productObject = new ProductObject();
-                                    productObject.setProductName(dish_name[i]);
-                                    productObject.setProductImage(String.valueOf(image[i]));
-                                    productObject.setCategoryName(dish_type[i]);
-                                    listProductObject.add(productObject);
-                                }
-
-                                mapBannerDetails.put(title, photoURL);
-                            }
-
-                        } else {
-                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-                        }
-
-                        setupRecyclerPopular();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    try {
-                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
-                        Log.e("Error onFailure : ", t.toString());
-                        t.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } else {
-//            signOutFirebaseAccounts();
-
-            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction("RETRY", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            getSliderDetails();
-                        }
-                    })
-//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
-                    .show();
-        }
-    }
+//    private void getUserLikeTopItems() {
+//        if (InternetConnection.checkConnection(getActivity())) {
+//
+//            ApiInterface apiService = RetroClient.getApiService(getActivity());
+//            Call<ResponseBody> call = apiService.getUserLikeTopItems();
+//            call.enqueue(new Callback<ResponseBody>() {
+//                @Override
+//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//                    try {
+//                        int statusCode = response.code();
+//
+//                        if (response.isSuccessful()) {
+//                            String responseString = response.body().string();
+//                            mapBannerDetails = new HashMap<>();
+//
+//                            JSONArray jsonArray = new JSONArray(responseString);
+//                            for (int i = 0; i < jsonArray.length(); i++) {
+//                                JSONObject jsonObj = jsonArray.getJSONObject(i);
+//
+//                                String photoURL = jsonObj.optString("PhotoData");
+//                                String title = jsonObj.optString("Text");
+//
+//                                for (int ii = 0; i < image.length; i++) {
+////            DishObject dishObject = new DishObject(image[i], dish_name[i], dish_type[i], price[i]);
+//                                    ProductObject productObject = new ProductObject();
+//                                    productObject.setProductName(dish_name[i]);
+//                                    productObject.setProductImage(String.valueOf(image[i]));
+//                                    productObject.setCategoryName(dish_type[i]);
+//                                    listProductObject.add(productObject);
+//                                }
+//
+//                                mapBannerDetails.put(title, photoURL);
+//                            }
+//
+//                        } else {
+//                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+//                        }
+//
+//                        setupRecyclerPopular();
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                    try {
+//                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+//                        Log.e("Error onFailure : ", t.toString());
+//                        t.printStackTrace();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//        } else {
+////            signOutFirebaseAccounts();
+//
+//            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+//                    Snackbar.LENGTH_INDEFINITE)
+//                    .setAction("RETRY", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            getSliderDetails();
+//                        }
+//                    })
+////                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+//                    .show();
+//        }
+//    }
 
     private String getFormattedNumber(int amount) {
         return NumberFormat.getNumberInstance(Locale.US).format(amount);
@@ -602,20 +739,20 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     @Override
     public void onCuisineClick(View view, int position) {
-        if (listRestaurantObject.size() > 0) {
-            CateogryObject restaurantObject = listRestaurantObject.get(0);
+        if (listCategoryObject.size() > 0) {
+            CateogryObject categoryObject = listCategoryObject.get(0);
             Intent intent = new Intent(getActivity(), ProductListActivity.class);
-            intent.putExtra("RestaurantObject", restaurantObject);
+            intent.putExtra("RestaurantObject", categoryObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
     }
 
     @Override
     public void onUserMayLikedClick(View view, int position) {
-        if (listRestaurantObject.size() > 0) {
-            CateogryObject restaurantObject = listRestaurantObject.get(0);
+        if (listCategoryObject.size() > 0) {
+            CateogryObject categoryObject = listCategoryObject.get(0);
             Intent intent = new Intent(getActivity(), ProductListActivity.class);
-            intent.putExtra("RestaurantObject", restaurantObject);
+            intent.putExtra("RestaurantObject", categoryObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
     }
@@ -623,11 +760,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     @Override
     public void onClick(View view, int position) {
-        CateogryObject restaurantObject = listRestaurantObject.get(position);
-        Application.restaurantObject = restaurantObject;
+        CateogryObject categoryObject = listCategoryObject.get(position);
+        Application.categoryObject = categoryObject;
 
         Intent intent = new Intent(getActivity(), ProductListActivity.class);
-        intent.putExtra("RestaurantObject", restaurantObject);
+        intent.putExtra("RestaurantObject", categoryObject);
         startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
     }
 

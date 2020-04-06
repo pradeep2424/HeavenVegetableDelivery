@@ -63,8 +63,13 @@ public class RecycleAdapterPopularItem extends RecyclerView.Adapter<RecycleAdapt
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         ProductObject movie = listDish.get(position);
 
+        Integer icon[] = movie.getProductImage();
+
         holder.tvItemName.setText(movie.getProductName());
-        holder.ivItemIcon.setImageResource(Integer.parseInt(movie.getProductImage()));
+        holder.ivItemIcon.setImageResource(icon[1]);
+
+//        holder.tvItemName.setText(movie.getProductName());
+//        holder.ivItemIcon.setImageResource(Integer.parseInt(movie.getProductImage(1)));
 
 //        Glide.with(context)
 //                .load(R.drawable.resource_id)

@@ -42,7 +42,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
     TextView tvEditProfile;
 
     private RecyclerView rvProfile;
-    private LinearLayout llManageAddresses;
+//    private LinearLayout llManageAddresses;
 
     private RecycleAdapterProfile adapterProfile;
     private ArrayList<ProfileObject> listProfile;
@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
         prefManagerConfig = new PrefManagerConfig(getActivity());
 
         rvProfile = rootView.findViewById(R.id.rv_profile);
-        llManageAddresses = rootView.findViewById(R.id.ll_manageAddresses);
+//        llManageAddresses = rootView.findViewById(R.id.ll_manageAddresses);
 //        viewToolbar = rootView.findViewById(R.id.view_toolbar);
 
         tvEditProfile = rootView.findViewById(R.id.tv_editProfile);
@@ -102,7 +102,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 //            public void onClick(View v) {
 //                prefManagerConfig.clearPrefOnLogout();
 //                Application.userDetails = new UserDetails();
-//                Application.restaurantObject = new CateogryObject();
+//                Application.categoryObject = new CateogryObject();
 //                Application.productObject = new ProductObject();
 //                Application.listCartItems.clear();
 //
@@ -248,6 +248,19 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 //                });
     }
 
+    private void logout()
+    {
+        prefManagerConfig.clearPrefOnLogout();
+        Application.userDetails = new UserDetails();
+        Application.categoryObject = new CateogryObject();
+//        Application.dishObject = new DishObject();
+        Application.listCartItems.clear();
+
+        Intent intent = new Intent(getActivity(), GetStartedMobileNumberActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -258,13 +271,13 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
     public void onClick(View view, int position) {
         switch (position) {
             case 0:
-//                Intent intent0 = new Intent(getActivity(), PaymentMethodsActivity.class);
-//                startActivity(intent0);
+                Intent intent = new Intent(getActivity(), ManageAddressesActivity.class);
+                startActivity(intent);
                 break;
 
             case 1:
-//                Intent intent1 = new Intent(getActivity(), RewardCreditsActivity.class);
-//                startActivity(intent1);
+//                Intent intent0 = new Intent(getActivity(), PaymentMethodsActivity.class);
+//                startActivity(intent0);
                 break;
 
             case 2:
@@ -272,7 +285,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
                 break;
 
             case 3:
-
+                logout();
                 break;
         }
     }

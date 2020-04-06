@@ -1,6 +1,7 @@
 package com.heaven.vegetable.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Wolf Soft on 8/3/2017.
@@ -15,9 +16,10 @@ public class ProductObject implements Serializable {
     int dishID;
     String isDiscounted;
     double price;
-    String productDesc;
+   String productDesc;
     int productID;
-    String productImage;
+    Integer listProductImage[] ;
+//    ArrayList<String> listProductImage;
     String productName;
     double sgst;
     int taxID;
@@ -112,12 +114,12 @@ public class ProductObject implements Serializable {
         this.productID = productID;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public  Integer[] getProductImage() {
+        return listProductImage;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setProductImage( Integer[] listProductImage) {
+        this.listProductImage = listProductImage;
     }
 
     public String getProductName() {
