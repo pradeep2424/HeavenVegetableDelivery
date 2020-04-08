@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.heaven.vegetable"
         minSdkVersion 17
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -78,10 +78,11 @@ dependencies {
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.github.travijuu:numberpicker:1.0.7'
     implementation 'com.github.Shashank02051997:FancyGifDialog-Android:1.2'
-    implementation 'com.github.IntruderShanky:Frisson:2.1.1'
+//    implementation 'com.github.IntruderShanky:Frisson:2.1.1'
 
 
     implementation project(path: ':vanillaplacepicker')
     implementation project(path: ':placepicker')
+    implementation project(path: ':libraryFrisson')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

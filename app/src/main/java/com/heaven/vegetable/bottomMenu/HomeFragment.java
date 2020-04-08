@@ -66,11 +66,12 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     View rootView;
 
     View viewToolbarLocation;
+    TextView tvToolbarTitle;
     LinearLayout llToolbarLocation;
     LinearLayout llToolbarAddress;
-    LinearLayout llToolbarReferralPoints;
-    TextView tvToolbarTitle;
-    TextView tvReferralPoints;
+//    LinearLayout llToolbarReferralPoints;
+
+//    TextView tvReferralPoints;
 
     private SliderLayout imageSliderLayout;
 
@@ -106,7 +107,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     int userID;
     int restaurantID;
     int zipCode;
-    double referralPoints;
+//    double referralPoints;
 
     @Override
     public void onAttach(Context context) {
@@ -128,7 +129,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         restaurantID = Application.categoryObject.getRestaurantID();
         userID = Application.userDetails.getUserID();
         zipCode = Application.userDetails.getZipCode();
-        referralPoints = Application.userDetails.getTotalReferralPoints();
+//        referralPoints = Application.userDetails.getTotalReferralPoints();
     }
 
     @Override
@@ -157,10 +158,9 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
         llToolbarLocation = viewToolbarLocation.findViewById(R.id.ll_toolbarLocation);
         llToolbarAddress = viewToolbarLocation.findViewById(R.id.ll_toolbarAddress);
-        llToolbarAddress = viewToolbarLocation.findViewById(R.id.ll_toolbarAddress);
-        llToolbarReferralPoints = viewToolbarLocation.findViewById(R.id.ll_toolbarReferralPoints);
         tvToolbarTitle = viewToolbarLocation.findViewById(R.id.tv_toolbarTitle);
-        tvReferralPoints = viewToolbarLocation.findViewById(R.id.tv_referralPoints);
+//        llToolbarReferralPoints = viewToolbarLocation.findViewById(R.id.ll_toolbarReferralPoints);
+//        tvReferralPoints = viewToolbarLocation.findViewById(R.id.tv_referralPoints);
 
         imageSliderLayout = (SliderLayout) rootView.findViewById(R.id.slider);
 
@@ -174,13 +174,13 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     }
 
     private void componentEvents() {
-        llToolbarReferralPoints.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), RewardCreditsActivity.class);
-//                startActivity(intent);
-            }
-        });
+//        llToolbarReferralPoints.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent = new Intent(getActivity(), RewardCreditsActivity.class);
+////                startActivity(intent);
+//            }
+//        });
 
         llToolbarAddress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -446,18 +446,18 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
             tvToolbarTitle.setText(getString(R.string.set_location));
         }
 
-        if (referralPoints > 0) {
-//            double referralPoints = Application.userDetails.getTotalReferralPoints();
-            String formattedPoints = getFormattedNumberDouble(referralPoints)
-                    .concat(" ")
-                    .concat(getString(R.string.rupees));
-            tvReferralPoints.setText(formattedPoints);
-
-        } else {
-            tvReferralPoints.setText("0"
-                    .concat(" ")
-                    .concat(getString(R.string.rupees)));
-        }
+//        if (referralPoints > 0) {
+////            double referralPoints = Application.userDetails.getTotalReferralPoints();
+//            String formattedPoints = getFormattedNumberDouble(referralPoints)
+//                    .concat(" ")
+//                    .concat(getString(R.string.rupees));
+//            tvReferralPoints.setText(formattedPoints);
+//
+//        } else {
+//            tvReferralPoints.setText("0"
+//                    .concat(" ")
+//                    .concat(getString(R.string.rupees)));
+//        }
     }
 
     public void showSnackbarErrorMsg(String erroMsg) {

@@ -53,7 +53,6 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
     RelativeLayout rlPastOrdersLayout;
     LinearLayout llBrowseMenu;
 
-
     TriggerTabChangeListener triggerTabChangeListener;
 
 //    String[] restaurantName  = {"Cocobolo Poolside Bar + Grill","Palm Beach Seafood Restaurant","Shin Minori Japanese Restaurant","Shin Minori Japanese Restaurant"};

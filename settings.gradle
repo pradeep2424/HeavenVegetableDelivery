@@ -1,2 +1,2 @@
 rootProject.name='HeavenVegetableDelivery'
-include ':app', ':placepicker', ':vanillaplacepicker'
+include ':app', ':placepicker', ':vanillaplacepicker', ':libraryFrisson'
