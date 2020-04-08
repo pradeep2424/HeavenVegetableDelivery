@@ -16,7 +16,10 @@ import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.model.CuisineObject;
 import com.heaven.vegetable.model.ProductObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapterProductList.MyViewHolder> {
     Context context;
@@ -79,12 +82,16 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         ProductObject productObject = listProducts.get(position);
 
-//        String price = context.getResources().getString(R.string.rupees) + " " + productObject.getPrice();
-//        holder.tvProductName.setText(productObject.getProductName());
-//        holder.tvProductCategory.setText(productObject.getCategoryName());
-//        holder.tvProductPrice.setText(price);
-//        holder.tvProductImage.setImageResource(productObject.getProductImage());
+        Integer image[] = productObject.getProductImage();
+        String name = productObject.getProductName();
+        String category = productObject.getCategoryName();
+        String price = context.getResources().getString(R.string.rupees)
+                + getFormattedNumberDouble(productObject.getPrice());
 
+        holder.tvProductImage.setImageResource(image[2]);
+        holder.tvProductName.setText(name);
+        holder.tvProductCategory.setText(category);
+        holder.tvProductPrice.setText(price);
 
 //        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
 //                // You can pass your own memory cache implementation
@@ -106,6 +113,19 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
     @Override
     public int getItemCount() {
         return listProducts.size();
+    }
+
+//    private String formatAmount(double amount) {
+//        String amt;
+//        DecimalFormat df = new DecimalFormat();
+//        df.setDecimalSeparatorAlwaysShown(false);
+//        amt = df.format(amount);
+//
+//        return amt;
+//    }
+
+    private String getFormattedNumberDouble(double amount) {
+        return NumberFormat.getNumberInstance(Locale.US).format(amount);
     }
 }
 

@@ -8,29 +8,28 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.heaven.vegetable.R;
 
 import java.util.ArrayList;
 
-public class RecycleAdapterRestaurantFoodPhotos extends RecyclerView.Adapter<RecycleAdapterRestaurantFoodPhotos.ViewHolder> {
+public class PagerAdapterSlidingProductImages extends RecyclerView.Adapter<PagerAdapterSlidingProductImages.ViewHolder> {
 
     Context context;
     private ArrayList<Integer> modelArrayList;
 
-    public RecycleAdapterRestaurantFoodPhotos(Context context, ArrayList<Integer> modelArrayList) {
+    public PagerAdapterSlidingProductImages(Context context, ArrayList<Integer> modelArrayList) {
         this.context = context;
         this.modelArrayList = modelArrayList;
     }
 
     @Override
-    public RecycleAdapterRestaurantFoodPhotos.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PagerAdapterSlidingProductImages.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_restaurant_food_photos,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecycleAdapterRestaurantFoodPhotos.ViewHolder holder, int position) {
+    public void onBindViewHolder(PagerAdapterSlidingProductImages.ViewHolder holder, int position) {
 //        DishObject dishObject = modelArrayList.get(position);
 //        holder.ivFood.setImageResource(Integer.parseInt(dishObject.getProductImage()));
 

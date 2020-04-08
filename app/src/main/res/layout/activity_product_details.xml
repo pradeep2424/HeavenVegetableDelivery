@@ -25,30 +25,65 @@
                     android:id="@+id/view_toolbarRestaurantDetails"
                     layout="@layout/toolbar_restaurant_detail" />
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPager_slidingRestaurantImages"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+<!--                <androidx.viewpager.widget.ViewPager-->
+<!--                    android:id="@+id/viewPager_slidingProductImages"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" />-->
 
-                <ImageView
-                    android:id="@+id/iv_restaurantImage"
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/sliderLayout_productImages"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/temp_paneer" />
+                    android:background="@mipmap/temp_white_img"
+                    app:auto_cycle="true"
+                    app:indicator_visibility="visible"
+                    app:pager_animation="Accordion"
+                    app:pager_animation_span="1100" />
+
+                <com.daimajia.slider.library.Indicators.PagerIndicator
+                    android:id="@+id/custom_indicator"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:gravity="center"
+                    app:selected_color="#0095BF"
+                    app:unselected_color="#55333333"
+                    app:selected_drawable="@drawable/ic_circle"
+                    app:shape="oval"
+                    app:selected_padding_left="5dp"
+                    app:selected_padding_right="5dp"
+                    app:unselected_padding_left="5dp"
+                    app:unselected_padding_right="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    app:selected_width="6dp"
+                    app:selected_height="6dp"
+                    app:unselected_width="6dp"
+                    app:unselected_height="6dp"
+                    android:layout_marginBottom="20dp"
+                    />
+
+<!--                <me.relex.circleindicator.CircleIndicator-->
+<!--                    android:id="@+id/indicator"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:layout_below="@+id/view"-->
+<!--                    android:layout_gravity="bottom"-->
+<!--                    app:ci_drawable="@drawable/ic_circle"-->
+<!--                    app:ci_drawable_unselected="@drawable/ic_circle"-->
+<!--                    app:ci_height="7dp"-->
+<!--                    app:ci_width="7dp" />-->
+
+
+                <!--                <ImageView-->
+<!--                    android:id="@+id/iv_restaurantImage"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@mipmap/temp_paneer" />-->
 
                 <!--circleindicator used-->
 
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/indicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_below="@+id/view"
-                    android:layout_gravity="bottom"
-                    app:ci_drawable="@drawable/ic_like"
-                    app:ci_drawable_unselected="@drawable/ic_like"
-                    app:ci_height="7dp"
-                    app:ci_width="7dp" />
 
                 <ImageView
                     android:id="@+id/iv_veg"

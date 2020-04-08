@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +14,16 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.adapter.RecycleAdapterRestaurantFoodPhotos;
+import com.heaven.vegetable.adapter.PagerAdapterSlidingProductImages;
 import com.heaven.vegetable.listeners.OnItemAddedToCart;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.ProductObject;
@@ -34,7 +39,9 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
+import me.relex.circleindicator.CircleIndicator;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,8 +60,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     Integer[] foodImage = {R.mipmap.temp_order, R.mipmap.temp_order,
             R.mipmap.temp_order, R.mipmap.temp_order, R.mipmap.temp_order};
 
-    private RecyclerView rvPhotos;
-    private RecycleAdapterRestaurantFoodPhotos adapterRestaurantPhotos;
+    private SliderLayout sliderLayoutProductImages;
+//    private CircleIndicator circleIndicator;
+//    private PagerAdapterSlidingProductImages adapterSlidingImages;
     private ArrayList<Integer> listPhotos;
 
     private View viewViewCart;
@@ -86,7 +94,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 
         initComponents();
         componentEvents();
-        setupRecyclerViewPhotos();
+        setupSlidingImages();
 
 //        setupRestaurantDetails();
 
@@ -103,6 +111,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         viewToolbar = findViewById(R.id.view_toolbarRestaurantDetails);
         ivBack = viewToolbar.findViewById(R.id.iv_back);
 
+        sliderLayoutProductImages = (SliderLayout) findViewById(R.id.sliderLayout_productImages);
+//        circleIndicator =  findViewById(R.id.indicator);
         tvRestaurantName = findViewById(R.id.tv_restaurantName);
         tvRestaurantReviews = findViewById(R.id.tv_restaurantReviews);
         ratingBarReviews = findViewById(R.id.ratingBar_restaurantReviews);
@@ -172,16 +182,67 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         }
     }
 
-    private void setupRecyclerViewPhotos() {
+    private void setupSlidingImages() {
         getPhotosData();
 
-        adapterRestaurantPhotos = new RecycleAdapterRestaurantFoodPhotos(this, listPhotos);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        rvPhotos.setLayoutManager(layoutManager);
-        rvPhotos.setItemAnimator(new DefaultItemAnimator());
-        rvPhotos.setAdapter(adapterRestaurantPhotos);
+//        HashMap<String, String> url_maps = new HashMap<String, String>();
+//        url_maps.put("Best Offer", "https://c4.wallpaperflare.com/wallpaper/563/7/828/peas-pod-food-wallpaper-preview.jpg");
+//        url_maps.put("Big Bang Theory", "https://c4.wallpaperflare.com/wallpaper/755/380/1002/vegetables-paprika-food-tomatoes-mushroom-wallpaper-preview.jpg");
+//        url_maps.put("House of Cards", "https://c4.wallpaperflare.com/wallpaper/401/129/264/food-vegetables-mushrooms-peppers-tomatoes-spoons-wallpaper-preview.jpg");
+//        url_maps.put("Game of Thrones", "https://c4.wallpaperflare.com/wallpaper/53/520/935/food-vegetables-tomatoes-eggplant-wallpaper-preview.jpg");
+//        url_maps.put("Game of Thrones", "https://c0.wallpaperflare.com/preview/218/234/443/asparagus-avocado-colorful-eating.jpg");
+
+//        HashMap<String, Integer> url_maps = new HashMap<String, Integer>();
+//        url_maps.put("50% off on Lunch", R.mipmap.temp_img1);
+//        url_maps.put("Free delivery above 250", R.mipmap.temp_img2);
+//        url_maps.put("House of Cards", R.mipmap.temp_img3);
+//        url_maps.put("Game of Thrones", R.mipmap.temp_img4);
+
+//        HashMap<String, String> url_maps = new HashMap<String, String>();
+//        url_maps.putAll(mapBannerDetails);
+
+//        for (String name : listPhotos.keySet()) {
+            for(int i = 0; i < listPhotos.size(); i ++) {
+            TextSliderView textSliderView = new TextSliderView(this);
+            // initialize a SliderLayout
+            textSliderView
+//                    .description(name)
+                    .image(listPhotos.get(i))
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+//                    .setOnSliderClickListener(this);
+
+//            //add your extra information
+//            textSliderView.bundle(new Bundle());
+//            textSliderView.getBundle()
+//                    .putString("extra", name);
+
+            sliderLayoutProductImages.addSlider(textSliderView);
+        }
+        sliderLayoutProductImages.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        sliderLayoutProductImages.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        sliderLayoutProductImages.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
+
+        sliderLayoutProductImages.setCustomAnimation(new DescriptionAnimation());
+        sliderLayoutProductImages.setDuration(4000);
+//        sliderLayoutProductImages.addOnPageChangeListener(this);
     }
 
+
+//    private void setupSlidingProductImages() {
+//        getPhotosData();
+//
+//        adapterSlidingImages = new PagerAdapterSlidingProductImages(this, listPhotos);
+//
+//        loginPagerAdapter = new FoodPagerAdapter(getSupportFragmentManager());
+//        viewPager.setAdapter(loginPagerAdapter);
+//        indicator.setViewPager(viewPager);
+//        loginPagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+//
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        rvPhotos.setLayoutManager(layoutManager);
+//        rvPhotos.setItemAnimator(new DefaultItemAnimator());
+//        rvPhotos.setAdapter(adapterRestaurantPhotos);
+//    }
 
     private void getPhotosData() {
         listPhotos = new ArrayList<>();
