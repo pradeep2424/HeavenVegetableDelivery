@@ -30,6 +30,7 @@
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content" />-->
 
+
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/sliderLayout_productImages"
                     android:layout_width="match_parent"
@@ -60,8 +61,7 @@
                     app:selected_height="6dp"
                     app:unselected_width="6dp"
                     app:unselected_height="6dp"
-                    android:layout_marginBottom="20dp"
-                    />
+                    android:layout_marginBottom="20dp" />
 
 <!--                <me.relex.circleindicator.CircleIndicator-->
 <!--                    android:id="@+id/indicator"-->

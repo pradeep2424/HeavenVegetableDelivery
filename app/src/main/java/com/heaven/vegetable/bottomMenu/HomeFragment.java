@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -245,6 +246,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         }
         imageSliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
         imageSliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        imageSliderLayout.setCustomIndicator((PagerIndicator) rootView.findViewById(R.id.custom_indicator));
         imageSliderLayout.setCustomAnimation(new DescriptionAnimation());
         imageSliderLayout.setDuration(4000);
         imageSliderLayout.addOnPageChangeListener(this);

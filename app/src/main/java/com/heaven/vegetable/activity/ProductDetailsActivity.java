@@ -20,6 +20,7 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
@@ -203,7 +204,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 
 //        for (String name : listPhotos.keySet()) {
             for(int i = 0; i < listPhotos.size(); i ++) {
-            TextSliderView textSliderView = new TextSliderView(this);
+                DefaultSliderView textSliderView = new DefaultSliderView(this);
             // initialize a SliderLayout
             textSliderView
 //                    .description(name)
@@ -218,8 +219,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 
             sliderLayoutProductImages.addSlider(textSliderView);
         }
+
         sliderLayoutProductImages.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        sliderLayoutProductImages.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+//        sliderLayoutProductImages.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayoutProductImages.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
 
         sliderLayoutProductImages.setCustomAnimation(new DescriptionAnimation());

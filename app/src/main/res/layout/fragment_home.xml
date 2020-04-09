@@ -62,7 +62,7 @@
             <!--                android:layout_width="match_parent"-->
             <!--                android:layout_height="wrap_content">-->
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -76,7 +76,29 @@
                     app:pager_animation="Accordion"
                     app:pager_animation_span="1100" />
 
-            </RelativeLayout>
+                <com.daimajia.slider.library.Indicators.PagerIndicator
+                    android:id="@+id/custom_indicator"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:gravity="center"
+                    app:selected_color="#0095BF"
+                    app:unselected_color="#55333333"
+                    app:selected_drawable="@drawable/ic_circle"
+                    app:shape="oval"
+                    app:selected_padding_left="5dp"
+                    app:selected_padding_right="5dp"
+                    app:unselected_padding_left="5dp"
+                    app:unselected_padding_right="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    app:selected_width="6dp"
+                    app:selected_height="6dp"
+                    app:unselected_width="6dp"
+                    app:unselected_height="6dp"
+                    android:layout_marginBottom="20dp" />
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

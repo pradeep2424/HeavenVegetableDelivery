@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <!--<ImageView-->
         <!--android:layout_width="wrap_content"-->
@@ -24,11 +23,11 @@
         <!--app:siSquare="true"/>-->
 
     <com.heaven.vegetable.utils.CornerImage
-        android:id="@+id/imageView"
+        android:id="@+id/iv_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@mipmap/trandy_coffee"
-        android:layout_marginRight="22.3dp"
+        android:layout_marginRight="23dp"
         android:scaleType="fitXY" />
 
 
