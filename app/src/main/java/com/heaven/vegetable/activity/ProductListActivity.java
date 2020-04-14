@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -304,6 +305,31 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+         if (requestCode == REQUEST_CODE_PRODUCT_DETAILS) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+
+                String flag = data.getExtras().getString("MESSAGE");
+
+                Intent intent = new Intent();
+                intent.putExtra("MESSAGE", flag);
+                setResult(RESULT_OK, intent);
+                finish();
+
+//                if (flag.equalsIgnoreCase("VIEW_CART")) {
+//                    triggerTabChangeListener.setTab(1);
+//
+//                } else if (flag.equalsIgnoreCase("UPDATE_CART_COUNT")) {
+//                    int noOfItems = data.getExtras().getInt("CART_ITEM_COUNT");
+//                    triggerTabChangeListener.setBadgeCount(noOfItems);
+//                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

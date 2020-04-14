@@ -1,5 +1,6 @@
 package com.heaven.vegetable.activity;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,16 +25,21 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.adapter.PagerAdapterSlidingProductImages;
 import com.heaven.vegetable.listeners.OnItemAddedToCart;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.ProductObject;
+import com.heaven.vegetable.model.RestaurantObject;
+import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
 import com.heaven.vegetable.utils.InternetConnection;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,9 +57,9 @@ import retrofit2.Response;
 
 //public class ProductDetailsActivity extends AppCompatActivity  {
 
-public class ProductDetailsActivity extends AppCompatActivity implements OnItemAddedToCart {
+public class ProductDetailsActivity extends AppCompatActivity {
     DialogLoadingIndicator progressIndicator;
-     CoordinatorLayout clRootLayout;
+    CoordinatorLayout clRootLayout;
 
     View viewToolbar;
     ImageView ivBack;
@@ -62,26 +69,36 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
             R.mipmap.temp_order, R.mipmap.temp_order, R.mipmap.temp_order};
 
     private SliderLayout sliderLayoutProductImages;
-//    private CircleIndicator circleIndicator;
+    //    private CircleIndicator circleIndicator;
 //    private PagerAdapterSlidingProductImages adapterSlidingImages;
     private ArrayList<Integer> listPhotos;
 
-    private View viewViewCart;
-    private TextView tvItemQuantity;
-    private TextView tvTotalPrice;
+//    private View viewViewCart;
+//    private TextView tvItemQuantity;
+//    private TextView tvTotalPrice;
 
-    private TextView tvRestaurantName;
-    private TextView tvRestaurantReviews;
-    private RatingBar ratingBarReviews;
+    private TextView tvProductName;
+    private TextView tvProductCategory;
+    private TextView tvProductPrice;
+
+    private LinearLayout llViewCartLayout;
+    private TextView tvProductTotalAmount;
+    private TextView tvViewCartText;
+    private TextView tvAddToCart;
+    private NumberPicker numberPickerItemQuantity;
 
     private int totalCartQuantity;
     private double totalCartPrice;
+    private double itemPackPrice;
+    private int packSize;
 
     LinearLayout ll250Gram;
     LinearLayout ll500Gram;
     LinearLayout ll1Kilo;
 
     ProductObject productObject;
+    UserDetails userDetails;
+    RestaurantObject restaurantObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +113,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         initComponents();
         componentEvents();
         setupSlidingImages();
+        setupProductDetails();
 
 //        setupRestaurantDetails();
 
@@ -103,24 +121,34 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 
 //        getProductsPhotoGallery();
         getProductDetailsData();
+
+        ll250Gram.performClick();
     }
 
     private void initComponents() {
-        progressIndicator = DialogLoadingIndicator.getInstance();
+        userDetails = Application.userDetails;
+        restaurantObject = Application.restaurantObject;
 
+        progressIndicator = DialogLoadingIndicator.getInstance();
         clRootLayout = findViewById(R.id.cl_rootLayout);
         viewToolbar = findViewById(R.id.view_toolbarRestaurantDetails);
         ivBack = viewToolbar.findViewById(R.id.iv_back);
 
         sliderLayoutProductImages = (SliderLayout) findViewById(R.id.sliderLayout_productImages);
 //        circleIndicator =  findViewById(R.id.indicator);
-        tvRestaurantName = findViewById(R.id.tv_restaurantName);
-        tvRestaurantReviews = findViewById(R.id.tv_restaurantReviews);
-        ratingBarReviews = findViewById(R.id.ratingBar_restaurantReviews);
+        tvProductName = findViewById(R.id.tv_productName);
+        tvProductCategory = findViewById(R.id.tv_productCategory);
+        tvProductPrice = findViewById(R.id.tv_productPrice);
 
-        viewViewCart = findViewById(R.id.view_bottomViewCart);
-        tvItemQuantity = viewViewCart.findViewById(R.id.tv_itemQuantity);
-        tvTotalPrice = viewViewCart.findViewById(R.id.tv_totalPrice);
+        llViewCartLayout = findViewById(R.id.ll_viewCartLayout);
+        tvProductTotalAmount = findViewById(R.id.tv_productAmount);
+        tvViewCartText = findViewById(R.id.tv_viewCartText);
+        tvAddToCart = findViewById(R.id.tv_addToCart);
+        numberPickerItemQuantity = findViewById(R.id.numberPicker_quantity);
+
+//        viewViewCart = findViewById(R.id.view_bottomViewCart);
+//        tvItemQuantity = viewViewCart.findViewById(R.id.tv_itemQuantity);
+//        tvTotalPrice = viewViewCart.findViewById(R.id.tv_totalPrice);
 
         ll250Gram = findViewById(R.id.ll_250Gram);
         ll500Gram = findViewById(R.id.ll_500Gram);
@@ -137,7 +165,17 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
             }
         });
 
-        viewViewCart.setOnClickListener(new View.OnClickListener() {
+//        viewViewCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.putExtra("MESSAGE", "VIEW_CART");
+//                setResult(RESULT_OK, intent);
+//                finish();
+//            }
+//        });
+
+        tvProductTotalAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -147,9 +185,32 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
             }
         });
 
+        tvAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItemOrUpdateQuantity(1, ActionEnum.INCREMENT.toString());
+            }
+        });
+
+        numberPickerItemQuantity.setValueChangedListener(new ValueChangedListener() {
+            @Override
+            public void valueChanged(int value, ActionEnum action) {
+//                String actionText = action == ActionEnum.MANUAL ? "manually set" : (action == ActionEnum.INCREMENT ? "incremented" : "decremented");
+                String actionText = action == ActionEnum.MANUAL ? "manually set" : (action == ActionEnum.INCREMENT ?
+                        ActionEnum.INCREMENT.toString() : ActionEnum.DECREMENT.toString());
+                String message = String.format("NumberPicker is %s to %d", actionText, value);
+
+                addItemOrUpdateQuantity(value, actionText);
+
+            }
+        });
+
         ll250Gram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                packSize = 0;
+                calculateItemPackPrice();
+
                 ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
                 ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
                 ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
@@ -159,6 +220,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         ll500Gram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                packSize = 1;
+                calculateItemPackPrice();
+
                 ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
                 ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
                 ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
@@ -168,6 +232,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         ll1Kilo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                packSize = 2;
+                calculateItemPackPrice();
+
                 ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
                 ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
                 ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect2));
@@ -175,11 +242,14 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         });
     }
 
-    private void setupRestaurantDetails() {
+
+    private void setupProductDetails() {
         if (productObject != null) {
-            tvRestaurantName.setText(productObject.getProductName());
-//            tvRestaurantReviews.setText(productObject.ge());
-//            ratingBarReviews.setText(productObject.getRestaurantName());
+            String formattedPrice = getString(R.string.rupees) + " " + formatAmount(productObject.getPrice());
+
+            tvProductName.setText(productObject.getProductName());
+            tvProductCategory.setText(productObject.getCategoryName());
+            tvProductPrice.setText(formattedPrice);
         }
     }
 
@@ -203,8 +273,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 //        url_maps.putAll(mapBannerDetails);
 
 //        for (String name : listPhotos.keySet()) {
-            for(int i = 0; i < listPhotos.size(); i ++) {
-                DefaultSliderView textSliderView = new DefaultSliderView(this);
+        for (int i = 0; i < listPhotos.size(); i++) {
+            DefaultSliderView textSliderView = new DefaultSliderView(this);
             // initialize a SliderLayout
             textSliderView
 //                    .description(name)
@@ -253,28 +323,71 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         listPhotos.addAll(new ArrayList<Integer>(Arrays.asList(icons)));
     }
 
-    private void calculateViewCartDetails(double itemPrice, String incrementOrDecrement) {
+    private void calculateItemPackPrice() {
+        double itemPrice = productObject.getPrice();
+        switch (packSize) {
+            case 0:   // 250 gm
+                itemPackPrice = itemPrice * 1;
+                break;
+
+            case 1:   // 500 gm
+                itemPackPrice = itemPrice * 2;
+                break;
+
+            case 2:   // 1 KG
+                itemPackPrice = itemPrice * 4;
+                break;
+        }
+
+        String formatPackPrice = formatAmount(itemPackPrice);
+        tvProductPrice.setText(getString(R.string.rupees) + formatPackPrice);
+    }
+
+    private void addItemOrUpdateQuantity(final int quantity, final String incrementOrDecrement) {
+        numberPickerItemQuantity.setValue(quantity);
+        if (quantity == 0) {
+            showAddItemButton();
+
+        } else {
+            hideAddItemButton();
+        }
+
+        addItemToCart(quantity, productObject, incrementOrDecrement);
+    }
+
+    public void showAddItemButton() {
+        numberPickerItemQuantity.setVisibility(View.GONE);
+        tvAddToCart.setVisibility(View.VISIBLE);
+    }
+
+    public void hideAddItemButton() {
+//            show number picker
+        numberPickerItemQuantity.setVisibility(View.VISIBLE);
+        tvAddToCart.setVisibility(View.GONE);
+    }
+
+    private void calculateViewCartDetails(String incrementOrDecrement) {
         int itemQuantity = 1;   // at a time 1 item can be added or removed
         if (incrementOrDecrement.equalsIgnoreCase(ActionEnum.INCREMENT.toString())) {
 //            increment
             totalCartQuantity = totalCartQuantity + itemQuantity;
-            double price = itemQuantity * itemPrice;
+            double price = itemQuantity * itemPackPrice;
             totalCartPrice = totalCartPrice + price;
 
         } else {
 
             totalCartQuantity = totalCartQuantity - itemQuantity;
-            double price = itemQuantity * itemPrice;
+            double price = itemQuantity * itemPackPrice;
             totalCartPrice = totalCartPrice - price;
         }
     }
 
     private void updateViewCartStrip() {
         if (totalCartQuantity == 0) {
-            viewViewCart.setVisibility(View.GONE);
+            removeBackgroundWhenNumberPickerVisHidden();
 
         } else {
-            viewViewCart.setVisibility(View.VISIBLE);
+            addBackgroundWhenNumberPickerVisible();
 
             String strPrice = formatAmount(totalCartPrice);
             String itemLabel = "";
@@ -285,9 +398,25 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
                 itemLabel = getString(R.string.item);
             }
 
-            tvItemQuantity.setText(totalCartQuantity + " " + itemLabel);
-            tvTotalPrice.setText(getString(R.string.rupees) + " " + strPrice);
+//            tvItemQuantity.setText(totalCartQuantity + " " + itemLabel);
+            tvProductTotalAmount.setText(getString(R.string.rupees) + " " + strPrice);
         }
+    }
+
+    private void addBackgroundWhenNumberPickerVisible() {
+        tvViewCartText.setVisibility(View.VISIBLE);
+        tvProductTotalAmount.setText("");
+
+        llViewCartLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_dark));
+        tvAddToCart.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+    }
+
+    private void removeBackgroundWhenNumberPickerVisHidden() {
+        tvViewCartText.setVisibility(View.GONE);
+        tvProductTotalAmount.setText(getString(R.string.view_cart));
+
+        llViewCartLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+        tvAddToCart.setBackgroundColor(ContextCompat.getColor(this, R.color.deep_orange));
     }
 
     private String formatAmount(double amount) {
@@ -299,66 +428,47 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
         return amt;
     }
 
-    @Override
-    public void onItemChangedInCart(int quantity, int position, String incrementOrDecrement) {
-//        DishObject dishObject = listDishProducts.get(position);
-//        Application.dishObject = dishObject;
-//
+//    private void addItemToLocal(DishObject dishObject, int quantity, String incrementOrDecrement) {
+////        CartObject cartObject = new CartObject();
+////        cartObject.setCgst(dishObject.getCgst());
+////        cartObject.setRestaurantID(productObject.getRestaurantID());
+////        cartObject.setDeliveryCharge(30);
+////        cartObject.setRestaurantName(productObject.getRestaurantName());
+////        cartObject.setIsIncludeTax(productObject.getIncludeTax());
+////        cartObject.setIsTaxApplicable(productObject.getTaxable());
+////        cartObject.setProductAmount(dishObject.getPrice());
+////        cartObject.setProductID(dishObject.getProductID());
+////        cartObject.setProductName(dishObject.getProductName());
+////        cartObject.setProductQuantity(quantity);
+////        cartObject.setProductRate(dishObject.getPrice());
+////        cartObject.setProductSize("Regular");
+////        cartObject.setSgst(dishObject.getSgst());
+////        cartObject.setTaxID(dishObject.getTaxID());
+////        cartObject.setTaxableVal(dishObject.getPrice());
+////        cartObject.setTotalAmount(dishObject.getPrice());
+////        cartObject.setUserID(Application.userDetails.getUserID());
+////        cartObject.setCartID(Application.listCartItems.size());
+////
+////        boolean isItemAlreadyExist = false;
+////        int newAddedProductID = dishObject.getProductID();
+////        for (int i = 0; i < Application.listCartItems.size(); i++) {
+////            int cartProductID = Application.listCartItems.get(i).getProductID();
+////            if (cartProductID == newAddedProductID) {
+////                isItemAlreadyExist = true;
+////                Application.listCartItems.remove(i);
+//////                Application.listCartItems.set(i, cartObject);
+////            }
+////        }
+////
+////        Application.listCartItems.add(cartObject);
+////
+//////        if (!isItemAlreadyExist) {
+//////            Application.listCartItems.add(cartObject);
+//////        }
+////
 ////        calculateViewCartDetails(dishObject.getPrice(), incrementOrDecrement);
 ////        updateViewCartStrip();
-//
-//        String mobileNo = Application.userDetails.getMobile();
-//        if (mobileNo != null) {
-//            calculateViewCartDetails(dishObject.getPrice(), incrementOrDecrement);
-//            updateViewCartStrip();
-//
-//        } else {
-//            addItemToLocal(dishObject, quantity, incrementOrDecrement);
-//        }
-
-    }
-
-//    private void addItemToLocal(DishObject dishObject, int quantity, String incrementOrDecrement) {
-//        CartObject cartObject = new CartObject();
-//        cartObject.setCgst(dishObject.getCgst());
-//        cartObject.setRestaurantID(productObject.getRestaurantID());
-//        cartObject.setDeliveryCharge(30);
-//        cartObject.setRestaurantName(productObject.getRestaurantName());
-//        cartObject.setIsIncludeTax(productObject.getIncludeTax());
-//        cartObject.setIsTaxApplicable(productObject.getTaxable());
-//        cartObject.setProductAmount(dishObject.getPrice());
-//        cartObject.setProductID(dishObject.getProductID());
-//        cartObject.setProductName(dishObject.getProductName());
-//        cartObject.setProductQuantity(quantity);
-//        cartObject.setProductRate(dishObject.getPrice());
-//        cartObject.setProductSize("Regular");
-//        cartObject.setSgst(dishObject.getSgst());
-//        cartObject.setTaxID(dishObject.getTaxID());
-//        cartObject.setTaxableVal(dishObject.getPrice());
-//        cartObject.setTotalAmount(dishObject.getPrice());
-//        cartObject.setUserID(Application.userDetails.getUserID());
-//        cartObject.setCartID(Application.listCartItems.size());
-//
-//        boolean isItemAlreadyExist = false;
-//        int newAddedProductID = dishObject.getProductID();
-//        for (int i = 0; i < Application.listCartItems.size(); i++) {
-//            int cartProductID = Application.listCartItems.get(i).getProductID();
-//            if (cartProductID == newAddedProductID) {
-//                isItemAlreadyExist = true;
-//                Application.listCartItems.remove(i);
-////                Application.listCartItems.set(i, cartObject);
-//            }
-//        }
-//
-//        Application.listCartItems.add(cartObject);
-//
-////        if (!isItemAlreadyExist) {
-////            Application.listCartItems.add(cartObject);
-////        }
-//
-//        calculateViewCartDetails(dishObject.getPrice(), incrementOrDecrement);
-//        updateViewCartStrip();
-//    }
+////    }
 
     private void getProductDetailsData() {
         if (InternetConnection.checkConnection(this)) {
@@ -423,7 +533,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
 //                                listDishProducts.add(dishObject);
                             }
 
-//                            setupRecyclerViewProducts();
+                            setupProductDetails();
 
                         } else {
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
@@ -465,130 +575,98 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnItemA
     }
 
 
-//    private JsonObject createJsonCart(DishObject dishObject, int quantity) {
-//        double totalPrice;
-//
-//        ProductObject productObject = Application.productObject;
-//
-//        if (productObject.getTaxable()) {
-//            double productPrice = dishObject.getPrice();
-//            double cgst = dishObject.getCgst();
-//            double sgst = dishObject.getCgst();
-//
-////            totalPrice = productPrice * ()
-//        }
-//
-//        JsonObject postParam = new JsonObject();
-//
-//        try {
-//            postParam.addProperty("ProductId", dishObject.getProductID());
-//            postParam.addProperty("ProductName", dishObject.getProductName());
-//            postParam.addProperty("ProductRate", dishObject.getPrice());
-//            postParam.addProperty("ProductAmount", dishObject.getPrice());
-//            postParam.addProperty("ProductSize", "Regular");
-//            postParam.addProperty("cartId", 0);
-//            postParam.addProperty("ProductQnty", quantity);
-//            postParam.addProperty("Taxableval", dishObject.getPrice());    // doubt
-//            postParam.addProperty("CGST", dishObject.getCgst());
-//            postParam.addProperty("SGST", dishObject.getSgst());
+    private JsonObject createJsonCart(ProductObject productObject, int quantity) {
+        double totalPrice;
+
+        JsonObject postParam = new JsonObject();
+
+        try {
+            postParam.addProperty("ProductId", productObject.getProductID());
+            postParam.addProperty("ProductName", productObject.getProductName());
+            postParam.addProperty("ProductRate", productObject.getPrice());
+            postParam.addProperty("ProductAmount", productObject.getPrice());
+            postParam.addProperty("ProductSize", "Regular");
+            postParam.addProperty("cartId", 0);
+            postParam.addProperty("ProductQnty", quantity);
+            postParam.addProperty("Taxableval", productObject.getPrice());    // doubt
+            postParam.addProperty("CGST", productObject.getCgst());
+            postParam.addProperty("SGST", productObject.getSgst());
+            postParam.addProperty("DeliveryCharge", 30.00);
+            postParam.addProperty("Userid", userDetails.getUserID());
+            postParam.addProperty("Clientid", restaurantObject.getRestaurantID());
+            postParam.addProperty("TaxId", 0);
+            postParam.addProperty("TotalAmount", productObject.getPrice());
+            postParam.addProperty("HotelName", restaurantObject.getRestaurantName());
+            postParam.addProperty("IsIncludeTax", true);
+            postParam.addProperty("IsTaxApplicable", true);
+
+//            postParam.addProperty("TotalAmount", dishObject.getPrice());
 //            postParam.addProperty("HotelName", productObject.getRestaurantName());
 //            postParam.addProperty("IsIncludeTax", productObject.getIncludeTax());
 //            postParam.addProperty("IsTaxApplicable", productObject.getTaxable());
-//            postParam.addProperty("DeliveryCharge", 30.00);
-//            postParam.addProperty("Userid", Application.userDetails.getUserID());
-//            postParam.addProperty("Clientid", productObject.getRestaurantID());
-//            postParam.addProperty("TotalAmount", dishObject.getPrice());
-//            postParam.addProperty("TaxId", 0);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return postParam;
-//    }
-//
-//
-//    public void addItemToCart(final int quantity, final DishObject dishObject, final String incrementOrDecrement) {
-//        if (InternetConnection.checkConnection(this)) {
-//
-//            ApiInterface apiService = RetroClient.getApiService(this);
-//            Call<ResponseBody> call = apiService.addItemToCart(createJsonCart(dishObject, quantity));
-//            call.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                    try {
-//                        int statusCode = response.code();
-//
-//                        if (response.isSuccessful()) {
-//                            String responseString = response.body().string();
-//
-////                            Application.cartObject = dishObject;
-//
-//
-//                            calculateViewCartDetails(quantity, dishObject.getPrice(), incrementOrDecrement);
-//                            updateViewCartStrip();
-//                            adapterRestaurantMenu.showHideQuantityAndAddItemButton();
-//
-////                            listCartDish = new ArrayList<>();
-//
-////                            ada
-//
-////                            JSONArray jsonArray = new JSONArray(responseString);
-////                            for (int i = 0; i < jsonArray.length(); i++) {
-////                                JSONObject jsonObj = jsonArray.getJSONObject(i);
-////
-////                                String dishID = jsonObj.optString("ProductId");
-////                                String dishName = jsonObj.optString("ProductName");
-////                                String dishDescription = jsonObj.optString("ProductDesc");
-////                                String dishImage = jsonObj.optString("ProductImage");
-////                                String dishPrice = jsonObj.optString("Price");
-////
-////                                DishObject dishObject = new DishObject();
-////                                dishObject.setDishID(dishID);
-////                                dishObject.setDishName(dishName);
-////                                dishObject.setDishDescription(dishDescription);
-////                                dishObject.setDishImage(dishImage);
-////                                dishObject.setDishPrice(dishPrice);
-////
-////                                listCartDish.add(dishObject);
-////                            }
-//
-//                        } else {
-//                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-//                        }
-//
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    try {
-//                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
-//                        Log.e("Error onFailure : ", t.toString());
-//                        t.printStackTrace();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//        } else {
-////            signOutFirebaseAccounts();
-//
-//            Snackbar.make(rlRootLayout, getResources().getString(R.string.no_internet),
-//                    Snackbar.LENGTH_INDEFINITE)
-//                    .setAction("RETRY", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            addItemToCart(quantity, dishObject, incrementOrDecrement);
-//                        }
-//                    })
-////                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
-//                    .show();
-//        }
-//    }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return postParam;
+    }
+
+
+    public void addItemToCart(final int quantity, final ProductObject productObject, final String incrementOrDecrement) {
+        if (InternetConnection.checkConnection(this)) {
+
+            ApiInterface apiService = RetroClient.getApiService(this);
+            Call<ResponseBody> call = apiService.addItemToCart(createJsonCart(productObject, quantity));
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+
+                        if (response.isSuccessful()) {
+                            String responseString = response.body().string();
+
+                            calculateViewCartDetails(incrementOrDecrement);
+                            updateViewCartStrip();
+//                            showHideQuantityAndAddItemButton();
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(clRootLayout, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            addItemToCart(quantity, productObject, incrementOrDecrement);
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
 
     public void showDialog() {
         progressIndicator.showProgress(ProductDetailsActivity.this);

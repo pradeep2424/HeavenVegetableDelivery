@@ -25,10 +25,10 @@
                     android:id="@+id/view_toolbarRestaurantDetails"
                     layout="@layout/toolbar_restaurant_detail" />
 
-<!--                <androidx.viewpager.widget.ViewPager-->
-<!--                    android:id="@+id/viewPager_slidingProductImages"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content" />-->
+                <!--                <androidx.viewpager.widget.ViewPager-->
+                <!--                    android:id="@+id/viewPager_slidingProductImages"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content" />-->
 
 
                 <com.daimajia.slider.library.SliderLayout
@@ -45,42 +45,42 @@
                     android:id="@+id/custom_indicator"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
                     app:selected_color="#0095BF"
-                    app:unselected_color="#55333333"
                     app:selected_drawable="@drawable/ic_circle"
-                    app:shape="oval"
+                    app:selected_height="6dp"
                     app:selected_padding_left="5dp"
                     app:selected_padding_right="5dp"
+                    app:selected_width="6dp"
+                    app:shape="oval"
+                    app:unselected_color="#55333333"
+                    app:unselected_height="6dp"
                     app:unselected_padding_left="5dp"
                     app:unselected_padding_right="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    app:selected_width="6dp"
-                    app:selected_height="6dp"
-                    app:unselected_width="6dp"
-                    app:unselected_height="6dp"
-                    android:layout_marginBottom="20dp" />
+                    app:unselected_width="6dp" />
 
-<!--                <me.relex.circleindicator.CircleIndicator-->
-<!--                    android:id="@+id/indicator"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    android:layout_below="@+id/view"-->
-<!--                    android:layout_gravity="bottom"-->
-<!--                    app:ci_drawable="@drawable/ic_circle"-->
-<!--                    app:ci_drawable_unselected="@drawable/ic_circle"-->
-<!--                    app:ci_height="7dp"-->
-<!--                    app:ci_width="7dp" />-->
+                <!--                <me.relex.circleindicator.CircleIndicator-->
+                <!--                    android:id="@+id/indicator"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="48dp"-->
+                <!--                    android:layout_below="@+id/view"-->
+                <!--                    android:layout_gravity="bottom"-->
+                <!--                    app:ci_drawable="@drawable/ic_circle"-->
+                <!--                    app:ci_drawable_unselected="@drawable/ic_circle"-->
+                <!--                    app:ci_height="7dp"-->
+                <!--                    app:ci_width="7dp" />-->
 
 
                 <!--                <ImageView-->
-<!--                    android:id="@+id/iv_restaurantImage"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:scaleType="centerCrop"-->
-<!--                    android:src="@mipmap/temp_paneer" />-->
+                <!--                    android:id="@+id/iv_restaurantImage"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:scaleType="centerCrop"-->
+                <!--                    android:src="@mipmap/temp_paneer" />-->
 
                 <!--circleindicator used-->
 
@@ -107,7 +107,7 @@
                     android:orientation="vertical">
 
                     <com.heaven.vegetable.custom.MyTextViewBold
-                        android:id="@+id/tv_foodName"
+                        android:id="@+id/tv_productName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
@@ -116,7 +116,7 @@
                         android:textSize="20sp" />
 
                     <com.heaven.vegetable.custom.MyTextView
-                        android:id="@+id/tv_foodCategory"
+                        android:id="@+id/tv_productCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_foodName"
@@ -131,9 +131,8 @@
                         android:layout_marginTop="15dp"
                         android:background="@color/smokegray" />
 
-
                     <com.heaven.vegetable.custom.MyTextViewBold
-                        android:id="@+id/tv_foodPrice"
+                        android:id="@+id/tv_productPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_foodCategory"
@@ -476,10 +475,29 @@
         </LinearLayout>
     </ScrollView>
 
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/ll_bottomLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_gravity="center_horizontal|bottom"-->
+    <!--        android:elevation="30dp"-->
+    <!--        android:fitsSystemWindows="true"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:visibility="visible">-->
+
+    <!--        <include-->
+    <!--            android:id="@+id/view_bottomViewCart"-->
+    <!--            layout="@layout/bottom_view_restaurant_cart"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentBottom="true"-->
+    <!--            android:visibility="gone" />-->
+
     <LinearLayout
         android:id="@+id/ll_bottomPaymentLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal|bottom"
         android:background="@color/black"
@@ -489,30 +507,49 @@
         android:visibility="visible"
         android:weightSum="2">
 
-        <com.heaven.vegetable.custom.MyTextView
-            android:id="@+id/tv_paymentButtonAmount"
+        <LinearLayout
+            android:id="@+id/ll_viewCartLayout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <com.heaven.vegetable.custom.MyTextViewBold
+                android:id="@+id/tv_productAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/view_cart"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.heaven.vegetable.custom.MyTextView
+                android:id="@+id/tv_viewCartText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/view_cart"
+                android:textColor="@color/green"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_addCartLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
             android:gravity="center"
-            android:padding="15dp"
-            android:text="Rs 8,750"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/ll_addCartLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/divider_light"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <com.heaven.vegetable.custom.MyTextView
-                android:id="@+id/tv_paymentButton"
+                android:id="@+id/tv_addToCart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/deep_orange"
@@ -530,9 +567,9 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingLeft="10dp"
-                android:paddingTop="5dp"
+                android:paddingTop="7dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="5dp"
+                android:paddingBottom="7dp"
                 android:visibility="gone"
                 app:custom_layout="@layout/custom_layout_number_picker"
                 app:focusable="false"
@@ -540,22 +577,8 @@
                 app:value="1" />
 
         </LinearLayout>
-
     </LinearLayout>
+    <!--    </LinearLayout>-->
 
-    <include
-        android:id="@+id/view_bottomViewCart"
-        layout="@layout/bottom_view_restaurant_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone" />
-
-    <!--    <include-->
-    <!--        android:id="@+id/view_bottomViewCart"-->
-    <!--        layout="@layout/bottom_view_restaurant_cart"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentBottom="true" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

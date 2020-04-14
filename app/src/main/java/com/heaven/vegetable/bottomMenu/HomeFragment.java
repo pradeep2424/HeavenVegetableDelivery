@@ -814,7 +814,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
                 String flag = data.getExtras().getString("MESSAGE");
                 if (flag.equalsIgnoreCase("VIEW_CART")) {
-                    triggerTabChangeListener.setTab(1);
+                    triggerTabChangeListener.setTab(2);
 //                    triggerTabChangeListener.setTab(2);
 
                 } else if (flag.equalsIgnoreCase("UPDATE_CART_COUNT")) {
