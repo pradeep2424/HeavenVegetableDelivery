@@ -527,12 +527,7 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
     public void onBackPressed() {
         super.onBackPressed();
 
-        if (calledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_ACTION_SKIP)) {
-//            Intent intent = new Intent(LocationGoogleMapActivity.this, GetStartedActivity.class);
-//            startActivity(intent);
-//            finish();
-
-        } else if (calledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_ACTION_OTP)) {
+        if (calledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_ACTION_OTP)) {
             Intent intent = new Intent(LocationGoogleMapActivity.this, GetStartedMobileNumberActivity.class);
             startActivity(intent);
             finish();

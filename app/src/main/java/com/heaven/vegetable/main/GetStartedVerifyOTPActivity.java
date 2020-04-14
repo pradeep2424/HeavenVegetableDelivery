@@ -343,10 +343,10 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
                             prefManagerConfig.setIsUserLoggedIn(true);
                             prefManagerConfig.setMobileNo(mobileNumber);
 
-                            String referralCode = prefManagerConfig.getReferralCode();
-                            if (referralCode != null && !referralCode.equalsIgnoreCase(prefManagerConfig.SP_DEFAULT_VALUE)) {
-                                addReferral(referralCode);
-                            }
+//                            String referralCode = prefManagerConfig.getReferralCode();
+//                            if (referralCode != null && !referralCode.equalsIgnoreCase(prefManagerConfig.SP_DEFAULT_VALUE)) {
+//                                addReferral(referralCode);
+//                            }
 
                             getUserDetails();
 
@@ -443,7 +443,7 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
     }
 
 
-    private void    getUserDetails() {
+    private void getUserDetails() {
         if (InternetConnection.checkConnection(this)) {
 
             ApiInterface apiService = RetroClient.getApiService(this);
@@ -482,11 +482,11 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
                             String cityName = jsonObj.optString("CityName");
                             String stateName = jsonObj.optString("StateName");
                             int zipCode = jsonObj.optInt("ZipCode");
-
-                            double totalPoints = jsonObj.optDouble("TotalPoints");
-                            if (Double.isNaN(totalPoints)) {
-                                totalPoints = 0;
-                            }
+//
+//                            double totalPoints = jsonObj.optDouble("TotalPoints");
+//                            if (Double.isNaN(totalPoints)) {
+//                                totalPoints = 0;
+//                            }
 
                             String url = jsonObj.optString("URL");
                             String smsUsername = jsonObj.optString("SMSUsername");
@@ -517,17 +517,8 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
                             userDetails.setCityName(cityName);
                             userDetails.setStateName(stateName);
                             userDetails.setZipCode(zipCode);
-                            userDetails.setTotalReferralPoints(totalPoints);
+//                            userDetails.setTotalReferralPoints(totalPoints);
                             Application.userDetails = userDetails;
-
-//                            SMSGatewayObject smsGatewayObject = new SMSGatewayObject();
-//                            smsGatewayObject.setUrl(url);
-//                            smsGatewayObject.setSmsUsername(smsUsername);
-//                            smsGatewayObject.setSmsPass(smsPass);
-//                            smsGatewayObject.setChannel(channel);
-//                            smsGatewayObject.setSendSMS(sendSMS);
-//                            smsGatewayObject.setSenderID(senderID);
-//                            Application.smsGatewayObject = smsGatewayObject;
 
                             if (flagCalledFrom != null && flagCalledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_CART_ACTION_PLACE_ORDER)) {
                                 Intent intent = new Intent();

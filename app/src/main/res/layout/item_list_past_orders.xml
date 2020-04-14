@@ -29,77 +29,75 @@
                 android:orientation="vertical"
                 android:paddingTop="16dp">
 
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                        android:id="@+id/iv_foodImage"-->
+<!--                        android:layout_width="80dp"-->
+<!--                        android:layout_height="80dp"-->
+<!--                        android:scaleType="fitXY"-->
+<!--                        android:src="@mipmap/ic_launcher"-->
+<!--                        app:riv_corner_radius="4dip" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginLeft="12dp"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:id="@+id/tv_restaurantName"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Cocobolo Poolside Bar + Grill"-->
+<!--                            android:textColor="#262628"-->
+<!--                            android:textSize="16sp" />-->
+
+<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                            android:id="@+id/tv_restaurantAddress"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:text="60 Kub Pines Apt. 797"-->
+<!--                            android:textColor="#9b9b9b"-->
+<!--                            android:textSize="14sp" />-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:orientation="horizontal">-->
+
+<!--                            <RatingBar-->
+<!--                                android:id="@+id/ratingBar"-->
+<!--                                style="?android:attr/ratingBarStyleSmall"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:numStars="5"-->
+<!--                                android:progressBackgroundTint="@color/colorAccent"-->
+<!--                                android:progressTint="@color/colorAccent"-->
+<!--                                android:rating="4" />-->
+
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:id="@+id/tv_restaurantReview"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="8.4dp"-->
+<!--                                android:text="238 reviews"-->
+<!--                                android:textColor="#9b9b9b"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/iv_foodImage"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher"
-                        app:riv_corner_radius="4dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="12dp"
-                        android:orientation="vertical">
-
-                        <com.heaven.vegetable.custom.MyTextView
-                            android:id="@+id/tv_restaurantName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Cocobolo Poolside Bar + Grill"
-                            android:textColor="#262628"
-                            android:textSize="16sp" />
-
-                        <com.heaven.vegetable.custom.MyTextView
-                            android:id="@+id/tv_restaurantAddress"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="60 Kub Pines Apt. 797"
-                            android:textColor="#9b9b9b"
-                            android:textSize="14sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RatingBar
-                                android:id="@+id/ratingBar"
-                                style="?android:attr/ratingBarStyleSmall"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:numStars="5"
-                                android:progressBackgroundTint="@color/colorAccent"
-                                android:progressTint="@color/colorAccent"
-                                android:rating="4" />
-
-                            <com.heaven.vegetable.custom.MyTextView
-                                android:id="@+id/tv_restaurantReview"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="8.4dp"
-                                android:text="238 reviews"
-                                android:textColor="#9b9b9b"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -173,9 +171,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:paddingLeft="11.7dp"
+                            android:paddingLeft="12dp"
                             android:paddingRight="15dp"
-                            android:text="$ 312.00"
+                            android:text="₹ 312"
                             android:textColor="@color/main_text"
                             android:textSize="14sp" />
 

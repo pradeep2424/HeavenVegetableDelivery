@@ -37,9 +37,9 @@ public class RecycleAdapterPastOrders extends RecyclerView.Adapter<RecycleAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvRestaurantName;
-        TextView tvRestaurantAddress;
-        TextView tvRestaurantReviews;
+//        TextView tvRestaurantName;
+//        TextView tvRestaurantAddress;
+//        TextView tvRestaurantReviews;
         TextView tvOrderDate;
         TextView tvOrderPrice;
         ImageView ivFoodImage;
@@ -49,9 +49,9 @@ public class RecycleAdapterPastOrders extends RecyclerView.Adapter<RecycleAdapte
         public ViewHolder(View itemView) {
             super(itemView);
 
-            tvRestaurantName = itemView.findViewById(R.id.tv_restaurantName);
-            tvRestaurantAddress = itemView.findViewById(R.id.tv_restaurantAddress);
-            tvRestaurantReviews = itemView.findViewById(R.id.tv_restaurantReview);
+//            tvRestaurantName = itemView.findViewById(R.id.tv_restaurantName);
+//            tvRestaurantAddress = itemView.findViewById(R.id.tv_restaurantAddress);
+//            tvRestaurantReviews = itemView.findViewById(R.id.tv_restaurantReview);
             tvOrderDate = itemView.findViewById(R.id.tv_date);
             tvOrderPrice = itemView.findViewById(R.id.tv_price);
             ivFoodImage = itemView.findViewById(R.id.iv_foodImage);
@@ -81,12 +81,11 @@ public class RecycleAdapterPastOrders extends RecyclerView.Adapter<RecycleAdapte
         OrderDetailsObject orderDetailsObject = modelArrayList.get(position);
         String formattedTotalAmount = getFormattedNumberDouble(orderDetailsObject.getTotalAmount());
 
-        holder.tvRestaurantName.setText(orderDetailsObject.getRestaurantName());
-        holder.tvRestaurantAddress.setText(orderDetailsObject.getUserAddress());
-//        holder.tvRestaurantReviews.setText(orderDetailsObject.getRestaurantReviews());
+//        holder.tvRestaurantName.setText(orderDetailsObject.getRestaurantName());
+//        holder.tvRestaurantAddress.setText(orderDetailsObject.getUserAddress());
+
         holder.tvOrderDate.setText(orderDetailsObject.getOrderDate());
         holder.tvOrderPrice.setText("₹ " + formattedTotalAmount);
-//        holder.ivFoodImage.setImageResource(Integer.parseInt(orderDetailsObject.getDishImage()));
 
         setupRecyclerViewPastOrders(holder.rvProductList, orderDetailsObject.getListProducts());
     }

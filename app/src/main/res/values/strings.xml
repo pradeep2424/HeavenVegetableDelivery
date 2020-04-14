@@ -20,7 +20,7 @@
     <string name="login_verify_awesome">Awesome,</string>
     <string name="login_verify_otp_text">We will auto detect the OTP sent to your number</string>
     <string name="otp_wait_for">Wait for</string>
-    <string name="otp_message">is your Dronam verification OTP.</string>
+    <string name="otp_message">is your Heaven Vegetable Delivery verification OTP.</string>
 
     <string name="set_location">Set Location</string>
     <string name="location_permission_title">Location Permission Denied</string>

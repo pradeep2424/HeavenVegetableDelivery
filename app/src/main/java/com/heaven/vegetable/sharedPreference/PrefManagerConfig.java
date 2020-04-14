@@ -19,7 +19,7 @@ public class PrefManagerConfig {
     private final String PREF_NAME_LOGIN_DETAILS = "SPLoginDetails";
     private final String SP_KEY_IS_USER_LOGGED_IN = "IsUserLoggedIn";
     private final String SP_KEY_MOBILE_NO = "MobileNo";
-    private final String SP_KEY_REFERRAL_CODE = "ReferralCode";
+//    private final String SP_KEY_REFERRAL_CODE = "ReferralCode";
 
     public PrefManagerConfig(Context context) {
         this.context = context;
@@ -45,15 +45,14 @@ public class PrefManagerConfig {
         editor.commit();
     }
 
-    public String getReferralCode() {
-        return pref.getString(SP_KEY_REFERRAL_CODE, SP_DEFAULT_VALUE);
-    }
-
-    public void setReferralCode(String referralCode) {
-        editor.putString(SP_KEY_REFERRAL_CODE, referralCode);
-        editor.commit();
-    }
-
+//    public String getReferralCode() {
+//        return pref.getString(SP_KEY_REFERRAL_CODE, SP_DEFAULT_VALUE);
+//    }
+//
+//    public void setReferralCode(String referralCode) {
+//        editor.putString(SP_KEY_REFERRAL_CODE, referralCode);
+//        editor.commit();
+//    }
 
     public void clearPrefOnLogout() {
         editor.clear();

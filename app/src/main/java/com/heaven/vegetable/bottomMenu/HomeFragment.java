@@ -39,6 +39,7 @@ import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.BannerDetailsObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.CateogryObject;
+import com.heaven.vegetable.model.RestaurantObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
@@ -127,7 +128,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        restaurantID = Application.categoryObject.getRestaurantID();
+        restaurantID = Application.restaurantObject.getRestaurantID();
         userID = Application.userDetails.getUserID();
         zipCode = Application.userDetails.getZipCode();
 //        referralPoints = Application.userDetails.getTotalReferralPoints();
@@ -146,9 +147,10 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         setupSlidingImages();
         setupRecyclerViewRestaurant();
 
-//        getSliderDetails();
 //        getUserLikeTopItems();
-//        getRestaurantData();
+
+        getSliderDetails();
+        getRestaurantData();
 
         return rootView;
     }
@@ -491,7 +493,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
                         if (response.isSuccessful()) {
                             String responseString = response.body().string();
-                            listCategoryObject = new ArrayList<>();
+//                            listCategoryObject = new ArrayList<>();
 
                             JSONArray jsonArray = new JSONArray(responseString);
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -516,34 +518,35 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
                                 boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
 
-                                CateogryObject categoryObject = new CateogryObject();
-                                categoryObject.setCategoryID(categoryID);
-                                categoryObject.setCategoryName(categoryName);
-                                categoryObject.setRestaurantID(restaurantID);
-                                categoryObject.setRestaurantName(restaurantName);
-                                categoryObject.setRestaurantAddress(restaurantAddress);
-                                categoryObject.setOpenTime(openTime);
-                                categoryObject.setCloseTime(closeTime);
-                                categoryObject.setContact(contact);
-                                categoryObject.setDescription(description);
-                                categoryObject.setLongitude(longitude);
-                                categoryObject.setLatitude(latitude);
-                                categoryObject.setRating(rating);
-                                categoryObject.setFoodTypeID(foodTypeID);
-                                categoryObject.setFoodTypeName(foodTypeName);
-                                categoryObject.setLogo(logo);
-                                categoryObject.setTaxID(taxID);
-                                categoryObject.setTaxable(taxable);
-                                categoryObject.setIncludeTax(includeTax);
+                                RestaurantObject restaurantObject = new RestaurantObject();
+                                restaurantObject.setCategoryID(categoryID);
+                                restaurantObject.setCategoryName(categoryName);
+                                restaurantObject.setRestaurantID(restaurantID);
+                                restaurantObject.setRestaurantName(restaurantName);
+                                restaurantObject.setRestaurantAddress(restaurantAddress);
+                                restaurantObject.setOpenTime(openTime);
+                                restaurantObject.setCloseTime(closeTime);
+                                restaurantObject.setContact(contact);
+                                restaurantObject.setDescription(description);
+                                restaurantObject.setLongitude(longitude);
+                                restaurantObject.setLatitude(latitude);
+                                restaurantObject.setRating(rating);
+                                restaurantObject.setFoodTypeID(foodTypeID);
+                                restaurantObject.setFoodTypeName(foodTypeName);
+                                restaurantObject.setLogo(logo);
+                                restaurantObject.setTaxID(taxID);
+                                restaurantObject.setTaxable(taxable);
+                                restaurantObject.setIncludeTax(includeTax);
 
-                                listCategoryObject.add(categoryObject);
+                                Application.restaurantObject = restaurantObject;
+//                                listCategoryObject.add(categoryObject);
                             }
 
                         } else {
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
                         }
 
-                        setupRecyclerViewRestaurant();
+//                        setupRecyclerViewRestaurant();
 
                     } catch (Exception e) {
                         e.printStackTrace();

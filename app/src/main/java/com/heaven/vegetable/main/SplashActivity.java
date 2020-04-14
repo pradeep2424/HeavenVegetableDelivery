@@ -23,6 +23,7 @@ import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.sharedPreference.PrefManagerConfig;
 import com.heaven.vegetable.utils.Application;
+import com.heaven.vegetable.utils.ConstantValues;
 import com.heaven.vegetable.utils.GPSTracker;
 import com.heaven.vegetable.utils.InternetConnection;
 import com.sucho.placepicker.AddressData;
@@ -55,7 +56,6 @@ public class SplashActivity extends AppCompatActivity {
 
         init();
         getCurrentLocation();
-//        getSmsDetails();
 
         loadNextPage();
 
@@ -66,9 +66,6 @@ public class SplashActivity extends AppCompatActivity {
 //        } else {
 //            loadNextPage();
 //        }
-
-//        insertUserDetails();
-
     }
 
 //    public void printHashKey() {
