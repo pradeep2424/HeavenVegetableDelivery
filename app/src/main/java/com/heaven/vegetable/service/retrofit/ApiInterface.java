@@ -76,12 +76,14 @@ public interface ApiInterface {
     Call<ResponseBody> placeOrder(@Body JsonObject jsonObj);
 
 
-    @GET("getRestaurantDetails/{Zip}")
-    Call<ResponseBody> getRestaurantDetails(@Path("Zip") String zipCode);
+    @GET("getCompanyDetails/{Zip}")
+    Call<ResponseBody> getCompanyDetails(@Path("Zip") String zipCode);
 
-//    @POST("insorder")
-//    Call<ResponseBody> placeOrder(@Body ArrayList<OrderDetailsObject> listOrder);
+    @GET("getCategory")
+    Call<ResponseBody> getCategory();
 
+    @GET("getTopProduct")
+    Call<ResponseBody> getTopProducts();
 
 //    @POST("insorder")
 //    Call<ResponseBody> placeOrder(@Body OrderDetailsObject orderDetails);

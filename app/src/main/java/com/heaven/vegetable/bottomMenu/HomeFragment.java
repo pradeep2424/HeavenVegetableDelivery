@@ -151,6 +151,8 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
         getSliderDetails();
         getRestaurantData();
+        getTopPopularItems();
+        getCategoryData();
 
         return rootView;
     }
@@ -363,7 +365,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     }
 
     private void setupRecyclerViewRestaurant() {
-        getCategoryData();
+        getCategoryDummyData();
 
         adapterRestaurant = new RecycleAdapterCategory(getActivity(), listCategoryObject);
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -374,7 +376,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         adapterRestaurant.setClickListener(this);
     }
 
-    private void getCategoryData() {
+    private void getCategoryDummyData() {
         listCategoryObject = new ArrayList<>();
 
         CateogryObject categoryObject1 = new CateogryObject();
@@ -477,13 +479,185 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     private void getRestaurantData() {
         if (InternetConnection.checkConnection(getActivity())) {
-            showDialog();
-
+//            showDialog();
             String strZipCode = String.valueOf(zipCode);
 
             ApiInterface apiService = RetroClient.getApiService(getActivity());
 //            Call<ResponseBody> call = apiService.getRestaurantDetails("416004");
-            Call<ResponseBody> call = apiService.getRestaurantDetails(strZipCode);
+            Call<ResponseBody> call = apiService.getCompanyDetails(strZipCode);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+
+                        if (response.isSuccessful()) {
+                            String responseString = response.body().string();
+//                            listCategoryObject = new ArrayList<>();
+
+                            JSONArray jsonArray = new JSONArray(responseString);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObj = jsonArray.getJSONObject(i);
+
+                                int categoryID = jsonObj.optInt("CategoryId");
+                                String categoryName = jsonObj.optString("CategoryName");
+                                int restaurantID = jsonObj.optInt("ClientId");
+                                String restaurantName = jsonObj.optString("RestaurantName");
+                                String restaurantAddress = jsonObj.optString("ClientAddress");
+                                String openTime = jsonObj.optString("OpentTime");
+                                String closeTime = jsonObj.optString("CloseTime");
+                                String contact = jsonObj.optString("Contact");
+                                String description = jsonObj.optString("Description");
+                                String longitude = jsonObj.optString("Langitude");
+                                String latitude = jsonObj.optString("Latitude");
+                                String rating = jsonObj.optString("Rating", "4.5");
+                                int foodTypeID = jsonObj.optInt("FoodTypeId");
+                                String foodTypeName = jsonObj.optString("FoodTypeName");
+                                String logo = jsonObj.optString("Logo");
+                                String taxID = jsonObj.optString("TaxId");
+                                boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
+                                boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
+
+                                RestaurantObject restaurantObject = new RestaurantObject();
+                                restaurantObject.setCategoryID(categoryID);
+                                restaurantObject.setCategoryName(categoryName);
+                                restaurantObject.setRestaurantID(restaurantID);
+                                restaurantObject.setRestaurantName(restaurantName);
+                                restaurantObject.setRestaurantAddress(restaurantAddress);
+                                restaurantObject.setOpenTime(openTime);
+                                restaurantObject.setCloseTime(closeTime);
+                                restaurantObject.setContact(contact);
+                                restaurantObject.setDescription(description);
+                                restaurantObject.setLongitude(longitude);
+                                restaurantObject.setLatitude(latitude);
+                                restaurantObject.setRating(rating);
+                                restaurantObject.setFoodTypeID(foodTypeID);
+                                restaurantObject.setFoodTypeName(foodTypeName);
+                                restaurantObject.setLogo(logo);
+                                restaurantObject.setTaxID(taxID);
+                                restaurantObject.setTaxable(taxable);
+                                restaurantObject.setIncludeTax(includeTax);
+
+                                Application.restaurantObject = restaurantObject;
+//                                listCategoryObject.add(categoryObject);
+                            }
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+//                        setupRecyclerViewRestaurant();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+//                    dismissDialog();
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+//                        dismissDialog();
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getRestaurantData();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
+
+    private void getSliderDetails() {
+        if (InternetConnection.checkConnection(getActivity())) {
+
+            ApiInterface apiService = RetroClient.getApiService(getActivity());
+            Call<ResponseBody> call = apiService.getSlidingPhotoDetails(0, ConstantValues.SLIDER_BANNER);   // 0 for sliding photos
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+
+                        if (response.isSuccessful()) {
+                            String responseString = response.body().string();
+                            mapBannerDetails = new HashMap<>();
+
+                            JSONArray jsonArray = new JSONArray(responseString);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObj = jsonArray.getJSONObject(i);
+
+                                String photoURL = jsonObj.optString("PhotoData");
+                                String title = jsonObj.optString("Text");
+
+//                                BannerDetailsObject bannerDetails = new BannerDetailsObject();
+//                                bannerDetails.setPhotoURL(photoURL);
+//                                bannerDetails.setTitle(title);
+
+                                mapBannerDetails.put(title, photoURL);
+                            }
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+//                        setupSlidingImages();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getSliderDetails();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
+
+    private void getTopPopularItems() {
+        if (InternetConnection.checkConnection(getActivity())) {
+            showDialog();
+
+            ApiInterface apiService = RetroClient.getApiService(getActivity());
+            Call<ResponseBody> call = apiService.getTopProducts();
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -583,11 +757,12 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         }
     }
 
-    private void getSliderDetails() {
+    private void getCategoryData() {
         if (InternetConnection.checkConnection(getActivity())) {
+            showDialog();
 
             ApiInterface apiService = RetroClient.getApiService(getActivity());
-            Call<ResponseBody> call = apiService.getSlidingPhotoDetails(0, ConstantValues.SLIDER_BANNER);   // 0 for sliding photos
+            Call<ResponseBody> call = apiService.getCategory();
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -597,36 +772,72 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
                         if (response.isSuccessful()) {
                             String responseString = response.body().string();
-                            mapBannerDetails = new HashMap<>();
+//                            listCategoryObject = new ArrayList<>();
 
                             JSONArray jsonArray = new JSONArray(responseString);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObj = jsonArray.getJSONObject(i);
 
-                                String photoURL = jsonObj.optString("PhotoData");
-                                String title = jsonObj.optString("Text");
+                                int categoryID = jsonObj.optInt("CategoryId");
+                                String categoryName = jsonObj.optString("CategoryName");
+                                int restaurantID = jsonObj.optInt("ClientId");
+                                String restaurantName = jsonObj.optString("RestaurantName");
+                                String restaurantAddress = jsonObj.optString("ClientAddress");
+                                String openTime = jsonObj.optString("OpentTime");
+                                String closeTime = jsonObj.optString("CloseTime");
+                                String contact = jsonObj.optString("Contact");
+                                String description = jsonObj.optString("Description");
+                                String longitude = jsonObj.optString("Langitude");
+                                String latitude = jsonObj.optString("Latitude");
+                                String rating = jsonObj.optString("Rating", "4.5");
+                                int foodTypeID = jsonObj.optInt("FoodTypeId");
+                                String foodTypeName = jsonObj.optString("FoodTypeName");
+                                String logo = jsonObj.optString("Logo");
+                                String taxID = jsonObj.optString("TaxId");
+                                boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
+                                boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
 
-//                                BannerDetailsObject bannerDetails = new BannerDetailsObject();
-//                                bannerDetails.setPhotoURL(photoURL);
-//                                bannerDetails.setTitle(title);
+                                RestaurantObject restaurantObject = new RestaurantObject();
+                                restaurantObject.setCategoryID(categoryID);
+                                restaurantObject.setCategoryName(categoryName);
+                                restaurantObject.setRestaurantID(restaurantID);
+                                restaurantObject.setRestaurantName(restaurantName);
+                                restaurantObject.setRestaurantAddress(restaurantAddress);
+                                restaurantObject.setOpenTime(openTime);
+                                restaurantObject.setCloseTime(closeTime);
+                                restaurantObject.setContact(contact);
+                                restaurantObject.setDescription(description);
+                                restaurantObject.setLongitude(longitude);
+                                restaurantObject.setLatitude(latitude);
+                                restaurantObject.setRating(rating);
+                                restaurantObject.setFoodTypeID(foodTypeID);
+                                restaurantObject.setFoodTypeName(foodTypeName);
+                                restaurantObject.setLogo(logo);
+                                restaurantObject.setTaxID(taxID);
+                                restaurantObject.setTaxable(taxable);
+                                restaurantObject.setIncludeTax(includeTax);
 
-                                mapBannerDetails.put(title, photoURL);
+                                Application.restaurantObject = restaurantObject;
+//                                listCategoryObject.add(categoryObject);
                             }
 
                         } else {
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
                         }
 
-//                        setupSlidingImages();
+//                        setupRecyclerViewRestaurant();
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    dismissDialog();
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     try {
+                        dismissDialog();
                         showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
                         Log.e("Error onFailure : ", t.toString());
                         t.printStackTrace();
@@ -643,13 +854,14 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            getSliderDetails();
+                            getRestaurantData();
                         }
                     })
 //                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
                     .show();
         }
     }
+
 
 //    private void getUserLikeTopItems() {
 //        if (InternetConnection.checkConnection(getActivity())) {
