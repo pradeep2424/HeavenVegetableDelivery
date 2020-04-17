@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:background="#fff">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -55,9 +56,20 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_productList"
             android:layout_width="match_parent"
+            android:layout_below="@+id/appBar"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/view_bottomViewCart"
             android:background="#ffffff"
             android:nestedScrollingEnabled="false" />
-    </LinearLayout>
+
+        <include
+            android:id="@+id/view_bottomViewCart"
+            layout="@layout/bottom_view_restaurant_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

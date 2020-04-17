@@ -21,8 +21,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.adapter.RecycleAdapterAddresses;
 import com.heaven.vegetable.adapter.RecycleAdapterProductList;
+import com.heaven.vegetable.listeners.OnItemAddedToCart;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.AddressDetails;
+import com.heaven.vegetable.model.CartObject;
+import com.heaven.vegetable.model.ClientObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -30,10 +34,12 @@ import com.heaven.vegetable.sharedPreference.PrefManagerConfig;
 import com.heaven.vegetable.utils.Application;
 import com.heaven.vegetable.utils.InternetConnection;
 import com.heaven.vegetable.utils.SimpleDividerItemDecoration;
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -41,21 +47,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductListActivity extends AppCompatActivity implements OnRecyclerViewClickListener {
-    private RelativeLayout rlRootLayout;
+public class ProductListActivity extends AppCompatActivity implements OnRecyclerViewClickListener, OnItemAddedToCart {
+    DialogLoadingIndicator progressIndicator;
+    public RelativeLayout rlRootLayout;
 
     //    View viewToolbarAddresses;
 //    ImageView ivBack;
     TextView tvToolbarTitle;
 
     private Toolbar toolbar;
-
     private PrefManagerConfig prefManagerConfig;
+
     String mobileNumber;
+    String intentFlag;
+
+    private int totalCartQuantity;
+    private double totalCartPrice;
 
     private RecyclerView rvProductList;
     private RecycleAdapterProductList adapterProductList;
     private ArrayList<ProductObject> listProducts;
+
+    private View viewViewCart;
+    private TextView tvItemQuantity;
+    private TextView tvTotalPrice;
+
+    ClientObject clientObject;
 
     private final int REQUEST_CODE_PRODUCT_DETAILS = 100;
 
@@ -68,10 +85,13 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         componentEvents();
 
 //        getUserAddressList();
-        setupRecyclerAddresses();
+        setupRecyclerProductList();
     }
 
     private void initComponents() {
+        clientObject = Application.clientObject;
+        progressIndicator = DialogLoadingIndicator.getInstance();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
 
@@ -87,6 +107,10 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         rlRootLayout = findViewById(R.id.rl_rootLayout);
         rvProductList = findViewById(R.id.rv_productList);
 
+        viewViewCart = findViewById(R.id.view_bottomViewCart);
+        tvItemQuantity = viewViewCart.findViewById(R.id.tv_itemQuantity);
+        tvTotalPrice = viewViewCart.findViewById(R.id.tv_totalPrice);
+
 //        viewToolbarAddresses = findViewById(R.id.view_toolbarProductList);
 //        ivBack = viewToolbarAddresses.findViewById(R.id.iv_back);
 //        tvToolbarTitle = viewToolbarAddresses.findViewById(R.id.tv_toolbarTitle);
@@ -94,6 +118,16 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     }
 
     private void componentEvents() {
+        viewViewCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("MESSAGE", "VIEW_CART");
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
 //        ivBack.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -103,7 +137,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 
     }
 
-    private void setupRecyclerAddresses() {
+    private void setupRecyclerProductList() {
         getProductDummyData();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -113,6 +147,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         adapterProductList = new RecycleAdapterProductList(this, listProducts);
         rvProductList.setAdapter(adapterProductList);
         adapterProductList.setClickListener(this);
+        adapterProductList.setOnItemAddedToCart(this);
 
 //        rvProductList.addItemDecoration(new SimpleDividerItemDecoration(this));
 
@@ -249,7 +284,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 //                                listProducts.add(addressDetails);
                             }
 
-                            setupRecyclerAddresses();
+                            setupRecyclerProductList();
 
                         } else {
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
@@ -287,13 +322,146 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         }
     }
 
+
+    public void showDialog() {
+        progressIndicator.showProgress(ProductListActivity.this);
+    }
+
+    public void dismissDialog() {
+        if (progressIndicator != null) {
+            progressIndicator.hideProgress();
+        }
+    }
+
     public void showSnackbarErrorMsg(String erroMsg) {
+//        Snackbar.make(fragmentRootView, erroMsg, Snackbar.LENGTH_LONG).show();
+
         Snackbar snackbar = Snackbar.make(rlRootLayout, erroMsg, Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         TextView snackTextView = (TextView) snackbarView
                 .findViewById(R.id.snackbar_text);
         snackTextView.setMaxLines(4);
         snackbar.show();
+    }
+
+    public void showSnackBarErrorMsgWithButton(String erroMsg) {
+        Snackbar.make(rlRootLayout, erroMsg, Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                })
+                .setActionTextColor(getResources().getColor(R.color.colorAccent))
+                .show();
+    }
+
+
+    private void calculateViewCartDetails(double itemPrice, String incrementOrDecrement) {
+        int itemQuantity = 1;   // at a time 1 item can be added or removed
+        if (incrementOrDecrement.equalsIgnoreCase(ActionEnum.INCREMENT.toString())) {
+//            increment
+            totalCartQuantity = totalCartQuantity + itemQuantity;
+            double price = itemQuantity * itemPrice;
+            totalCartPrice = totalCartPrice + price;
+
+        } else {
+
+            totalCartQuantity = totalCartQuantity - itemQuantity;
+            double price = itemQuantity * itemPrice;
+            totalCartPrice = totalCartPrice - price;
+        }
+    }
+
+
+    private void updateViewCartStrip() {
+        if (totalCartQuantity == 0) {
+            viewViewCart.setVisibility(View.GONE);
+
+        } else {
+            viewViewCart.setVisibility(View.VISIBLE);
+
+            String strPrice = formatAmount(totalCartPrice);
+            String itemLabel = "";
+            if (totalCartQuantity > 1) {
+                itemLabel = getString(R.string.items);
+
+            } else {
+                itemLabel = getString(R.string.item);
+            }
+
+            tvItemQuantity.setText(totalCartQuantity + " " + itemLabel);
+            tvTotalPrice.setText(getString(R.string.rupees) + " " + strPrice);
+        }
+    }
+
+    private String formatAmount(double amount) {
+        String amt;
+        DecimalFormat df = new DecimalFormat();
+        df.setDecimalSeparatorAlwaysShown(false);
+        amt = df.format(amount);
+
+        return amt;
+    }
+
+    private void addItemToLocal(ProductObject dishObject, int quantity, String incrementOrDecrement) {
+        CartObject cartObject = new CartObject();
+        cartObject.setCgst(dishObject.getCgst());
+        cartObject.setRestaurantID(clientObject.getRestaurantID());
+        cartObject.setDeliveryCharge(30);
+        cartObject.setRestaurantName(clientObject.getRestaurantName());
+        cartObject.setIsIncludeTax(clientObject.getIncludeTax());
+        cartObject.setIsTaxApplicable(clientObject.getTaxable());
+        cartObject.setProductAmount(dishObject.getPrice());
+        cartObject.setProductID(dishObject.getProductID());
+        cartObject.setProductName(dishObject.getProductName());
+        cartObject.setProductQuantity(quantity);
+        cartObject.setProductRate(dishObject.getPrice());
+        cartObject.setProductSize("Regular");
+        cartObject.setSgst(dishObject.getSgst());
+        cartObject.setTaxID(dishObject.getTaxID());
+        cartObject.setTaxableVal(dishObject.getPrice());
+        cartObject.setTotalAmount(dishObject.getPrice());
+        cartObject.setUserID(Application.userDetails.getUserID());
+        cartObject.setCartID(Application.listCartItems.size());
+
+        boolean isItemAlreadyExist = false;
+        int newAddedProductID = dishObject.getProductID();
+        for (int i = 0; i < Application.listCartItems.size(); i++) {
+            int cartProductID = Application.listCartItems.get(i).getProductID();
+            if (cartProductID == newAddedProductID) {
+                isItemAlreadyExist = true;
+                Application.listCartItems.remove(i);
+//                Application.listCartItems.set(i, cartObject);
+            }
+        }
+
+        Application.listCartItems.add(cartObject);
+
+//        if (!isItemAlreadyExist) {
+//            Application.listCartItems.add(cartObject);
+//        }
+
+        calculateViewCartDetails(dishObject.getPrice(), incrementOrDecrement);
+        updateViewCartStrip();
+    }
+
+
+    @Override
+    public void onItemChangedInCart(int quantity, int position, String incrementOrDecrement) {
+        ProductObject productObject = listProducts.get(position);
+        Application.productObject = productObject;
+
+//        calculateViewCartDetails(dishObject.getPrice(), incrementOrDecrement);
+//        updateViewCartStrip();
+
+        String mobileNo = Application.userDetails.getMobile();
+        if (mobileNo != null) {
+            calculateViewCartDetails(productObject.getPrice(), incrementOrDecrement);
+            updateViewCartStrip();
+
+        } else {
+            addItemToLocal(productObject, quantity, incrementOrDecrement);
+        }
     }
 
     @Override
@@ -310,15 +478,11 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-         if (requestCode == REQUEST_CODE_PRODUCT_DETAILS) {
+        if (requestCode == REQUEST_CODE_PRODUCT_DETAILS) {
             if (resultCode == Activity.RESULT_OK && data != null) {
 
-                String flag = data.getExtras().getString("MESSAGE");
-
-                Intent intent = new Intent();
-                intent.putExtra("MESSAGE", flag);
-                setResult(RESULT_OK, intent);
-                finish();
+                intentFlag = data.getExtras().getString("MESSAGE");
+                totalCartQuantity = data.getExtras().getInt("CART_ITEM_COUNT");
 
 //                if (flag.equalsIgnoreCase("VIEW_CART")) {
 //                    triggerTabChangeListener.setTab(1);
@@ -337,5 +501,19 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        int totalItems;
+        if (intentFlag != null) {    // back from product details page
+            totalItems = totalCartQuantity;
+
+        } else {
+            totalItems = Application.listCartItems.size() + totalCartQuantity;
+        }
+
+        Intent intent = new Intent();
+        intent.putExtra("MESSAGE", "UPDATE_CART_COUNT");
+        intent.putExtra("CART_ITEM_COUNT", totalItems);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

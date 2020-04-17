@@ -2,7 +2,7 @@ package com.heaven.vegetable.model;
 
 import java.io.Serializable;
 
-public class RestaurantObject implements Serializable {
+public class ClientObject implements Serializable {
     int categoryID;
     String categoryName;
     int restaurantID;

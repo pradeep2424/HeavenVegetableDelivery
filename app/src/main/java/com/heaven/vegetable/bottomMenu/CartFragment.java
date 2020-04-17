@@ -1114,7 +1114,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //                UserDetails userDetails = Application.userDetails;
 //                ArrayList<CartObject> listCartItems = Application.listCartItems;
 //
-////                RestaurantObject restaurantObj = Application.categoryObject;
+////                ClientObject restaurantObj = Application.categoryObject;
 ////                String userTypeID = Application.userDetails.getUserType();
 ////                String restaurantID = "1";
 //
@@ -1220,7 +1220,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     }
 
 //    private JsonObject createJsonPlaceOrder(OrderDetailsObject orderDetailsObject) {
-////        RestaurantObject categoryObject = Application.categoryObject;
+////        ClientObject categoryObject = Application.categoryObject;
 //
 //        JsonObject postParam = new JsonObject();
 //
@@ -1262,7 +1262,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //            try {
 //
 //                UserDetails userDetails = Application.userDetails;
-//                RestaurantObject restaurantObj = Application.categoryObject;
+//                ClientObject restaurantObj = Application.categoryObject;
 //
 //                CartObject cartObject = Application.listCartItems.get(0);
 //

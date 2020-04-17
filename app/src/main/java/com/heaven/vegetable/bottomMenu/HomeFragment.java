@@ -37,9 +37,9 @@ import com.heaven.vegetable.listeners.OnUserMayLikedClickListener;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.BannerDetailsObject;
+import com.heaven.vegetable.model.ClientObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.CateogryObject;
-import com.heaven.vegetable.model.RestaurantObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        restaurantID = Application.restaurantObject.getRestaurantID();
+        restaurantID = Application.clientObject.getRestaurantID();
         userID = Application.userDetails.getUserID();
         zipCode = Application.userDetails.getZipCode();
 //        referralPoints = Application.userDetails.getTotalReferralPoints();
@@ -496,7 +496,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                             String responseString = response.body().string();
 //                            listCategoryObject = new ArrayList<>();
 
-                            JSONArray jsonArray = new JSONArray(responseString);
+                                JSONArray jsonArray = new JSONArray(responseString);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObj = jsonArray.getJSONObject(i);
 
@@ -519,27 +519,27 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
                                 boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
 
-                                RestaurantObject restaurantObject = new RestaurantObject();
-                                restaurantObject.setCategoryID(categoryID);
-                                restaurantObject.setCategoryName(categoryName);
-                                restaurantObject.setRestaurantID(restaurantID);
-                                restaurantObject.setRestaurantName(restaurantName);
-                                restaurantObject.setRestaurantAddress(restaurantAddress);
-                                restaurantObject.setOpenTime(openTime);
-                                restaurantObject.setCloseTime(closeTime);
-                                restaurantObject.setContact(contact);
-                                restaurantObject.setDescription(description);
-                                restaurantObject.setLongitude(longitude);
-                                restaurantObject.setLatitude(latitude);
-                                restaurantObject.setRating(rating);
-                                restaurantObject.setFoodTypeID(foodTypeID);
-                                restaurantObject.setFoodTypeName(foodTypeName);
-                                restaurantObject.setLogo(logo);
-                                restaurantObject.setTaxID(taxID);
-                                restaurantObject.setTaxable(taxable);
-                                restaurantObject.setIncludeTax(includeTax);
+                                ClientObject clientObject = new ClientObject();
+                                clientObject.setCategoryID(categoryID);
+                                clientObject.setCategoryName(categoryName);
+                                clientObject.setRestaurantID(restaurantID);
+                                clientObject.setRestaurantName(restaurantName);
+                                clientObject.setRestaurantAddress(restaurantAddress);
+                                clientObject.setOpenTime(openTime);
+                                clientObject.setCloseTime(closeTime);
+                                clientObject.setContact(contact);
+                                clientObject.setDescription(description);
+                                clientObject.setLongitude(longitude);
+                                clientObject.setLatitude(latitude);
+                                clientObject.setRating(rating);
+                                clientObject.setFoodTypeID(foodTypeID);
+                                clientObject.setFoodTypeName(foodTypeName);
+                                clientObject.setLogo(logo);
+                                clientObject.setTaxID(taxID);
+                                clientObject.setTaxable(taxable);
+                                clientObject.setIncludeTax(includeTax);
 
-                                Application.restaurantObject = restaurantObject;
+                                Application.clientObject = clientObject;
 //                                listCategoryObject.add(categoryObject);
                             }
 
@@ -654,7 +654,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     private void getTopPopularItems() {
         if (InternetConnection.checkConnection(getActivity())) {
-            showDialog();
+//            showDialog();
 
             ApiInterface apiService = RetroClient.getApiService(getActivity());
             Call<ResponseBody> call = apiService.getTopProducts();
@@ -692,27 +692,27 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
                                 boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
 
-                                RestaurantObject restaurantObject = new RestaurantObject();
-                                restaurantObject.setCategoryID(categoryID);
-                                restaurantObject.setCategoryName(categoryName);
-                                restaurantObject.setRestaurantID(restaurantID);
-                                restaurantObject.setRestaurantName(restaurantName);
-                                restaurantObject.setRestaurantAddress(restaurantAddress);
-                                restaurantObject.setOpenTime(openTime);
-                                restaurantObject.setCloseTime(closeTime);
-                                restaurantObject.setContact(contact);
-                                restaurantObject.setDescription(description);
-                                restaurantObject.setLongitude(longitude);
-                                restaurantObject.setLatitude(latitude);
-                                restaurantObject.setRating(rating);
-                                restaurantObject.setFoodTypeID(foodTypeID);
-                                restaurantObject.setFoodTypeName(foodTypeName);
-                                restaurantObject.setLogo(logo);
-                                restaurantObject.setTaxID(taxID);
-                                restaurantObject.setTaxable(taxable);
-                                restaurantObject.setIncludeTax(includeTax);
+                                ClientObject clientObject = new ClientObject();
+                                clientObject.setCategoryID(categoryID);
+                                clientObject.setCategoryName(categoryName);
+                                clientObject.setRestaurantID(restaurantID);
+                                clientObject.setRestaurantName(restaurantName);
+                                clientObject.setRestaurantAddress(restaurantAddress);
+                                clientObject.setOpenTime(openTime);
+                                clientObject.setCloseTime(closeTime);
+                                clientObject.setContact(contact);
+                                clientObject.setDescription(description);
+                                clientObject.setLongitude(longitude);
+                                clientObject.setLatitude(latitude);
+                                clientObject.setRating(rating);
+                                clientObject.setFoodTypeID(foodTypeID);
+                                clientObject.setFoodTypeName(foodTypeName);
+                                clientObject.setLogo(logo);
+                                clientObject.setTaxID(taxID);
+                                clientObject.setTaxable(taxable);
+                                clientObject.setIncludeTax(includeTax);
 
-                                Application.restaurantObject = restaurantObject;
+                                Application.clientObject = clientObject;
 //                                listCategoryObject.add(categoryObject);
                             }
 
@@ -726,13 +726,13 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                         e.printStackTrace();
                     }
 
-                    dismissDialog();
+//                    dismissDialog();
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     try {
-                        dismissDialog();
+//                        dismissDialog();
                         showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
                         Log.e("Error onFailure : ", t.toString());
                         t.printStackTrace();
@@ -797,27 +797,27 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
                                 boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
 
-                                RestaurantObject restaurantObject = new RestaurantObject();
-                                restaurantObject.setCategoryID(categoryID);
-                                restaurantObject.setCategoryName(categoryName);
-                                restaurantObject.setRestaurantID(restaurantID);
-                                restaurantObject.setRestaurantName(restaurantName);
-                                restaurantObject.setRestaurantAddress(restaurantAddress);
-                                restaurantObject.setOpenTime(openTime);
-                                restaurantObject.setCloseTime(closeTime);
-                                restaurantObject.setContact(contact);
-                                restaurantObject.setDescription(description);
-                                restaurantObject.setLongitude(longitude);
-                                restaurantObject.setLatitude(latitude);
-                                restaurantObject.setRating(rating);
-                                restaurantObject.setFoodTypeID(foodTypeID);
-                                restaurantObject.setFoodTypeName(foodTypeName);
-                                restaurantObject.setLogo(logo);
-                                restaurantObject.setTaxID(taxID);
-                                restaurantObject.setTaxable(taxable);
-                                restaurantObject.setIncludeTax(includeTax);
+                                ClientObject clientObject = new ClientObject();
+                                clientObject.setCategoryID(categoryID);
+                                clientObject.setCategoryName(categoryName);
+                                clientObject.setRestaurantID(restaurantID);
+                                clientObject.setRestaurantName(restaurantName);
+                                clientObject.setRestaurantAddress(restaurantAddress);
+                                clientObject.setOpenTime(openTime);
+                                clientObject.setCloseTime(closeTime);
+                                clientObject.setContact(contact);
+                                clientObject.setDescription(description);
+                                clientObject.setLongitude(longitude);
+                                clientObject.setLatitude(latitude);
+                                clientObject.setRating(rating);
+                                clientObject.setFoodTypeID(foodTypeID);
+                                clientObject.setFoodTypeName(foodTypeName);
+                                clientObject.setLogo(logo);
+                                clientObject.setTaxID(taxID);
+                                clientObject.setTaxable(taxable);
+                                clientObject.setIncludeTax(includeTax);
 
-                                Application.restaurantObject = restaurantObject;
+                                Application.clientObject = clientObject;
 //                                listCategoryObject.add(categoryObject);
                             }
 
@@ -959,7 +959,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         if (listCategoryObject.size() > 0) {
             CateogryObject categoryObject = listCategoryObject.get(0);
             Intent intent = new Intent(getActivity(), ProductListActivity.class);
-            intent.putExtra("RestaurantObject", categoryObject);
+            intent.putExtra("ClientObject", categoryObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
     }
@@ -969,7 +969,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         if (listCategoryObject.size() > 0) {
             CateogryObject categoryObject = listCategoryObject.get(0);
             Intent intent = new Intent(getActivity(), ProductListActivity.class);
-            intent.putExtra("RestaurantObject", categoryObject);
+            intent.putExtra("ClientObject", categoryObject);
             startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
         }
     }
@@ -981,7 +981,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         Application.categoryObject = categoryObject;
 
         Intent intent = new Intent(getActivity(), ProductListActivity.class);
-        intent.putExtra("RestaurantObject", categoryObject);
+        intent.putExtra("ClientObject", categoryObject);
         startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
     }
 

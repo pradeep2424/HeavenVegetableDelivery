@@ -1,37 +1,28 @@
 package com.heaven.vegetable.activity;
 
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.adapter.PagerAdapterSlidingProductImages;
-import com.heaven.vegetable.listeners.OnItemAddedToCart;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.ProductObject;
-import com.heaven.vegetable.model.RestaurantObject;
+import com.heaven.vegetable.model.ClientObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -47,9 +38,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
-import me.relex.circleindicator.CircleIndicator;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,7 +87,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     ProductObject productObject;
     UserDetails userDetails;
-    RestaurantObject restaurantObject;
+    ClientObject clientObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +116,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void initComponents() {
         userDetails = Application.userDetails;
-        restaurantObject = Application.restaurantObject;
+        clientObject = Application.clientObject;
 
         progressIndicator = DialogLoadingIndicator.getInstance();
         clRootLayout = findViewById(R.id.cl_rootLayout);
@@ -593,10 +582,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
             postParam.addProperty("SGST", productObject.getSgst());
             postParam.addProperty("DeliveryCharge", 30.00);
             postParam.addProperty("Userid", userDetails.getUserID());
-            postParam.addProperty("Clientid", restaurantObject.getRestaurantID());
+            postParam.addProperty("Clientid", clientObject.getRestaurantID());
             postParam.addProperty("TaxId", 0);
             postParam.addProperty("TotalAmount", productObject.getPrice());
-            postParam.addProperty("HotelName", restaurantObject.getRestaurantName());
+            postParam.addProperty("HotelName", clientObject.getRestaurantName());
             postParam.addProperty("IsIncludeTax", true);
             postParam.addProperty("IsTaxApplicable", true);
 
