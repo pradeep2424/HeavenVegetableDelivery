@@ -463,10 +463,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         if (InternetConnection.checkConnection(this)) {
             showDialog();
 
-            int userTypeID = Application.userDetails.getUserID();
-            int restaurantID = productObject.getProductID();
+            int userTypeID = userDetails.getUserID();
+            int restaurantID = clientObject.getRestaurantID();
             int foodTypeID = productObject.getFoodTypeID();
-            int categoryID = productObject.getCategoryID();
+            int categoryID = 4;
+//            int categoryID = productObject.getCategoryID();
 
             ApiInterface apiService = RetroClient.getApiService(this);
             Call<ResponseBody> call = apiService.getProductDetailsData(userTypeID, restaurantID, foodTypeID, categoryID);

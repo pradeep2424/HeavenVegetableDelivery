@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.model.CateogryObject;
@@ -63,9 +64,9 @@ public class RecycleAdapterCategory extends RecyclerView.Adapter<RecycleAdapterC
         CateogryObject cateogryObject = listCategory.get(position);
 
         holder.tvCategoryName.setText(cateogryObject.getCategoryName());
-        holder.ivCategoryImage.setImageResource(Integer.parseInt(cateogryObject.getCategoryImage()));
+//        holder.ivCategoryImage.setImageResource(Integer.parseInt(cateogryObject.getCategoryImage()));
 
-//        Glide.with(context).load(restaurantObj.getLogo()).into(holder.ivRestaurantImage);
+        Glide.with(context).load(cateogryObject.getCategoryImage()).into(holder.ivCategoryImage);
     }
 
     @Override

@@ -64,15 +64,15 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     RelativeLayout rlCartItemDetails;
     View viewEmptyCart;
 
-    LinearLayout llReferralPointsLayout;
-    SwitchButton switchButtonApplyPoints;
-    TextView tvBalancePoints;
-    TextView tvSaveReferralPointsMessage;
+//    LinearLayout llReferralPointsLayout;
+//    SwitchButton switchButtonApplyPoints;
+//    TextView tvBalancePoints;
+//    TextView tvSaveReferralPointsMessage;
 
-    private RelativeLayout rlAddReferralBalBillDetails;
-    private RelativeLayout rlAddReferralBalTotalPay;
-    private TextView tvAddReferralMoneyBillDetails;
-    private TextView tvAddReferralMoneyTotalPay;
+//    private RelativeLayout rlAddReferralBalBillDetails;
+//    private RelativeLayout rlAddReferralBalTotalPay;
+//    private TextView tvAddReferralMoneyBillDetails;
+//    private TextView tvAddReferralMoneyTotalPay;
 
     private TextView tvItemTotal;
 //    private TextView tvRestaurantCharges;
@@ -87,16 +87,16 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     TriggerTabChangeListener triggerTabChangeListener;
     private ArrayList<CartObject> listCartDish = new ArrayList<>();
 
-    double appliedReferralPoints;
+//    double appliedReferralPoints;
     double totalPayment;
     String mobileNo;
     int userID;
-    double referralPoints;
+//    double referralPoints;
     int restaurantID;
     int orderNumber;
 
     private final int REQUEST_CODE_MOBILE_NO_ACTIVITY = 100;
-    private final int MINIMUM_AMOUNT_FOR_FREE_DELIVERY = 350;
+    private final int MINIMUM_AMOUNT_FOR_FREE_DELIVERY = 100;
 
     @Override
     public void onAttach(Context context) {
@@ -111,8 +111,8 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 
         userID = Application.userDetails.getUserID();
         mobileNo = Application.userDetails.getMobile();
-        restaurantID = Application.categoryObject.getRestaurantID();
-        referralPoints = Application.userDetails.getTotalReferralPoints();
+        restaurantID = Application.clientObject.getRestaurantID();
+//        referralPoints = Application.userDetails.getTotalReferralPoints();
     }
 
     @Override
@@ -154,15 +154,15 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
         tvPaymentButton = rootView.findViewById(R.id.tv_paymentButton);
         rvOrderedItems = (RecyclerView) rootView.findViewById(R.id.recyclerView_orderedItems);
 
-        llReferralPointsLayout = rootView.findViewById(R.id.ll_referralPointsLayout);
-        switchButtonApplyPoints = rootView.findViewById(R.id.switchButton_applyPoints);
-        tvBalancePoints = rootView.findViewById(R.id.tv_balanceReferralPoints);
-        tvSaveReferralPointsMessage = rootView.findViewById(R.id.tv_referralPointsSaveMessage);
-
-        rlAddReferralBalBillDetails = rootView.findViewById(R.id.rl_addReferralPointsBillDetails);
-        rlAddReferralBalTotalPay = rootView.findViewById(R.id.rl_addReferralPointsTotalPay);
-        tvAddReferralMoneyBillDetails = rootView.findViewById(R.id.tv_addReferralMoneyBillDetails);
-        tvAddReferralMoneyTotalPay = rootView.findViewById(R.id.tv_addReferralMoneyTotalPay);
+//        llReferralPointsLayout = rootView.findViewById(R.id.ll_referralPointsLayout);
+//        switchButtonApplyPoints = rootView.findViewById(R.id.switchButton_applyPoints);
+//        tvBalancePoints = rootView.findViewById(R.id.tv_balanceReferralPoints);
+//        tvSaveReferralPointsMessage = rootView.findViewById(R.id.tv_referralPointsSaveMessage);
+//
+//        rlAddReferralBalBillDetails = rootView.findViewById(R.id.rl_addReferralPointsBillDetails);
+//        rlAddReferralBalTotalPay = rootView.findViewById(R.id.rl_addReferralPointsTotalPay);
+//        tvAddReferralMoneyBillDetails = rootView.findViewById(R.id.tv_addReferralMoneyBillDetails);
+//        tvAddReferralMoneyTotalPay = rootView.findViewById(R.id.tv_addReferralMoneyTotalPay);
 
         tvItemTotal = rootView.findViewById(R.id.tv_itemTotalText);
 //        tvRestaurantCharges = rootView.findViewById(R.id.tv_restaurantChargesText);
@@ -180,18 +180,18 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             }
         });
 
-        switchButtonApplyPoints.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                setupBillingDetails();
-
-//                if (isChecked) {
+//        switchButtonApplyPoints.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+//                setupBillingDetails();
 //
-//                } else {
-//
-//                }
-            }
-        });
+////                if (isChecked) {
+////
+////                } else {
+////
+////                }
+//            }
+//        });
 
         tvPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,26 +208,26 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
         });
     }
 
-    private void setupReferralPointsLayout() {
-        String formattedPoints = getFormattedNumberDouble(referralPoints);
-
-        if (referralPoints == 0) {
-            llReferralPointsLayout.setVisibility(View.GONE);
-
-        } else {
-            llReferralPointsLayout.setVisibility(View.VISIBLE);
-
-            String balanceText = getString(R.string.referral_points_you_will_save)
-                    + " " + getString(R.string.rupees)
-                    + " " + formattedPoints
-                    + " " + getString(R.string.using)
-                    + " " + formattedPoints
-                    + " " + getString(R.string.referral_points);
-
-            tvBalancePoints.setText(formattedPoints + " " + getString(R.string.rupees));
-            tvSaveReferralPointsMessage.setText(balanceText);
-        }
-    }
+//    private void setupReferralPointsLayout() {
+//        String formattedPoints = getFormattedNumberDouble(referralPoints);
+//
+//        if (referralPoints == 0) {
+//            llReferralPointsLayout.setVisibility(View.GONE);
+//
+//        } else {
+//            llReferralPointsLayout.setVisibility(View.VISIBLE);
+//
+//            String balanceText = getString(R.string.referral_points_you_will_save)
+//                    + " " + getString(R.string.rupees)
+//                    + " " + formattedPoints
+//                    + " " + getString(R.string.using)
+//                    + " " + formattedPoints
+//                    + " " + getString(R.string.referral_points);
+//
+//            tvBalancePoints.setText(formattedPoints + " " + getString(R.string.rupees));
+//            tvSaveReferralPointsMessage.setText(balanceText);
+//        }
+//    }
 
     private void setupRecyclerViewOrderedItems() {
         adapterOrderedItems = new RecycleAdapterOrderedItem(getActivity(), listCartDish);
@@ -244,27 +244,23 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //        adapterOrderedItems.setClickListener(this);
     }
 
-//    private void setupBillingDetails() {
-//        double itemTotal = 0;
+    private void setupBillingDetails() {
+        double itemTotal = 0;
 //        double remainingItemTotal;
-//        double deliveryCharges = 0;
+        double deliveryCharges = 0;
 //        double sgst = 0;
 //        double cgst = 0;
-//
-//        for (int i = 0; i < Application.listCartItems.size(); i++) {
-//            CartObject cartObject = SerializationUtils.clone(Application.listCartItems.get(i));
-//
-//            itemTotal = itemTotal + getUpdateItemPrice(cartObject);
-//            deliveryCharges = cartObject.getDeliveryCharge();
+
+        for (int i = 0; i < Application.listCartItems.size(); i++) {
+            CartObject cartObject = SerializationUtils.clone(Application.listCartItems.get(i));
+
+            itemTotal = itemTotal + getUpdateItemPrice(cartObject);
+            deliveryCharges = cartObject.getDeliveryCharge();
 //            sgst = cartObject.getSgst();
 //            cgst = cartObject.getCgst();
-//        }
+        }
 //        remainingItemTotal = itemTotal;
-//
-//        sgst = itemTotal * (sgst / 100);
-//        cgst = itemTotal * (cgst / 100);
-//        double totalGST = sgst + cgst;
-//
+
 ////       logic for calculating referral points
 //        if (referralPoints != 0 && switchButtonApplyPoints.isChecked()) {
 //            double remainingReferralPoints;
@@ -280,11 +276,6 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //                remainingItemTotal = itemTotal - referralPoints;
 //            }
 //
-////            itemTotal = remainingItemTotal;
-//
-////            totalPayment = remainingItemTotal + totalGST + deliveryCharges;
-////            formattedTotalPayment = getFormattedNumberDouble(totalPayment);
-//
 //            rlAddReferralBalBillDetails.setVisibility(View.VISIBLE);
 //            rlAddReferralBalTotalPay.setVisibility(View.VISIBLE);
 //
@@ -296,103 +287,24 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //            rlAddReferralBalBillDetails.setVisibility(View.GONE);
 //            rlAddReferralBalTotalPay.setVisibility(View.GONE);
 //        }
-//
-//        // 200 rupees minimum delivery charge
-//        if (itemTotal > MINIMUM_AMOUNT_FOR_FREE_DELIVERY) {
-//            totalPayment = remainingItemTotal + totalGST;
-//
-//            tvDeliveryFreeText.setVisibility(View.VISIBLE);
-//            tvDeliveryFee.setPaintFlags(tvDeliveryFee.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//
-//        } else {
-//            totalPayment = remainingItemTotal + totalGST + deliveryCharges;
-//
-//            tvDeliveryFreeText.setVisibility(View.GONE);
-//            tvDeliveryFee.setPaintFlags(tvDeliveryFee.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-//        }
-//
-//        String formattedItemTotal = getFormattedNumberDouble(remainingItemTotal);
-//        String formattedTotalGST = getFormattedNumberDouble(totalGST);
-//        String formattedDeliveryCharges = getFormattedNumberDouble(deliveryCharges);
-//        String formattedTotalPayment = getFormattedNumberDouble(totalPayment);
-//
-//        tvItemTotal.setText("₹ " + formattedItemTotal);
-//        tvRestaurantCharges.setText("₹ " + formattedTotalGST);
-//        tvDeliveryFee.setText("₹ " + formattedDeliveryCharges);
-//        tvTotalPaymentAmount.setText("₹ " + formattedTotalPayment);
-//        tvPaymentButtonAmount.setText("₹ " + formattedTotalPayment);
-//    }
-
-    private void setupBillingDetails() {
-        double itemTotal = 0;
-        double remainingItemTotal;
-        double deliveryCharges = 0;
-//        double sgst = 0;
-//        double cgst = 0;
-
-        for (int i = 0; i < Application.listCartItems.size(); i++) {
-            CartObject cartObject = SerializationUtils.clone(Application.listCartItems.get(i));
-
-            itemTotal = itemTotal + getUpdateItemPrice(cartObject);
-            deliveryCharges = cartObject.getDeliveryCharge();
-//            sgst = cartObject.getSgst();
-//            cgst = cartObject.getCgst();
-        }
-        remainingItemTotal = itemTotal;
-
-//        sgst = itemTotal * (sgst / 100);
-//        cgst = itemTotal * (cgst / 100);
-//        double totalGST = sgst + cgst;
-
-//       logic for calculating referral points
-        if (referralPoints != 0 && switchButtonApplyPoints.isChecked()) {
-            double remainingReferralPoints;
-
-            if (referralPoints >= itemTotal) {
-                remainingReferralPoints = referralPoints - itemTotal;
-                appliedReferralPoints = itemTotal;
-                remainingItemTotal = 0;
-
-            } else {
-                remainingReferralPoints = 0;
-                appliedReferralPoints = referralPoints;
-                remainingItemTotal = itemTotal - referralPoints;
-            }
-
-//            itemTotal = remainingItemTotal;
-
-//            totalPayment = remainingItemTotal + totalGST + deliveryCharges;
-//            formattedTotalPayment = getFormattedNumberDouble(totalPayment);
-
-            rlAddReferralBalBillDetails.setVisibility(View.VISIBLE);
-            rlAddReferralBalTotalPay.setVisibility(View.VISIBLE);
-
-            String formattedAppliedPoints = getFormattedNumberDouble(appliedReferralPoints);
-            tvAddReferralMoneyBillDetails.setText(formattedAppliedPoints);
-            tvAddReferralMoneyTotalPay.setText(formattedAppliedPoints);
-
-        } else {
-            rlAddReferralBalBillDetails.setVisibility(View.GONE);
-            rlAddReferralBalTotalPay.setVisibility(View.GONE);
-        }
 
         // 200 rupees minimum delivery charge
         if (itemTotal > MINIMUM_AMOUNT_FOR_FREE_DELIVERY) {
-            totalPayment = remainingItemTotal;
+            totalPayment = itemTotal;
 //            totalPayment = remainingItemTotal + totalGST;
 
             tvDeliveryFreeText.setVisibility(View.VISIBLE);
             tvDeliveryFee.setPaintFlags(tvDeliveryFee.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         } else {
-            totalPayment = remainingItemTotal + deliveryCharges;
+            totalPayment = itemTotal + deliveryCharges;
 //            totalPayment = remainingItemTotal + totalGST + deliveryCharges;
 
             tvDeliveryFreeText.setVisibility(View.GONE);
             tvDeliveryFee.setPaintFlags(tvDeliveryFee.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
 
-        String formattedItemTotal = getFormattedNumberDouble(remainingItemTotal);
+        String formattedItemTotal = getFormattedNumberDouble(itemTotal);
 //        String formattedTotalGST = getFormattedNumberDouble(totalGST);
         String formattedDeliveryCharges = getFormattedNumberDouble(deliveryCharges);
         String formattedTotalPayment = getFormattedNumberDouble(totalPayment);
@@ -643,7 +555,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
         showCartItemDetails();
         setupRecyclerViewOrderedItems();
 
-        setupReferralPointsLayout();
+//        setupReferralPointsLayout();
         setupBillingDetails();
     }
 
@@ -997,9 +909,9 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                                     String responseString = response.body().string();
 
                                     if (currentIndex == listCartItems.size() - 1) {
-                                        if (referralPoints != 0) {
-                                            sendAppliedReferralPoints();
-                                        }
+//                                        if (referralPoints != 0) {
+//                                            sendAppliedReferralPoints();
+//                                        }
 
                                         triggerTabChangeListener.setBadgeCount(0);
                                         deleteCartItem();
@@ -1050,56 +962,56 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
         }
     }
 
-    public void sendAppliedReferralPoints() {
-        if (InternetConnection.checkConnection(getActivity())) {
-
-            ApiInterface apiService = RetroClient.getApiService(getActivity());
-            Call<ResponseBody> call = apiService.setReferralPoint(userID, referralPoints);
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                    try {
-                        int statusCode = response.code();
-
-                        if (response.isSuccessful()) {
-                            String responseString = response.body().string();
-
-                        } else {
-                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    try {
-                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
-                        Log.e("Error onFailure : ", t.toString());
-                        t.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } else {
-//            signOutFirebaseAccounts();
-
-            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction("RETRY", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            deleteCartItem();
-                        }
-                    })
-//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
-                    .show();
-        }
-    }
+//    public void sendAppliedReferralPoints() {
+//        if (InternetConnection.checkConnection(getActivity())) {
+//
+//            ApiInterface apiService = RetroClient.getApiService(getActivity());
+//            Call<ResponseBody> call = apiService.setReferralPoint(userID, referralPoints);
+//            call.enqueue(new Callback<ResponseBody>() {
+//                @Override
+//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//                    try {
+//                        int statusCode = response.code();
+//
+//                        if (response.isSuccessful()) {
+//                            String responseString = response.body().string();
+//
+//                        } else {
+//                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+//                        }
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                    try {
+//                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+//                        Log.e("Error onFailure : ", t.toString());
+//                        t.printStackTrace();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//        } else {
+////            signOutFirebaseAccounts();
+//
+//            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+//                    Snackbar.LENGTH_INDEFINITE)
+//                    .setAction("RETRY", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            deleteCartItem();
+//                        }
+//                    })
+////                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+//                    .show();
+//        }
+//    }
 
     private String getFormattedNumberDouble(double amount) {
         return NumberFormat.getNumberInstance(Locale.US).format(amount);

@@ -52,12 +52,6 @@ public interface ApiInterface {
 //                                             @Path("foodtypeid") int foodTypeID,
 //                                             @Path("CategoryID") int categoryID);
 
-    @GET("getProductDetails/{Usertypeid}/{ClientID}/{foodtypeid}/{CategoryID}")
-    Call<ResponseBody> getProductDetailsData(@Path("Usertypeid") int userTypeID,
-                                             @Path("ClientID") int clientID,
-                                             @Path("foodtypeid") int foodTypeID,
-                                             @Path("CategoryID") int categoryID);
-
     @POST("insCartItem")
     Call<ResponseBody> addItemToCart(@Body JsonObject jsonObj);
 
@@ -75,15 +69,6 @@ public interface ApiInterface {
     @POST("insorder")
     Call<ResponseBody> placeOrder(@Body JsonObject jsonObj);
 
-
-    @GET("getCompanyDetails/{Zip}")
-    Call<ResponseBody> getCompanyDetails(@Path("Zip") String zipCode);
-
-    @GET("getCategory")
-    Call<ResponseBody> getCategory();
-
-    @GET("getTopProduct")
-    Call<ResponseBody> getTopProducts();
 
 //    @POST("insorder")
 //    Call<ResponseBody> placeOrder(@Body OrderDetailsObject orderDetails);
@@ -128,8 +113,21 @@ public interface ApiInterface {
     Call<ResponseBody> getSlidingPhotoDetails(@Path("HotelID") int hotelID,
                                               @Path("Type") String type);
 
-    @GET("getTopItem")
-    Call<ResponseBody> getUserLikeTopItems();
+    @GET("getCompanyDetails/{Zip}")
+    Call<ResponseBody> getCompanyDetails(@Path("Zip") String zipCode);
+
+    @GET("getTopProduct")
+    Call<ResponseBody> getTopProducts();
+
+    @GET("getCategory")
+    Call<ResponseBody> getCategory();
+
+    @GET("getProductDetails/{Usertypeid}/{ClientID}/{foodtypeid}/{CategoryID}")
+    Call<ResponseBody> getProductDetailsData(@Path("Usertypeid") int userTypeID,
+                                             @Path("ClientID") int clientID,
+                                             @Path("foodtypeid") int foodTypeID,
+                                             @Path("CategoryID") int categoryID);
+
 
 //    @Multipart
 //    @POST("UploadFile")

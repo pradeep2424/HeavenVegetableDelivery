@@ -31,6 +31,9 @@
     <color name="light_orange">#FF9E80</color>
     <color name="orange">#FF9800</color>
 
+    <color name="deep_orange_500">#ff5722</color>
+    <color name="orange_500">#ff9800</color>
+
     <color name="light_green_500">#8bc34a</color>
     <color name="light_green_700">#689F38</color>
 

@@ -104,7 +104,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     private final int REQUEST_CODE_SEE_MORE_DISH = 100;
     private final int REQUEST_CODE_SEE_MORE_CUISINE = 101;
     private final int REQUEST_CODE_SEE_MORE_RESTAURANT = 102;
-    private final int REQUEST_CODE_RESTAURANT_DETAILS = 103;
+    private final int REQUEST_CODE_PRODUCT_LIST = 103;
 
     int userID;
     int restaurantID;
@@ -145,7 +145,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
         setupRecyclerPopular();
         setupSlidingImages();
-        setupRecyclerViewRestaurant();
+//        setupRecyclerViewCategory();
 
 //        getUserLikeTopItems();
 
@@ -364,8 +364,8 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 //        }
     }
 
-    private void setupRecyclerViewRestaurant() {
-        getCategoryDummyData();
+    private void setupRecyclerViewCategory() {
+//        getCategoryDummyData();
 
         adapterRestaurant = new RecycleAdapterCategory(getActivity(), listCategoryObject);
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -772,7 +772,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
                         if (response.isSuccessful()) {
                             String responseString = response.body().string();
-//                            listCategoryObject = new ArrayList<>();
+                            listCategoryObject = new ArrayList<>();
 
                             JSONArray jsonArray = new JSONArray(responseString);
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -780,46 +780,17 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
                                 int categoryID = jsonObj.optInt("CategoryId");
                                 String categoryName = jsonObj.optString("CategoryName");
-                                int restaurantID = jsonObj.optInt("ClientId");
-                                String restaurantName = jsonObj.optString("RestaurantName");
-                                String restaurantAddress = jsonObj.optString("ClientAddress");
-                                String openTime = jsonObj.optString("OpentTime");
-                                String closeTime = jsonObj.optString("CloseTime");
-                                String contact = jsonObj.optString("Contact");
-                                String description = jsonObj.optString("Description");
-                                String longitude = jsonObj.optString("Langitude");
-                                String latitude = jsonObj.optString("Latitude");
-                                String rating = jsonObj.optString("Rating", "4.5");
-                                int foodTypeID = jsonObj.optInt("FoodTypeId");
-                                String foodTypeName = jsonObj.optString("FoodTypeName");
-                                String logo = jsonObj.optString("Logo");
-                                String taxID = jsonObj.optString("TaxId");
-                                boolean taxable = Boolean.parseBoolean(jsonObj.optString("Taxable"));
-                                boolean includeTax = Boolean.parseBoolean(jsonObj.optString("IncludeTax"));
+                                String categoryImage = jsonObj.optString("PhotoPath");
 
-                                ClientObject clientObject = new ClientObject();
-                                clientObject.setCategoryID(categoryID);
-                                clientObject.setCategoryName(categoryName);
-                                clientObject.setRestaurantID(restaurantID);
-                                clientObject.setRestaurantName(restaurantName);
-                                clientObject.setRestaurantAddress(restaurantAddress);
-                                clientObject.setOpenTime(openTime);
-                                clientObject.setCloseTime(closeTime);
-                                clientObject.setContact(contact);
-                                clientObject.setDescription(description);
-                                clientObject.setLongitude(longitude);
-                                clientObject.setLatitude(latitude);
-                                clientObject.setRating(rating);
-                                clientObject.setFoodTypeID(foodTypeID);
-                                clientObject.setFoodTypeName(foodTypeName);
-                                clientObject.setLogo(logo);
-                                clientObject.setTaxID(taxID);
-                                clientObject.setTaxable(taxable);
-                                clientObject.setIncludeTax(includeTax);
+                                CateogryObject cateogryObject = new CateogryObject();
+                                cateogryObject.setCategoryID(categoryID);
+                                cateogryObject.setCategoryName(categoryName);
+                                cateogryObject.setCategoryImage(categoryImage);
 
-                                Application.clientObject = clientObject;
-//                                listCategoryObject.add(categoryObject);
+                                listCategoryObject.add(cateogryObject);
                             }
+
+                            setupRecyclerViewCategory();
 
                         } else {
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
@@ -960,7 +931,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
             CateogryObject categoryObject = listCategoryObject.get(0);
             Intent intent = new Intent(getActivity(), ProductListActivity.class);
             intent.putExtra("ClientObject", categoryObject);
-            startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
+            startActivityForResult(intent, REQUEST_CODE_PRODUCT_LIST);
         }
     }
 
@@ -970,7 +941,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
             CateogryObject categoryObject = listCategoryObject.get(0);
             Intent intent = new Intent(getActivity(), ProductListActivity.class);
             intent.putExtra("ClientObject", categoryObject);
-            startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
+            startActivityForResult(intent, REQUEST_CODE_PRODUCT_LIST);
         }
     }
 
@@ -982,7 +953,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
         Intent intent = new Intent(getActivity(), ProductListActivity.class);
         intent.putExtra("ClientObject", categoryObject);
-        startActivityForResult(intent, REQUEST_CODE_RESTAURANT_DETAILS);
+        startActivityForResult(intent, REQUEST_CODE_PRODUCT_LIST);
     }
 
     @Override
@@ -1021,7 +992,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
             if (resultCode == Activity.RESULT_OK && data != null) {
 
             }
-        } else if (requestCode == REQUEST_CODE_RESTAURANT_DETAILS) {
+        } else if (requestCode == REQUEST_CODE_PRODUCT_LIST) {
             if (resultCode == Activity.RESULT_OK && data != null) {
 
                 String flag = data.getExtras().getString("MESSAGE");

@@ -110,4 +110,10 @@
     <string name="email">Email</string>
     <string name="contact_no">Contact</string>
     <string name="total_price">Total Price</string>
+
+    <string name="delivery_at">Delivery At</string>
+    <string name="address_type_home">Home</string>
+    <string name="address_type_office">Office</string>
+    <string name="address_type_other">Other</string>
+    <string name="change">Change</string>
 </resources>
