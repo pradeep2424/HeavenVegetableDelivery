@@ -3,7 +3,7 @@ package com.heaven.vegetable.utils;
 import com.heaven.vegetable.model.CartObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
-import com.heaven.vegetable.model.CateogryObject;
+import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ClientObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.sucho.placepicker.AddressData;
@@ -20,7 +20,7 @@ public class Application extends android.app.Application {
 
     public static UserDetails userDetails = new UserDetails();
     public static ClientObject clientObject = new ClientObject();
-    public static CateogryObject categoryObject = new CateogryObject();
+    public static CategoryObject categoryObject = new CategoryObject();
     public static ProductObject productObject = new ProductObject();
     //    public static CartObject cartObject = new CartObject();
     public static ArrayList<CartObject> listCartItems = new ArrayList();

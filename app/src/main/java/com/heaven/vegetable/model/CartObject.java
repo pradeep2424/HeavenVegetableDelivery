@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class CartObject implements Serializable {
     double cgst;
-    int restaurantID;
+    int clientID;
     double deliveryCharge;
     String restaurantName;
     boolean isIncludeTax;
@@ -21,6 +21,15 @@ public class CartObject implements Serializable {
     double totalAmount;
     int userID;
     int cartID;
+    int unitID;
+
+    public int getUnitID() {
+        return unitID;
+    }
+
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
+    }
 
     public double getCgst() {
         return cgst;
@@ -30,12 +39,12 @@ public class CartObject implements Serializable {
         this.cgst = cgst;
     }
 
-    public int getRestaurantID() {
-        return restaurantID;
+    public int getClientID() {
+        return clientID;
     }
 
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
     }
 
     public double getDeliveryCharge() {

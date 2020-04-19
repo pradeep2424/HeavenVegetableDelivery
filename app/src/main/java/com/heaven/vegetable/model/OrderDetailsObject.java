@@ -31,6 +31,15 @@ public class OrderDetailsObject implements Serializable {
     boolean isTaxApplicable;
 
     ArrayList<ProductObject> listProducts;
+    int unitID;
+
+    public int getUnitID() {
+        return unitID;
+    }
+
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
+    }
 
     public ArrayList<ProductObject> getListProducts() {
         return listProducts;

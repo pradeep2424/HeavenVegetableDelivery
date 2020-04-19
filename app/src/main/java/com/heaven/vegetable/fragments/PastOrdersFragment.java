@@ -23,9 +23,9 @@ import com.heaven.vegetable.listeners.OnPastOrderOptionsClickListener;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.CartObject;
+import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
-import com.heaven.vegetable.model.CateogryObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
@@ -236,7 +236,7 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
         ArrayList<ProductObject> listProducts = orderDetailsObject.getListProducts();
 
 //        adding restaurant details to application class
-        CateogryObject categoryObject = new CateogryObject();
+        CategoryObject categoryObject = new CategoryObject();
         categoryObject.setRestaurantID(orderDetailsObject.getClientID());
         categoryObject.setRestaurantName(orderDetailsObject.getRestaurantName());
         categoryObject.setIncludeTax(orderDetailsObject.getIsIncludeTax());
@@ -381,7 +381,7 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
     }
 
     private JsonObject createJsonCart(ProductObject productObject) {
-        CateogryObject categoryObject = Application.categoryObject;
+        CategoryObject categoryObject = Application.categoryObject;
 
         JsonObject postParam = new JsonObject();
 
@@ -483,7 +483,7 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
 
             CartObject cartObject = new CartObject();
             cartObject.setCgst(productObject.getCgst());
-            cartObject.setRestaurantID(Application.categoryObject.getRestaurantID());
+            cartObject.setClientID(Application.categoryObject.getRestaurantID());
             cartObject.setDeliveryCharge(30);
             cartObject.setRestaurantName(Application.categoryObject.getRestaurantName());
             cartObject.setIsIncludeTax(Application.categoryObject.getIncludeTax());

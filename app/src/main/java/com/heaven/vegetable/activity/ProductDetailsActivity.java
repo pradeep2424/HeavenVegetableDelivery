@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
@@ -20,9 +23,14 @@ import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
+import com.heaven.vegetable.adapter.RecycleAdapterCategory;
+import com.heaven.vegetable.adapter.RecycleAdapterUnit;
+import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
+import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.ClientObject;
+import com.heaven.vegetable.model.UnitObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -32,6 +40,7 @@ import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -39,6 +48,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import kotlin.UInt;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +56,7 @@ import retrofit2.Response;
 
 //public class ProductDetailsActivity extends AppCompatActivity  {
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity implements OnRecyclerViewClickListener {
     DialogLoadingIndicator progressIndicator;
     CoordinatorLayout clRootLayout;
 
@@ -60,7 +70,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private SliderLayout sliderLayoutProductImages;
     //    private CircleIndicator circleIndicator;
 //    private PagerAdapterSlidingProductImages adapterSlidingImages;
-    private ArrayList<Integer> listPhotos;
+    private ArrayList<String> listPhotos;
 
 //    private View viewViewCart;
 //    private TextView tvItemQuantity;
@@ -68,7 +78,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private TextView tvProductName;
     private TextView tvProductCategory;
+    private TextView tvProductDescription;
     private TextView tvProductPrice;
+
+    private RecyclerView rvUnitSize;
+    private RecycleAdapterUnit adapterUnit;
+    ArrayList<UnitObject> listUnitDetails;
 
     private LinearLayout llViewCartLayout;
     private TextView tvProductTotalAmount;
@@ -79,11 +94,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private int totalCartQuantity;
     private double totalCartPrice;
     private double itemPackPrice;
-    private int packSize;
+    private int unitSize;
 
-    LinearLayout ll250Gram;
-    LinearLayout ll500Gram;
-    LinearLayout ll1Kilo;
+    //    LinearLayout ll250Gram;
+//    LinearLayout ll500Gram;
+//    LinearLayout ll1Kilo;
+//
+//    TextView tv250Gram;
+//    TextView tv500Gram;
+//    TextView tv1Kilo;
+    UnitObject selectedUnit;
 
     ProductObject productObject;
     UserDetails userDetails;
@@ -96,22 +116,21 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            productObject = (ProductObject) bundle.getSerializable("ProductObject");
+            productObject = SerializationUtils.clone((ProductObject) bundle.getSerializable("ProductObject"));
         }
 
         initComponents();
         componentEvents();
         setupSlidingImages();
-        setupProductDetails();
 
+//        setupProductDetails();
 //        setupRestaurantDetails();
-
 //        setupRecyclerViewMenu();
-
 //        getProductsPhotoGallery();
-        getProductDetailsData();
 
-        ll250Gram.performClick();
+        getProductRate();
+
+//        ll250Gram.performClick();
     }
 
     private void initComponents() {
@@ -127,7 +146,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //        circleIndicator =  findViewById(R.id.indicator);
         tvProductName = findViewById(R.id.tv_productName);
         tvProductCategory = findViewById(R.id.tv_productCategory);
+        tvProductDescription = findViewById(R.id.tv_productDescription);
         tvProductPrice = findViewById(R.id.tv_productPrice);
+
+        rvUnitSize = findViewById(R.id.recyclerView_unitSize);
 
         llViewCartLayout = findViewById(R.id.ll_viewCartLayout);
         tvProductTotalAmount = findViewById(R.id.tv_productAmount);
@@ -135,15 +157,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tvAddToCart = findViewById(R.id.tv_addToCart);
         numberPickerItemQuantity = findViewById(R.id.numberPicker_quantity);
 
-//        viewViewCart = findViewById(R.id.view_bottomViewCart);
-//        tvItemQuantity = viewViewCart.findViewById(R.id.tv_itemQuantity);
-//        tvTotalPrice = viewViewCart.findViewById(R.id.tv_totalPrice);
+////        viewViewCart = findViewById(R.id.view_bottomViewCart);
+////        tvItemQuantity = viewViewCart.findViewById(R.id.tv_itemQuantity);
+////        tvTotalPrice = viewViewCart.findViewById(R.id.tv_totalPrice);
+//
+//        ll250Gram = findViewById(R.id.ll_250Gram);
+//        ll500Gram = findViewById(R.id.ll_500Gram);
+//        ll1Kilo = findViewById(R.id.ll_1Kilo);
+//
+//        tv250Gram = findViewById(R.id.tv_250Gram);
+//        tv500Gram = findViewById(R.id.tv_500Gram);
+//        tv1Kilo = findViewById(R.id.tv_1Kilo);
 
-        ll250Gram = findViewById(R.id.ll_250Gram);
-        ll500Gram = findViewById(R.id.ll_500Gram);
-        ll1Kilo = findViewById(R.id.ll_1Kilo);
-
-//        viewPager = (ViewPager) findViewById(R.id.viewPager_slidingRestaurantImages);
     }
 
     private void componentEvents() {
@@ -164,9 +189,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //            }
 //        });
 
-        tvProductTotalAmount.setOnClickListener(new View.OnClickListener() {
+        llViewCartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                int totalItems = Application.listCartItems.size() + totalCartQuantity;
+//
+//                Intent intent = new Intent();
+//                intent.putExtra("ACTION", "BACK");
+//                intent.putExtra("MESSAGE", "UPDATE_CART_COUNT");
+//                intent.putExtra("CART_ITEM_COUNT", totalItems);
+//                setResult(RESULT_OK, intent);
+//
                 Intent intent = new Intent();
                 intent.putExtra("MESSAGE", "VIEW_CART");
                 setResult(RESULT_OK, intent);
@@ -194,43 +227,42 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
-        ll250Gram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                packSize = 0;
-                calculateItemPackPrice();
-
-                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
-                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
-                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
-            }
-        });
-
-        ll500Gram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                packSize = 1;
-                calculateItemPackPrice();
-
-                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
-                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
-                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
-            }
-        });
-
-        ll1Kilo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                packSize = 2;
-                calculateItemPackPrice();
-
-                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
-                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
-                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect2));
-            }
-        });
+//        ll250Gram.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                unitSize = 0;
+//                calculateItemPackPrice();
+//
+//                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
+//                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+//                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
+//            }
+//        });
+//
+//        ll500Gram.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                unitSize = 1;
+//                calculateItemPackPrice();
+//
+//                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+//                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect2));
+//                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect1));
+//            }
+//        });
+//
+//        ll1Kilo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                unitSize = 2;
+//                calculateItemPackPrice();
+//
+//                ll250Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+//                ll500Gram.setBackground(getResources().getDrawable(R.drawable.rect1));
+//                ll1Kilo.setBackground(getResources().getDrawable(R.drawable.rect2));
+//            }
+//        });
     }
-
 
     private void setupProductDetails() {
         if (productObject != null) {
@@ -238,12 +270,36 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             tvProductName.setText(productObject.getProductName());
             tvProductCategory.setText(productObject.getCategoryName());
+            tvProductDescription.setText(productObject.getProductDescription());
             tvProductPrice.setText(formattedPrice);
         }
+
+//        if (listUnitDetails != null) {
+//            for (int i = 0; i < listUnitDetails.size(); i++) {
+//                UnitObject unitObject = listUnitDetails.get(i);
+//
+//                switch (i) {
+//                    case 0:
+//                        tv250Gram.setText(unitObject.getUnitName());
+//                        break;
+//
+//                    case 1:
+//                        tv500Gram.setText(unitObject.getUnitName());
+//                        break;
+//
+//                    case 2:
+//                        tv1Kilo.setText(unitObject.getUnitName());
+//                        break;
+//                }
+//            }
+//        }
+
+//        ll250Gram.performClick();
     }
 
+
     private void setupSlidingImages() {
-        getPhotosData();
+//        getPhotosData();
 
 //        HashMap<String, String> url_maps = new HashMap<String, String>();
 //        url_maps.put("Best Offer", "https://c4.wallpaperflare.com/wallpaper/563/7/828/peas-pod-food-wallpaper-preview.jpg");
@@ -260,6 +316,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 //        HashMap<String, String> url_maps = new HashMap<String, String>();
 //        url_maps.putAll(mapBannerDetails);
+
+        listPhotos = new ArrayList<>();
+        listPhotos.addAll(productObject.getListProductImage());
 
 //        for (String name : listPhotos.keySet()) {
         for (int i = 0; i < listPhotos.size(); i++) {
@@ -288,6 +347,47 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //        sliderLayoutProductImages.addOnPageChangeListener(this);
     }
 
+    private void setupRecyclerViewUnit() {
+//        getCategoryDummyData();
+
+        adapterUnit = new RecycleAdapterUnit(this, listUnitDetails);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        rvUnitSize.setLayoutManager(gridLayoutManager);
+        rvUnitSize.setItemAnimator(new DefaultItemAnimator());
+        rvUnitSize.setAdapter(adapterUnit);
+        adapterUnit.setClickListener(this);
+
+
+        rvUnitSize.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (rvUnitSize.findViewHolderForAdapterPosition(0) != null) {
+                    rvUnitSize.findViewHolderForAdapterPosition(0).itemView.performClick();
+                }
+            }
+        }, 50);
+    }
+
+
+    @Override
+    public void onClick(View view, int position) {
+        uncheckAllUnits();
+        selectedUnit = listUnitDetails.get(position);
+        selectedUnit.setIsChecked(true);
+
+        itemPackPrice = selectedUnit.getUnitPrice();
+        productObject.setPrice(itemPackPrice);
+        String formattedPrice = getString(R.string.rupees) + " " + formatAmount(itemPackPrice);
+        tvProductPrice.setText(formattedPrice);
+        adapterUnit.notifyDataSetChanged();
+    }
+
+    private void uncheckAllUnits() {
+        for (int i = 0; i < listUnitDetails.size(); i++) {
+            listUnitDetails.get(i).setIsChecked(false);
+        }
+    }
 
 //    private void setupSlidingProductImages() {
 //        getPhotosData();
@@ -305,32 +405,35 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //        rvPhotos.setAdapter(adapterRestaurantPhotos);
 //    }
 
-    private void getPhotosData() {
-        listPhotos = new ArrayList<>();
+//    private void getPhotosData() {
+//        listPhotos = new ArrayList<>();
+//
+//        ArrayList icons[] = productObject.getListProductImage();
+//        listPhotos.addAll(new ArrayList<Integer>(Arrays.asList(icons)));
+//    }
 
-        Integer icons[] = productObject.getProductImage();
-        listPhotos.addAll(new ArrayList<Integer>(Arrays.asList(icons)));
-    }
-
-    private void calculateItemPackPrice() {
-        double itemPrice = productObject.getPrice();
-        switch (packSize) {
-            case 0:   // 250 gm
-                itemPackPrice = itemPrice * 1;
-                break;
-
-            case 1:   // 500 gm
-                itemPackPrice = itemPrice * 2;
-                break;
-
-            case 2:   // 1 KG
-                itemPackPrice = itemPrice * 4;
-                break;
-        }
-
-        String formatPackPrice = formatAmount(itemPackPrice);
-        tvProductPrice.setText(getString(R.string.rupees) + formatPackPrice);
-    }
+//    private void calculateItemPackPrice() {
+////        double itemPrice = productObject.getPrice();
+////        switch (unitSize) {
+////            case 0:   // 250 gm
+////                itemPackPrice = itemPrice * 1;
+////                break;
+////
+////            case 1:   // 500 gm
+////                itemPackPrice = itemPrice * 2;
+////                break;
+////
+////            case 2:   // 1 KG
+////                itemPackPrice = itemPrice * 4;
+////                break;
+////        }
+//
+//        UnitObject unitObject = listUnitDetails.get(unitSize);
+//        itemPackPrice = unitObject.getUnitPrice();
+//
+//        String formatPackPrice = formatAmount(itemPackPrice);
+//        tvProductPrice.setText(getString(R.string.rupees) + formatPackPrice);
+//    }
 
     private void addItemOrUpdateQuantity(final int quantity, final String incrementOrDecrement) {
         numberPickerItemQuantity.setValue(quantity);
@@ -459,18 +562,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
 ////        updateViewCartStrip();
 ////    }
 
-    private void getProductDetailsData() {
+    private void getProductRate() {
         if (InternetConnection.checkConnection(this)) {
             showDialog();
 
-            int userTypeID = userDetails.getUserID();
-            int restaurantID = clientObject.getRestaurantID();
-            int foodTypeID = productObject.getFoodTypeID();
-            int categoryID = 4;
-//            int categoryID = productObject.getCategoryID();
+            int productID = productObject.getProductID();
 
             ApiInterface apiService = RetroClient.getApiService(this);
-            Call<ResponseBody> call = apiService.getProductDetailsData(userTypeID, restaurantID, foodTypeID, categoryID);
+            Call<ResponseBody> call = apiService.getProductRate(productID);
 //            Call<ResponseBody> call = apiService.getProductDetailsData(userTypeID, restaurantID, foodTypeID, categoryID);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
@@ -481,48 +580,30 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                         if (response.isSuccessful()) {
                             String responseString = response.body().string();
-//                            listDishProducts = new ArrayList<>();
+                            listUnitDetails = new ArrayList<>();
 
                             JSONArray jsonArray = new JSONArray(responseString);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObj = jsonArray.getJSONObject(i);
 
-                                double cgst = jsonObj.optDouble("CGST");
-                                int categoryID = jsonObj.optInt("CategoryID");
-                                String categoryName = jsonObj.optString("CategoryName");
-                                String foodType = jsonObj.optString("FoodType");
-                                int foodTypeID = jsonObj.optInt("FoodTypeId");
-                                int dishID = jsonObj.optInt("HaveRuntimeRate");
-                                String isDiscounted = jsonObj.optString("IsDiscounted");
-                                double price = jsonObj.optDouble("Price");
-                                String productDesc = jsonObj.optString("ProductDesc");
-                                int productID = jsonObj.optInt("ProductId");
-                                String productImage = jsonObj.optString("ProductImage");
-                                String productName = jsonObj.optString("ProductName");
-                                double sgst = jsonObj.optDouble("SGST");
-                                int taxID = jsonObj.optInt("TaxID");
-                                String taxName = jsonObj.optString("TaxName");
+                                int id = jsonObj.optInt("ID");
+                                int itemID = jsonObj.optInt("itemID");
+                                int unitID = jsonObj.optInt("UnitID");
+                                String unitName = jsonObj.optString("UnitName");
+                                double unitPrice = jsonObj.optDouble("Rate");
 
-//                                DishObject dishObject = new DishObject();
-//                                dishObject.setCgst(cgst);
-//                                dishObject.setCategoryID(categoryID);
-//                                dishObject.setCategoryName(categoryName);
-//                                dishObject.setFoodType(foodType);
-//                                dishObject.setFoodTypeID(foodTypeID);
-//                                dishObject.setDishID(dishID);
-//                                dishObject.setIsDiscounted(isDiscounted);
-//                                dishObject.setPrice(price);
-//                                dishObject.setProductDesc(productDesc);
-//                                dishObject.setProductID(productID);
-//                                dishObject.setProductImage(productImage);
-//                                dishObject.setProductName(productName);
-//                                dishObject.setSgst(sgst);
-//                                dishObject.setTaxID(taxID);
-//                                dishObject.setTaxName(taxName);
-//
-//                                listDishProducts.add(dishObject);
+                                UnitObject unitObject = new UnitObject();
+                                unitObject.setId(id);
+                                unitObject.setItemID(itemID);
+                                unitObject.setUnitID(unitID);
+                                unitObject.setUnitName(unitName);
+                                unitObject.setUnitPrice(unitPrice);
+
+                                listUnitDetails.add(unitObject);
                             }
 
+                            productObject.setListUnits(listUnitDetails);
+                            setupRecyclerViewUnit();
                             setupProductDetails();
 
                         } else {
@@ -556,7 +637,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            getProductDetailsData();
+                            getProductRate();
                         }
                     })
 //                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
@@ -573,8 +654,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         try {
             postParam.addProperty("ProductId", productObject.getProductID());
             postParam.addProperty("ProductName", productObject.getProductName());
-            postParam.addProperty("ProductRate", productObject.getPrice());
-            postParam.addProperty("ProductAmount", productObject.getPrice());
+            postParam.addProperty("ProductRate", itemPackPrice);
+            postParam.addProperty("ProductAmount", itemPackPrice);
             postParam.addProperty("ProductSize", "Regular");
             postParam.addProperty("cartId", 0);
             postParam.addProperty("ProductQnty", quantity);
@@ -585,10 +666,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
             postParam.addProperty("Userid", userDetails.getUserID());
             postParam.addProperty("Clientid", clientObject.getRestaurantID());
             postParam.addProperty("TaxId", 0);
-            postParam.addProperty("TotalAmount", productObject.getPrice());
+            postParam.addProperty("TotalAmount", itemPackPrice);
             postParam.addProperty("HotelName", clientObject.getRestaurantName());
             postParam.addProperty("IsIncludeTax", true);
             postParam.addProperty("IsTaxApplicable", true);
+
+            postParam.addProperty("UnitId", selectedUnit.getUnitID());
 
 //            postParam.addProperty("TotalAmount", dishObject.getPrice());
 //            postParam.addProperty("HotelName", productObject.getRestaurantName());
@@ -708,6 +791,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         int totalItems = Application.listCartItems.size() + totalCartQuantity;
 
         Intent intent = new Intent();
+        intent.putExtra("ACTION", "BACK");
         intent.putExtra("MESSAGE", "UPDATE_CART_COUNT");
         intent.putExtra("CART_ITEM_COUNT", totalItems);
         setResult(RESULT_OK, intent);

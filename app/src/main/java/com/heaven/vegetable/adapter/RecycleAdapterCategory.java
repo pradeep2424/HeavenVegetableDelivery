@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
-import com.heaven.vegetable.model.CateogryObject;
+import com.heaven.vegetable.model.CategoryObject;
 
 import java.util.ArrayList;
 
@@ -21,9 +21,9 @@ public class RecycleAdapterCategory extends RecyclerView.Adapter<RecycleAdapterC
     Context context;
     private OnRecyclerViewClickListener clickListener;
 
-    ArrayList<CateogryObject> listCategory;
+    ArrayList<CategoryObject> listCategory;
 
-    public RecycleAdapterCategory(Context context, ArrayList<CateogryObject> listCategory) {
+    public RecycleAdapterCategory(Context context, ArrayList<CategoryObject> listCategory) {
         this.context = context;
         this.listCategory = listCategory;
     }
@@ -61,7 +61,7 @@ public class RecycleAdapterCategory extends RecyclerView.Adapter<RecycleAdapterC
 
     @Override
     public void onBindViewHolder(@NonNull RecycleAdapterCategory.ViewHolder holder, int position) {
-        CateogryObject cateogryObject = listCategory.get(position);
+        CategoryObject cateogryObject = listCategory.get(position);
 
         holder.tvCategoryName.setText(cateogryObject.getCategoryName());
 //        holder.ivCategoryImage.setImageResource(Integer.parseInt(cateogryObject.getCategoryImage()));

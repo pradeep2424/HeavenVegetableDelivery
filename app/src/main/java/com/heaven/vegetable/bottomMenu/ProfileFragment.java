@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -22,9 +21,8 @@ import com.heaven.vegetable.adapter.RecycleAdapterProfile;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.main.GetStartedMobileNumberActivity;
 import com.heaven.vegetable.main.MainActivity;
-import com.heaven.vegetable.model.ProductObject;
+import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ProfileObject;
-import com.heaven.vegetable.model.CateogryObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.sharedPreference.PrefManagerConfig;
 import com.heaven.vegetable.utils.Application;
@@ -102,7 +100,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 //            public void onClick(View v) {
 //                prefManagerConfig.clearPrefOnLogout();
 //                Application.userDetails = new UserDetails();
-//                Application.categoryObject = new CateogryObject();
+//                Application.categoryObject = new CategoryObject();
 //                Application.productObject = new ProductObject();
 //                Application.listCartItems.clear();
 //
@@ -252,7 +250,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
     {
         prefManagerConfig.clearPrefOnLogout();
         Application.userDetails = new UserDetails();
-        Application.categoryObject = new CateogryObject();
+        Application.categoryObject = new CategoryObject();
 //        Application.dishObject = new DishObject();
         Application.listCartItems.clear();
 

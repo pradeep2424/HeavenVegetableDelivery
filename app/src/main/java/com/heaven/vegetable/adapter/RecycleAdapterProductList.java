@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.activity.ProductListActivity;
-import com.heaven.vegetable.listeners.OnCuisineClickListener;
 import com.heaven.vegetable.listeners.OnItemAddedToCart;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
@@ -32,6 +32,7 @@ import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,8 +52,8 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
     DialogLoadingIndicator progressIndicator;
 
     public RecycleAdapterProductList(ProductListActivity activity, List<ProductObject> listProducts) {
-        this.listProducts = listProducts;
         this.activity = activity;
+        this.listProducts = listProducts;
 
         progressIndicator = DialogLoadingIndicator.getInstance();
     }
@@ -66,7 +67,7 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView tvProductImage;
+        ImageView ivProductImage;
         TextView tvProductName;
         TextView tvProductCategory;
         TextView tvProductPrice;
@@ -81,7 +82,7 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         public MyViewHolder(View view) {
             super(view);
 
-            tvProductImage = view.findViewById(R.id.iv_productImage);
+            ivProductImage = view.findViewById(R.id.iv_productImage);
             tvProductName = view.findViewById(R.id.tv_productName);
             tvProductCategory = view.findViewById(R.id.tv_productCategory);
             tvProductPrice = view.findViewById(R.id.tv_ProductPrice);
@@ -116,15 +117,21 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         ProductObject productObject = listProducts.get(position);
 
-        Integer image[] = productObject.getProductImage();
+//        Integer image[] = productObject.getProductImage();
+        ArrayList<String> listProductImages = productObject.getListProductImage();
         String name = productObject.getProductName();
         String category = productObject.getCategoryName();
         String price = activity.getResources().getString(R.string.rupees) + getFormattedNumberDouble(productObject.getPrice());
 
-        holder.tvProductImage.setImageResource(image[2]);
+//        holder.tvProductImage.setImageResource(listProductImages[0]);
         holder.tvProductName.setText(name);
         holder.tvProductCategory.setText(category);
         holder.tvProductPrice.setText(price);
+
+        if (listProductImages != null && listProductImages.size() > 0) {
+            String imageURL = listProductImages.get(0);
+            Glide.with(activity).load(imageURL).into(holder.ivProductImage);
+        }
 
         holder.llAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +216,8 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
             postParam.addProperty("HotelName", clientObject.getRestaurantName());
             postParam.addProperty("IsIncludeTax", true);
             postParam.addProperty("IsTaxApplicable", true);
+
+            postParam.addProperty("UnitId", productObject.getUnitID());
 
         } catch (Exception e) {
             e.printStackTrace();

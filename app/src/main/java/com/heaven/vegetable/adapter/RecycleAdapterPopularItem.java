@@ -9,24 +9,26 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnUserMayLikedClickListener;
+import com.heaven.vegetable.listeners.OnPopularItemClickedListener;
 import com.heaven.vegetable.model.ProductObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecycleAdapterPopularItem extends RecyclerView.Adapter<RecycleAdapterPopularItem.MyViewHolder> {
     Context context;
-    private OnUserMayLikedClickListener clickListener;
+    private OnPopularItemClickedListener clickListener;
 
-    private List<ProductObject> listDish;
+    private List<ProductObject> listProducts;
 
-    public RecycleAdapterPopularItem(Context context, List<ProductObject> listDish) {
-        this.listDish = listDish;
+    public RecycleAdapterPopularItem(Context context, List<ProductObject> listProducts) {
+        this.listProducts = listProducts;
         this.context = context;
     }
 
-    public void setClickListener(OnUserMayLikedClickListener clickListener) {
+    public void setClickListener(OnPopularItemClickedListener clickListener) {
         this.clickListener = clickListener;
     }
 
@@ -45,7 +47,7 @@ public class RecycleAdapterPopularItem extends RecyclerView.Adapter<RecycleAdapt
         @Override
         public void onClick(View view) {
             if (clickListener != null) {
-                clickListener.onUserMayLikedClick(view, getAdapterPosition());
+                clickListener.onPopularItemClicked(view, getAdapterPosition());
             }
         }
     }
@@ -61,41 +63,23 @@ public class RecycleAdapterPopularItem extends RecyclerView.Adapter<RecycleAdapt
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        ProductObject movie = listDish.get(position);
+        ProductObject productObject = listProducts.get(position);
 
-        Integer icon[] = movie.getProductImage();
+//        Integer icon[] = productObject.getProductImage();
+        ArrayList<String> listProductImages = productObject.getListProductImage();
 
-        holder.tvItemName.setText(movie.getProductName());
-        holder.ivItemIcon.setImageResource(icon[1]);
+        holder.tvItemName.setText(productObject.getProductName());
+//        holder.ivItemIcon.setImageResource(icon[1]);
 
-//        holder.tvItemName.setText(movie.getProductName());
-//        holder.ivItemIcon.setImageResource(Integer.parseInt(movie.getProductImage(1)));
-
-//        Glide.with(context)
-//                .load(R.drawable.resource_id)
-//                .into(imageView);
-
-//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-//                // You can pass your own memory cache implementation
-//                .discCacheFileNameGenerator(new HashCodeFileNameGenerator())
-//                .build();
-//
-//        DisplayImageOptions options = new DisplayImageOptions.Builder()
-//                .displayer(new RoundedBitmapDisplayer(10)) //rounded corner bitmap
-//                .cacheInMemory(true)
-//                .cacheOnDisc(true)
-//                .build();
-//
-//        ImageLoader imageLoader = ImageLoader.getInstance();
-//        imageLoader.init(config);
-//        imageLoader.displayImage("drawable://" + movie.getImage(), holder.image, options);
-
-
+        if (listProductImages != null && listProductImages.size() > 0) {
+            String imageURL = listProductImages.get(0);
+            Glide.with(context).load(imageURL).into(holder.ivItemIcon);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return listDish.size();
+        return listProducts.size();
     }
 
 

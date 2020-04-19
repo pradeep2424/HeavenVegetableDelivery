@@ -26,8 +26,10 @@ import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.AddressDetails;
 import com.heaven.vegetable.model.CartObject;
+import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ClientObject;
 import com.heaven.vegetable.model.ProductObject;
+import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.sharedPreference.PrefManagerConfig;
@@ -73,6 +75,8 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     private TextView tvTotalPrice;
 
     ClientObject clientObject;
+    UserDetails userDetails;
+    CategoryObject categoryObject;
 
     private final int REQUEST_CODE_PRODUCT_DETAILS = 100;
 
@@ -81,15 +85,23 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            categoryObject = (CategoryObject) bundle.getSerializable("CategoryObject");
+        }
+
         initComponents();
         componentEvents();
 
 //        getUserAddressList();
-        setupRecyclerProductList();
+        getProductDetailsData();
+//        setupRecyclerProductList();
     }
 
     private void initComponents() {
         clientObject = Application.clientObject;
+        userDetails = Application.userDetails;
+
         progressIndicator = DialogLoadingIndicator.getInstance();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -138,7 +150,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     }
 
     private void setupRecyclerProductList() {
-        getProductDummyData();
+//        getProductDummyData();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvProductList.setLayoutManager(layoutManager);
@@ -157,86 +169,86 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 
     }
 
-    private void getProductDummyData() {
-        listProducts = new ArrayList<>();
-
-        Integer broccoli[] = {R.mipmap.temp_broccoli_1, R.mipmap.temp_broccoli_2, R.mipmap.temp_broccoli_3};
-        Integer cabbage[] = {R.mipmap.temp_cabbage_1, R.mipmap.temp_cabbage_2, R.mipmap.temp_cabbage_3};
-        Integer capsicum[] = {R.mipmap.temp_capsicum_1, R.mipmap.temp_capsicum_2, R.mipmap.temp_capsicum_3,
-                R.mipmap.temp_capsicum_4, R.mipmap.temp_capsicum_5};
-        Integer carrots[] = {R.mipmap.temp_carrots_1, R.mipmap.temp_carrots_2, R.mipmap.temp_carrots_3};
-        Integer chilli[] = {R.mipmap.temp_chilli_1, R.mipmap.temp_chilli_2, R.mipmap.temp_chilli_3, R.mipmap.temp_chilli_4};
-        Integer lemon[] = {R.mipmap.temp_lemon_1, R.mipmap.temp_lemon_2, R.mipmap.temp_lemon_3, R.mipmap.temp_lemon_4};
-        Integer melons[] = {R.mipmap.temp_melons_1, R.mipmap.temp_melons_2, R.mipmap.temp_melons_3, R.mipmap.temp_melons_4};
-        Integer potato[] = {R.mipmap.temp_potato_1, R.mipmap.temp_potato_2, R.mipmap.temp_potato_3, R.mipmap.temp_potato_4};
-        Integer tomato[] = {R.mipmap.temp_tomato_1, R.mipmap.temp_tomato_2, R.mipmap.temp_tomato_3, R.mipmap.temp_tomato_4};
-
-        ProductObject productObject = new ProductObject();
-        productObject.setProductName("Broccoli");
-        productObject.setProductImage(broccoli);
-        productObject.setCategoryName("Vegetable");
-        productObject.setPrice(40);
-
-        ProductObject productObject1 = new ProductObject();
-        productObject1.setProductName("Cabbage");
-        productObject1.setProductImage(cabbage);
-        productObject1.setCategoryName("Leaf Vegetable");
-        productObject1.setPrice(30);
-
-        ProductObject productObject2 = new ProductObject();
-        productObject2.setProductName("Capsicum");
-        productObject2.setProductImage(capsicum);
-        productObject2.setCategoryName("Green Vegetable");
-        productObject2.setPrice(50);
-
-        ProductObject productObject3 = new ProductObject();
-        productObject3.setProductName("Carrots");
-        productObject3.setProductImage(carrots);
-        productObject3.setCategoryName("Fruit Vegetable");
-        productObject3.setPrice(35);
-
-        ProductObject productObject4 = new ProductObject();
-        productObject4.setProductName("Chili");
-        productObject4.setProductImage(chilli);
-        productObject4.setCategoryName("Green Vegetable");
-        productObject4.setPrice(25);
-
-        ProductObject productObject5 = new ProductObject();
-        productObject5.setProductName("Lemon");
-        productObject5.setProductImage(lemon);
-        productObject5.setCategoryName("Fruit Vegetable");
-        productObject5.setPrice(15);
-
-        ProductObject productObject6 = new ProductObject();
-        productObject6.setProductName("Potato");
-        productObject6.setProductImage(potato);
-        productObject6.setCategoryName("Root Vegetable");
-        productObject6.setPrice(55);
-
-        ProductObject productObject7 = new ProductObject();
-        productObject7.setProductName("Tomato");
-        productObject7.setProductImage(tomato);
-        productObject7.setCategoryName("Fruit Vegetable");
-        productObject7.setPrice(45);
-
-        ProductObject productObject8 = new ProductObject();
-        productObject8.setProductName("Water Melons");
-        productObject8.setProductImage(melons);
-        productObject8.setCategoryName("Fruit");
-        productObject8.setPrice(80);
-
-        listProducts.add(productObject);
-        listProducts.add(productObject1);
-        listProducts.add(productObject2);
-        listProducts.add(productObject3);
-        listProducts.add(productObject4);
-        listProducts.add(productObject5);
-        listProducts.add(productObject6);
-        listProducts.add(productObject7);
-        listProducts.add(productObject8);
-
-
-    }
+//    private void getProductDummyData() {
+//        listProducts = new ArrayList<>();
+//
+//        Integer broccoli[] = {R.mipmap.temp_broccoli_1, R.mipmap.temp_broccoli_2, R.mipmap.temp_broccoli_3};
+//        Integer cabbage[] = {R.mipmap.temp_cabbage_1, R.mipmap.temp_cabbage_2, R.mipmap.temp_cabbage_3};
+//        Integer capsicum[] = {R.mipmap.temp_capsicum_1, R.mipmap.temp_capsicum_2, R.mipmap.temp_capsicum_3,
+//                R.mipmap.temp_capsicum_4, R.mipmap.temp_capsicum_5};
+//        Integer carrots[] = {R.mipmap.temp_carrots_1, R.mipmap.temp_carrots_2, R.mipmap.temp_carrots_3};
+//        Integer chilli[] = {R.mipmap.temp_chilli_1, R.mipmap.temp_chilli_2, R.mipmap.temp_chilli_3, R.mipmap.temp_chilli_4};
+//        Integer lemon[] = {R.mipmap.temp_lemon_1, R.mipmap.temp_lemon_2, R.mipmap.temp_lemon_3, R.mipmap.temp_lemon_4};
+//        Integer melons[] = {R.mipmap.temp_melons_1, R.mipmap.temp_melons_2, R.mipmap.temp_melons_3, R.mipmap.temp_melons_4};
+//        Integer potato[] = {R.mipmap.temp_potato_1, R.mipmap.temp_potato_2, R.mipmap.temp_potato_3, R.mipmap.temp_potato_4};
+//        Integer tomato[] = {R.mipmap.temp_tomato_1, R.mipmap.temp_tomato_2, R.mipmap.temp_tomato_3, R.mipmap.temp_tomato_4};
+//
+//        ProductObject productObject = new ProductObject();
+//        productObject.setProductName("Broccoli");
+//        productObject.setProductImage(broccoli);
+//        productObject.setCategoryName("Vegetable");
+//        productObject.setPrice(40);
+//
+//        ProductObject productObject1 = new ProductObject();
+//        productObject1.setProductName("Cabbage");
+//        productObject1.setProductImage(cabbage);
+//        productObject1.setCategoryName("Leaf Vegetable");
+//        productObject1.setPrice(30);
+//
+//        ProductObject productObject2 = new ProductObject();
+//        productObject2.setProductName("Capsicum");
+//        productObject2.setProductImage(capsicum);
+//        productObject2.setCategoryName("Green Vegetable");
+//        productObject2.setPrice(50);
+//
+//        ProductObject productObject3 = new ProductObject();
+//        productObject3.setProductName("Carrots");
+//        productObject3.setProductImage(carrots);
+//        productObject3.setCategoryName("Fruit Vegetable");
+//        productObject3.setPrice(35);
+//
+//        ProductObject productObject4 = new ProductObject();
+//        productObject4.setProductName("Chili");
+//        productObject4.setProductImage(chilli);
+//        productObject4.setCategoryName("Green Vegetable");
+//        productObject4.setPrice(25);
+//
+//        ProductObject productObject5 = new ProductObject();
+//        productObject5.setProductName("Lemon");
+//        productObject5.setProductImage(lemon);
+//        productObject5.setCategoryName("Fruit Vegetable");
+//        productObject5.setPrice(15);
+//
+//        ProductObject productObject6 = new ProductObject();
+//        productObject6.setProductName("Potato");
+//        productObject6.setProductImage(potato);
+//        productObject6.setCategoryName("Root Vegetable");
+//        productObject6.setPrice(55);
+//
+//        ProductObject productObject7 = new ProductObject();
+//        productObject7.setProductName("Tomato");
+//        productObject7.setProductImage(tomato);
+//        productObject7.setCategoryName("Fruit Vegetable");
+//        productObject7.setPrice(45);
+//
+//        ProductObject productObject8 = new ProductObject();
+//        productObject8.setProductName("Water Melons");
+//        productObject8.setProductImage(melons);
+//        productObject8.setCategoryName("Fruit");
+//        productObject8.setPrice(80);
+//
+//        listProducts.add(productObject);
+//        listProducts.add(productObject1);
+//        listProducts.add(productObject2);
+//        listProducts.add(productObject3);
+//        listProducts.add(productObject4);
+//        listProducts.add(productObject5);
+//        listProducts.add(productObject6);
+//        listProducts.add(productObject7);
+//        listProducts.add(productObject8);
+//
+//
+//    }
 
     @Override
     public void onClick(View view, int position) {
@@ -406,7 +418,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     private void addItemToLocal(ProductObject dishObject, int quantity, String incrementOrDecrement) {
         CartObject cartObject = new CartObject();
         cartObject.setCgst(dishObject.getCgst());
-        cartObject.setRestaurantID(clientObject.getRestaurantID());
+        cartObject.setClientID(clientObject.getRestaurantID());
         cartObject.setDeliveryCharge(30);
         cartObject.setRestaurantName(clientObject.getRestaurantName());
         cartObject.setIsIncludeTax(clientObject.getIncludeTax());
@@ -446,6 +458,117 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
     }
 
 
+    private void getProductDetailsData() {
+        if (InternetConnection.checkConnection(this)) {
+            showDialog();
+
+            int userTypeID = userDetails.getUserID();
+            int clientID = clientObject.getRestaurantID();
+            int foodTypeID = 0;
+            int categoryID = categoryObject.getCategoryID();
+//            int categoryID = productObject.getCategoryID();
+
+            ApiInterface apiService = RetroClient.getApiService(this);
+            Call<ResponseBody> call = apiService.getProductDetailsData(userTypeID, clientID, foodTypeID, categoryID);
+//            Call<ResponseBody> call = apiService.getProductDetailsData(userTypeID, restaurantID, foodTypeID, categoryID);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+
+                        if (response.isSuccessful()) {
+                            String responseString = response.body().string();
+                            listProducts = new ArrayList<>();
+
+                            JSONArray jsonArray = new JSONArray(responseString);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObj = jsonArray.getJSONObject(i);
+
+                                int categoryID = jsonObj.optInt("CategoryID");
+                                String categoryName = jsonObj.optString("CategoryName");
+                                String foodType = jsonObj.optString("FoodType");
+                                int foodTypeID = jsonObj.optInt("FoodTypeId");
+                                String group = jsonObj.optString("Group");
+                                int groupID = jsonObj.optInt("GroupId");
+                                double price = jsonObj.optDouble("Price");
+                                String productDesc = jsonObj.optString("ProductDesc");
+                                int productID = jsonObj.optInt("ProductId");
+                                String productImage = jsonObj.optString("PhotoPath");
+                                String productName = jsonObj.optString("ProductName");
+                                String unit = jsonObj.optString("Unit");
+                                int unitID = jsonObj.optInt("UnitId");
+
+//                                double cgst = jsonObj.optDouble("CGST");
+//                                int haveRuntimeRate = jsonObj.optInt("HaveRuntimeRate");
+//                                String isDiscounted = jsonObj.optString("IsDiscounted");
+//                                double sgst = jsonObj.optDouble("SGST");
+//                                int taxID = jsonObj.optInt("TaxID");
+//                                String taxName = jsonObj.optString("TaxName");
+
+                                ArrayList<String> listProdImages = new ArrayList<>();
+                                listProdImages.add(productImage);
+
+                                ProductObject productObject = new ProductObject();
+                                productObject.setProductID(productID);
+                                productObject.setProductName(productName);
+                                productObject.setProductDescription(productDesc);
+                                productObject.setListProductImage(listProdImages);
+                                productObject.setPrice(price);
+                                productObject.setCategoryID(categoryID);
+                                productObject.setCategoryName(categoryName);
+                                productObject.setFoodTypeID(foodTypeID);
+                                productObject.setFoodType(foodType);
+                                productObject.setGroupID(groupID);
+                                productObject.setGroup(group);
+                                productObject.setUnitID(unitID);
+                                productObject.setUnit(unit);
+
+                                listProducts.add(productObject);
+                            }
+
+                            setupRecyclerProductList();
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    dismissDialog();
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        dismissDialog();
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rlRootLayout, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getProductDetailsData();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
+
     @Override
     public void onItemChangedInCart(int quantity, int position, String incrementOrDecrement) {
         ProductObject productObject = listProducts.get(position);
@@ -484,10 +607,13 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
                 intentFlag = data.getExtras().getString("MESSAGE");
                 totalCartQuantity = data.getExtras().getInt("CART_ITEM_COUNT");
 
-//                if (flag.equalsIgnoreCase("VIEW_CART")) {
-//                    triggerTabChangeListener.setTab(1);
-//
-//                } else if (flag.equalsIgnoreCase("UPDATE_CART_COUNT")) {
+                if (intentFlag.equalsIgnoreCase("VIEW_CART")) {
+                    Intent intent = new Intent();
+                    intent.putExtra("MESSAGE", "VIEW_CART");
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+//                else if (flag.equalsIgnoreCase("UPDATE_CART_COUNT")) {
 //                    int noOfItems = data.getExtras().getInt("CART_ITEM_COUNT");
 //                    triggerTabChangeListener.setBadgeCount(noOfItems);
 //                }
@@ -500,7 +626,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
 
         int totalItems;
         if (intentFlag != null) {    // back from product details page

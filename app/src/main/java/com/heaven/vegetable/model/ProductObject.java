@@ -16,15 +16,68 @@ public class ProductObject implements Serializable {
     int dishID;
     String isDiscounted;
     double price;
-   String productDesc;
+   String productDescription;
     int productID;
-    Integer listProductImage[] ;
-//    ArrayList<String> listProductImage;
+//    Integer listProductImage[] ;
+    ArrayList<String> listProductImage;
     String productName;
     double sgst;
     int taxID;
     String taxName;
     int productQuantity;
+    int groupID;
+    String group;
+    int unitID;
+    String unit;
+    ArrayList<UnitObject> listUnits;
+
+    public ArrayList<UnitObject> getListUnits() {
+        return listUnits;
+    }
+
+    public void setListUnits(ArrayList<UnitObject> listUnits) {
+        this.listUnits = listUnits;
+    }
+
+    public int getUnitID() {
+        return unitID;
+    }
+
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public ArrayList<String> getListProductImage() {
+        return listProductImage;
+    }
+
+    public void setListProductImage(ArrayList<String> listProductImage) {
+        this.listProductImage = listProductImage;
+    }
+
+    public int getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(int groupID) {
+        this.groupID = groupID;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
 
     public int getProductQuantity() {
         return productQuantity;
@@ -98,12 +151,12 @@ public class ProductObject implements Serializable {
         this.price = price;
     }
 
-    public String getProductDesc() {
-        return productDesc;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public void setProductDesc(String productDesc) {
-        this.productDesc = productDesc;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public int getProductID() {
@@ -114,13 +167,13 @@ public class ProductObject implements Serializable {
         this.productID = productID;
     }
 
-    public  Integer[] getProductImage() {
-        return listProductImage;
-    }
-
-    public void setProductImage( Integer[] listProductImage) {
-        this.listProductImage = listProductImage;
-    }
+//    public  Integer[] getProductImage() {
+//        return listProductImage;
+//    }
+//
+//    public void setProductImage( Integer[] listProductImage) {
+//        this.listProductImage = listProductImage;
+//    }
 
     public String getProductName() {
         return productName;

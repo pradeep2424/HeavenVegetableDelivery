@@ -28,7 +28,7 @@ import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.main.GetStartedMobileNumberActivity;
 import com.heaven.vegetable.model.CartObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
-import com.heaven.vegetable.model.CateogryObject;
+import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -37,7 +37,6 @@ import com.heaven.vegetable.utils.ConstantValues;
 import com.heaven.vegetable.utils.InternetConnection;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
-import com.suke.widget.SwitchButton;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.json.JSONArray;
@@ -468,7 +467,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 
                                     CartObject cartObject = new CartObject();
                                     cartObject.setCgst(cgst);
-                                    cartObject.setRestaurantID(restaurantID);
+                                    cartObject.setClientID(restaurantID);
                                     cartObject.setDeliveryCharge(deliveryCharge);
                                     cartObject.setRestaurantName(restaurantName);
                                     cartObject.setIsIncludeTax(isIncludeTax);
@@ -562,7 +561,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     private JsonObject createJsonCart(CartObject cartObject) {
         double totalPrice;
 
-        CateogryObject categoryObject = Application.categoryObject;
+        CategoryObject categoryObject = Application.categoryObject;
 
         if (categoryObject.getTaxable()) {
             double productPrice = cartObject.getProductAmount();
@@ -821,6 +820,8 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             postParam.addProperty("OrderPaid", orderDetailsObject.getOrderPaid());
             postParam.addProperty("RejectReason", orderDetailsObject.getRejectReason());
 
+            postParam.addProperty("UnitId", orderDetailsObject.getUnitID());
+
 ////                JsonObject postParam = new JsonObject();
 ////                postParam.addProperty("orderID", orderDetailsObject.getOrderID());
 //                postParam.addProperty("orderNumber", orderDetailsObject.getOrderNumber());
@@ -880,7 +881,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                     orderObj.setUserAddress(userDetails.getAddress());
 //                    orderObj.setUserAddress("ABCD");
                     orderObj.setUserID(userDetails.getUserID());
-                    orderObj.setClientID(cartObject.getRestaurantID());
+                    orderObj.setClientID(cartObject.getClientID());
 //                    orderObj.setRestaurantName(cartObject.getRestaurantName());
                     orderObj.setTaxID(cartObject.getTaxID());
                     orderObj.setOrderPaid(false);

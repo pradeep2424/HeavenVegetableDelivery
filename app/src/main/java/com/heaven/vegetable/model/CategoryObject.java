@@ -2,7 +2,7 @@ package com.heaven.vegetable.model;
 
 import java.io.Serializable;
 
-public class CateogryObject implements Serializable {
+public class CategoryObject implements Serializable {
     int categoryID;
     String categoryName;
     String categoryImage;

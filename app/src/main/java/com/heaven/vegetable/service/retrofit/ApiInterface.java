@@ -128,6 +128,8 @@ public interface ApiInterface {
                                              @Path("foodtypeid") int foodTypeID,
                                              @Path("CategoryID") int categoryID);
 
+    @GET("getItemRate/{ProductID}")
+    Call<ResponseBody> getProductRate(@Path("ProductID") int productID);
 
 //    @Multipart
 //    @POST("UploadFile")

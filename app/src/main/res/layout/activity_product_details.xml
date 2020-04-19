@@ -156,87 +156,101 @@
                         android:textColor="@color/main_text"
                         android:textSize="16sp" />
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_unitSize"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:divider="#fff"
+                        android:useDefaultMargins="true"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="3"
-                        android:orientation="horizontal">
+                        android:dividerHeight="0dp"
+                        android:scrollbars="none" />
 
-                        <LinearLayout
-                            android:id="@+id/ll_250Gram"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/rect1"
-                            android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_weight="3"-->
+<!--                        android:orientation="horizontal">-->
 
-                            <com.heaven.vegetable.custom.MyTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="250 gm"
-                                android:textColor="#4a4a4a"
-                                android:textSize="16sp" />
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/ll_250Gram"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@drawable/rect1"-->
+<!--                            android:orientation="vertical">-->
 
-                            <com.heaven.vegetable.custom.MyTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Small"
-                                android:textColor="#9b9b9b"
-                                android:textSize="11sp" />
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:id="@+id/tv_250Gram"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="250 gm"-->
+<!--                                android:textColor="#4a4a4a"-->
+<!--                                android:textSize="16sp" />-->
 
-                        </LinearLayout>
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Small"-->
+<!--                                android:textColor="#9b9b9b"-->
+<!--                                android:textSize="11sp" />-->
 
-                        <LinearLayout
-                            android:id="@+id/ll_500Gram"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rect1"
-                            android:orientation="vertical">
+<!--                        </LinearLayout>-->
 
-                            <com.heaven.vegetable.custom.MyTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="500 gm"
-                                android:textColor="#4a4a4a"
-                                android:textSize="16sp" />
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/ll_500Gram"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@drawable/rect1"-->
+<!--                            android:orientation="vertical">-->
 
-                            <com.heaven.vegetable.custom.MyTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Medium"
-                                android:textColor="#9b9b9b"
-                                android:textSize="11sp" />
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:id="@+id/tv_500Gram"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="500 gm"-->
+<!--                                android:textColor="#4a4a4a"-->
+<!--                                android:textSize="16sp" />-->
 
-                        </LinearLayout>
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Medium"-->
+<!--                                android:textColor="#9b9b9b"-->
+<!--                                android:textSize="11sp" />-->
 
-                        <LinearLayout
-                            android:id="@+id/ll_1Kilo"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/rect1"
-                            android:orientation="vertical">
+<!--                        </LinearLayout>-->
 
-                            <com.heaven.vegetable.custom.MyTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1 kg"
-                                android:textColor="#4a4a4a"
-                                android:textSize="16sp" />
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/ll_1Kilo"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@drawable/rect1"-->
+<!--                            android:orientation="vertical">-->
 
-                            <com.heaven.vegetable.custom.MyTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Regular"
-                                android:textColor="#9b9b9b"
-                                android:textSize="11sp" />
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:id="@+id/tv_1Kilo"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="1 kg"-->
+<!--                                android:textColor="#4a4a4a"-->
+<!--                                android:textSize="16sp" />-->
 
-                        </LinearLayout>
-                    </LinearLayout>
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Regular"-->
+<!--                                android:textColor="#9b9b9b"-->
+<!--                                android:textSize="11sp" />-->
+
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
                 </LinearLayout>
             </LinearLayout>
 
@@ -261,6 +275,7 @@
                     android:textSize="16sp" />
 
                 <com.heaven.vegetable.custom.MyTextView
+                    android:id="@+id/tv_productDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -582,3 +597,592 @@
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/cl_rootLayout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content">-->
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@+id/view_bottomViewCart">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <FrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="270dp">-->
+
+<!--                <include-->
+<!--                    android:id="@+id/view_toolbarRestaurantDetails"-->
+<!--                    layout="@layout/toolbar_restaurant_detail" />-->
+
+<!--                &lt;!&ndash;                <androidx.viewpager.widget.ViewPager&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/viewPager_slidingProductImages"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="wrap_content" />&ndash;&gt;-->
+
+
+<!--                <com.daimajia.slider.library.SliderLayout-->
+<!--                    android:id="@+id/sliderLayout_productImages"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="@mipmap/temp_white_img"-->
+<!--                    app:auto_cycle="true"-->
+<!--                    app:indicator_visibility="visible"-->
+<!--                    app:pager_animation="Accordion"-->
+<!--                    app:pager_animation_span="1100" />-->
+
+<!--                <com.daimajia.slider.library.Indicators.PagerIndicator-->
+<!--                    android:id="@+id/custom_indicator"-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_gravity="center|bottom"-->
+<!--                    android:layout_marginBottom="20dp"-->
+<!--                    android:gravity="center"-->
+<!--                    app:selected_color="#0095BF"-->
+<!--                    app:selected_drawable="@drawable/ic_circle"-->
+<!--                    app:selected_height="6dp"-->
+<!--                    app:selected_padding_left="5dp"-->
+<!--                    app:selected_padding_right="5dp"-->
+<!--                    app:selected_width="6dp"-->
+<!--                    app:shape="oval"-->
+<!--                    app:unselected_color="#55333333"-->
+<!--                    app:unselected_height="6dp"-->
+<!--                    app:unselected_padding_left="5dp"-->
+<!--                    app:unselected_padding_right="5dp"-->
+<!--                    app:unselected_width="6dp" />-->
+
+<!--                &lt;!&ndash;                <me.relex.circleindicator.CircleIndicator&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/indicator"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="48dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_below="@+id/view"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_gravity="bottom"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:ci_drawable="@drawable/ic_circle"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:ci_drawable_unselected="@drawable/ic_circle"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:ci_height="7dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    app:ci_width="7dp" />&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;                <ImageView&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:id="@+id/iv_restaurantImage"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:scaleType="centerCrop"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:src="@mipmap/temp_paneer" />&ndash;&gt;-->
+
+<!--                &lt;!&ndash;circleindicator used&ndash;&gt;-->
+
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_veg"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_gravity="bottom|left"-->
+<!--                    android:layout_margin="15dp"-->
+<!--                    android:src="@mipmap/ic_veg" />-->
+
+<!--            </FrameLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="15dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <com.heaven.vegetable.custom.MyTextViewBold-->
+<!--                        android:id="@+id/tv_productName"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:maxLines="2"-->
+<!--                        android:text="Vegetable Name"-->
+<!--                        android:textColor="@color/main_dark_text"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                        android:id="@+id/tv_productCategory"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/tv_foodName"-->
+<!--                        android:layout_marginTop="6dp"-->
+<!--                        android:text="Vegetable Category"-->
+<!--                        android:textColor="@color/green"-->
+<!--                        android:textSize="14sp" />-->
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:background="@color/smokegray" />-->
+
+<!--                    <com.heaven.vegetable.custom.MyTextViewBold-->
+<!--                        android:id="@+id/tv_productPrice"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/tv_foodCategory"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:text="₹ 50.00"-->
+<!--                        android:textColor="@color/main_text"-->
+<!--                        android:textSize="18sp" />-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/pack_size"-->
+<!--                        android:textColor="@color/main_text"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_weight="3"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/ll_250Gram"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@drawable/rect1"-->
+<!--                            android:orientation="vertical">-->
+
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:id="@+id/tv_250Gram"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="250 gm"-->
+<!--                                android:textColor="#4a4a4a"-->
+<!--                                android:textSize="16sp" />-->
+
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Small"-->
+<!--                                android:textColor="#9b9b9b"-->
+<!--                                android:textSize="11sp" />-->
+
+<!--                        </LinearLayout>-->
+
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/ll_500Gram"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@drawable/rect1"-->
+<!--                            android:orientation="vertical">-->
+
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:id="@+id/tv_500Gram"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="500 gm"-->
+<!--                                android:textColor="#4a4a4a"-->
+<!--                                android:textSize="16sp" />-->
+
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Medium"-->
+<!--                                android:textColor="#9b9b9b"-->
+<!--                                android:textSize="11sp" />-->
+
+<!--                        </LinearLayout>-->
+
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/ll_1Kilo"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@drawable/rect1"-->
+<!--                            android:orientation="vertical">-->
+
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:id="@+id/tv_1Kilo"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="1 kg"-->
+<!--                                android:textColor="#4a4a4a"-->
+<!--                                android:textSize="16sp" />-->
+
+<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Regular"-->
+<!--                                android:textColor="#9b9b9b"-->
+<!--                                android:textSize="11sp" />-->
+
+<!--                        </LinearLayout>-->
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="#f5f5f5"-->
+<!--                android:padding="6dp" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="15dp">-->
+
+<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/about_this_product"-->
+<!--                    android:textColor="@color/main_text"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="Vegetables are parts of plants that are eaten by humans as food as part of a meal. This meaning is often used: it is applied to plants collectively to mean all edible plant matter, including the flowers, fruits, stems, leaves, roots, and seeds."-->
+<!--                    android:textColor="@color/gray"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="#f5f5f5"-->
+<!--                android:padding="6dp" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:paddingLeft="13.4dp"-->
+<!--                android:paddingTop="25dp">-->
+
+<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="REVIEWS"-->
+<!--                    android:textColor="#c2c4ca"-->
+<!--                    android:textSize="14.4sp" />-->
+
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/ll_restaurantReviews"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <RatingBar-->
+<!--                        android:id="@+id/ratingBar_restaurantReviews"-->
+<!--                        style="?android:attr/ratingBarStyleSmall"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:numStars="5"-->
+<!--                        android:progressTint="#f05421"-->
+<!--                        android:rating="4" />-->
+
+<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                        android:id="@+id/tv_restaurantReviews"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="8.4dp"-->
+<!--                        android:text="238 Total Reviews"-->
+<!--                        android:textColor="#9b9b9b"-->
+<!--                        android:textSize="11.5sp" />-->
+
+<!--                </LinearLayout>-->
+
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="12dp"-->
+<!--                android:paddingBottom="12dp">-->
+
+<!--                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:layout_width="38.4dp"-->
+<!--                    android:layout_height="38.4dp"-->
+<!--                    android:layout_marginLeft="13.4dp"-->
+<!--                    android:layout_marginTop="17dp"-->
+<!--                    android:layout_marginRight="5.4dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/ic_person"-->
+<!--                    app:riv_corner_radius="30dip"-->
+<!--                    app:riv_oval="true" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="15.4dp"-->
+<!--                    android:layout_marginTop="12.8dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Rahul Patil"-->
+<!--                            android:textColor="#4a4a4a"-->
+<!--                            android:textSize="14.4sp" />-->
+
+<!--                        <RatingBar-->
+<!--                            style="?android:attr/ratingBarStyleSmall"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginRight="18.2dp"-->
+<!--                            android:progressTint="#f05421"-->
+<!--                            android:rating="4" />-->
+
+<!--                    </LinearLayout>-->
+
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:text="2 hours ago"-->
+<!--                        android:textColor="#9b9b9b"-->
+<!--                        android:textSize="14.4sp" />-->
+
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginTop="13.5dp"-->
+<!--                        android:text="restaurant_review1"-->
+<!--                        android:textColor="#4a4a4a"-->
+<!--                        android:textSize="14.4sp" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="12dp"-->
+<!--                android:paddingBottom="30dp">-->
+
+<!--                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:layout_width="38.4dp"-->
+<!--                    android:layout_height="38.4dp"-->
+<!--                    android:layout_marginLeft="13.4dp"-->
+<!--                    android:layout_marginTop="17dp"-->
+<!--                    android:layout_marginRight="5.4dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/ic_profile"-->
+<!--                    app:riv_corner_radius="30dip"-->
+<!--                    app:riv_oval="true" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="15.4dp"-->
+<!--                    android:layout_marginTop="12.8dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Pradeep Jadhav"-->
+<!--                            android:textColor="#4a4a4a"-->
+<!--                            android:textSize="14.4sp" />-->
+
+<!--                        <RatingBar-->
+<!--                            style="?android:attr/ratingBarStyleSmall"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginRight="18.2dp"-->
+<!--                            android:progressTint="#f05421"-->
+<!--                            android:rating="5" />-->
+
+<!--                    </LinearLayout>-->
+
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:text="3 hours ago"-->
+<!--                        android:textColor="#9b9b9b"-->
+<!--                        android:textSize="14.4sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginTop="13.5dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="restaurant_review2"-->
+<!--                        android:textColor="#4a4a4a"-->
+<!--                        android:textSize="14.4sp" />-->
+
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="#f5f5f5"-->
+<!--                android:padding="20dp" />-->
+
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
+
+<!--    &lt;!&ndash;    <LinearLayout&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:id="@+id/ll_bottomLayout"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_alignParentBottom="true"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_gravity="center_horizontal|bottom"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:elevation="30dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:fitsSystemWindows="true"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:orientation="vertical"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:visibility="visible">&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        <include&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:id="@+id/view_bottomViewCart"&ndash;&gt;-->
+<!--    &lt;!&ndash;            layout="@layout/bottom_view_restaurant_cart"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_alignParentBottom="true"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:visibility="gone" />&ndash;&gt;-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_bottomPaymentLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_gravity="center_horizontal|bottom"-->
+<!--        android:background="@color/black"-->
+<!--        android:elevation="30dp"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:visibility="visible"-->
+<!--        android:weightSum="2">-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_viewCartLayout"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:background="@color/white"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <com.heaven.vegetable.custom.MyTextViewBold-->
+<!--                android:id="@+id/tv_productAmount"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/view_cart"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <com.heaven.vegetable.custom.MyTextView-->
+<!--                android:id="@+id/tv_viewCartText"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:visibility="gone"-->
+<!--                android:text="@string/view_cart"-->
+<!--                android:textColor="@color/green"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_addCartLayout"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/white"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <com.heaven.vegetable.custom.MyTextView-->
+<!--                android:id="@+id/tv_addToCart"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@color/deep_orange"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="15dp"-->
+<!--                android:text="@string/add_to_cart"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:visibility="visible" />-->
+
+<!--            <com.travijuu.numberpicker.library.NumberPicker-->
+<!--                android:id="@+id/numberPicker_quantity"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:paddingTop="7dp"-->
+<!--                android:paddingRight="10dp"-->
+<!--                android:paddingBottom="7dp"-->
+<!--                android:visibility="gone"-->
+<!--                app:custom_layout="@layout/custom_layout_number_picker"-->
+<!--                app:focusable="false"-->
+<!--                app:unit="1"-->
+<!--                app:value="1" />-->
+
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+<!--    &lt;!&ndash;    </LinearLayout>&ndash;&gt;-->
+
+
+<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
