@@ -77,29 +77,10 @@ public class SearchAutoCompleteAdapter extends RecyclerView.Adapter<SearchAutoCo
         }
 
         @Override
-        public void onClick(final View v) {
-//            PlaceAutocomplete item = mResultList.get(getAdapterPosition());
-//            if (v.getId() == R.id.ll_rootView) {
-//
-//                String placeId = String.valueOf(item.placeId);
-//
-//                List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS);
-//                FetchPlaceRequest request = FetchPlaceRequest.builder(placeId, placeFields).build();
-//                placesClient.fetchPlace(request).addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {
-//                    @Override
-//                    public void onSuccess(FetchPlaceResponse response) {
-//                        Place place = response.getPlace();
-//                        clickListener.onClick(v, 0);
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception exception) {
-//                        if (exception instanceof ApiException) {
-//                            Toast.makeText(mContext, exception.getMessage() + "", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//            }
+        public void onClick(View view) {
+            if (clickListener != null) {
+                clickListener.onClick(view, getAdapterPosition());
+            }
         }
     }
 
