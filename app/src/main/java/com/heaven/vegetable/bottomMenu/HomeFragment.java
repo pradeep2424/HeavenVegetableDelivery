@@ -32,6 +32,7 @@ import com.heaven.vegetable.activity.ProductListActivity;
 import com.heaven.vegetable.adapter.PagerAdapterBanner;
 import com.heaven.vegetable.adapter.RecycleAdapterPopularItem;
 import com.heaven.vegetable.adapter.RecycleAdapterCategory;
+import com.heaven.vegetable.fragments.FragmentFooter;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.listeners.OnPopularItemClickedListener;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
@@ -49,6 +50,7 @@ import com.heaven.vegetable.utils.InternetConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,10 +95,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 //    Integer image2[] = {R.mipmap.temp_img1, R.mipmap.temp_img2, R.mipmap.temp_img3,
 //            R.mipmap.temp_img4, R.mipmap.temp_img5, R.mipmap.temp_img6, R.mipmap.temp_img7};
 
-    private ViewPager viewPager;
-    private ArrayList<BannerDetailsObject> listBannerDetails;
     private HashMap<String, String> mapBannerDetails;
-    private PagerAdapterBanner pagerAdapterForBanner;
+
+    private ViewPager viewPagerFooter;
+    private PagerAdapterBanner pagerAdapterForFooter;
+    private ArrayList<String> listFooterURL;
 
     TriggerTabChangeListener triggerTabChangeListener;
 
@@ -131,7 +134,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
         restaurantID = Application.clientObject.getRestaurantID();
         userID = Application.userDetails.getUserID();
-        zipCode = Application.userDetails.getZipCode();
+
+        if (Application.locationAddressData != null) {
+            zipCode = Integer.parseInt(Application.locationAddressData.getAddressList().get(0).getPostalCode());
+        }
+//        zipCode = Application.userDetails.getZipCode();
 //        referralPoints = Application.userDetails.getTotalReferralPoints();
     }
 
@@ -142,10 +149,10 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         initComponents();
         componentEvents();
         setToolbarDetails();
-        setupViewPagerBanner();
+//        setupViewPagerFooter();
 
 //        setupRecyclerViewPopularItems();
-        setupSlidingImages();
+//        setupSlidingImages();
 //        setupRecyclerViewCategory();
 
 //        getUserLikeTopItems();
@@ -154,6 +161,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         getRestaurantData();
         getTopPopularItems();
         getCategoryData();
+        getSlidingFooter();
 
         return rootView;
     }
@@ -172,7 +180,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
         rvPopular = rootView.findViewById(R.id.recyclerView_popular);
         rvVegetableCategories = rootView.findViewById(R.id.recyclerView_vegetableCategories);
-        viewPager = rootView.findViewById(R.id.viewpager);
+        viewPagerFooter = rootView.findViewById(R.id.viewPagerFooter);
 
 //        tvSeeMoreDish = (TextView) rootView.findViewById(R.id.tv_seeMoreDish);
 //        tvSeeMoreCuisines = (TextView) rootView.findViewById(R.id.tv_seeMoreCuisine);
@@ -217,12 +225,12 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     }
 
     private void setupSlidingImages() {
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put("Best Offer", "https://c4.wallpaperflare.com/wallpaper/563/7/828/peas-pod-food-wallpaper-preview.jpg");
-        url_maps.put("Big Bang Theory", "https://c4.wallpaperflare.com/wallpaper/755/380/1002/vegetables-paprika-food-tomatoes-mushroom-wallpaper-preview.jpg");
-        url_maps.put("House of Cards", "https://c4.wallpaperflare.com/wallpaper/401/129/264/food-vegetables-mushrooms-peppers-tomatoes-spoons-wallpaper-preview.jpg");
-        url_maps.put("Game of Thrones", "https://c4.wallpaperflare.com/wallpaper/53/520/935/food-vegetables-tomatoes-eggplant-wallpaper-preview.jpg");
-        url_maps.put("Game of Thrones", "https://c0.wallpaperflare.com/preview/218/234/443/asparagus-avocado-colorful-eating.jpg");
+//        HashMap<String, String> url_maps = new HashMap<String, String>();
+//        url_maps.put("Best Offer", "https://c4.wallpaperflare.com/wallpaper/563/7/828/peas-pod-food-wallpaper-preview.jpg");
+//        url_maps.put("Big Bang Theory", "https://c4.wallpaperflare.com/wallpaper/755/380/1002/vegetables-paprika-food-tomatoes-mushroom-wallpaper-preview.jpg");
+//        url_maps.put("House of Cards", "https://c4.wallpaperflare.com/wallpaper/401/129/264/food-vegetables-mushrooms-peppers-tomatoes-spoons-wallpaper-preview.jpg");
+//        url_maps.put("Game of Thrones", "https://c4.wallpaperflare.com/wallpaper/53/520/935/food-vegetables-tomatoes-eggplant-wallpaper-preview.jpg");
+//        url_maps.put("Game of Thrones", "https://c0.wallpaperflare.com/preview/218/234/443/asparagus-avocado-colorful-eating.jpg");
 
 //        HashMap<String, Integer> url_maps = new HashMap<String, Integer>();
 //        url_maps.put("50% off on Lunch", R.mipmap.temp_img1);
@@ -230,8 +238,8 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 //        url_maps.put("House of Cards", R.mipmap.temp_img3);
 //        url_maps.put("Game of Thrones", R.mipmap.temp_img4);
 
-//        HashMap<String, String> url_maps = new HashMap<String, String>();
-//        url_maps.putAll(mapBannerDetails);
+        HashMap<String, String> url_maps = new HashMap<String, String>();
+        url_maps.putAll(mapBannerDetails);
 
         for (String name : url_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(getActivity());
@@ -441,9 +449,11 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     }
 
 
-    private void setupViewPagerBanner() {
-        pagerAdapterForBanner = new PagerAdapterBanner(getFragmentManager());
-        viewPager.setAdapter(pagerAdapterForBanner);
+    private void setupViewPagerFooter(ArrayList<Fragment> fragments, ArrayList<String> listFooterURL) {
+        viewPagerFooter.setVisibility(View.VISIBLE);
+
+        pagerAdapterForFooter = new PagerAdapterBanner(getActivity(), getFragmentManager(), fragments, listFooterURL);
+        viewPagerFooter.setAdapter(pagerAdapterForFooter);
     }
 
     private void setToolbarDetails() {
@@ -547,6 +557,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
                         }
 
+                        getSliderDetails();
 //                        setupRecyclerViewRestaurant();
 
                     } catch (Exception e) {
@@ -586,9 +597,10 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
     private void getSliderDetails() {
         if (InternetConnection.checkConnection(getActivity())) {
+            int clientID = Application.clientObject.getRestaurantID();
 
             ApiInterface apiService = RetroClient.getApiService(getActivity());
-            Call<ResponseBody> call = apiService.getSlidingPhotoDetails(0, ConstantValues.SLIDER_BANNER);   // 0 for sliding photos
+            Call<ResponseBody> call = apiService.getSlidingPhotoDetails(clientID, ConstantValues.SLIDER_BANNER);   // 0 for sliding photos
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -618,7 +630,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
                         }
 
-//                        setupSlidingImages();
+                        setupSlidingImages();
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -651,6 +663,82 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                     .show();
         }
     }
+
+    private void getSlidingFooter() {
+        if (InternetConnection.checkConnection(getActivity())) {
+            int clientID = Application.clientObject.getRestaurantID();
+
+            ApiInterface apiService = RetroClient.getApiService(getActivity());
+            Call<ResponseBody> call = apiService.getSlidingPhotoDetails(clientID, ConstantValues.SLIDER_FOOTER);   // 0 for sliding photos
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    ArrayList<String> listFooterURL = new ArrayList<>();
+                    ArrayList<Fragment> fragments = new ArrayList<>();
+
+                    try {
+                        int statusCode = response.code();
+
+                        if (response.isSuccessful()) {
+                            String responseString = response.body().string();
+                            JSONArray jsonArray = new JSONArray(responseString);
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObj = jsonArray.getJSONObject(i);
+
+                                String photoURL = jsonObj.optString("PhotoData");
+//                                String title = jsonObj.optString("Text");
+
+                                Bundle b = new Bundle();
+                                b.putString("ImageURL", photoURL);
+                                fragments.add(Fragment.instantiate(getActivity(), FragmentFooter.class.getName(), b));
+
+                                listFooterURL.add(photoURL);
+                            }
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                        if ( listFooterURL.size() != 0 && fragments.size() != 0) {
+                            setupViewPagerFooter(fragments, listFooterURL);
+
+                        } else {
+                            viewPagerFooter.setVisibility(View.GONE);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getSlidingFooter();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
+
 
     private void getTopPopularItems() {
         if (InternetConnection.checkConnection(getActivity())) {
@@ -750,7 +838,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            getRestaurantData();
+                            getTopPopularItems();
                         }
                     })
 //                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))

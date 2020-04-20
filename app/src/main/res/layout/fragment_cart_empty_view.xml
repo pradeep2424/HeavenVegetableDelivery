@@ -6,9 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/empty_cart" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/gifImageView"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
@@ -20,12 +29,6 @@
         <!--            android:layout_height="wrap_content"-->
         <!--            android:layout_gravity="center"-->
         <!--            android:src="@mipmap/empty_cart" />-->
-
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@mipmap/empty_cart3" />
 
         <com.heaven.vegetable.custom.MyTextView
             android:layout_width="wrap_content"
@@ -52,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@drawable/rect_red_border"
+            android:background="@drawable/rect_green_border"
             android:gravity="right"
             android:orientation="vertical"
             android:paddingLeft="30dp"
@@ -66,7 +69,7 @@
                 android:layout_gravity="center"
                 android:text="@string/browse_menu"
                 android:textAllCaps="false"
-                android:textColor="@color/dark_red"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp" />
         </LinearLayout>
 

@@ -75,8 +75,8 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
 
-    <string name="search_main_title">What can we \nserve you today?</string>
-    <string name="search_box_text">Search for restaurants or dish...</string>
+    <string name="search_main_title">What can we serve you today?</string>
+    <string name="search_box_text">Search for vegetables or fruits...</string>
     <string name="search_button">SEARCH</string>
 
     <string name="cart_empty_title">Oops! Your cart is empty</string>

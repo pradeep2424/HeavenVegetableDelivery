@@ -35,7 +35,6 @@ import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.sharedPreference.PrefManagerConfig;
 import com.heaven.vegetable.utils.Application;
 import com.heaven.vegetable.utils.InternetConnection;
-import com.heaven.vegetable.utils.SimpleDividerItemDecoration;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 
 import org.json.JSONArray;

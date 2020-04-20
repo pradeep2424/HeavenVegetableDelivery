@@ -131,6 +131,9 @@ public interface ApiInterface {
     @GET("getItemRate/{ProductID}")
     Call<ResponseBody> getProductRate(@Path("ProductID") int productID);
 
+    @GET("ItemSearch/{SearchTExt}")
+    Call<ResponseBody> getSearchItem(@Path("SearchTExt") String searchText);
+
 //    @Multipart
 //    @POST("UploadFile")
 //    Call<ResponseBody> uploadImage(@Part MultipartBody.Part file);

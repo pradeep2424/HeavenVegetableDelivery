@@ -74,7 +74,7 @@
                 android:textSize="14sp" />
 
             <com.heaven.vegetable.custom.MyTextView
-                android:id="@+id/tv_productSize"
+                android:id="@+id/tv_productUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_foodName"

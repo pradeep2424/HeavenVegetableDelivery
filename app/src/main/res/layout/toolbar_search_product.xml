@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.Light">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.heaven.vegetable.custom.MyTextView
+            android:id="@+id/tv_toolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/search_main_title"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_white"
+            android:focusable="true"
+            app:queryBackground="@null"
+            android:focusableInTouchMode="true"
+            android:theme="@style/SearchViewTheme"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search_box_text" />
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/rectangle_white"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:paddingTop="12dp"-->
+        <!--            android:paddingBottom="12dp">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginLeft="12dp"-->
+        <!--                android:src="@drawable/ic_search"-->
+        <!--                android:tint="#d0d0d0" />-->
+
+        <!--            <com.heaven.vegetable.custom.MyEditText-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:background="#00000000"-->
+        <!--                android:hint="@string/search_box_text"-->
+        <!--                android:textColor="@color/main_text"-->
+        <!--                android:textColorHint="@color/hint_gray"-->
+        <!--                android:textSize="14sp" />-->
+        <!--        </LinearLayout>-->
+    </RelativeLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
+
+    <!--<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    android:id="@+id/toolbar"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="?attr/actionBarSize"-->
+    <!--    android:background="@color/colorPrimary"-->
+    <!--    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+    <!--    app:layout_scrollFlags="scroll|enterAlways"-->
+    <!--    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/ll_toolbarLocation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:paddingTop="10dp">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_toolbarAddress"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_weight="3"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:gravity="center_vertical">-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="18dp"-->
+    <!--                android:layout_height="18dp"-->
+    <!--                android:src="@mipmap/ic_places" />-->
+
+    <!--            <com.heaven.vegetable.custom.MyTextView-->
+    <!--                android:id="@+id/tv_toolbarTitle"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginLeft="12dp"-->
+    <!--                android:ellipsize="end"-->
+    <!--                android:maxLines="1"-->
+    <!--                android:text="Home - 7, Karnatak School, Chembur"-->
+    <!--                android:textColor="@color/main_text"-->
+    <!--                android:textSize="16sp" />-->
+
+    <!--        </LinearLayout>-->
+    <!--    </LinearLayout>-->
+
+    <!--</androidx.appcompat.widget.Toolbar>-->

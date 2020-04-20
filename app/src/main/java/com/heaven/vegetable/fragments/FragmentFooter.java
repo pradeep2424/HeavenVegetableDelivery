@@ -9,16 +9,17 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.heaven.vegetable.R;
 
-public class FragmentBanner extends Fragment {
+public class FragmentFooter extends Fragment {
     private View rootView;
     private ImageView ivImage;
 
-    int position;
+    String imageURL;
 
-//    public static FragmentBanner newInstance(int page) {
-//        FragmentBanner fragmentFirst = new FragmentBanner();
+//    public static FragmentFooter newInstance(int page) {
+//        FragmentFooter fragmentFirst = new FragmentFooter();
 //        Bundle args = new Bundle();
 //        args.putInt("POSITION", page);
 //        fragmentFirst.setArguments(args);
@@ -28,7 +29,10 @@ public class FragmentBanner extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        position = getArguments().getInt("POSITION", 0);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            imageURL = getArguments().getString("ImageURL");
+        }
     }
 
     @Override
@@ -41,19 +45,7 @@ public class FragmentBanner extends Fragment {
 
     private void init() {
         ivImage = rootView.findViewById(R.id.iv_image);
+        Glide.with(getActivity()).load(imageURL).into(ivImage);
 
-//        switch (position) {
-//            case 0:
-//                ivImage.setImageResource(R.mipmap.temp_bottom_cover_1);
-//                break;
-//
-//            case 1:
-//                ivImage.setImageResource(R.mipmap.temp_bottom_cover_2);
-//                break;
-//
-//            case 2:
-//                ivImage.setImageResource(R.mipmap.temp_bottom_cover_3);
-//                break;
-//        }
     }
 }

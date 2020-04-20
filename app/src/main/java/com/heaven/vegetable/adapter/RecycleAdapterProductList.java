@@ -71,6 +71,7 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         TextView tvProductName;
         TextView tvProductCategory;
         TextView tvProductPrice;
+        TextView tvProductUnit;
 
         LinearLayout llAddItem;
         NumberPicker numberPickerItemQuantity;
@@ -86,6 +87,7 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
             tvProductName = view.findViewById(R.id.tv_productName);
             tvProductCategory = view.findViewById(R.id.tv_productCategory);
             tvProductPrice = view.findViewById(R.id.tv_ProductPrice);
+            tvProductUnit = view.findViewById(R.id.tv_productUnit);
 
             llAddItem = itemView.findViewById(R.id.ll_addButton);
             numberPickerItemQuantity = itemView.findViewById(R.id.numberPicker_quantity);
@@ -121,11 +123,13 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         ArrayList<String> listProductImages = productObject.getListProductImage();
         String name = productObject.getProductName();
         String category = productObject.getCategoryName();
+        String unit = productObject.getUnit();
         String price = activity.getResources().getString(R.string.rupees) + getFormattedNumberDouble(productObject.getPrice());
 
 //        holder.tvProductImage.setImageResource(listProductImages[0]);
         holder.tvProductName.setText(name);
         holder.tvProductCategory.setText(category);
+        holder.tvProductUnit.setText(unit);
         holder.tvProductPrice.setText(price);
 
         if (listProductImages != null && listProductImages.size() > 0) {

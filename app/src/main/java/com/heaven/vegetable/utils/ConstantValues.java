@@ -22,5 +22,6 @@ public class ConstantValues {
     public static final String ACTIVITY_CART_ACTION_PLACE_ORDER = "ActivityCartPlaceOrder";
 
     public static final String SLIDER_BANNER = "Banner";
+    public static final String SLIDER_FOOTER = "Footer";
 
 }

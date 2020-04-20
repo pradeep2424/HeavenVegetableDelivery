@@ -128,7 +128,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
 //        setupRecyclerViewMenu();
 //        getProductsPhotoGallery();
 
-        getProductRate();
+        getProductUnitRate();
 
 //        ll250Gram.performClick();
     }
@@ -562,7 +562,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
 ////        updateViewCartStrip();
 ////    }
 
-    private void getProductRate() {
+    private void getProductUnitRate() {
         if (InternetConnection.checkConnection(this)) {
             showDialog();
 
@@ -637,7 +637,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            getProductRate();
+                            getProductUnitRate();
                         }
                     })
 //                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
@@ -662,7 +662,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
             postParam.addProperty("Taxableval", productObject.getPrice());    // doubt
             postParam.addProperty("CGST", productObject.getCgst());
             postParam.addProperty("SGST", productObject.getSgst());
-            postParam.addProperty("DeliveryCharge", 30.00);
+            postParam.addProperty("DeliveryCharge", 0);
             postParam.addProperty("Userid", userDetails.getUserID());
             postParam.addProperty("Clientid", clientObject.getRestaurantID());
             postParam.addProperty("TaxId", 0);

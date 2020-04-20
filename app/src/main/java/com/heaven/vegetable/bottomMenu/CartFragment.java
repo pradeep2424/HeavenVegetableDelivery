@@ -1285,7 +1285,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                 .setMessage(getString(R.string.order_placed_message))
                 .setPositiveBtnText("Ok")
                 .setPositiveBtnBackground("#ff3d00")
-                .setGifResource(R.drawable.gif1)   //Pass your Gif here
+                .setGifResource(R.mipmap.order_place)   //Pass your Gif here
                 .isCancellable(true)
                 .OnPositiveClicked(new FancyGifDialogListener() {
                     @Override

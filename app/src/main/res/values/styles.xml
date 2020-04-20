@@ -20,6 +20,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SearchViewTheme" parent="Widget.AppCompat.Light.SearchView">
+        <item name="android:textColorHint">@color/hint_gray</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 <!--    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">-->
 <!--        <item name="android:textColor">@color/white</item>-->
 <!--    </style>-->

@@ -182,7 +182,7 @@
                     <!--                    <LinearLayout-->
                     <!--                        android:layout_width="wrap_content"-->
                     <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:background="@drawable/rect_red_border"-->
+                    <!--                        android:background="@drawable/rect_green_border"-->
                     <!--                        android:gravity="right"-->
                     <!--                        android:layout_marginRight="10dp"-->
                     <!--                        android:orientation="vertical"-->
@@ -269,7 +269,7 @@
                                 android:id="@+id/ll_reorder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/rect_red"
+                                android:background="@drawable/rect_green"
                                 android:orientation="vertical"
                                 android:paddingLeft="30dp"
                                 android:paddingTop="8dp"
@@ -310,7 +310,7 @@
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:layout_marginRight="10dp"-->
-<!--                                android:background="@drawable/rect_red_border"-->
+<!--                                android:background="@drawable/rect_green_border"-->
 <!--                                android:gravity="right"-->
 <!--                                android:orientation="vertical"-->
 <!--                                android:paddingLeft="30dp"-->
@@ -339,7 +339,7 @@
 <!--                                android:id="@+id/ll_reorder"-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
-<!--                                android:background="@drawable/rect_red"-->
+<!--                                android:background="@drawable/rect_green"-->
 <!--                                android:orientation="vertical"-->
 <!--                                android:paddingLeft="30dp"-->
 <!--                                android:paddingTop="8dp"-->
