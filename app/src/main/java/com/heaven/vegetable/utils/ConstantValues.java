@@ -18,6 +18,7 @@ public class ConstantValues {
 
     public static final String ACTIVITY_ACTION_OTP = "ActivityActionOTP";
     public static final String ACTIVITY_ACTION_HOME = "ActivityActionHome";
+    public static final String ACTIVITY_ACTION_CART = "ActivityActionCart";
 
     public static final String ACTIVITY_CART_ACTION_PLACE_ORDER = "ActivityCartPlaceOrder";
 

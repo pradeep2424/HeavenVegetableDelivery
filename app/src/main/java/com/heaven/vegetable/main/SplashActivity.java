@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
+import com.heaven.vegetable.model.SMSGatewayObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -57,15 +58,10 @@ public class SplashActivity extends AppCompatActivity {
         init();
         getCurrentLocation();
 
-        loadNextPage();
+        getSmsDetails();
 
-//        if (isUserLoggedIn && !mobileNumber.equalsIgnoreCase(ConstantValues.SP_DEFAULT_VALUE)) {
-//            getUserDetails();
-//            getAreaDetails();
-//
-//        } else {
-//            loadNextPage();
-//        }
+//        loadNextPage();
+
     }
 
 //    public void printHashKey() {
@@ -364,98 +360,76 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-//    private void getSmsDetails() {
-//        if (InternetConnection.checkConnection(this)) {
-//
-//            ApiInterface apiService = RetroClient.getApiService(this);
-//            Call<ResponseBody> call = apiService.getSMSDetails();
-//            call.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                    try {
-//                        int statusCode = response.code();
-//                        if (response.isSuccessful()) {
-//
-//                            String responseString = response.body().string();
-//
-//                            JSONObject jsonObj = new JSONObject(responseString);
-//                            String status = jsonObj.optString("Status");
-////
-////                            String fname = jsonObj.optString("FName");
-////                            String lname = jsonObj.optString("LName");
-////                            String gender = jsonObj.optString("Gender");
-////                            String email = jsonObj.optString("Email");
-////                            String telephone = jsonObj.optString("Telephone");
-////                            String mobile = jsonObj.optString("Mobile");
-////                            String facebookId = jsonObj.optString("FacebookId");
-////
-////                            int userID = jsonObj.optInt("UserID");
-////                            String username = jsonObj.optString("Username");
-////                            String password = jsonObj.optString("Pass");
-////                            String userPhoto = jsonObj.optString("UserPhoto");
-////                            String userRole = jsonObj.optString("UserRole");
-////                            String userType = jsonObj.optString("UserType");
-////
-////                            String address = jsonObj.optString("Address");
-////                            String area = jsonObj.optString("Area");
-////                            String cityName = jsonObj.optString("CityName");
-////                            String stateName = jsonObj.optString("StateName");
-////                            int zipCode = jsonObj.optInt("ZipCode");
-//
-//                            String url = jsonObj.optString("URL");
-//                            String smsUsername = jsonObj.optString("SMSUsername");
-//                            String smsPass = jsonObj.optString("SMSPass");
-//                            String channel = jsonObj.optString("channel");
-//                            String sendSMS = jsonObj.optString("SendSMS");
-//                            String senderID = jsonObj.optString("SenderID");
-//
-//                            SMSGatewayObject smsGatewayObject = new SMSGatewayObject();
-//                            smsGatewayObject.setUrl(url);
-//                            smsGatewayObject.setSmsUsername(smsUsername);
-//                            smsGatewayObject.setSmsPass(smsPass);
-//                            smsGatewayObject.setChannel(channel);
-//                            smsGatewayObject.setSendSMS(sendSMS);
-//                            smsGatewayObject.setSenderID(senderID);
-//                            Application.smsGatewayObject = smsGatewayObject;
-//
-//                            loadNextPage();
-//
-//                        } else {
-//                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-//                        }
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    try {
-//                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
-//                        Log.e("Error onFailure : ", t.toString());
-//                        t.printStackTrace();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//        } else {
-////            signOutFirebaseAccounts();
-//
-//            Snackbar.make(rlRootLayout, getResources().getString(R.string.no_internet),
-//                    Snackbar.LENGTH_INDEFINITE)
-//                    .setAction("RETRY", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            getSmsDetails();
-//                        }
-//                    })
-////                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
-//                    .show();
-//        }
-//    }
+    private void getSmsDetails() {
+        if (InternetConnection.checkConnection(this)) {
+            ApiInterface apiService = RetroClient.getApiService(this);
+            Call<ResponseBody> call = apiService.getSMSDetails();
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+                        if (response.isSuccessful()) {
+
+                            String responseString = response.body().string();
+
+                            JSONObject jsonObj = new JSONObject(responseString);
+                            String status = jsonObj.optString("Status");
+
+                            String url = jsonObj.optString("URL");
+                            String smsUsername = jsonObj.optString("SMSUsername");
+                            String smsPass = jsonObj.optString("SMSPass");
+                            String channel = jsonObj.optString("channel");
+                            String sendSMS = jsonObj.optString("SendSMS");
+                            String senderID = jsonObj.optString("SenderID");
+
+                            SMSGatewayObject smsGatewayObject = new SMSGatewayObject();
+                            smsGatewayObject.setUrl(url);
+                            smsGatewayObject.setSmsUsername(smsUsername);
+                            smsGatewayObject.setSmsPass(smsPass);
+                            smsGatewayObject.setChannel(channel);
+                            smsGatewayObject.setSendSMS(sendSMS);
+                            smsGatewayObject.setSenderID(senderID);
+                            Application.smsGatewayObject = smsGatewayObject;
+
+                            loadNextPage();
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rlRootLayout, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getSmsDetails();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
 
 //    private void getAreaDetails() {
 //        if (InternetConnection.checkConnection(this)) {

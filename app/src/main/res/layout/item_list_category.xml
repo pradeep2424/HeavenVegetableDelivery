@@ -26,8 +26,7 @@
                 android:id="@+id/iv_categoryImage"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_launcher" />
+                android:scaleType="fitXY" />
 
             <com.heaven.vegetable.custom.MyTextView
                 android:id="@+id/tv_categoryName"

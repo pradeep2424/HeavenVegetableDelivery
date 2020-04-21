@@ -1,5 +1,7 @@
 package com.heaven.vegetable.bottomMenu;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,6 +26,7 @@ import com.heaven.vegetable.activity.ProductDetailsActivity;
 import com.heaven.vegetable.adapter.PlacesAutoCompleteAdapter;
 import com.heaven.vegetable.adapter.SearchAutoCompleteAdapter;
 import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -50,7 +53,15 @@ public class SearchFragment extends Fragment implements OnRecyclerViewClickListe
     private SearchAutoCompleteAdapter adapterSearch;
     private ArrayList<ProductObject> listProductObject = new ArrayList<>();
 
+    TriggerTabChangeListener triggerTabChangeListener;
+
     private final int REQUEST_CODE_PRODUCT_DETAILS = 100;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        triggerTabChangeListener = (TriggerTabChangeListener) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -239,4 +250,25 @@ public class SearchFragment extends Fragment implements OnRecyclerViewClickListe
         snackTextView.setMaxLines(4);
         snackbar.show();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if ( requestCode == REQUEST_CODE_PRODUCT_DETAILS) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+
+                String flag = data.getExtras().getString("MESSAGE");
+                if (flag.equalsIgnoreCase("VIEW_CART")) {
+                    triggerTabChangeListener.setTab(2);
+//                    triggerTabChangeListener.setTab(2);
+
+                } else if (flag.equalsIgnoreCase("UPDATE_CART_COUNT")) {
+                    int noOfItems = data.getExtras().getInt("CART_ITEM_COUNT");
+                    triggerTabChangeListener.setBadgeCount(noOfItems);
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
+import com.heaven.vegetable.activity.LocationGoogleMapActivity;
 import com.heaven.vegetable.adapter.RecycleAdapterOrderedItem;
 import com.heaven.vegetable.listeners.OnItemAddedToCart;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
@@ -29,6 +30,7 @@ import com.heaven.vegetable.main.GetStartedMobileNumberActivity;
 import com.heaven.vegetable.model.CartObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
 import com.heaven.vegetable.model.CategoryObject;
+import com.heaven.vegetable.model.SMSGatewayObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -73,10 +75,12 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //    private TextView tvAddReferralMoneyBillDetails;
 //    private TextView tvAddReferralMoneyTotalPay;
 
+    private LinearLayout llChangeAddress;
     private TextView tvItemTotal;
 //    private TextView tvRestaurantCharges;
     private TextView tvDeliveryFee;
     private TextView tvDeliveryFreeText;
+    private TextView tvDeliveryFreeMessageText;
     private TextView tvTotalPaymentAmount;
     private TextView tvPaymentButtonAmount;
 
@@ -94,8 +98,11 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     int restaurantID;
     int orderNumber;
 
-    private final int REQUEST_CODE_MOBILE_NO_ACTIVITY = 100;
     private final int MINIMUM_AMOUNT_FOR_FREE_DELIVERY = 100;
+
+    private final int REQUEST_CODE_MOBILE_NO_ACTIVITY = 100;
+    private final int REQUEST_CODE_LOCATION = 101;
+
 
     @Override
     public void onAttach(Context context) {
@@ -163,12 +170,18 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //        tvAddReferralMoneyBillDetails = rootView.findViewById(R.id.tv_addReferralMoneyBillDetails);
 //        tvAddReferralMoneyTotalPay = rootView.findViewById(R.id.tv_addReferralMoneyTotalPay);
 
+        llChangeAddress = rootView.findViewById(R.id.ll_changeAddress);
         tvItemTotal = rootView.findViewById(R.id.tv_itemTotalText);
 //        tvRestaurantCharges = rootView.findViewById(R.id.tv_restaurantChargesText);
         tvDeliveryFee = rootView.findViewById(R.id.tv_deliveryFeeText);
         tvDeliveryFreeText = rootView.findViewById(R.id.tv_deliveryFeeTextFree);
+        tvDeliveryFreeMessageText = rootView.findViewById(R.id.tv_deliveryFeeMessageText);
         tvTotalPaymentAmount = rootView.findViewById(R.id.tv_totalPayText);
         tvPaymentButtonAmount = rootView.findViewById(R.id.tv_paymentButtonAmount);
+
+        String freeDeliveryMsg = getString(R.string.free_delivery_for_orders_above) + " "
+                + MINIMUM_AMOUNT_FOR_FREE_DELIVERY;
+        tvDeliveryFreeMessageText.setText(freeDeliveryMsg);
     }
 
     private void componentEvents() {
@@ -179,18 +192,14 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             }
         });
 
-//        switchButtonApplyPoints.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-//                setupBillingDetails();
-//
-////                if (isChecked) {
-////
-////                } else {
-////
-////                }
-//            }
-//        });
+        llChangeAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LocationGoogleMapActivity.class);
+                intent.putExtra("CalledFrom", ConstantValues.ACTIVITY_ACTION_CART);
+                startActivityForResult(intent, REQUEST_CODE_LOCATION);
+            }
+        });
 
         tvPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -917,6 +926,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                                         triggerTabChangeListener.setBadgeCount(0);
                                         deleteCartItem();
                                         showSuccessOrderMsg();
+                                        sendOrderPlacedSMS();
                                     }
 
                                 } else {
@@ -963,164 +973,76 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
         }
     }
 
-//    public void sendAppliedReferralPoints() {
-//        if (InternetConnection.checkConnection(getActivity())) {
-//
-//            ApiInterface apiService = RetroClient.getApiService(getActivity());
-//            Call<ResponseBody> call = apiService.setReferralPoint(userID, referralPoints);
-//            call.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                    try {
-//                        int statusCode = response.code();
-//
-//                        if (response.isSuccessful()) {
-//                            String responseString = response.body().string();
-//
-//                        } else {
-//                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-//                        }
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    try {
-//                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
-//                        Log.e("Error onFailure : ", t.toString());
-//                        t.printStackTrace();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//        } else {
-////            signOutFirebaseAccounts();
-//
-//            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
-//                    Snackbar.LENGTH_INDEFINITE)
-//                    .setAction("RETRY", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            deleteCartItem();
-//                        }
-//                    })
-////                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
-//                    .show();
-//        }
-//    }
+
+    private void sendOrderPlacedSMS() {
+        if (InternetConnection.checkConnection(getActivity())) {
+            SMSGatewayObject smsGatewayObject = Application.smsGatewayObject;
+            String smsURL = smsGatewayObject.getUrl();
+            String smsUsername = smsGatewayObject.getSmsUsername();
+            String smsPass = smsGatewayObject.getSmsPass();
+            String channel = smsGatewayObject.getChannel();
+            String senderID = smsGatewayObject.getSenderID();
+
+            String successMsg = getString(R.string.order_place_sms) ;
+
+            String url = smsURL + "user=" + smsUsername + "&pass=" + smsPass
+                    + "&channel=" + channel + "&number=" + mobileNo + "&message=" + successMsg
+                    + "&SenderID=" + senderID + "&Campaign=";
+
+            ApiInterface apiService = RetroClient.getApiService(getActivity());
+            Call<ResponseBody> call = apiService.getOtpSMS(url);
+
+//            Call<ResponseBody> call = apiService.getOtpSMS(smsUsername, smsPass, channel,
+//                    mobileNumber, senderID, otpAndMessage, "" );
+
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+                        if (response.isSuccessful()) {
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            sendOrderPlacedSMS();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
+
 
     private String getFormattedNumberDouble(double amount) {
         return NumberFormat.getNumberInstance(Locale.US).format(amount);
     }
-
-
-//    private void placeOrder() {
-//        if (InternetConnection.checkConnection(getActivity())) {
-//            ArrayList<OrderDetailsObject> listOrderDetails = new ArrayList<>();
-//            try {
-//
-//                UserDetails userDetails = Application.userDetails;
-//                ArrayList<CartObject> listCartItems = Application.listCartItems;
-//
-////                ClientObject restaurantObj = Application.categoryObject;
-////                String userTypeID = Application.userDetails.getUserType();
-////                String restaurantID = "1";
-//
-//                for (int i = 0; i < listCartItems.size(); i++) {
-//                    CartObject cartObject = listCartItems.get(i);
-//
-//                    OrderDetailsObject orderObj = new OrderDetailsObject();
-//                    orderObj.setOrderID(i + 1);
-//                    orderObj.setOrderNumber(i + 1);
-//                    orderObj.setOrderType(i + 1);
-//                    orderObj.setOrderStatus(i + 1);
-//                    orderObj.setOrderMode(i + 1);
-//                    orderObj.setPaymentID(i + 1);
-//                    orderObj.setProductID(cartObject.getProductID());
-//                    orderObj.setProductName(cartObject.getProductName());
-//                    orderObj.setProductRate(cartObject.getProductRate());
-//                    orderObj.setProductQuantity(cartObject.getProductQuantity());
-//                    orderObj.setTaxableVal(cartObject.getTaxableVal());
-//                    orderObj.setCgst(cartObject.getCgst());
-//                    orderObj.setSgst(cartObject.getSgst());
-//                    orderObj.setUserAddress(userDetails.getAddress());
-//                    orderObj.setUserID(userDetails.getUserID());
-//                    orderObj.setClientID(cartObject.getRestaurantID());
-//                    orderObj.setRestaurantName(cartObject.getRestaurantName());
-//                    orderObj.setTaxID(cartObject.getTaxID());
-//                    orderObj.setOrderPaid(false);
-//                    orderObj.setRejectReason("NO");
-//                    orderObj.setOrderDate(getCurrentDate());
-//
-//                    listOrderDetails.add(orderObj);
-//                }
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            ApiInterface apiService = RetroClient.getApiService(getActivity());
-////          Call<ResponseBody> call = apiService.placeOrder(createJsonPlaceOrder(listOrderDetails));
-//            Call<ResponseBody> call = apiService.placeOrder(listOrderDetails);
-//            call.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                    try {
-//                        int statusCode = response.code();
-//
-//                        if (response.isSuccessful()) {
-//                            String responseString = response.body().string();
-//
-////                            if (responseString.equalsIgnoreCase(getString(R.string.success))) {
-////                                setupRecyclerViewOrderedItems();
-//
-////                                showSnackBarErrorMsgWithButton(getString(R.string.order_placed_successfully));
-//
-//                            showSuccessOrderMsg();
-//                            showEmptyCart();
-////                            }
-//
-//                        } else {
-//                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-//                        }
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    try {
-//                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
-//                        Log.e("Error onFailure : ", t.toString());
-//                        t.printStackTrace();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//        } else {
-////            signOutFirebaseAccounts();
-//
-//            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
-//                    Snackbar.LENGTH_INDEFINITE)
-//                    .setAction("RETRY", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            getCartItems();
-//                        }
-//                    })
-////                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
-//                    .show();
-//        }
-//    }
 
     private String getCurrentDate() {
         Calendar c = Calendar.getInstance();
@@ -1131,153 +1053,6 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 
         return formattedDate;
     }
-
-//    private JsonObject createJsonPlaceOrder(OrderDetailsObject orderDetailsObject) {
-////        ClientObject categoryObject = Application.categoryObject;
-//
-//        JsonObject postParam = new JsonObject();
-//
-//        try {
-//
-//            postParam.addProperty("orderID", orderDetailsObject.getProductID());
-//            postParam.addProperty("orderNumber", orderDetailsObject.getProductName());
-//            postParam.addProperty("orderDate", orderDetailsObject.getOrderDate());
-//            postParam.addProperty("orderType", orderDetailsObject.getOrderType());
-//            postParam.addProperty("orderStatus", orderDetailsObject.getOrderStatus());
-//            postParam.addProperty("orderMode", orderDetailsObject.getOrderMode());
-//            postParam.addProperty("paymentID", orderDetailsObject.getPaymentID());    // doubt
-//            postParam.addProperty("productID", orderDetailsObject.getProductID());
-//            postParam.addProperty("productName", orderDetailsObject.getProductName());
-//            postParam.addProperty("productRate", orderDetailsObject.getProductRate());
-//            postParam.addProperty("ProductQnty", orderDetailsObject.getProductQuantity());
-//            postParam.addProperty("taxableVal", orderDetailsObject.getTaxableVal());
-//            postParam.addProperty("cgst", orderDetailsObject.getCgst());
-//            postParam.addProperty("sgst", orderDetailsObject.getSgst());
-//            postParam.addProperty("UserAddress", orderDetailsObject.getUserAddress());
-//            postParam.addProperty("userID", orderDetailsObject.getUserID());
-//            postParam.addProperty("restaurantID", orderDetailsObject.getRestaurantID());
-//            postParam.addProperty("restaurantName", orderDetailsObject.getRestaurantName());
-//            postParam.addProperty("totalAmount", orderDetailsObject.getTotalAmount());
-//            postParam.addProperty("taxID", orderDetailsObject.getTaxID());
-//            postParam.addProperty("orderPaid", orderDetailsObject.getOrderPaid());
-//            postParam.addProperty("rejectReason", orderDetailsObject.getRejectReason());
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return postParam;
-//    }
-//
-//    private void placeOrder() {
-//        if (InternetConnection.checkConnection(getActivity())) {
-//
-//            OrderDetailsObject orderObj = new OrderDetailsObject();
-//            try {
-//
-//                UserDetails userDetails = Application.userDetails;
-//                ClientObject restaurantObj = Application.categoryObject;
-//
-//                CartObject cartObject = Application.listCartItems.get(0);
-//
-//                String userTypeID = Application.userDetails.getUserType();
-//                String restaurantID = "1";
-//
-//                orderObj.setOrderID(1);
-//                orderObj.setOrderNumber(1);
-//                orderObj.setOrderType(1);
-//                orderObj.setOrderStatus(1);
-//                orderObj.setOrderMode(1);
-//                orderObj.setPaymentID(1);
-//                orderObj.setProductID(cartObject.getProductID());
-//                orderObj.setProductName(cartObject.getProductName());
-//                orderObj.setProductRate(cartObject.getProductRate());
-//                orderObj.setProductQuantity(cartObject.getProductQuantity());
-//                orderObj.setTaxableVal(cartObject.getTaxableVal());
-//                orderObj.setCgst(cartObject.getCgst());
-//                orderObj.setSgst(cartObject.getSgst());
-//                orderObj.setUserAddress(userDetails.getAddress());
-//                orderObj.setUserID(userDetails.getUserID());
-//                orderObj.setRestaurantID(cartObject.getRestaurantID());
-//                orderObj.setRestaurantName(cartObject.getRestaurantName());
-//                orderObj.setTaxID(cartObject.getTaxID());
-//                orderObj.setOrderPaid(true);
-//                orderObj.setRejectReason("NO");
-//                orderObj.setOrderDate("28-11-2019");
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            ApiInterface apiService = RetroClient.getApiService(getActivity());
-//            Call<ResponseBody> call = apiService.placeOrder(createJsonPlaceOrder(orderObj));
-//            call.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                    try {
-//                        int statusCode = response.code();
-//
-//                        if (response.isSuccessful()) {
-//                            String responseString = response.body().string();
-//                            listCartDish = new ArrayList<>();
-//
-//                            JSONArray jsonArray = new JSONArray(responseString);
-////                            for (int i = 0; i < jsonArray.length(); i++) {
-////                                JSONObject jsonObj = jsonArray.getJSONObject(i);
-////
-////                                String dishID = jsonObj.optString("ProductId");
-////                                String dishName = jsonObj.optString("ProductName");
-////                                String dishDescription = jsonObj.optString("ProductDesc");
-////                                String dishImage = jsonObj.optString("ProductImage");
-////                                String dishPrice = jsonObj.optString("Price");
-////
-////                                DishObject dishObject = new DishObject();
-////                                dishObject.setDishID(dishID);
-////                                dishObject.setDishName(dishName);
-////                                dishObject.setDishDescription(dishDescription);
-////                                dishObject.setDishImage(dishImage);
-////                                dishObject.setDishAmount(dishPrice);
-////
-////                                listCartDish.add(dishObject);
-////                            }
-//
-//                            setupRecyclerViewOrderedItems();
-//
-//                        } else {
-//                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-//                        }
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    try {
-//                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
-//                        Log.e("Error onFailure : ", t.toString());
-//                        t.printStackTrace();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//        } else {
-////            signOutFirebaseAccounts();
-//
-//            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
-//                    Snackbar.LENGTH_INDEFINITE)
-//                    .setAction("RETRY", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            getCartItems();
-//                        }
-//                    })
-////                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
-//                    .show();
-//        }
-//    }
 
     private void showSuccessOrderMsg() {
         new FancyGifDialog.Builder(getActivity())
@@ -1344,8 +1119,12 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                         mobileNo = Application.userDetails.getMobile();
                     }
                 }
-
                 break;
+
+            case REQUEST_CODE_LOCATION:
+                if (resultCode == Activity.RESULT_OK && data != null) {
+
+                }
 
             default:
                 super.onActivityResult(requestCode, resultCode, data);

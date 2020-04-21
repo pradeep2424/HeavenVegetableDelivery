@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,8 @@ import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
 import com.heaven.vegetable.listeners.OnPopularItemClickedListener;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
+import com.heaven.vegetable.main.GetStartedMobileNumberActivity;
+import com.heaven.vegetable.main.SplashActivity;
 import com.heaven.vegetable.model.BannerDetailsObject;
 import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ClientObject;
@@ -119,13 +122,6 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     public void onAttach(Context context) {
         super.onAttach(context);
         triggerTabChangeListener = (TriggerTabChangeListener) context;
-    }
-
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -385,75 +381,81 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
         adapterRestaurant.setClickListener(this);
     }
 
-    private void getCategoryDummyData() {
-        listCategoryObject = new ArrayList<>();
+//    private void getCategoryDummyData() {
+//        listCategoryObject = new ArrayList<>();
+//
+//        CategoryObject categoryObject1 = new CategoryObject();
+//        categoryObject1.setCategoryName("Vegetables");
+//        categoryObject1.setCategoryImage(String.valueOf(R.mipmap.temp_cabbage_1));
+//
+//        CategoryObject categoryObject2 = new CategoryObject();
+//        categoryObject2.setCategoryName("Fresh Fruits");
+//        categoryObject2.setCategoryImage(String.valueOf(R.mipmap.temp_capsicum_1));
+//
+//        CategoryObject categoryObject3 = new CategoryObject();
+//        categoryObject3.setCategoryName("Organic");
+//        categoryObject3.setCategoryImage(String.valueOf(R.mipmap.temp_carrots_1));
+//
+//        CategoryObject categoryObject4 = new CategoryObject();
+//        categoryObject4.setCategoryName("Herbs & Seasoning");
+//        categoryObject4.setCategoryImage(String.valueOf(R.mipmap.temp_chilli_1));
+//
+//        CategoryObject categoryObject5 = new CategoryObject();
+//        categoryObject5.setCategoryName("Exotic");
+//        categoryObject5.setCategoryImage(String.valueOf(R.mipmap.temp_lemon_1));
+//
+//        CategoryObject categoryObject6 = new CategoryObject();
+//        categoryObject6.setCategoryName("Seasonal");
+//        categoryObject6.setCategoryImage(String.valueOf(R.mipmap.temp_melons_1));
+//
+//        CategoryObject categoryObject7 = new CategoryObject();
+//        categoryObject7.setCategoryName("Flowers");
+//        categoryObject7.setCategoryImage(String.valueOf(R.mipmap.temp_potato_1));
+//
+//        CategoryObject categoryObject8 = new CategoryObject();
+//        categoryObject8.setCategoryName("Cut Fruits");
+//        categoryObject8.setCategoryImage(String.valueOf(R.mipmap.temp_tomato_1));
+//
+//        CategoryObject categoryObject9 = new CategoryObject();
+//        categoryObject9.setCategoryName("Organic Fruits");
+//        categoryObject9.setCategoryImage(String.valueOf(R.mipmap.temp_strawberry_1));
+//
+//        CategoryObject categoryObject10 = new CategoryObject();
+//        categoryObject10.setCategoryName("Cuts & Sprouts");
+//        categoryObject10.setCategoryImage(String.valueOf(R.mipmap.temp_vegetable));
+//
+//        listCategoryObject.add(categoryObject1);
+//        listCategoryObject.add(categoryObject2);
+//        listCategoryObject.add(categoryObject3);
+//        listCategoryObject.add(categoryObject4);
+//        listCategoryObject.add(categoryObject5);
+//        listCategoryObject.add(categoryObject6);
+//        listCategoryObject.add(categoryObject7);
+//        listCategoryObject.add(categoryObject8);
+//        listCategoryObject.add(categoryObject9);
+//        listCategoryObject.add(categoryObject10);
+//
+//
+////        for (int i = 0; i < image.length; i++) {
+////            CategoryObject cateogryObject = new CategoryObject();
+////            cateogryObject.setCategoryName("Category " + 1);
+////            cateogryObject.setCategoryImage(String.valueOf(image[i]));
+////            listCategoryObject.add(cateogryObject);
+////        }
+//    }
 
-        CategoryObject categoryObject1 = new CategoryObject();
-        categoryObject1.setCategoryName("Vegetables");
-        categoryObject1.setCategoryImage(String.valueOf(R.mipmap.temp_cabbage_1));
 
-        CategoryObject categoryObject2 = new CategoryObject();
-        categoryObject2.setCategoryName("Fresh Fruits");
-        categoryObject2.setCategoryImage(String.valueOf(R.mipmap.temp_capsicum_1));
-
-        CategoryObject categoryObject3 = new CategoryObject();
-        categoryObject3.setCategoryName("Organic");
-        categoryObject3.setCategoryImage(String.valueOf(R.mipmap.temp_carrots_1));
-
-        CategoryObject categoryObject4 = new CategoryObject();
-        categoryObject4.setCategoryName("Herbs & Seasoning");
-        categoryObject4.setCategoryImage(String.valueOf(R.mipmap.temp_chilli_1));
-
-        CategoryObject categoryObject5 = new CategoryObject();
-        categoryObject5.setCategoryName("Exotic");
-        categoryObject5.setCategoryImage(String.valueOf(R.mipmap.temp_lemon_1));
-
-        CategoryObject categoryObject6 = new CategoryObject();
-        categoryObject6.setCategoryName("Seasonal");
-        categoryObject6.setCategoryImage(String.valueOf(R.mipmap.temp_melons_1));
-
-        CategoryObject categoryObject7 = new CategoryObject();
-        categoryObject7.setCategoryName("Flowers");
-        categoryObject7.setCategoryImage(String.valueOf(R.mipmap.temp_potato_1));
-
-        CategoryObject categoryObject8 = new CategoryObject();
-        categoryObject8.setCategoryName("Cut Fruits");
-        categoryObject8.setCategoryImage(String.valueOf(R.mipmap.temp_tomato_1));
-
-        CategoryObject categoryObject9 = new CategoryObject();
-        categoryObject9.setCategoryName("Organic Fruits");
-        categoryObject9.setCategoryImage(String.valueOf(R.mipmap.temp_strawberry_1));
-
-        CategoryObject categoryObject10 = new CategoryObject();
-        categoryObject10.setCategoryName("Cuts & Sprouts");
-        categoryObject10.setCategoryImage(String.valueOf(R.mipmap.temp_vegetable));
-
-        listCategoryObject.add(categoryObject1);
-        listCategoryObject.add(categoryObject2);
-        listCategoryObject.add(categoryObject3);
-        listCategoryObject.add(categoryObject4);
-        listCategoryObject.add(categoryObject5);
-        listCategoryObject.add(categoryObject6);
-        listCategoryObject.add(categoryObject7);
-        listCategoryObject.add(categoryObject8);
-        listCategoryObject.add(categoryObject9);
-        listCategoryObject.add(categoryObject10);
-
-
-//        for (int i = 0; i < image.length; i++) {
-//            CategoryObject cateogryObject = new CategoryObject();
-//            cateogryObject.setCategoryName("Category " + 1);
-//            cateogryObject.setCategoryImage(String.valueOf(image[i]));
-//            listCategoryObject.add(cateogryObject);
-//        }
-    }
-
-
-    private void setupViewPagerFooter(ArrayList<Fragment> fragments, ArrayList<String> listFooterURL) {
+    private void setupViewPagerFooter(final ArrayList<Fragment> fragments, final ArrayList<String> listFooterURL) {
         viewPagerFooter.setVisibility(View.VISIBLE);
 
-        pagerAdapterForFooter = new PagerAdapterBanner(getActivity(), getFragmentManager(), fragments, listFooterURL);
-        viewPagerFooter.setAdapter(pagerAdapterForFooter);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                pagerAdapterForFooter = new PagerAdapterBanner(getActivity(), getFragmentManager(), fragments, listFooterURL);
+                viewPagerFooter.setAdapter(pagerAdapterForFooter);
+            }
+        }, 2000);
+
+
     }
 
     private void setToolbarDetails() {

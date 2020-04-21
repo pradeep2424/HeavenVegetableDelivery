@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -437,7 +437,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
-                                android:text="@string/free_delivery_for_orders_above_200"
+                                android:text="@string/free_delivery_for_orders_above"
                                 android:textColor="@color/light_green_700"
                                 android:textSize="14sp" />
 

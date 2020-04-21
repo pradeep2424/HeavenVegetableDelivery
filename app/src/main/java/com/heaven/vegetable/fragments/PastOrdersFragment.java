@@ -243,12 +243,14 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
         categoryObject.setTaxable(orderDetailsObject.getIsTaxApplicable());
         Application.categoryObject = categoryObject;
 
-        String mobileNo = Application.userDetails.getMobile();
-        if (mobileNo != null) {
-            addItemToCart(listProducts);
-        } else {
-            addItemToLocal(listProducts);
-        }
+        addItemToCart(listProducts);
+
+//        String mobileNo = Application.userDetails.getMobile();
+//        if (mobileNo != null) {
+//            addItemToCart(listProducts);
+//        } else {
+//            addItemToLocal(listProducts);
+//        }
     }
 
 
@@ -431,12 +433,11 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
                             if (response.isSuccessful()) {
                                 String responseString = response.body().string();
 
-                                successOnAddToCart(currentIndex, listProducts);
-
-//                                if (currentIndex == listProducts.size() - 1) {
-//                                    triggerTabChangeListener.setTab(1);
-////                                    triggerTabChangeListener.setTab(2);
-//                                }
+                                if (currentIndex == listProducts.size() - 1) {
+                                    triggerTabChangeListener.setTab(2);
+                                    dismissDialog();
+                                }
+//                                successOnAddToCart(currentIndex, listProducts);
 
                             } else {
                                 showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
@@ -476,42 +477,41 @@ public class PastOrdersFragment extends Fragment implements OnPastOrderOptionsCl
         }
     }
 
-    private void addItemToLocal(final ArrayList<ProductObject> listProducts) {
-        for (int i = 0; i < listProducts.size(); i++) {
-            final int currentIndex = i;
-            ProductObject productObject = listProducts.get(i);
-
-            CartObject cartObject = new CartObject();
-            cartObject.setCgst(productObject.getCgst());
-            cartObject.setClientID(Application.categoryObject.getRestaurantID());
-            cartObject.setDeliveryCharge(30);
-            cartObject.setRestaurantName(Application.categoryObject.getRestaurantName());
-            cartObject.setIsIncludeTax(Application.categoryObject.getIncludeTax());
-            cartObject.setIsTaxApplicable(Application.categoryObject.getTaxable());
-            cartObject.setProductAmount(productObject.getPrice());
-            cartObject.setProductID(productObject.getProductID());
-            cartObject.setProductName(productObject.getProductName());
-            cartObject.setProductQuantity(productObject.getProductQuantity());
-            cartObject.setProductRate(productObject.getPrice());
-            cartObject.setProductSize("Regular");
-            cartObject.setSgst(productObject.getSgst());
-            cartObject.setTaxID(productObject.getTaxID());
-            cartObject.setTaxableVal(productObject.getPrice());
-            cartObject.setTotalAmount(productObject.getPrice());
-            cartObject.setUserID(Application.userDetails.getUserID());
-            cartObject.setCartID(Application.listCartItems.size());
-            Application.listCartItems.add(cartObject);
-
-            successOnAddToCart(currentIndex, listProducts);
-        }
-    }
+//    private void addItemToLocal(final ArrayList<ProductObject> listProducts) {
+//        for (int i = 0; i < listProducts.size(); i++) {
+//            final int currentIndex = i;
+//            ProductObject productObject = listProducts.get(i);
+//
+//            CartObject cartObject = new CartObject();
+//            cartObject.setCgst(productObject.getCgst());
+//            cartObject.setClientID(Application.categoryObject.getRestaurantID());
+//            cartObject.setDeliveryCharge(30);
+//            cartObject.setRestaurantName(Application.categoryObject.getRestaurantName());
+//            cartObject.setIsIncludeTax(Application.categoryObject.getIncludeTax());
+//            cartObject.setIsTaxApplicable(Application.categoryObject.getTaxable());
+//            cartObject.setProductAmount(productObject.getPrice());
+//            cartObject.setProductID(productObject.getProductID());
+//            cartObject.setProductName(productObject.getProductName());
+//            cartObject.setProductQuantity(productObject.getProductQuantity());
+//            cartObject.setProductRate(productObject.getPrice());
+//            cartObject.setProductSize("Regular");
+//            cartObject.setSgst(productObject.getSgst());
+//            cartObject.setTaxID(productObject.getTaxID());
+//            cartObject.setTaxableVal(productObject.getPrice());
+//            cartObject.setTotalAmount(productObject.getPrice());
+//            cartObject.setUserID(Application.userDetails.getUserID());
+//            cartObject.setCartID(Application.listCartItems.size());
+//            Application.listCartItems.add(cartObject);
+//
+//            successOnAddToCart(currentIndex, listProducts);
+//        }
+//    }
 
 
     private void successOnAddToCart(int currentIndex, ArrayList<ProductObject> listProducts) {
         if (currentIndex == listProducts.size() - 1) {
             triggerTabChangeListener.setTab(1);
             dismissDialog();
-
 //                                    triggerTabChangeListener.setTab(2);
         }
     }

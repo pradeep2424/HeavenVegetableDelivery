@@ -42,8 +42,8 @@
     <string name="get_started_with_mobile">Get started with your mobile number</string>
     <string name="join_family">Join the Dronam family and wait no more, \nwhen you are hungry.</string>
     <string name="mobile_number">Your 10 digit mobile number</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
+<!--    <string name="first_name">First name</string>-->
+<!--    <string name="last_name">Last name</string>-->
 
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
@@ -58,7 +58,7 @@
     <string name="item">Item</string>
     <string name="items">Items</string>
     <string name="free">( Free )</string>
-    <string name="free_delivery_for_orders_above_200">Now get free delivery for order above ₹ 200.</string>
+    <string name="free_delivery_for_orders_above">Now get free delivery for order above ₹</string>
     <string name="contact_not_found">Contact number not found.</string>
     <string name="no_intent_available">No application available to handle this action.</string>
 
@@ -94,7 +94,10 @@
 
     <string name="order_placed_title">Order Placed</string>
     <string name="order_placed_message">You order is placed successfully.
-        Delivery master will reach to you soon. Please provide exact change.</string>
+        Delivery executive will reach to you soon. Please provide exact change.</string>
+
+    <string name="order_place_sms">Order Placed. \nOur delivery executive is on the way to your location to delivery your product.
+    \nPlease provide exact change.</string>
 
     <string name="vegetable">Vegetable</string>
     <string name="popular">Popular</string>
@@ -106,10 +109,14 @@
     <string name="about_this_product">About This Product</string>
     <string name="logout">Logout</string>
     <string name="save">Save</string>
-    <string name="name">Name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="email">Email</string>
     <string name="contact_no">Contact</string>
     <string name="total_price">Total Price</string>
+    <string name="profile_updated">Profile updated successfully.</string>
+    <string name="can_edit_mobile_no">You can\'t edit mobile number. This mobile number is linked to your account.</string>
+
 
     <string name="delivery_at">Delivery At</string>
     <string name="address_type_home">Home</string>

@@ -1,5 +1,6 @@
 package com.heaven.vegetable.bottomMenu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,6 +48,8 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 
     private PrefManagerConfig prefManagerConfig;
 
+    private final int REQUEST_CODE_EDIT_PROFILE_ACTIVITY = 100;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +61,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 
         initComponents();
         componentEvents();
-//        setUserInformation();
+        setUserInformation();
         setupRecyclerViewProfile();
 
         return rootView;
@@ -67,15 +70,12 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
     private void initComponents() {
         prefManagerConfig = new PrefManagerConfig(getActivity());
 
-        rvProfile = rootView.findViewById(R.id.rv_profile);
-//        llManageAddresses = rootView.findViewById(R.id.ll_manageAddresses);
-//        viewToolbar = rootView.findViewById(R.id.view_toolbar);
-
+        tvName = rootView.findViewById(R.id.tv_name);
+        tvEmail = rootView.findViewById(R.id.tv_email);
+        tvMobile = rootView.findViewById(R.id.tv_mobile);
         tvEditProfile = rootView.findViewById(R.id.tv_editProfile);
 
-//        tvName = rootView.findViewById(R.id.tv_name);
-//        tvEmail = rootView.findViewById(R.id.tv_email);
-//        tvMobile = rootView.findViewById(R.id.tv_mobile);
+        rvProfile = rootView.findViewById(R.id.rv_profile);
     }
 
     private void componentEvents() {
@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_EDIT_PROFILE_ACTIVITY);
             }
         });
 
@@ -287,4 +287,16 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
                 break;
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_EDIT_PROFILE_ACTIVITY) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                setUserInformation();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }

@@ -134,6 +134,12 @@ public interface ApiInterface {
     @GET("ItemSearch/{SearchTExt}")
     Call<ResponseBody> getSearchItem(@Path("SearchTExt") String searchText);
 
+    @POST("UpdateUserDetails/{UserID}/{Email}/{FirstName}/{LastName}")
+    Call<ResponseBody> updateUserProfile(@Path("UserID") int userTypeID,
+                                     @Path("Email") String email,
+                                     @Path("FirstName") String firstName,
+                                     @Path("LastName") String lastName);
+
 //    @Multipart
 //    @POST("UploadFile")
 //    Call<ResponseBody> uploadImage(@Part MultipartBody.Part file);

@@ -5,6 +5,7 @@ import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
 import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ClientObject;
+import com.heaven.vegetable.model.SMSGatewayObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.sucho.placepicker.AddressData;
 
@@ -26,6 +27,7 @@ public class Application extends android.app.Application {
     public static ArrayList<CartObject> listCartItems = new ArrayList();
     public static OrderDetailsObject orderDetailsObject = new OrderDetailsObject();
 
+    public static SMSGatewayObject smsGatewayObject;
     public static AddressData locationAddressData;
 
     public static HashMap<String, String> mapBannerDetails = new HashMap<>();

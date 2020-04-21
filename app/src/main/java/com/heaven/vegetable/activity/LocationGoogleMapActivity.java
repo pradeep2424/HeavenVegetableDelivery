@@ -324,9 +324,16 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
 //                            prefManagerConfig.setIsUserLoggedIn(true);
 //                            prefManagerConfig.setMobileNo(mobileNumber);
 
-                            Intent it = new Intent(LocationGoogleMapActivity.this, MainActivity.class);
-                            startActivity(it);
-                            finish();
+                            if (calledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_ACTION_CART)) {
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK, intent);
+                                finish();
+
+                            } else {
+                                Intent it = new Intent(LocationGoogleMapActivity.this, MainActivity.class);
+                                startActivity(it);
+                                finish();
+                            }
 
 //                            if (status.equalsIgnoreCase("Success")) {
 //                                FirebaseUser user = mAuth.getCurrentUser();
@@ -533,6 +540,11 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
             finish();
 
         } else if (calledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_ACTION_HOME)) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+
+        } else if (calledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_ACTION_CART)) {
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
             finish();
