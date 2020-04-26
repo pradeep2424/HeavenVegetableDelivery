@@ -35,7 +35,7 @@ public class RecycleAdapterOrderedItem extends RecyclerView.Adapter<RecycleAdapt
 
     @Override
     public RecycleAdapterOrderedItem.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_ordered_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_past_completed_orders_product_view_item, parent, false);
         return new ViewHolder(view);
     }
 

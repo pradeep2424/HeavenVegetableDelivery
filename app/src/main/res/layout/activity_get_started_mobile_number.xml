@@ -72,7 +72,7 @@
                     android:layout_height="34dp"
                     android:layout_marginLeft="9dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/orange_500" />
+                    android:background="@color/white" />
 
                 <com.heaven.vegetable.custom.MyTextView
                     android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="9dp"
                     android:text="@string/vegetable_delivery"
-                    android:textColor="@color/white"
+                    android:textColor="@color/orange_500"
                     android:textSize="20sp" />
             </LinearLayout>
 

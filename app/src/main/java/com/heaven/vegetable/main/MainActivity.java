@@ -1,5 +1,6 @@
 package com.heaven.vegetable.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,9 +18,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.bottomMenu.CartFragment;
 import com.heaven.vegetable.bottomMenu.HomeFragment;
+import com.heaven.vegetable.bottomMenu.OrdersFragment;
 import com.heaven.vegetable.bottomMenu.ProfileFragment;
 import com.heaven.vegetable.bottomMenu.SearchFragment;
-import com.heaven.vegetable.fragments.PastOrdersFragment;
 import com.heaven.vegetable.listeners.TriggerTabChangeListener;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
                         break;
 
                     case R.id.tab_orders:
-                        replaceFragment(new PastOrdersFragment());
+                        replaceFragment(new OrdersFragment());
 //                        replaceFragment(new OrdersFragment());
                         break;
 

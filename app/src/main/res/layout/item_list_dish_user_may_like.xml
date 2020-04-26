@@ -21,8 +21,7 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="205dp"
-                android:layout_height="140dp"
-                android:src="@mipmap/temp_paneer" />
+                android:layout_height="140dp" />
 
             <com.heaven.vegetable.custom.MyTextView
                 android:id="@+id/tv_dishName"

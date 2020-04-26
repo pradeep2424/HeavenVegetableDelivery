@@ -24,11 +24,12 @@ public class Application extends android.app.Application {
     public static CategoryObject categoryObject = new CategoryObject();
     public static ProductObject productObject = new ProductObject();
     //    public static CartObject cartObject = new CartObject();
-    public static ArrayList<CartObject> listCartItems = new ArrayList();
+    public static ArrayList<CartObject> listCartItems = new ArrayList<CartObject>();
     public static OrderDetailsObject orderDetailsObject = new OrderDetailsObject();
 
     public static SMSGatewayObject smsGatewayObject;
     public static AddressData locationAddressData;
+    public static int MINIMUM_FREE_DELIVERY_AMOUNT;
 
     public static HashMap<String, String> mapBannerDetails = new HashMap<>();
 

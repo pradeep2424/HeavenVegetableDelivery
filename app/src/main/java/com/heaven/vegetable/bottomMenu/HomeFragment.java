@@ -459,8 +459,9 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     }
 
     private void setToolbarDetails() {
-        if (Application.locationAddressData != null) {
-            tvToolbarTitle.setText(Application.locationAddressData.getAddressList().get(0).getSubLocality());
+        if (Application.userDetails != null && Application.userDetails.getSubLocality() != null) {
+            tvToolbarTitle.setText(Application.userDetails.getSubLocality());
+
         } else {
             tvToolbarTitle.setText(getString(R.string.set_location));
         }
@@ -702,7 +703,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
                         }
 
-                        if ( listFooterURL.size() != 0 && fragments.size() != 0) {
+                        if (listFooterURL.size() != 0 && fragments.size() != 0) {
                             setupViewPagerFooter(fragments, listFooterURL);
 
                         } else {

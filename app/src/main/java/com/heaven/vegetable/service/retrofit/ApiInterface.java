@@ -30,7 +30,6 @@ public interface ApiInterface {
     @GET("getSMSDetails")
     Call<ResponseBody> getSMSDetails();
 
-
     @POST("insUserAddress")
     Call<ResponseBody> insertUserAddress(@Body JsonObject jsonObj);
 
@@ -81,8 +80,14 @@ public interface ApiInterface {
 //    Call<ResponseBody> insertUserDetails(@Body UserDetails body);insHotelDetails
 
 
-    @GET("getorderDetails/{userids}")
-    Call<ResponseBody> getPastOrders(@Path("userids") int userID);
+    @GET("getCompletedOrder/{userids}")
+    Call<ResponseBody> getCompletedOrders(@Path("userids") int userID);
+
+    @GET("getPendingOrder/{userids}")
+    Call<ResponseBody> getPendingOrders(@Path("userids") int userID);
+
+    @GET("getOrderStatus/{OrderNo}")
+    Call<ResponseBody> getOrderStatus(@Path("OrderNo") int orderNo);
 
     @POST
     Call<ResponseBody> getOtpSMS(@Url String url);
@@ -139,6 +144,11 @@ public interface ApiInterface {
                                      @Path("Email") String email,
                                      @Path("FirstName") String firstName,
                                      @Path("LastName") String lastName);
+
+
+    @GET("getSetting")
+    Call<ResponseBody> getAppSetting();
+
 
 //    @Multipart
 //    @POST("UploadFile")

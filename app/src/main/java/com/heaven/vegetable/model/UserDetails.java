@@ -19,6 +19,7 @@ public class UserDetails implements Serializable {
     int zipCode;
     String cityName;
     String area;
+    String subLocality;
     String addressType;
     String telephone;
     String facebookId;
@@ -27,6 +28,14 @@ public class UserDetails implements Serializable {
     String password;
 
     double totalReferralPoints;
+
+    public String getSubLocality() {
+        return subLocality;
+    }
+
+    public void setSubLocality(String subLocality) {
+        this.subLocality = subLocality;
+    }
 
     public double getTotalReferralPoints() {
         return totalReferralPoints;

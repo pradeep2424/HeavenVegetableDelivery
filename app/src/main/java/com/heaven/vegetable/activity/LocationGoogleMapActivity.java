@@ -2,6 +2,7 @@ package com.heaven.vegetable.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.appwidget.AppWidgetProvider;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +64,9 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
     private RecyclerView recyclerView;
     private EditText etSearchText;
 
+    private View viewToolbar;
+    private ImageView ivToolbarBack;
+
     private PrefManagerConfig prefManagerConfig;
 
     String mobileNumber;
@@ -95,6 +100,9 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
         prefManagerConfig = new PrefManagerConfig(this);
         mobileNumber = prefManagerConfig.getMobileNo();
 
+        viewToolbar = findViewById(R.id.view_toolbar);
+        ivToolbarBack = viewToolbar.findViewById(R.id.iv_back);
+
         rlRootLayout = findViewById(R.id.rl_rootLayout);
         viewCurrentLocation = findViewById(R.id.view_currentLocation);
         recyclerView = findViewById(R.id.places_recycler_view);
@@ -127,6 +135,13 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        ivToolbarBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
@@ -271,6 +286,7 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
             String fullAddress = address.getAddressLine(0);
             String zipCodeStr = address.getPostalCode();
             String cityName = address.getLocality();
+            String subLocality = address.getSubLocality();
             String area = address.getFeatureName();
 
 
@@ -282,6 +298,8 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
 
             Application.userDetails.setAddress(fullAddress);
             Application.userDetails.setZipCode(zipCode);
+            Application.userDetails.setCityName(cityName);
+            Application.userDetails.setSubLocality(subLocality);
             Application.userDetails.setAddressType("Home");
 
         } catch (Exception e) {
@@ -532,7 +550,7 @@ public class LocationGoogleMapActivity extends AppCompatActivity implements Plac
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
 
         if (calledFrom.equalsIgnoreCase(ConstantValues.ACTIVITY_ACTION_OTP)) {
             Intent intent = new Intent(LocationGoogleMapActivity.this, GetStartedMobileNumberActivity.class);

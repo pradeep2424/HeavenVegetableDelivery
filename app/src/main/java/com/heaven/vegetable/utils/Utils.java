@@ -1,7 +1,10 @@
 package com.heaven.vegetable.utils;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.text.Spannable;
 import android.text.style.URLSpan;
+import android.util.DisplayMetrics;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +52,10 @@ public class Utils {
         }
 
         return dateTime;
+    }
+
+    public static int dpToPx(float dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
 }

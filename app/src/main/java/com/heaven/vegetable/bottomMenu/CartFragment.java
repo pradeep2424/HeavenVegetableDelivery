@@ -76,8 +76,10 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //    private TextView tvAddReferralMoneyTotalPay;
 
     private LinearLayout llChangeAddress;
+    private TextView tvAddress;
+
     private TextView tvItemTotal;
-//    private TextView tvRestaurantCharges;
+    //    private TextView tvRestaurantCharges;
     private TextView tvDeliveryFee;
     private TextView tvDeliveryFreeText;
     private TextView tvDeliveryFreeMessageText;
@@ -90,15 +92,15 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     TriggerTabChangeListener triggerTabChangeListener;
     private ArrayList<CartObject> listCartDish = new ArrayList<>();
 
-//    double appliedReferralPoints;
+    //    double appliedReferralPoints;
     double totalPayment;
     String mobileNo;
     int userID;
-//    double referralPoints;
+    //    double referralPoints;
     int restaurantID;
     int orderNumber;
 
-    private final int MINIMUM_AMOUNT_FOR_FREE_DELIVERY = 100;
+    private int MINIMUM_AMOUNT_FOR_FREE_DELIVERY;
 
     private final int REQUEST_CODE_MOBILE_NO_ACTIVITY = 100;
     private final int REQUEST_CODE_LOCATION = 101;
@@ -118,6 +120,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
         userID = Application.userDetails.getUserID();
         mobileNo = Application.userDetails.getMobile();
         restaurantID = Application.clientObject.getRestaurantID();
+        MINIMUM_AMOUNT_FOR_FREE_DELIVERY = Application.MINIMUM_FREE_DELIVERY_AMOUNT;
 //        referralPoints = Application.userDetails.getTotalReferralPoints();
     }
 
@@ -127,7 +130,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 
         init();
         componentEvents();
-//        setupReferralPointsLayout();
+        setupAddressDetails();
 
         getOrderNumber();
 //        getCartItems();
@@ -171,6 +174,8 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //        tvAddReferralMoneyTotalPay = rootView.findViewById(R.id.tv_addReferralMoneyTotalPay);
 
         llChangeAddress = rootView.findViewById(R.id.ll_changeAddress);
+        tvAddress = rootView.findViewById(R.id.tv_address);
+
         tvItemTotal = rootView.findViewById(R.id.tv_itemTotalText);
 //        tvRestaurantCharges = rootView.findViewById(R.id.tv_restaurantChargesText);
         tvDeliveryFee = rootView.findViewById(R.id.tv_deliveryFeeText);
@@ -250,6 +255,22 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 //        rvOrderedItems.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
 //        adapterOrderedItems.setClickListener(this);
+    }
+
+    private void setupAddressDetails() {
+        String address = "";
+        if (Application.userDetails != null) {
+
+            if (Application.userDetails.getSubLocality() != null) {
+                address = Application.userDetails.getSubLocality() + ", ";
+            }
+
+            if (Application.userDetails.getCityName() != null) {
+                address = address + Application.userDetails.getCityName();
+            }
+        }
+
+        tvAddress.setText(address);
     }
 
     private void setupBillingDetails() {
@@ -808,7 +829,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             postParam.addProperty("OrderNumber", orderDetailsObject.getOrderNumber());
 //                postParam.addProperty("OrderDate", orderDetailsObject.getOrderDate());
             postParam.addProperty("OrderType", orderDetailsObject.getOrderType());
-            postParam.addProperty("OrderStatus", 0);       // order placed
+            postParam.addProperty("OrderStatusEnum", 0);       // order placed
             postParam.addProperty("OrderMode", orderDetailsObject.getOrderMode());
 //                postParam.addProperty("PaymentId", orderDetailsObject.getPaymentID());    // doubt
             postParam.addProperty("PaymentId", 1);     // cash
@@ -983,7 +1004,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             String channel = smsGatewayObject.getChannel();
             String senderID = smsGatewayObject.getSenderID();
 
-            String successMsg = getString(R.string.order_place_sms) ;
+            String successMsg = getString(R.string.order_place_sms);
 
             String url = smsURL + "user=" + smsUsername + "&pass=" + smsPass
                     + "&channel=" + channel + "&number=" + mobileNo + "&message=" + successMsg
@@ -1123,7 +1144,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
 
             case REQUEST_CODE_LOCATION:
                 if (resultCode == Activity.RESULT_OK && data != null) {
-
+                    setupAddressDetails();
                 }
 
             default:

@@ -29,9 +29,18 @@ public class OrderDetailsObject implements Serializable {
     String rejectReason;
     boolean isIncludeTax;
     boolean isTaxApplicable;
-
-    ArrayList<ProductObject> listProducts;
     int unitID;
+    ArrayList<ProductObject> listProducts;
+
+    ArrayList<OrderTimelineObject> listOrderStatusTimeline;
+
+    public ArrayList<OrderTimelineObject> getListOrderStatusTimeline() {
+        return listOrderStatusTimeline;
+    }
+
+    public void setListOrderStatusTimeline(ArrayList<OrderTimelineObject> listOrderStatusTimeline) {
+        this.listOrderStatusTimeline = listOrderStatusTimeline;
+    }
 
     public int getUnitID() {
         return unitID;

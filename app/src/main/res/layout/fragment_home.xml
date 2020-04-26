@@ -70,7 +70,7 @@
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:background="@mipmap/temp_white_img"
+                    android:background="@mipmap/placeholder_white"
                     app:auto_cycle="true"
                     app:indicator_visibility="visible"
                     app:pager_animation="Accordion"

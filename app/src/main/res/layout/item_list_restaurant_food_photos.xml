@@ -10,7 +10,6 @@
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginRight="14.4dp"
-        android:src="@mipmap/temp_cabbage_1"
         android:scaleType="centerCrop"
         app:riv_corner_radius="6dip" />
     

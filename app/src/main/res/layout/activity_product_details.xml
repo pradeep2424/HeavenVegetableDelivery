@@ -35,7 +35,7 @@
                     android:id="@+id/sliderLayout_productImages"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@mipmap/temp_white_img"
+                    android:background="@mipmap/placeholder_white"
                     app:auto_cycle="true"
                     app:indicator_visibility="visible"
                     app:pager_animation="Accordion"
@@ -292,193 +292,193 @@
                 android:background="#f5f5f5"
                 android:padding="6dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="13.4dp"
-                android:paddingTop="25dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:paddingLeft="13.4dp"-->
+<!--                android:paddingTop="25dp">-->
 
-                <com.heaven.vegetable.custom.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="REVIEWS"
-                    android:textColor="#c2c4ca"
-                    android:textSize="14.4sp" />
-
-
-                <LinearLayout
-                    android:id="@+id/ll_restaurantReviews"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <RatingBar
-                        android:id="@+id/ratingBar_restaurantReviews"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:progressTint="#f05421"
-                        android:rating="4" />
-
-                    <com.heaven.vegetable.custom.MyTextView
-                        android:id="@+id/tv_restaurantReviews"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8.4dp"
-                        android:text="238 Total Reviews"
-                        android:textColor="#9b9b9b"
-                        android:textSize="11.5sp" />
-
-                </LinearLayout>
+<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="REVIEWS"-->
+<!--                    android:textColor="#c2c4ca"-->
+<!--                    android:textSize="14.4sp" />-->
 
 
-            </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/ll_restaurantReviews"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:orientation="horizontal">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp">
+<!--                    <RatingBar-->
+<!--                        android:id="@+id/ratingBar_restaurantReviews"-->
+<!--                        style="?android:attr/ratingBarStyleSmall"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:numStars="5"-->
+<!--                        android:progressTint="#f05421"-->
+<!--                        android:rating="4" />-->
 
-                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="38.4dp"
-                    android:layout_height="38.4dp"
-                    android:layout_marginLeft="13.4dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginRight="5.4dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_person"
-                    app:riv_corner_radius="30dip"
-                    app:riv_oval="true" />
+<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                        android:id="@+id/tv_restaurantReviews"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="8.4dp"-->
+<!--                        android:text="238 Total Reviews"-->
+<!--                        android:textColor="#9b9b9b"-->
+<!--                        android:textSize="11.5sp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15.4dp"
-                    android:layout_marginTop="12.8dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Rahul Patil"
-                            android:textColor="#4a4a4a"
-                            android:textSize="14.4sp" />
-
-                        <RatingBar
-                            style="?android:attr/ratingBarStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="18.2dp"
-                            android:progressTint="#f05421"
-                            android:rating="4" />
-
-                    </LinearLayout>
+<!--                </LinearLayout>-->
 
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="2 hours ago"
-                        android:textColor="#9b9b9b"
-                        android:textSize="14.4sp" />
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="12dp"-->
+<!--                android:paddingBottom="12dp">-->
+
+<!--                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:layout_width="38.4dp"-->
+<!--                    android:layout_height="38.4dp"-->
+<!--                    android:layout_marginLeft="13.4dp"-->
+<!--                    android:layout_marginTop="17dp"-->
+<!--                    android:layout_marginRight="5.4dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/ic_person"-->
+<!--                    app:riv_corner_radius="30dip"-->
+<!--                    app:riv_oval="true" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="15.4dp"-->
+<!--                    android:layout_marginTop="12.8dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Rahul Patil"-->
+<!--                            android:textColor="#4a4a4a"-->
+<!--                            android:textSize="14.4sp" />-->
+
+<!--                        <RatingBar-->
+<!--                            style="?android:attr/ratingBarStyleSmall"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginRight="18.2dp"-->
+<!--                            android:progressTint="#f05421"-->
+<!--                            android:rating="4" />-->
+
+<!--                    </LinearLayout>-->
 
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="13.5dp"
-                        android:text="restaurant_review1"
-                        android:textColor="#4a4a4a"
-                        android:textSize="14.4sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="12dp"
-                android:paddingBottom="30dp">
-
-                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="38.4dp"
-                    android:layout_height="38.4dp"
-                    android:layout_marginLeft="13.4dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginRight="5.4dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_profile"
-                    app:riv_corner_radius="30dip"
-                    app:riv_oval="true" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15.4dp"
-                    android:layout_marginTop="12.8dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Pradeep Jadhav"
-                            android:textColor="#4a4a4a"
-                            android:textSize="14.4sp" />
-
-                        <RatingBar
-                            style="?android:attr/ratingBarStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="18.2dp"
-                            android:progressTint="#f05421"
-                            android:rating="5" />
-
-                    </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:text="2 hours ago"-->
+<!--                        android:textColor="#9b9b9b"-->
+<!--                        android:textSize="14.4sp" />-->
 
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="3 hours ago"
-                        android:textColor="#9b9b9b"
-                        android:textSize="14.4sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginTop="13.5dp"-->
+<!--                        android:text="restaurant_review1"-->
+<!--                        android:textColor="#4a4a4a"-->
+<!--                        android:textSize="14.4sp" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="13.5dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="restaurant_review2"
-                        android:textColor="#4a4a4a"
-                        android:textSize="14.4sp" />
+<!--                </LinearLayout>-->
 
-                </LinearLayout>
-            </LinearLayout>
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="12dp"-->
+<!--                android:paddingBottom="30dp">-->
+
+<!--                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:layout_width="38.4dp"-->
+<!--                    android:layout_height="38.4dp"-->
+<!--                    android:layout_marginLeft="13.4dp"-->
+<!--                    android:layout_marginTop="17dp"-->
+<!--                    android:layout_marginRight="5.4dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/ic_profile"-->
+<!--                    app:riv_corner_radius="30dip"-->
+<!--                    app:riv_oval="true" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="15.4dp"-->
+<!--                    android:layout_marginTop="12.8dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="Pradeep Jadhav"-->
+<!--                            android:textColor="#4a4a4a"-->
+<!--                            android:textSize="14.4sp" />-->
+
+<!--                        <RatingBar-->
+<!--                            style="?android:attr/ratingBarStyleSmall"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginRight="18.2dp"-->
+<!--                            android:progressTint="#f05421"-->
+<!--                            android:rating="5" />-->
+
+<!--                    </LinearLayout>-->
+
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:text="3 hours ago"-->
+<!--                        android:textColor="#9b9b9b"-->
+<!--                        android:textSize="14.4sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginTop="13.5dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="restaurant_review2"-->
+<!--                        android:textColor="#4a4a4a"-->
+<!--                        android:textSize="14.4sp" />-->
+
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -636,7 +636,7 @@
 <!--                    android:id="@+id/sliderLayout_productImages"-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="match_parent"-->
-<!--                    android:background="@mipmap/temp_white_img"-->
+<!--                    android:background="@mipmap/placeholder_white"-->
 <!--                    app:auto_cycle="true"-->
 <!--                    app:indicator_visibility="visible"-->
 <!--                    app:pager_animation="Accordion"-->

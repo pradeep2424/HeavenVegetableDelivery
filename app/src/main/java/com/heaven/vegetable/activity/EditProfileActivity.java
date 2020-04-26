@@ -119,6 +119,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             if (Application.userDetails.getMobile() != null) {
                 tvMobile.setText(Application.userDetails.getMobile());
+//                tvMobile.setText("9594******");
             }
         }
     }

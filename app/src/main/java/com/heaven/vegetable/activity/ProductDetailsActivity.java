@@ -63,9 +63,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
     View viewToolbar;
     ImageView ivBack;
 
-    String[] foodName = {"Navgrah Veg Restaurant", "Saroj Hotel", "Hotel Jewel of Chembur"};
-    Integer[] foodImage = {R.mipmap.temp_order, R.mipmap.temp_order,
-            R.mipmap.temp_order, R.mipmap.temp_order, R.mipmap.temp_order};
+//    String[] foodName = {"Navgrah Veg Restaurant", "Saroj Hotel", "Hotel Jewel of Chembur"};
+//    Integer[] foodImage = {R.mipmap.temp_order, R.mipmap.temp_order,
+//            R.mipmap.temp_order, R.mipmap.temp_order, R.mipmap.temp_order};
 
     private SliderLayout sliderLayoutProductImages;
     //    private CircleIndicator circleIndicator;

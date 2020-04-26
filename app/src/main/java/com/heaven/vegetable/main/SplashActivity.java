@@ -2,12 +2,15 @@ package com.heaven.vegetable.main;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -32,6 +35,8 @@ import com.sucho.placepicker.AddressData;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,17 +53,19 @@ public class SplashActivity extends AppCompatActivity {
     boolean isUserLoggedIn;
     String mobileNumber;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-//        printHashKey();8
+//        printHashKey();
 
         init();
         getCurrentLocation();
 
         getSmsDetails();
+//        getAppSettings();
 
 //        loadNextPage();
 
@@ -183,6 +190,26 @@ public class SplashActivity extends AppCompatActivity {
             AddressData addressData = new AddressData(latitude, longitude, addresses);
             Application.locationAddressData = addressData;
 
+            Address address = addressData.getAddressList().get(0);
+            String fullAddress = address.getAddressLine(0);
+            String zipCodeStr = address.getPostalCode();
+            String cityName = address.getLocality();
+            String subLocality = address.getSubLocality();
+            String area = address.getFeatureName();
+
+
+            int zipCode = 0;
+//        checking if zipCodeStr has integer values
+            if (zipCodeStr != null && zipCodeStr.matches("[0-9]+")) {
+                zipCode = Integer.parseInt(zipCodeStr);
+            }
+
+            Application.userDetails.setAddress(fullAddress);
+            Application.userDetails.setZipCode(zipCode);
+            Application.userDetails.setCityName(cityName);
+            Application.userDetails.setSubLocality(subLocality);
+            Application.userDetails.setAddressType("Home");
+
 //            Toast.makeText(myContext, "country: " + addresses.get(0).getCountryName(), Toast.LENGTH_LONG).show();
         }
     }
@@ -241,28 +268,28 @@ public class SplashActivity extends AppCompatActivity {
 
                             String fullName = fname.concat(" ").concat(lname);
 
-                            UserDetails userDetails = new UserDetails();
-                            userDetails.setFirstName(fname);
-                            userDetails.setLastName(lname);
-                            userDetails.setFullName(fullName);
-                            userDetails.setUserType(userType);
-                            userDetails.setEmail(email);
-                            userDetails.setMobile(mobile);
-                            userDetails.setGender(gender);
-                            userDetails.setTelephone(telephone);
-                            userDetails.setFacebookId(facebookId);
-                            userDetails.setUserID(userID);
-                            userDetails.setUsername(username);
-                            userDetails.setPassword(password);
-                            userDetails.setUserPhoto(userPhoto);
-                            userDetails.setUserRole(userRole);
-                            userDetails.setAddress(address);
-                            userDetails.setArea(area);
-                            userDetails.setCityName(cityName);
-                            userDetails.setStateName(stateName);
-                            userDetails.setZipCode(zipCode);
-                            userDetails.setTotalReferralPoints(totalPoints);
-                            Application.userDetails = userDetails;
+//                            UserDetails userDetails = new UserDetails();
+                            Application.userDetails.setFirstName(fname);
+                            Application.userDetails.setLastName(lname);
+                            Application.userDetails.setFullName(fullName);
+                            Application.userDetails.setUserType(userType);
+                            Application.userDetails.setEmail(email);
+                            Application.userDetails.setMobile(mobile);
+                            Application.userDetails.setGender(gender);
+                            Application.userDetails.setTelephone(telephone);
+                            Application.userDetails.setFacebookId(facebookId);
+                            Application.userDetails.setUserID(userID);
+                            Application.userDetails.setUsername(username);
+                            Application.userDetails.setPassword(password);
+                            Application.userDetails.setUserPhoto(userPhoto);
+                            Application.userDetails.setUserRole(userRole);
+//                            userDetails.setAddress(address);
+//                            userDetails.setArea(area);
+//                            userDetails.setCityName(cityName);
+//                            userDetails.setStateName(stateName);
+//                            userDetails.setZipCode(zipCode);
+//                            userDetails.setTotalReferralPoints(totalPoints);
+//                            Application.userDetails = userDetails;
 
 //                            SMSGatewayObject smsGatewayObject = new SMSGatewayObject();
 //                            smsGatewayObject.setUrl(url);
@@ -393,6 +420,69 @@ public class SplashActivity extends AppCompatActivity {
                             smsGatewayObject.setSenderID(senderID);
                             Application.smsGatewayObject = smsGatewayObject;
 
+                            getAppSettings();
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rlRootLayout, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getSmsDetails();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
+
+    private void getAppSettings() {
+        if (InternetConnection.checkConnection(this)) {
+            ApiInterface apiService = RetroClient.getApiService(this);
+            Call<ResponseBody> call = apiService.getAppSetting();
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+                        if (response.isSuccessful()) {
+
+                            String responseString = response.body().string();
+
+                            JSONObject jsonObj = new JSONObject(responseString);
+
+                            int id = jsonObj.optInt("ID");
+                            int maxDiscount = jsonObj.optInt("MaxDiscount");
+                            int minimumAmountForFreeDelivery = jsonObj.optInt("MinAmtForFreeDel");
+                            int referralPercent = jsonObj.optInt("ReferrelPercent");
+                            String contactEmail = jsonObj.optString("ContactEmail");
+                            String contactNo = jsonObj.optString("ContactNo");
+
+                            Application.MINIMUM_FREE_DELIVERY_AMOUNT = minimumAmountForFreeDelivery;
+
                             loadNextPage();
 
                         } else {
@@ -430,6 +520,7 @@ public class SplashActivity extends AppCompatActivity {
                     .show();
         }
     }
+
 
 //    private void getAreaDetails() {
 //        if (InternetConnection.checkConnection(this)) {

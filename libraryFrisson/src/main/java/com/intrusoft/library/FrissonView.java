@@ -225,13 +225,13 @@ public class FrissonView extends View {
         }
         paint.setAlpha(alphaValue);
         canvas.drawPath(path, paint);
-        canvas.clipRect(viewBounds, Region.Op.UNION);
+//        canvas.clipRect(viewBounds, Region.Op.UNION);
 
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-//            canvas.clipRect(viewBounds, Region.Op.UNION);
-//        } else {
-//            canvas.clipRect(viewBounds);
-//        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            canvas.clipRect(viewBounds, Region.Op.UNION);
+        } else {
+            canvas.clipRect(viewBounds);
+        }
 
         for (int i = 1; i <= tideCount; i++) {
             path = Utils.getWavePath(width, height, tideHeight, i * i * 20, 3);

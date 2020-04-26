@@ -131,6 +131,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 
         if (Application.userDetails != null && Application.userDetails.getMobile() != null) {
             tvMobile.setText(Application.userDetails.getMobile());
+//            tvMobile.setText("9594******");
         }
     }
 
@@ -157,12 +158,12 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 //                R.mipmap.profile_settings, R.mipmap.profile_invite_friends};
 
         String[] title = {getString(R.string.profile_manage_addresses),
-                getString(R.string.profile_payment_methods),
+//                getString(R.string.profile_payment_methods),
                 getString(R.string.profile_invite_friends),
                 getString(R.string.logout)};
 
         Integer[] icon = {R.mipmap.profile_favorite_restaurants,
-                R.mipmap.profile_payment_method,
+//                R.mipmap.profile_payment_method,
                 R.mipmap.profile_invite_friends,
                 R.drawable.ic_logout};
 
@@ -193,10 +194,7 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
 
         String shareMessage = "\nI recommend you this application\n\n"
                 + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
-                + "&referrer=utm_source=" + Application.userDetails.getMobile()
-//                + "&referrer=utm_source%3D" + Application.userDetails.getMobile()
-//                + "&referrer=" + Application.userDetails.getMobile()
-//                + "%26utm_medium%3Dronam"
+//                + "&referrer=utm_source=" + Application.userDetails.getMobile()
                 + "\n\n";
 
         try {
@@ -274,16 +272,15 @@ public class ProfileFragment extends Fragment implements OnRecyclerViewClickList
                 break;
 
             case 1:
-//                Intent intent0 = new Intent(getActivity(), PaymentMethodsActivity.class);
-//                startActivity(intent0);
-                break;
-
-            case 2:
                 shareApp();
                 break;
 
-            case 3:
+            case 2:
                 logout();
+                break;
+
+            case 3:
+
                 break;
         }
     }

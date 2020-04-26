@@ -95,7 +95,7 @@
                                     android:layout_below="@+id/tv_addressType"
                                     android:layout_alignStart="@+id/tv_addressType"
                                     android:layout_marginTop="5dp"
-                                    android:text="Chembur"
+                                    android:text="xyz"
                                     android:ellipsize="end"
                                     android:maxLines="2"
                                     android:layout_marginRight="10dp"
@@ -363,7 +363,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginLeft="8dp"
-                                    android:text="₹ 607"
+                                    android:text="₹ 00"
                                     android:textColor="@color/main_text"
                                     android:textSize="14sp" />
 
@@ -416,7 +416,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="right"
-                                    android:text="₹ 35"
+                                    android:text="₹ 00"
                                     android:textColor="@color/main_text"
                                     android:textSize="14sp" />
 
@@ -518,7 +518,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginLeft="8dp"
-                                    android:text="₹ 870"
+                                    android:text="₹ 000"
                                     android:textColor="@color/main_text"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
@@ -541,7 +541,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:layout_below="@+id/ll_orderDetails"
                     android:background="@color/smokegray" />
 
