@@ -55,7 +55,7 @@ public class RecycleAdapterPastUpcomingStatusTimeline extends RecyclerView.Adapt
             tvDate = itemView.findViewById(R.id.tv_date);
             tvMessage = itemView.findViewById(R.id.tv_message);
 
-            timelineView.initLine(viewType);
+            timelineView.initLine(1);
 
             timelineView.setMarkerSize(Utils.dpToPx(20f));
             timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
@@ -65,8 +65,8 @@ public class RecycleAdapterPastUpcomingStatusTimeline extends RecyclerView.Adapt
             timelineView.setMarkerPaddingLeft(Utils.dpToPx(0f));
             timelineView.setMarkerPaddingRight(Utils.dpToPx(0f));
             timelineView.setLinePadding(Utils.dpToPx(2f));
-            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), 0 );
-            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorAccent), 0 );
+            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), 1 );
+            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorAccent), 1 );
             timelineView.setLineStyle(TimelineView.LineStyle.NORMAL);
             timelineView.setLineWidth(Utils.dpToPx(2f));
             timelineView.setLineStyleDashLength(Utils.dpToPx(4f));
