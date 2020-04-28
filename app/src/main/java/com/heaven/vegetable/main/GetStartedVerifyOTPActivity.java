@@ -141,7 +141,12 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
         llConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInWithPhoneAuthCredential();
+                String otpCode = otpView.getText().toString();
+
+                if (validate(otpCode)) {
+                    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(mVerificationId, otpCode);
+                    signInWithPhoneAuthCredential(phoneAuthCredential);
+                }
 
 
 //                if (generatedOTP.equalsIgnoreCase(enteredOTP)
@@ -165,6 +170,14 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
                 onBackPressed();
             }
         });
+    }
+
+    private boolean validate(String otpCode) {
+        if (otpCode.length() < 1) {
+            showSnackbarErrorMsg(getString(R.string.please_enter_otp));
+            return false;
+        }
+        return true;
     }
 
     private void startOTPTimer() {
@@ -210,11 +223,9 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
                 mCallbacks);
     }
 
-    private void signInWithPhoneAuthCredential() {
-        String otpCode = otpView.getText().toString();
-
-        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(mVerificationId, otpCode);
-        mAuth.signInWithCredential(phoneAuthCredential)
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+//        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(mVerificationId, otpCode);
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(GetStartedVerifyOTPActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -664,6 +675,8 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
                 otpView.setText(code);
                 //verifying the code
 //                verifyVerificationCode(code);
+            } else {
+                signInWithPhoneAuthCredential(phoneAuthCredential);
             }
         }
 
