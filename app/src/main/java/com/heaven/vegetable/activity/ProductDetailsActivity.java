@@ -23,11 +23,9 @@ import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.adapter.RecycleAdapterCategory;
 import com.heaven.vegetable.adapter.RecycleAdapterUnit;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
-import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.ClientObject;
 import com.heaven.vegetable.model.UnitObject;
@@ -46,9 +44,7 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import kotlin.UInt;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;

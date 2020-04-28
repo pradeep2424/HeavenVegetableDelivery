@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.adapter.RecycleAdapterAddresses;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.model.AddressDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;

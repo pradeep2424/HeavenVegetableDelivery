@@ -1,4 +1,4 @@
-package com.heaven.vegetable.listeners;
+package com.heaven.vegetable.interfaces;
 
 public interface TriggerTabChangeListener {
 

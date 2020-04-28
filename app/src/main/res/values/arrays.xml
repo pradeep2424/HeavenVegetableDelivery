@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="order_status_title">
+        <item>order_status_title_ordered</item>
+        <item>order_status_title_approved</item>
+        <item>order_status_title_rejected</item>
+        <item>order_status_title_packed</item>
+        <item>order_status_title_shipped</item>
+        <item>order_status_title_delivered</item>
+    </string-array>
+
+    <string-array name="order_status_subtitle">
+        <item>order_status_subtitle_ordered</item>
+        <item>order_status_subtitle_approved</item>
+        <item>order_status_subtitle_rejected</item>
+        <item>order_status_subtitle_packed</item>
+        <item>order_status_subtitle_shipped</item>
+        <item>order_status_subtitle_delivered</item>
+    </string-array>
+</resources>

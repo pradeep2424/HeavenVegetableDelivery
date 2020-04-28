@@ -4,17 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
-import com.heaven.vegetable.model.CategoryObject;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.model.UnitObject;
 
 import java.util.ArrayList;

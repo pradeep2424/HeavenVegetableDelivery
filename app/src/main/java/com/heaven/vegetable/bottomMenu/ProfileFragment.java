@@ -19,7 +19,7 @@ import com.heaven.vegetable.R;
 import com.heaven.vegetable.activity.EditProfileActivity;
 import com.heaven.vegetable.activity.ManageAddressesActivity;
 import com.heaven.vegetable.adapter.RecycleAdapterProfile;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.main.GetStartedMobileNumberActivity;
 import com.heaven.vegetable.main.MainActivity;
 import com.heaven.vegetable.model.CategoryObject;

@@ -1,6 +1,5 @@
 package com.heaven.vegetable.adapter;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +15,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.activity.ProductListActivity;
-import com.heaven.vegetable.listeners.OnItemAddedToCart;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.interfaces.OnItemAddedToCart;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.ClientObject;
-import com.heaven.vegetable.model.CuisineObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
@@ -30,7 +28,6 @@ import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;

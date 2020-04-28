@@ -127,4 +127,19 @@
     <string name="change">Change</string>
 
     <string name="order_id">Order ID - </string>
+    <string name="ordered_on">Ordered On - </string>
+
+    <string name="order_status_title_ordered">Ordered</string>
+    <string name="order_status_title_approved">Approved</string>
+    <string name="order_status_title_rejected">Rejected</string>
+    <string name="order_status_title_packed">Packed</string>
+    <string name="order_status_title_shipped">Shipped</string>
+    <string name="order_status_title_delivered">Delivered</string>
+
+    <string name="order_status_subtitle_ordered">Your order has been placed.</string>
+    <string name="order_status_subtitle_approved">Your order has been approved.</string>
+    <string name="order_status_subtitle_rejected">Your order has been rejected.</string>
+    <string name="order_status_subtitle_packed">Your item has been packed and waiting for delivery partner to arrive.</string>
+    <string name="order_status_subtitle_shipped">Your items has been shipped.</string>
+    <string name="order_status_subtitle_delivered">Your item has been Delivered.</string>
 </resources>

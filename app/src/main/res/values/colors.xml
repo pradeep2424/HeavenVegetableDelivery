@@ -29,6 +29,8 @@
     <color name="deep_orange">#ff3d00</color>
     <color name="dark_orange">#f05421</color>
     <color name="light_orange">#FF9E80</color>
+    <color name="light_orange_50">#fff8e1</color>
+    <color name="light_orange_card">#fffcf3</color>
     <color name="orange">#FF9800</color>
 
     <color name="deep_orange_500">#ff5722</color>

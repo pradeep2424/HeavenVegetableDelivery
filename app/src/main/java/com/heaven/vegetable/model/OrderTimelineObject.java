@@ -10,7 +10,16 @@ public class OrderTimelineObject implements Serializable {
     String title;
     String date;
     String message;
+    int viewType;
     OrderStatusEnum status;
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+    }
 
     public String getTitle() {
         return title;

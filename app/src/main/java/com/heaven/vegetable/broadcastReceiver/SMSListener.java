@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
-import com.heaven.vegetable.listeners.OTPListener;
+import com.heaven.vegetable.interfaces.OTPListener;
 
 public class SMSListener extends BroadcastReceiver {
 

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.model.ProductObject;
 
 import java.util.ArrayList;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnItemAddedToCart;
+import com.heaven.vegetable.interfaces.OnItemAddedToCart;
 import com.heaven.vegetable.model.CartObject;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener;

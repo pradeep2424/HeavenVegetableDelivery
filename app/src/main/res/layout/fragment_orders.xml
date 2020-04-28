@@ -18,16 +18,17 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
+            android:background="@color/white"
             app:tabGravity="fill"
-            app:tabIndicatorColor="#d22532"
-            app:tabMode="fixed"/>
+            android:elevation="6dp"
+            app:tabIndicatorColor="@color/colorPrimaryDark"
+            app:tabMode="fixed" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"/>
+            android:background="#ffffff" />
     </LinearLayout>
 
 </RelativeLayout>

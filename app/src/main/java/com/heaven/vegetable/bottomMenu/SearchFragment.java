@@ -9,24 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.activity.ProductDetailsActivity;
-import com.heaven.vegetable.adapter.PlacesAutoCompleteAdapter;
 import com.heaven.vegetable.adapter.SearchAutoCompleteAdapter;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
-import com.heaven.vegetable.listeners.TriggerTabChangeListener;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
+import com.heaven.vegetable.interfaces.TriggerTabChangeListener;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;

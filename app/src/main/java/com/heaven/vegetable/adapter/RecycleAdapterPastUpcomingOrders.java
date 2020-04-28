@@ -5,15 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnPastOrderOptionsClickListener;
+import com.heaven.vegetable.interfaces.OnPastOrderOptionsClickListener;
 import com.heaven.vegetable.model.OrderDetailsObject;
 import com.heaven.vegetable.model.OrderTimelineObject;
 import com.heaven.vegetable.model.ProductObject;
@@ -71,7 +69,7 @@ public class RecycleAdapterPastUpcomingOrders extends RecyclerView.Adapter<Recyc
 //        holder.tvRestaurantName.setText(orderDetailsObject.getRestaurantName());
 //        holder.tvRestaurantAddress.setText(orderDetailsObject.getUserAddress());
 
-        holder.tvOrderID.setText(orderDetailsObject.getOrderDate());
+        holder.tvOrderID.setText(orderDetailsObject.getOrderID()+ "");
         holder.tvOrderPrice.setText("₹ " + formattedTotalAmount);
 
         if (orderDetailsObject.getListProducts() != null) {

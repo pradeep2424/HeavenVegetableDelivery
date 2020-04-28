@@ -23,8 +23,8 @@ import com.google.gson.JsonObject;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.activity.LocationGoogleMapActivity;
 import com.heaven.vegetable.adapter.RecycleAdapterOrderedItem;
-import com.heaven.vegetable.listeners.OnItemAddedToCart;
-import com.heaven.vegetable.listeners.TriggerTabChangeListener;
+import com.heaven.vegetable.interfaces.OnItemAddedToCart;
+import com.heaven.vegetable.interfaces.TriggerTabChangeListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.main.GetStartedMobileNumberActivity;
 import com.heaven.vegetable.model.CartObject;
@@ -494,6 +494,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                                     double totalAmount = jsonObj.optDouble("TotalAmount");
                                     int userID = jsonObj.optInt("Userid");
                                     int cartID = jsonObj.optInt("cartId");
+                                    int unitID = jsonObj.optInt("UnitId");
 
                                     CartObject cartObject = new CartObject();
                                     cartObject.setCgst(cgst);
@@ -514,6 +515,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                                     cartObject.setTotalAmount(totalAmount);
                                     cartObject.setUserID(userID);
                                     cartObject.setCartID(cartID);
+                                    cartObject.setUnitID(unitID);
 
                                     listCartDish.add(cartObject);
                                 }
@@ -916,6 +918,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
                     orderObj.setTaxID(cartObject.getTaxID());
                     orderObj.setOrderPaid(false);
                     orderObj.setRejectReason("NO");
+                    orderObj.setUnitID(cartObject.getUnitID());
 //                    orderObj.setOrderDate(getCurrentDate());
 
 //                }

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnPopularItemClickedListener;
+import com.heaven.vegetable.interfaces.OnPopularItemClickedListener;
 import com.heaven.vegetable.model.ProductObject;
 
 import java.util.ArrayList;

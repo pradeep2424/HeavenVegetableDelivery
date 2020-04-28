@@ -13,18 +13,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.adapter.RecycleAdapterAddresses;
 import com.heaven.vegetable.adapter.RecycleAdapterProductList;
-import com.heaven.vegetable.listeners.OnItemAddedToCart;
-import com.heaven.vegetable.listeners.OnRecyclerViewClickListener;
+import com.heaven.vegetable.interfaces.OnItemAddedToCart;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
-import com.heaven.vegetable.model.AddressDetails;
 import com.heaven.vegetable.model.CartObject;
 import com.heaven.vegetable.model.CategoryObject;
 import com.heaven.vegetable.model.ClientObject;
@@ -434,6 +431,7 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         cartObject.setTotalAmount(dishObject.getPrice());
         cartObject.setUserID(Application.userDetails.getUserID());
         cartObject.setCartID(Application.listCartItems.size());
+        cartObject.setUnitID(dishObject.getUnitID());
 
         boolean isItemAlreadyExist = false;
         int newAddedProductID = dishObject.getProductID();

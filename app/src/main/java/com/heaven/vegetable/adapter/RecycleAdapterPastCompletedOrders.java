@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnPastOrderOptionsClickListener;
+import com.heaven.vegetable.interfaces.OnPastOrderOptionsClickListener;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
 

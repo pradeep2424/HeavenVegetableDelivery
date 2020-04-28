@@ -5,21 +5,16 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.vipulasri.timelineview.TimelineView;
 import com.heaven.vegetable.R;
-import com.heaven.vegetable.listeners.OnPastOrderOptionsClickListener;
-import com.heaven.vegetable.model.OrderDetailsObject;
+import com.heaven.vegetable.interfaces.OnPastOrderOptionsClickListener;
 import com.heaven.vegetable.model.OrderStatusEnum;
 import com.heaven.vegetable.model.OrderTimelineObject;
-import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.utils.Utils;
 
 import java.text.NumberFormat;
@@ -55,22 +50,22 @@ public class RecycleAdapterPastUpcomingStatusTimeline extends RecyclerView.Adapt
             tvDate = itemView.findViewById(R.id.tv_date);
             tvMessage = itemView.findViewById(R.id.tv_message);
 
-            timelineView.initLine(1);
+            timelineView.initLine(viewType);
 
-            timelineView.setMarkerSize(Utils.dpToPx(20f));
-            timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
-            timelineView.setMarkerInCenter(true);
-            timelineView.setMarkerPaddingBottom(Utils.dpToPx(0f));
-            timelineView.setMarkerPaddingTop(Utils.dpToPx(0f));
-            timelineView.setMarkerPaddingLeft(Utils.dpToPx(0f));
-            timelineView.setMarkerPaddingRight(Utils.dpToPx(0f));
-            timelineView.setLinePadding(Utils.dpToPx(2f));
-            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), 1 );
-            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorAccent), 1 );
-            timelineView.setLineStyle(TimelineView.LineStyle.NORMAL);
-            timelineView.setLineWidth(Utils.dpToPx(2f));
-            timelineView.setLineStyleDashLength(Utils.dpToPx(4f));
-            timelineView.setLineStyleDashGap(Utils.dpToPx(2f));
+//            timelineView.setMarkerSize(Utils.dpToPx(15f));
+//            timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
+//            timelineView.setMarkerInCenter(false);
+//            timelineView.setMarkerPaddingBottom(Utils.dpToPx(0f));
+//            timelineView.setMarkerPaddingTop(Utils.dpToPx(0f));
+//            timelineView.setMarkerPaddingLeft(Utils.dpToPx(0f));
+//            timelineView.setMarkerPaddingRight(Utils.dpToPx(0f));
+////            timelineView.setLinePadding(Utils.dpToPx(2f));
+//            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), 1);
+//            timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorAccent), 1);
+//            timelineView.setLineStyle(TimelineView.LineStyle.NORMAL);
+//            timelineView.setLineWidth(Utils.dpToPx(2f));
+//            timelineView.setLineStyleDashLength(Utils.dpToPx(4f));
+//            timelineView.setLineStyleDashGap(Utils.dpToPx(2f));
         }
     }
 
@@ -87,39 +82,26 @@ public class RecycleAdapterPastUpcomingStatusTimeline extends RecyclerView.Adapt
         String title = orderStatus.getTitle();
         String date = orderStatus.getDate();
         String message = orderStatus.getMessage();
+        int viewType = orderStatus.getViewType();
         OrderStatusEnum orderStatusEnum = orderStatus.getStatus();
 
         holder.tvTitle.setText(title);
         holder.tvDate.setText(date);
         holder.tvMessage.setText(message);
 
-        setupStatusLine(holder.timelineView, orderStatusEnum);
+        setupStatusMarker(holder.timelineView, orderStatusEnum, viewType);
+//        setupStatusLine(holder.timelineView, viewType);
     }
 
-    private void setupStatusLine(TimelineView timelineView, OrderStatusEnum orderStatusEnum) {
-        int viewType = 1;
-
-
-//        timelineView.setMarkerSize(); = dpToPx(20f),
-//                markerColor = getColorCompat( R.color.material_grey_500),
-//                markerInCenter = true,
-//                markerLeftPadding = dpToPx(0f),
-//                markerTopPadding = dpToPx(0f),
-//                markerRightPadding = dpToPx(0f),
-//                markerBottomPadding = dpToPx(0f),
-//                linePadding = dpToPx(2f),
-//                startLineColor = getColorCompat(R.color.colorAccent),
-//                endLineColor = getColorCompat(R.color.colorAccent),
-//                lineStyle = TimelineView.LineStyle.NORMAL,
-//                lineWidth = dpToPx(2f),
-//                lineDashWidth = dpToPx(4f),
-//                lineDashGap = dpToPx(2f)
-
+    private void setupStatusMarker(TimelineView timelineView, OrderStatusEnum orderStatusEnum, int viewType) {
 
         switch (orderStatusEnum) {
             case ACTIVE:
                 Drawable drawable1 = ContextCompat.getDrawable(context, R.drawable.ic_marker_active);
                 timelineView.setMarker(drawable1);
+
+                setupStatusLine(timelineView, orderStatusEnum, viewType);
+
 //                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
 //                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
 //                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
@@ -130,6 +112,9 @@ public class RecycleAdapterPastUpcomingStatusTimeline extends RecyclerView.Adapt
 
                 Drawable drawable2 = ContextCompat.getDrawable(context, R.drawable.ic_marker);
                 timelineView.setMarker(drawable2);
+
+                setupStatusLine(timelineView, orderStatusEnum, viewType);
+
 //                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
 //                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
 //                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
@@ -138,6 +123,9 @@ public class RecycleAdapterPastUpcomingStatusTimeline extends RecyclerView.Adapt
             case INACTIVE:
                 Drawable drawable3 = ContextCompat.getDrawable(context, R.drawable.ic_marker_inactive);
                 timelineView.setMarker(drawable3);
+
+                setupStatusLine(timelineView, orderStatusEnum, viewType);
+
 //                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.divider_dark));
 //                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.divider_dark), viewType);
 //                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.divider_dark), viewType);
@@ -146,11 +134,60 @@ public class RecycleAdapterPastUpcomingStatusTimeline extends RecyclerView.Adapt
             default:
                 Drawable drawable4 = ContextCompat.getDrawable(context, R.drawable.ic_marker_active);
                 timelineView.setMarker(drawable4);
+
+                setupStatusLine(timelineView, orderStatusEnum, viewType);
+
 //                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
 //                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
 //                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
         }
     }
+
+    private void setupStatusLine(TimelineView timelineView, OrderStatusEnum orderStatusEnum, int viewType) {
+        int color;
+        if (orderStatusEnum == OrderStatusEnum.INACTIVE) {
+            color = R.color.divider_dark;
+        } else {
+            color = R.color.colorPrimary;
+        }
+
+        timelineView.setMarkerColor(ContextCompat.getColor(context, color));
+        timelineView.setStartLineColor(ContextCompat.getColor(context, color), viewType);
+        timelineView.setEndLineColor(ContextCompat.getColor(context, color), viewType);
+
+//        switch (viewType) {
+//            case TimelineView.LineType.START:
+//                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
+//                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
+//                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
+//
+//                break;
+//
+//            case TimelineView.LineType.NORMAL:
+//                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
+//                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
+//                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
+//                break;
+//
+//            case TimelineView.LineType.END:
+////                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.divider_dark));
+////                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.divider_dark), viewType);
+////                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.divider_dark), viewType);
+//                break;
+//
+//            case TimelineView.LineType.ONLYONE:
+////                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.divider_dark));
+////                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.divider_dark), viewType);
+////                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.divider_dark), viewType);
+//                break;
+//
+//            default:
+////                timelineView.setMarkerColor(ContextCompat.getColor(context, R.color.colorPrimary));
+////                timelineView.setStartLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
+////                timelineView.setEndLineColor(ContextCompat.getColor(context, R.color.colorPrimary), viewType);
+//        }
+    }
+
 
     @Override
     public int getItemCount() {

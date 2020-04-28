@@ -1,6 +1,5 @@
 package com.heaven.vegetable.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,7 +20,7 @@ import com.heaven.vegetable.bottomMenu.HomeFragment;
 import com.heaven.vegetable.bottomMenu.OrdersFragment;
 import com.heaven.vegetable.bottomMenu.ProfileFragment;
 import com.heaven.vegetable.bottomMenu.SearchFragment;
-import com.heaven.vegetable.listeners.TriggerTabChangeListener;
+import com.heaven.vegetable.interfaces.TriggerTabChangeListener;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
 import com.heaven.vegetable.service.retrofit.RetroClient;
 import com.heaven.vegetable.utils.Application;
