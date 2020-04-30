@@ -23,6 +23,7 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.material.snackbar.Snackbar;
@@ -94,7 +95,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 //    Integer image2[] = {R.mipmap.temp_img1, R.mipmap.temp_img2, R.mipmap.temp_img3,
 //            R.mipmap.temp_img4, R.mipmap.temp_img5, R.mipmap.temp_img6, R.mipmap.temp_img7};
 
-    private HashMap<String, String> mapBannerDetails;
+    private HashMap<Integer, String> mapBannerDetails;
 
     private ViewPager viewPagerFooter;
     private PagerAdapterBanner pagerAdapterForFooter;
@@ -230,27 +231,27 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 //        url_maps.put("House of Cards", R.mipmap.temp_img3);
 //        url_maps.put("Game of Thrones", R.mipmap.temp_img4);
 
-        HashMap<String, String> url_maps = new HashMap<String, String>();
+        HashMap<Integer, String> url_maps = new HashMap<Integer, String>();
         url_maps.putAll(mapBannerDetails);
 
-        for (String name : url_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(getActivity());
-            // initialize a SliderLayout
+        for (Integer name : url_maps.keySet()) {
+//            TextSliderView textSliderView = new TextSliderView(getActivity());
+            DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
             textSliderView
-                    .description(name)
+//                    .description(name)
                     .image(url_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+//                    .setOnSliderClickListener(this);
 
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
+//            //add your extra information
+//            textSliderView.bundle(new Bundle());
+//            textSliderView.getBundle()
+//                    .putString("extra", name);
 
             imageSliderLayout.addSlider(textSliderView);
         }
         imageSliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        imageSliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+//        imageSliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         imageSliderLayout.setCustomIndicator((PagerIndicator) rootView.findViewById(R.id.custom_indicator));
         imageSliderLayout.setCustomAnimation(new DescriptionAnimation());
         imageSliderLayout.setDuration(4000);
@@ -622,7 +623,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 //                                bannerDetails.setPhotoURL(photoURL);
 //                                bannerDetails.setTitle(title);
 
-                                mapBannerDetails.put(title, photoURL);
+                                mapBannerDetails.put(i, photoURL);
                             }
 
                         } else {
