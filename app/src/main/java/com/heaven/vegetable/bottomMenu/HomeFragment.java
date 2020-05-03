@@ -150,11 +150,10 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
 
 //        getUserLikeTopItems();
 
-        getSliderDetails();
         getRestaurantData();
         getTopPopularItems();
         getCategoryData();
-        getSlidingFooter();
+
 
         return rootView;
     }
@@ -445,14 +444,9 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
     private void setupViewPagerFooter(final ArrayList<Fragment> fragments, final ArrayList<String> listFooterURL) {
         viewPagerFooter.setVisibility(View.VISIBLE);
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                pagerAdapterForFooter = new PagerAdapterBanner(getActivity(), getFragmentManager(), fragments, listFooterURL);
-                viewPagerFooter.setAdapter(pagerAdapterForFooter);
-            }
-        }, 2000);
-
-
+        pagerAdapterForFooter = new PagerAdapterBanner(getActivity(), getFragmentManager(), fragments, listFooterURL);
+        viewPagerFooter.setPageMargin(40);
+        viewPagerFooter.setAdapter(pagerAdapterForFooter);
     }
 
     private void setToolbarDetails() {
@@ -558,6 +552,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                         }
 
                         getSliderDetails();
+                        getSlidingFooter();
 //                        setupRecyclerViewRestaurant();
 
                     } catch (Exception e) {
@@ -689,22 +684,22 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 String photoURL = jsonObj.optString("PhotoData");
 //                                String title = jsonObj.optString("Text");
 
-                                Bundle b = new Bundle();
-                                b.putString("ImageURL", photoURL);
-                                fragments.add(Fragment.instantiate(getActivity(), FragmentFooter.class.getName(), b));
+                                Bundle bundle = new Bundle();
+                                bundle.putString("ImageURL", photoURL);
+                                fragments.add(Fragment.instantiate(getActivity(), FragmentFooter.class.getName(), bundle));
 
                                 listFooterURL.add(photoURL);
                             }
 
+                            if (listFooterURL.size() != 0 && fragments.size() != 0) {
+                                setupViewPagerFooter(fragments, listFooterURL);
+
+                            } else {
+                                viewPagerFooter.setVisibility(View.GONE);
+                            }
+
                         } else {
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
-                        }
-
-                        if (listFooterURL.size() != 0 && fragments.size() != 0) {
-                            setupViewPagerFooter(fragments, listFooterURL);
-
-                        } else {
-                            viewPagerFooter.setVisibility(View.GONE);
                         }
 
                     } catch (Exception e) {

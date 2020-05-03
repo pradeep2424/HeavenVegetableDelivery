@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
+import com.heaven.vegetable.model.AppSetting;
 import com.heaven.vegetable.model.SMSGatewayObject;
 import com.heaven.vegetable.model.UserDetails;
 import com.heaven.vegetable.service.retrofit.ApiInterface;
@@ -480,8 +481,18 @@ public class SplashActivity extends AppCompatActivity {
                             int referralPercent = jsonObj.optInt("ReferrelPercent");
                             String contactEmail = jsonObj.optString("ContactEmail");
                             String contactNo = jsonObj.optString("ContactNo");
+                            String smsTemplate = jsonObj.optString("SMSTemplate");
 
-                            Application.MINIMUM_FREE_DELIVERY_AMOUNT = minimumAmountForFreeDelivery;
+                            AppSetting appSetting = new AppSetting();
+                            appSetting.setMaxDiscount(maxDiscount);
+                            appSetting.setContactEmail(contactEmail);
+                            appSetting.setContactNo(contactNo);
+                            appSetting.setMinimumAmountForFreeDelivery(minimumAmountForFreeDelivery);
+                            appSetting.setOrderSuccessSMSTemplate(smsTemplate);
+
+                            Application.appSetting = appSetting;
+
+//                            Application.MINIMUM_FREE_DELIVERY_AMOUNT = minimumAmountForFreeDelivery;
 
                             loadNextPage();
 

@@ -6,10 +6,10 @@
     <string name="powered_by">Powered by</string>
 
     <string name="powered_by_hotel">
-        <font fgcolor="#000000">A HEAV</font><font fgcolor="#13c7ac">E</font><font fgcolor="#000000">N</font>
+        <font fgcolor="#000000">A HEAV</font><font fgcolor="#13c7ac">E</font><font fgcolor="#000000">N Mart</font>
     </string>
 
-    <string name="powered_by_name">Mart Vegetable Delivery</string>
+    <string name="powered_by_name">Vegetable Delivery</string>
 
     <string name="heaven">Heaven</string>
     <string name="vegetable_delivery">Vegetable Delivery</string>
@@ -127,19 +127,23 @@
     <string name="address_type_other">Other</string>
     <string name="change">Change</string>
 
-    <string name="order_id">Order ID - </string>
+    <string name="order_no">Order No. - </string>
     <string name="ordered_on">Ordered On - </string>
+    <string name="cancel_order">Cancel Order</string>
+
+    <string name="order_cancelled_msg">Your order is cancelled successfully.</string>
+    <string name="order_cancel_failed">Your order can not be cancelled, It is already accepted by the partner.</string>
 
     <string name="order_status_title_ordered">Ordered</string>
     <string name="order_status_title_approved">Approved</string>
-    <string name="order_status_title_rejected">Rejected</string>
+    <string name="order_status_title_cancelled">Cancelled</string>
     <string name="order_status_title_packed">Packed</string>
     <string name="order_status_title_shipped">Shipped</string>
     <string name="order_status_title_delivered">Delivered</string>
 
     <string name="order_status_subtitle_ordered">Your order has been placed.</string>
     <string name="order_status_subtitle_approved">Your order has been approved.</string>
-    <string name="order_status_subtitle_rejected">Your order has been rejected.</string>
+    <string name="order_status_subtitle_cancelled">Your order has been cancelled.</string>
     <string name="order_status_subtitle_packed">Your item has been packed and waiting for delivery partner to arrive.</string>
     <string name="order_status_subtitle_shipped">Your items has been shipped.</string>
     <string name="order_status_subtitle_delivered">Your item has been Delivered.</string>

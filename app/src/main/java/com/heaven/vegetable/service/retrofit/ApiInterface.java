@@ -145,10 +145,12 @@ public interface ApiInterface {
                                      @Path("FirstName") String firstName,
                                      @Path("LastName") String lastName);
 
-
     @GET("getSetting")
     Call<ResponseBody> getAppSetting();
 
+    @POST("RejectOrder/{Reason}/{OrderNo}")
+    Call<ResponseBody> cancelOrder(@Path("Reason") String reason,
+                                     @Path("OrderNo") int orderNo);
 
 //    @Multipart
 //    @POST("UploadFile")

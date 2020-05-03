@@ -1,5 +1,6 @@
 package com.heaven.vegetable.fragments;
 
+import android.content.Context;
 import android.icu.text.UFormat;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +22,10 @@ import com.github.vipulasri.timelineview.TimelineView;
 import com.google.android.material.snackbar.Snackbar;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.adapter.RecycleAdapterPastUpcomingOrders;
+import com.heaven.vegetable.bottomMenu.OrdersFragment;
+import com.heaven.vegetable.interfaces.OnRecyclerViewClickListener;
 import com.heaven.vegetable.interfaces.TimelineLineType;
+import com.heaven.vegetable.interfaces.TriggerTabChangeListener;
 import com.heaven.vegetable.loader.DialogLoadingIndicator;
 import com.heaven.vegetable.model.OrderDetailsObject;
 import com.heaven.vegetable.model.OrderStatusEnum;
@@ -40,19 +46,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class UpcomingOrdersFragment extends Fragment {
+public class UpcomingOrdersFragment extends Fragment implements OnRecyclerViewClickListener {
     DialogLoadingIndicator progressIndicator;
     View rootView;
 
     View viewEmptyUpcomingOrders;
     RelativeLayout rlUpcomingOrdersLayout;
     LinearLayout llBrowseMenu;
+
+    TriggerTabChangeListener triggerTabChangeListener;
 
     private RecyclerView rvUpcomingOrders;
     private RecycleAdapterPastUpcomingOrders adapterUpcomingOrders;
@@ -63,6 +72,12 @@ public class UpcomingOrdersFragment extends Fragment {
 
     private ArrayList<String> listOrderStatusTitle;
     private ArrayList<String> listOrderStatusSubtitle;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        triggerTabChangeListener = (TriggerTabChangeListener) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +111,13 @@ public class UpcomingOrdersFragment extends Fragment {
     }
 
     private void componentEvents() {
+        llBrowseMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                triggerTabChangeListener.setTab(0);
+            }
+        });
+
     }
 
     private void initOrderStatusArrays() {
@@ -120,15 +142,18 @@ public class UpcomingOrdersFragment extends Fragment {
         listFormattedPastOrders = new ArrayList<>();
         listFormattedPastOrders = formatPastOrderData();
 
+        Collections.sort(listFormattedPastOrders,
+                (order1, order2) -> order1.getOrderNumber()
+                        - order2.getOrderNumber());
+        Collections.reverse(listFormattedPastOrders);
 
-
-        Collections.sort(listFormattedPastOrders, new Comparator<OrderDetailsObject>() {
-            public int compare(OrderDetailsObject o1, OrderDetailsObject o2) {
-                if (o1.getOrderDate() == null || o2.getOrderDate() == null)
-                    return 0;
-                return o2.getOrderDate().compareTo(o1.getOrderDate());
-            }
-        });
+//        Collections.sort(listFormattedPastOrders, new Comparator<OrderDetailsObject>() {
+//            public int compare(OrderDetailsObject o1, OrderDetailsObject o2) {
+//                if (o1.getOrderDate() == null || o2.getOrderDate() == null)
+//                    return 0;
+//                return o2.getOrderDate().compareTo(o1.getOrderDate());
+//            }
+//        });
 
         adapterUpcomingOrders = new RecycleAdapterPastUpcomingOrders(getActivity(), listFormattedPastOrders);
 //        adapterUpcomingOrders = new RecycleAdapterPastUpcomingOrders(getActivity(), listUpcomingOrders);
@@ -136,8 +161,7 @@ public class UpcomingOrdersFragment extends Fragment {
         rvUpcomingOrders.setLayoutManager(layoutManager);
         rvUpcomingOrders.setItemAnimator(new DefaultItemAnimator());
         rvUpcomingOrders.setAdapter(adapterUpcomingOrders);
-
-//        adapterUpcomingOrders.setClickListener(this);
+        adapterUpcomingOrders.setClickListener(this);
     }
 
     private ArrayList<OrderDetailsObject> formatPastOrderData() {
@@ -326,45 +350,45 @@ public class UpcomingOrdersFragment extends Fragment {
         listDefaultStatus = new ArrayList<>();
 
         OrderTimelineObject orderTimelineObj0 = new OrderTimelineObject();
-        orderTimelineObj0.setTitle("Ordered");
+        orderTimelineObj0.setTitle(getResources().getString(R.string.order_status_title_ordered));
 //        orderTimelineObj2.setDate("20th Apr 2020, 11:00 PM");
-        orderTimelineObj0.setMessage("Your order has been placed.");
+        orderTimelineObj0.setMessage(getResources().getString(R.string.order_status_subtitle_ordered));
         orderTimelineObj0.setViewType(TimelineLineType.START);
         orderTimelineObj0.setStatus(OrderStatusEnum.INACTIVE);
 
         OrderTimelineObject orderTimelineObj1 = new OrderTimelineObject();
-        orderTimelineObj1.setTitle("Approved");
+        orderTimelineObj1.setTitle(getResources().getString(R.string.order_status_title_approved));
 //        orderTimelineObj2.setDate("20th Apr 2020, 11:00 PM");
-        orderTimelineObj1.setMessage("Your order has been approved.");
+        orderTimelineObj1.setMessage(getResources().getString(R.string.order_status_subtitle_approved));
         orderTimelineObj1.setViewType(TimelineLineType.NORMAL);
         orderTimelineObj1.setStatus(OrderStatusEnum.INACTIVE);
 
         OrderTimelineObject orderTimelineObj2 = new OrderTimelineObject();
-        orderTimelineObj2.setTitle("Rejected");
+        orderTimelineObj2.setTitle(getResources().getString(R.string.order_status_title_cancelled));
 //        orderTimelineObj2.setDate("20th Apr 2020, 11:00 PM");
-        orderTimelineObj2.setMessage("Your order has been rejected.");
+        orderTimelineObj2.setMessage(getResources().getString(R.string.order_status_subtitle_cancelled));
         orderTimelineObj2.setViewType(TimelineLineType.NORMAL);
         orderTimelineObj2.setStatus(OrderStatusEnum.INACTIVE);
 
 
         OrderTimelineObject orderTimelineObj3 = new OrderTimelineObject();
-        orderTimelineObj3.setTitle("Packed");
+        orderTimelineObj3.setTitle(getResources().getString(R.string.order_status_title_packed));
 //        orderTimelineObj3.setDate("21st Apr 2020, 11:00 AM");
-        orderTimelineObj3.setMessage("Your item has been packed and waiting for delivery partner to arrive.");
+        orderTimelineObj3.setMessage(getResources().getString(R.string.order_status_subtitle_packed));
         orderTimelineObj3.setViewType(TimelineLineType.NORMAL);
         orderTimelineObj3.setStatus(OrderStatusEnum.INACTIVE);
 
         OrderTimelineObject orderTimelineObj4 = new OrderTimelineObject();
-        orderTimelineObj4.setTitle("Shipped");
+        orderTimelineObj4.setTitle(getResources().getString(R.string.order_status_title_shipped));
 //        orderTimelineObj4.setDate("21th Apr 2020, 3:00 PM");
-        orderTimelineObj4.setMessage("Your items has been shipped");
+        orderTimelineObj4.setMessage(getResources().getString(R.string.order_status_subtitle_shipped));
         orderTimelineObj4.setViewType(TimelineLineType.NORMAL);
         orderTimelineObj4.setStatus(OrderStatusEnum.INACTIVE);
 
         OrderTimelineObject orderTimelineObj5 = new OrderTimelineObject();
-        orderTimelineObj5.setTitle("Delivered");
+        orderTimelineObj5.setTitle(getResources().getString(R.string.order_status_title_delivered));
 //        orderTimelineObj5.setDate("21th Apr 2020, 6:00 PM");
-        orderTimelineObj5.setMessage("Your item has been Delivered");
+        orderTimelineObj5.setMessage(getResources().getString(R.string.order_status_subtitle_delivered));
         orderTimelineObj5.setViewType(TimelineLineType.END);
         orderTimelineObj5.setStatus(OrderStatusEnum.INACTIVE);
 
@@ -469,7 +493,7 @@ public class UpcomingOrdersFragment extends Fragment {
                                     int orderMode = jsonObj.optInt("OrderMode");
                                     int orderNumber = jsonObj.optInt("OrderNumber");
                                     boolean orderPaid = jsonObj.optBoolean("OrderPaid");
-                                    int orderStatus = jsonObj.optInt("OrderStatusEnum");
+                                    int orderStatus = jsonObj.optInt("OrderStatus");
                                     int orderType = jsonObj.optInt("OrderType");
                                     int paymentID = jsonObj.optInt("PaymentId");
                                     int dishID = jsonObj.optInt("ProductId");
@@ -564,6 +588,95 @@ public class UpcomingOrdersFragment extends Fragment {
 //                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
                     .show();
         }
+    }
+
+    private void cancelOrder(OrderDetailsObject orderDetailsObject, final View view) {
+        if (InternetConnection.checkConnection(getActivity())) {
+//            showDialog();
+
+            int orderNo = orderDetailsObject.getOrderNumber();
+
+            ApiInterface apiService = RetroClient.getApiService(getActivity());
+            Call<ResponseBody> call = apiService.cancelOrder("Customer Rejected", orderNo);
+//            Call<ResponseBody> call = apiService.getPendingOrders(4);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    try {
+                        int statusCode = response.code();
+
+                        if (response.isSuccessful()) {
+                            String responseString = response.body().string();
+
+//                            JSONObject jsonObj = new JSONObject(responseString);
+//                            String status = jsonObj.optString("Status");
+
+                            if (responseString.trim().contains("Success")) {
+                                view.setVisibility(View.GONE);
+                                showSnackBarErrorMsgWithButton(getString(R.string.order_cancelled_msg));
+
+                                triggerTabChangeListener.setTab(3);
+
+                            } else {
+                                view.setVisibility(View.GONE);
+                                showSnackBarErrorMsgWithButton(getString(R.string.order_cancel_failed));
+                            }
+
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+//                    dismissDialog();
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+//                        dismissDialog();
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+//            signOutFirebaseAccounts();
+
+            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getUpcomingOrderDetails();
+                        }
+                    })
+//                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+        OrderDetailsObject orderDetailsObject = listFormattedPastOrders.get(position);
+        cancelOrder(orderDetailsObject, view);
+    }
+
+    public void showSnackBarErrorMsgWithButton(String erroMsg) {
+        Snackbar.make(rootView, erroMsg, Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                })
+                .setActionTextColor(getResources().getColor(R.color.colorAccent))
+                .show();
     }
 
     public void showSnackbarErrorMsg(String erroMsg) {

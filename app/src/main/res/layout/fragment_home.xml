@@ -410,8 +410,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:clipToPadding="false"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:visibility="visible" />
 
             <LinearLayout

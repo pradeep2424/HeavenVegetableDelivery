@@ -57,8 +57,8 @@ public class OrdersFragment extends Fragment {
     }
 
     private void setupTabLayout() {
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.past_orders)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.upcoming_orders)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.past_orders)));
 
         pagerAdapterOrders = new PagerAdapterOrders(getFragmentManager(), tabLayout.getTabCount());
         viewPager.setOffscreenPageLimit(2);

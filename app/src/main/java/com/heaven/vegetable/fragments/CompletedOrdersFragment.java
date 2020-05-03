@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -35,10 +36,13 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -114,13 +118,33 @@ public class CompletedOrdersFragment extends Fragment implements OnPastOrderOpti
         listFormattedPastOrders = new ArrayList<>();
         listFormattedPastOrders = formatPastOrderData();
 
-        Collections.sort(listFormattedPastOrders, new Comparator<OrderDetailsObject>() {
-            public int compare(OrderDetailsObject o1, OrderDetailsObject o2) {
-                if (o1.getOrderDate() == null || o2.getOrderDate() == null)
-                    return 0;
-                return o2.getOrderDate().compareTo(o1.getOrderDate());
-            }
-        });
+        Collections.sort(listFormattedPastOrders,
+                (order1, order2) -> order1.getOrderNumber()
+                        - order2.getOrderNumber());
+        Collections.reverse(listFormattedPastOrders);
+
+//        Collections.sort(listFormattedPastOrders, new Comparator<OrderDetailsObject>() {
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm a");
+//            public int compare(OrderDetailsObject o1, OrderDetailsObject o2) {
+//                Date date1 = sdf.parse(o1.getOrderDate());
+//                Date date2 = sdf.parse(o2.getOrderDate());
+//
+//                if (o1.getOrderDate() == null || o2.getOrderDate() == null)
+//                    return 0;
+//                return o2.getOrderDate().compareTo(o1.getOrderDate());
+//            }
+//        });
+
+//        Collections.sort(listFormattedPastOrders, new Comparator<OrderDetailsObject>() {
+//            public int compare(OrderDetailsObject o1, OrderDetailsObject o2) {
+//                if (o1.getOrderDate() == null || o2.getOrderDate() == null) {
+//                    return 0;
+//                } else {
+//                    return o2.getOrderDate().compareTo(o1.getOrderDate());
+//
+//                }
+//            }
+//        });
 
         adapterPastOrders = new RecycleAdapterPastCompletedOrders(getActivity(), listFormattedPastOrders);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -260,7 +284,7 @@ public class CompletedOrdersFragment extends Fragment implements OnPastOrderOpti
             int userTypeID = Application.userDetails.getUserID();
 
             ApiInterface apiService = RetroClient.getApiService(getActivity());
-            Call<ResponseBody> call = apiService.getPendingOrders(userTypeID);
+            Call<ResponseBody> call = apiService.getCompletedOrders(userTypeID);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -285,7 +309,7 @@ public class CompletedOrdersFragment extends Fragment implements OnPastOrderOpti
                                     int orderMode = jsonObj.optInt("OrderMode");
                                     int orderNumber = jsonObj.optInt("OrderNumber");
                                     boolean orderPaid = jsonObj.optBoolean("OrderPaid");     // @@@@@@
-                                    int orderStatus = jsonObj.optInt("OrderStatusEnum");
+                                    int orderStatus = jsonObj.optInt("OrderStatus");
                                     int orderType = jsonObj.optInt("OrderType");
                                     int paymentID = jsonObj.optInt("PaymentId");
                                     int dishID = jsonObj.optInt("ProductId");
@@ -513,6 +537,14 @@ public class CompletedOrdersFragment extends Fragment implements OnPastOrderOpti
             dismissDialog();
 //                                    triggerTabChangeListener.setTab(2);
         }
+    }
+
+    public void showSuccessToast(String erroMsg) {
+        Toasty.success(getActivity(), erroMsg, Toast.LENGTH_SHORT, true).show();
+    }
+
+    public void showSuccessError(String erroMsg) {
+        Toasty.error(getActivity(), erroMsg, Toast.LENGTH_SHORT, true).show();
     }
 
     public void showSnackbarErrorMsg(String erroMsg) {

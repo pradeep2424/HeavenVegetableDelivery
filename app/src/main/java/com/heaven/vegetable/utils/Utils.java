@@ -35,7 +35,8 @@ public class Utils {
             Date date = new Date(millis);
 
             //It Will Be in format 29-OCT-2014 2:26 PM
-            dateTime = new SimpleDateFormat("dd-MMM-yyyy hh:mm aa").format(date);
+            dateTime = new SimpleDateFormat("dd-MMM-yyyy hh:mm a").format(date);
+            dateTime = dateTime.replace("a.m.", "AM").replace("p.m.","PM");
 
 //            String timeString = jsonDate.substring(jsonDate.indexOf("(") + 1, jsonDate.indexOf(")"));
 //            String[] timeSegments = timeString.split("\\+");

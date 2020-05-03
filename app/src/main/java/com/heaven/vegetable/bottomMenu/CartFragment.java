@@ -100,7 +100,8 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
     int restaurantID;
     int orderNumber;
 
-    private int MINIMUM_AMOUNT_FOR_FREE_DELIVERY;
+    private int MINIMUM_AMOUNT_FOR_FREE_DELIVERY = 0;
+    private String ORDER_SUCCESS_SMS_TEMPLATE = "";
 
     private final int REQUEST_CODE_MOBILE_NO_ACTIVITY = 100;
     private final int REQUEST_CODE_LOCATION = 101;
@@ -120,7 +121,8 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
         userID = Application.userDetails.getUserID();
         mobileNo = Application.userDetails.getMobile();
         restaurantID = Application.clientObject.getRestaurantID();
-        MINIMUM_AMOUNT_FOR_FREE_DELIVERY = Application.MINIMUM_FREE_DELIVERY_AMOUNT;
+        MINIMUM_AMOUNT_FOR_FREE_DELIVERY = Application.appSetting.getMinimumAmountForFreeDelivery();
+        ORDER_SUCCESS_SMS_TEMPLATE = Application.appSetting.getOrderSuccessSMSTemplate();
 //        referralPoints = Application.userDetails.getTotalReferralPoints();
     }
 
@@ -831,7 +833,7 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             postParam.addProperty("OrderNumber", orderDetailsObject.getOrderNumber());
 //                postParam.addProperty("OrderDate", orderDetailsObject.getOrderDate());
             postParam.addProperty("OrderType", orderDetailsObject.getOrderType());
-            postParam.addProperty("OrderStatusEnum", 0);       // order placed
+            postParam.addProperty("OrderStatus", 0);       // order placed
             postParam.addProperty("OrderMode", orderDetailsObject.getOrderMode());
 //                postParam.addProperty("PaymentId", orderDetailsObject.getPaymentID());    // doubt
             postParam.addProperty("PaymentId", 1);     // cash
@@ -1007,7 +1009,8 @@ public class CartFragment extends Fragment implements OnItemAddedToCart {
             String channel = smsGatewayObject.getChannel();
             String senderID = smsGatewayObject.getSenderID();
 
-            String successMsg = getString(R.string.order_place_sms);
+//            String successMsg = getString(R.string.order_place_sms);
+            String successMsg = ORDER_SUCCESS_SMS_TEMPLATE;
 
             String url = smsURL + "user=" + smsUsername + "&pass=" + smsPass
                     + "&channel=" + channel + "&number=" + mobileNo + "&message=" + successMsg

@@ -107,7 +107,6 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        tvToolbarTitle.setText("Vegetables");
 
         prefManagerConfig = new PrefManagerConfig(this);
         mobileNumber = prefManagerConfig.getMobileNo();
@@ -118,6 +117,13 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
         viewViewCart = findViewById(R.id.view_bottomViewCart);
         tvItemQuantity = viewViewCart.findViewById(R.id.tv_itemQuantity);
         tvTotalPrice = viewViewCart.findViewById(R.id.tv_totalPrice);
+
+        if (categoryObject != null && categoryObject.getCategoryName() != null) {
+            tvToolbarTitle.setText(categoryObject.getCategoryName());
+
+        } else {
+            tvToolbarTitle.setText("Vegetables");
+        }
 
 //        viewToolbarAddresses = findViewById(R.id.view_toolbarProductList);
 //        ivBack = viewToolbarAddresses.findViewById(R.id.iv_back);

@@ -37,9 +37,11 @@ public class RecycleAdapterPastCompletedOrders extends RecyclerView.Adapter<Recy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-//        TextView tvRestaurantName;
+        //        TextView tvRestaurantName;
 //        TextView tvRestaurantAddress;
 //        TextView tvRestaurantReviews;
+        TextView tvOrderNo;
+        TextView tvOrderStatus;
         TextView tvOrderDate;
         TextView tvOrderPrice;
         ImageView ivFoodImage;
@@ -52,6 +54,8 @@ public class RecycleAdapterPastCompletedOrders extends RecyclerView.Adapter<Recy
 //            tvRestaurantName = itemView.findViewById(R.id.tv_restaurantName);
 //            tvRestaurantAddress = itemView.findViewById(R.id.tv_restaurantAddress);
 //            tvRestaurantReviews = itemView.findViewById(R.id.tv_restaurantReview);
+            tvOrderNo = itemView.findViewById(R.id.tv_orderNo);
+            tvOrderStatus = itemView.findViewById(R.id.tv_orderStatusText);
             tvOrderDate = itemView.findViewById(R.id.tv_date);
             tvOrderPrice = itemView.findViewById(R.id.tv_price);
             ivFoodImage = itemView.findViewById(R.id.iv_foodImage);
@@ -81,9 +85,10 @@ public class RecycleAdapterPastCompletedOrders extends RecyclerView.Adapter<Recy
         OrderDetailsObject orderDetailsObject = modelArrayList.get(position);
         String formattedTotalAmount = getFormattedNumberDouble(orderDetailsObject.getTotalAmount());
 
-//        holder.tvRestaurantName.setText(orderDetailsObject.getRestaurantName());
-//        holder.tvRestaurantAddress.setText(orderDetailsObject.getUserAddress());
+        String strOrderStatus = getOrderStatus(orderDetailsObject.getOrderStatus());
 
+        holder.tvOrderNo.setText("#" + orderDetailsObject.getOrderNumber());
+        holder.tvOrderStatus.setText(strOrderStatus);
         holder.tvOrderDate.setText(orderDetailsObject.getOrderDate());
         holder.tvOrderPrice.setText("₹ " + formattedTotalAmount);
 
@@ -91,11 +96,29 @@ public class RecycleAdapterPastCompletedOrders extends RecyclerView.Adapter<Recy
     }
 
     private void setupRecyclerViewPastOrders(RecyclerView recyclerView, ArrayList<ProductObject> listDish) {
-        RecycleAdapterPastOrderProductView  adapter = new RecycleAdapterPastOrderProductView(context, listDish);
+        RecycleAdapterPastOrderProductView adapter = new RecycleAdapterPastOrderProductView(context, listDish);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
+    }
+
+    private String getOrderStatus(int orderStatusID) {
+        String orderStatus = "";
+        switch (orderStatusID) {
+            case 2:
+                orderStatus = context.getResources().getString(R.string.order_status_title_cancelled);
+                break;
+
+            case 5:
+                orderStatus = context.getResources().getString(R.string.order_status_title_delivered);
+                break;
+
+            default:
+                orderStatus = context.getResources().getString(R.string.order_status_title_delivered);
+        }
+
+        return orderStatus;
     }
 
     @Override

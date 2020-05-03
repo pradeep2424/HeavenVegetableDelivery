@@ -1,5 +1,6 @@
 package com.heaven.vegetable.utils;
 
+import com.heaven.vegetable.model.AppSetting;
 import com.heaven.vegetable.model.CartObject;
 import com.heaven.vegetable.model.ProductObject;
 import com.heaven.vegetable.model.OrderDetailsObject;
@@ -29,7 +30,8 @@ public class Application extends android.app.Application {
 
     public static SMSGatewayObject smsGatewayObject;
     public static AddressData locationAddressData;
-    public static int MINIMUM_FREE_DELIVERY_AMOUNT;
+    public static AppSetting appSetting;
+//    public static int MINIMUM_FREE_DELIVERY_AMOUNT;
 
     public static HashMap<String, String> mapBannerDetails = new HashMap<>();
 

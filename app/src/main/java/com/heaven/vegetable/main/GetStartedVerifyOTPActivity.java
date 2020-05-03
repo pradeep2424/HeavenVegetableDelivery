@@ -116,7 +116,6 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
 //            mobileNumber = extras.getString("Mobile");
 //        }
 
-
         String titleText = getResources().getString(R.string.login_verify_otp_text)
                 .concat(" ").concat(mobileNumber);
         tvTitleText.setText(titleText);
@@ -162,7 +161,6 @@ public class GetStartedVerifyOTPActivity extends AppCompatActivity implements OT
 //                }
             }
         });
-
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
