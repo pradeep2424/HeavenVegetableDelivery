@@ -122,7 +122,7 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         String category = productObject.getCategoryName();
         String unit = productObject.getUnit();
         String price = activity.getResources().getString(R.string.rupees) + getFormattedNumberDouble(productObject.getPrice());
-
+        int quantity = productObject.getProductQuantity();
 //        holder.tvProductImage.setImageResource(listProductImages[0]);
         holder.tvProductName.setText(name);
         holder.tvProductCategory.setText(category);
@@ -293,6 +293,15 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         }
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     @Override
     public int getItemCount() {
