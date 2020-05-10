@@ -1,6 +1,7 @@
 package com.heaven.vegetable.activity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,6 +76,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
     private TextView tvProductName;
     private TextView tvProductCategory;
     private TextView tvProductDescription;
+    private TextView tvProductMRP;
     private TextView tvProductPrice;
 
     private RecyclerView rvUnitSize;
@@ -90,6 +92,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
     private int totalCartQuantity;
     private double totalCartPrice;
     private double itemPackPrice;
+    private double itemPackDiscountPrice;
     private int unitSize;
 
     //    LinearLayout ll250Gram;
@@ -143,6 +146,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
         tvProductName = findViewById(R.id.tv_productName);
         tvProductCategory = findViewById(R.id.tv_productCategory);
         tvProductDescription = findViewById(R.id.tv_productDescription);
+        tvProductMRP = findViewById(R.id.tv_ProductMRP);
         tvProductPrice = findViewById(R.id.tv_productPrice);
 
         rvUnitSize = findViewById(R.id.recyclerView_unitSize);
@@ -268,6 +272,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
             tvProductCategory.setText(productObject.getCategoryName());
             tvProductDescription.setText(productObject.getProductDescription());
             tvProductPrice.setText(formattedPrice);
+
+            String formattedPriceMRP = getString(R.string.mrp) + " " +
+                    getString(R.string.rupees) + " " + formatAmount(productObject.getPriceMRP());
+            showHidePriceMRP(formattedPriceMRP);
         }
 
 //        if (listUnitDetails != null) {
@@ -293,6 +301,16 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
 //        ll250Gram.performClick();
     }
 
+    private void showHidePriceMRP(String formattedPriceMRP) {
+        if (productObject.getDiscountPercentage() != 0) {
+            tvProductMRP.setVisibility(View.VISIBLE);
+            tvProductMRP.setText(formattedPriceMRP);
+            tvProductMRP.setPaintFlags(tvProductMRP.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+        } else {
+            tvProductMRP.setVisibility(View.GONE);
+        }
+    }
 
     private void setupSlidingImages() {
 //        getPhotosData();
@@ -373,10 +391,26 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
         selectedUnit.setIsChecked(true);
 
         itemPackPrice = selectedUnit.getUnitPrice();
-        productObject.setPrice(itemPackPrice);
-        String formattedPrice = getString(R.string.rupees) + " " + formatAmount(itemPackPrice);
-        tvProductPrice.setText(formattedPrice);
+
+        itemPackDiscountPrice = calculateDiscountMRP(itemPackPrice);
+        String formattedPriceDiscount = getString(R.string.rupees) + " " + formatAmount(itemPackDiscountPrice);
+        tvProductPrice.setText(formattedPriceDiscount);
+
+        String formattedPriceMRP = getString(R.string.mrp) + " " + getString(R.string.rupees)
+                + " " + formatAmount(itemPackPrice);
+        showHidePriceMRP(formattedPriceMRP);
+
+        productObject.setPriceMRP(itemPackPrice);
+        productObject.setPrice(itemPackDiscountPrice);
+
         adapterUnit.notifyDataSetChanged();
+    }
+
+    private double calculateDiscountMRP(double price) {
+        double discountPercent = productObject.getDiscountPercentage();
+
+        double priceMRP = price - (price * discountPercent / 100);
+        return priceMRP;
     }
 
     private void uncheckAllUnits() {
@@ -459,13 +493,15 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
         if (incrementOrDecrement.equalsIgnoreCase(ActionEnum.INCREMENT.toString())) {
 //            increment
             totalCartQuantity = totalCartQuantity + itemQuantity;
-            double price = itemQuantity * itemPackPrice;
+            double price = itemQuantity * itemPackDiscountPrice;
+//            double price = itemQuantity * itemPackPrice;
             totalCartPrice = totalCartPrice + price;
 
         } else {
 
             totalCartQuantity = totalCartQuantity - itemQuantity;
-            double price = itemQuantity * itemPackPrice;
+            double price = itemQuantity * itemPackDiscountPrice;
+//            double price = itemQuantity * itemPackPrice;
             totalCartPrice = totalCartPrice - price;
         }
     }
@@ -650,8 +686,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
         try {
             postParam.addProperty("ProductId", productObject.getProductID());
             postParam.addProperty("ProductName", productObject.getProductName());
-            postParam.addProperty("ProductRate", itemPackPrice);
-            postParam.addProperty("ProductAmount", itemPackPrice);
+            postParam.addProperty("ProductRate", itemPackDiscountPrice);
+            postParam.addProperty("ProductAmount", itemPackDiscountPrice);
             postParam.addProperty("ProductSize", "Regular");
             postParam.addProperty("cartId", 0);
             postParam.addProperty("ProductQnty", quantity);
@@ -662,7 +698,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
             postParam.addProperty("Userid", userDetails.getUserID());
             postParam.addProperty("Clientid", clientObject.getRestaurantID());
             postParam.addProperty("TaxId", 0);
-            postParam.addProperty("TotalAmount", itemPackPrice);
+            postParam.addProperty("TotalAmount", itemPackDiscountPrice);
             postParam.addProperty("HotelName", clientObject.getRestaurantName());
             postParam.addProperty("IsIncludeTax", true);
             postParam.addProperty("IsTaxApplicable", true);
