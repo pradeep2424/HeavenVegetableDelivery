@@ -762,6 +762,7 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 int foodTypeID = jsonObj.optInt("FoodTypeId");
                                 String group = jsonObj.optString("Group");
                                 int groupID = jsonObj.optInt("GroupId");
+                                double discountPercent = jsonObj.optDouble("DiscountPercent");
                                 double price = jsonObj.optDouble("Price");
                                 String productDesc = jsonObj.optString("ProductDesc");
                                 int productID = jsonObj.optInt("ProductId");
@@ -769,6 +770,9 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 String productName = jsonObj.optString("ProductName");
                                 String unit = jsonObj.optString("Unit");
                                 int unitID = jsonObj.optInt("UnitId");
+
+//                                discountPercent = 1;
+                                double priceMRP = price - (price * discountPercent / 100);
 
 //                                double cgst = jsonObj.optDouble("CGST");
 //                                int haveRuntimeRate = jsonObj.optInt("HaveRuntimeRate");
@@ -785,7 +789,9 @@ public class HomeFragment extends Fragment implements OnRecyclerViewClickListene
                                 productObject.setProductName(productName);
                                 productObject.setProductDescription(productDesc);
                                 productObject.setListProductImage(listProdImages);
+                                productObject.setDiscountPercentage(discountPercent);
                                 productObject.setPrice(price);
+                                productObject.setPriceMRP(priceMRP);
                                 productObject.setCategoryID(categoryID);
                                 productObject.setCategoryName(categoryName);
                                 productObject.setFoodTypeID(foodTypeID);

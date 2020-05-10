@@ -1,5 +1,6 @@
 package com.heaven.vegetable.adapter;
 
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +68,7 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         ImageView ivProductImage;
         TextView tvProductName;
         TextView tvProductCategory;
+        TextView tvProductMRP;
         TextView tvProductPrice;
         TextView tvProductUnit;
 
@@ -83,6 +85,7 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
             ivProductImage = view.findViewById(R.id.iv_productImage);
             tvProductName = view.findViewById(R.id.tv_productName);
             tvProductCategory = view.findViewById(R.id.tv_productCategory);
+            tvProductMRP = view.findViewById(R.id.tv_ProductMRP);
             tvProductPrice = view.findViewById(R.id.tv_ProductPrice);
             tvProductUnit = view.findViewById(R.id.tv_productUnit);
 
@@ -121,8 +124,13 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         String name = productObject.getProductName();
         String category = productObject.getCategoryName();
         String unit = productObject.getUnit();
+        double discountPercentage = productObject.getDiscountPercentage();
         String price = activity.getResources().getString(R.string.rupees) + getFormattedNumberDouble(productObject.getPrice());
+        String priceMRP = activity.getString(R.string.mrp) + " "
+                + activity.getResources().getString(R.string.rupees) + " "
+                + getFormattedNumberDouble(productObject.getPriceMRP());
         int quantity = productObject.getProductQuantity();
+
 //        holder.tvProductImage.setImageResource(listProductImages[0]);
         holder.tvProductName.setText(name);
         holder.tvProductCategory.setText(category);
@@ -132,6 +140,15 @@ public class RecycleAdapterProductList extends RecyclerView.Adapter<RecycleAdapt
         if (listProductImages != null && listProductImages.size() > 0) {
             String imageURL = listProductImages.get(0);
             Glide.with(activity).load(imageURL).into(holder.ivProductImage);
+        }
+
+        if (discountPercentage != 0) {
+            holder.tvProductMRP.setVisibility(View.VISIBLE);
+            holder.tvProductMRP.setText(priceMRP);
+            holder.tvProductMRP.setPaintFlags(holder.tvProductMRP.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+        } else {
+            holder.tvProductMRP.setVisibility(View.GONE);
         }
 
         holder.llAddItem.setOnClickListener(new View.OnClickListener() {

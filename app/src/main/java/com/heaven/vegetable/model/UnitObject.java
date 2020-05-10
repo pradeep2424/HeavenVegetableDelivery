@@ -13,8 +13,17 @@ public class UnitObject implements Serializable {
     int unitID;
     String unitName;
     int itemID;
+    int quantity;
 
     boolean isChecked;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public boolean getIsChecked() {
         return isChecked;

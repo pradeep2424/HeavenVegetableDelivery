@@ -7,11 +7,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.heaven.vegetable.BuildConfig;
 import com.heaven.vegetable.R;
 import com.heaven.vegetable.model.AppSetting;
 import com.heaven.vegetable.model.SMSGatewayObject;
@@ -31,6 +35,7 @@ import com.heaven.vegetable.utils.Application;
 import com.heaven.vegetable.utils.ConstantValues;
 import com.heaven.vegetable.utils.GPSTracker;
 import com.heaven.vegetable.utils.InternetConnection;
+import com.kyleduo.blurpopupwindow.library.BlurPopupWindow;
 import com.sucho.placepicker.AddressData;
 
 import org.json.JSONObject;
@@ -53,7 +58,7 @@ public class SplashActivity extends AppCompatActivity {
 
     boolean isUserLoggedIn;
     String mobileNumber;
-
+    BlurPopupWindow blurPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,6 +218,49 @@ public class SplashActivity extends AppCompatActivity {
 
 //            Toast.makeText(myContext, "country: " + addresses.get(0).getCountryName(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private boolean isAppUpdateAvailable(String newAppVersion) {
+        int serverAppVersion = 0;
+        int userAppVersion = 0;
+
+        if (TextUtils.isDigitsOnly(newAppVersion)) {
+            serverAppVersion = Integer.parseInt(newAppVersion);
+        }
+
+        String strUserAppVersion = BuildConfig.VERSION_NAME.replaceAll("\\.", "");
+        if (TextUtils.isDigitsOnly(strUserAppVersion)) {
+            userAppVersion = Integer.parseInt(strUserAppVersion);
+        }
+
+        if (userAppVersion < serverAppVersion) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    private void showDialogAppForceUpdate() {
+        blurPopupWindow = new BlurPopupWindow.Builder(SplashActivity.this)
+                .setContentView(R.layout.dialog_layout_force_app_update)
+                .bindClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                                ("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID)));
+                        blurPopupWindow.dismiss();
+                    }
+                }, R.id.ll_update)
+                .setGravity(Gravity.CENTER)
+                .setScaleRatio(0.2f)
+                .setDismissOnClickBack(false)
+                .setDismissOnTouchBackground(false)
+                .setBlurRadius(10)
+                .setTintColor(0x30000000)
+                .build();
+
+        blurPopupWindow.show();
     }
 
     private void getUserDetails() {
@@ -482,6 +530,7 @@ public class SplashActivity extends AppCompatActivity {
                             String contactEmail = jsonObj.optString("ContactEmail");
                             String contactNo = jsonObj.optString("ContactNo");
                             String smsTemplate = jsonObj.optString("SMSTemplate");
+                            String appVersion = jsonObj.optString("version");
 
                             AppSetting appSetting = new AppSetting();
                             appSetting.setMaxDiscount(maxDiscount);
@@ -489,13 +538,14 @@ public class SplashActivity extends AppCompatActivity {
                             appSetting.setContactNo(contactNo);
                             appSetting.setMinimumAmountForFreeDelivery(minimumAmountForFreeDelivery);
                             appSetting.setOrderSuccessSMSTemplate(smsTemplate);
-
                             Application.appSetting = appSetting;
 
-//                            Application.MINIMUM_FREE_DELIVERY_AMOUNT = minimumAmountForFreeDelivery;
+                            if (isAppUpdateAvailable(appVersion)) {
+                                showDialogAppForceUpdate();
 
-                            loadNextPage();
-
+                            } else {
+                                loadNextPage();
+                            }
                         } else {
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
                         }
@@ -762,5 +812,12 @@ public class SplashActivity extends AppCompatActivity {
                 .findViewById(R.id.snackbar_text);
         snackTextView.setMaxLines(4);
         snackbar.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+//        if(blurPopupWindow.)
     }
 }

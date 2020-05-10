@@ -15,7 +15,9 @@ public class ProductObject implements Serializable {
     int foodTypeID;
     int dishID;
     String isDiscounted;
+    double discountPercentage;
     double price;
+    double priceMRP;
    String productDescription;
     int productID;
 //    Integer listProductImage[] ;
@@ -141,6 +143,22 @@ public class ProductObject implements Serializable {
 
     public void setIsDiscounted(String isDiscounted) {
         this.isDiscounted = isDiscounted;
+    }
+
+    public double getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(double discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public double getPriceMRP() {
+        return priceMRP;
+    }
+
+    public void setPriceMRP(double priceMRP) {
+        this.priceMRP = priceMRP;
     }
 
     public double getPrice() {

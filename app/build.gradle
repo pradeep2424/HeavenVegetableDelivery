@@ -19,11 +19,15 @@ android {
         applicationId "com.heaven.vegetable"
         minSdkVersion 17
         targetSdkVersion 29
-//        versionCode 3
-        versionCode 4
-        versionName "1.1.0"
+//        versionCode 4
+//        versionName "1.1.0"
+
+        versionCode 5
+        versionName "1.2.0"
         multiDexEnabled true
 
+        renderscriptTargetApi 25
+        renderscriptSupportModeEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -94,6 +98,8 @@ dependencies {
     implementation 'com.github.Shashank02051997:FancyGifDialog-Android:1.2'
 //    implementation 'com.github.IntruderShanky:Frisson:2.1.1'
     implementation 'com.github.GrenderG:Toasty:1.4.2'
+    implementation 'com.kyleduo.blurpopupwindow:blurpopupwindow:1.0.9'
+    implementation 'com.google.android.play:core:1.6.1'//for new version updater
 
 
 //    implementation 'com.github.vipulasri:timelineview:1.1.4'

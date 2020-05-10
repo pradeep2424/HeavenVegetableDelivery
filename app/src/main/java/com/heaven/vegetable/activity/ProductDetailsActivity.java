@@ -372,7 +372,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
         rvUnitSize.setAdapter(adapterUnit);
         adapterUnit.setClickListener(this);
 
-
         rvUnitSize.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -387,6 +386,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements OnRecyc
     @Override
     public void onClick(View view, int position) {
         uncheckAllUnits();
+
         selectedUnit = listUnitDetails.get(position);
         selectedUnit.setIsChecked(true);
 

@@ -111,7 +111,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:text="Vegetable Name"
                         android:textColor="@color/main_dark_text"
                         android:textSize="20sp" />
 
@@ -121,7 +120,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_foodName"
                         android:layout_marginTop="6dp"
-                        android:text="Vegetable Category"
                         android:textColor="@color/green"
                         android:textSize="14sp" />
 
@@ -131,15 +129,30 @@
                         android:layout_marginTop="15dp"
                         android:background="@color/smokegray" />
 
-                    <com.heaven.vegetable.custom.MyTextViewBold
-                        android:id="@+id/tv_productPrice"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_foodCategory"
                         android:layout_marginTop="15dp"
-                        android:text="₹ 50.00"
-                        android:textColor="@color/main_text"
-                        android:textSize="18sp" />
+                        android:orientation="vertical">
+
+                        <com.heaven.vegetable.custom.MyTextView
+                            android:id="@+id/tv_ProductMRP"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_foodName"
+                            android:visibility="gone"
+                            android:textColor="@color/hint_gray"
+                            android:textSize="14sp" />
+
+                        <com.heaven.vegetable.custom.MyTextViewBold
+                            android:id="@+id/tv_productPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_below="@+id/tv_foodCategory"
+                            android:textColor="@color/main_text"
+                            android:textSize="18sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -279,7 +292,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Vegetables are parts of plants that are eaten by humans as food as part of a meal. This meaning is often used: it is applied to plants collectively to mean all edible plant matter, including the flowers, fruits, stems, leaves, roots, and seeds."
                     android:textColor="@color/gray"
                     android:textSize="14sp" />
 

@@ -1,5 +1,6 @@
 <resources>
-    <string name="google_maps_key">AIzaSyC223E_1fOrNL7cpUZ_cuEbzBI-7xEmfbI</string>
+<!--    <string name="google_maps_key">AIzaSyC223E_1fOrNL7cpUZ_cuEbzBI-7xEmfbI</string>-->
+    <string name="google_maps_key">AIzaSyCob7WSKjosQVSboXzFWWwMOUPDWnoOzCY</string>
 
     <string name="app_name">A Heaven Mart</string>
 
@@ -14,8 +15,13 @@
     <string name="heaven">Heaven</string>
     <string name="vegetable_delivery">Vegetable Delivery</string>
     <string name="rupees">₹</string>
+    <string name="mrp">MRP</string>
 
     <string name="toolbar_products">Products</string>
+
+    <string name="app_update_title">Update App</string>
+    <string name="app_update_subtitle">New update is available now.\nUpdate your application to use latest features.</string>
+    <string name="update">Update</string>
 
     <string name="login_verify_awesome">Awesome,</string>
     <string name="login_verify_otp_text">We will auto detect the OTP sent to your number</string>

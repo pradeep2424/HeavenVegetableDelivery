@@ -495,7 +495,8 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
                                 int foodTypeID = jsonObj.optInt("FoodTypeId");
                                 String group = jsonObj.optString("Group");
                                 int groupID = jsonObj.optInt("GroupId");
-                                double price = jsonObj.optDouble("Price");
+                                double priceMRP = jsonObj.optDouble("Price");
+                                double discountPercent = jsonObj.optDouble("DiscountPercent");
                                 String productDesc = jsonObj.optString("ProductDesc");
                                 int productID = jsonObj.optInt("ProductId");
                                 String productImage = jsonObj.optString("PhotoPath");
@@ -510,6 +511,9 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
 //                                int taxID = jsonObj.optInt("TaxID");
 //                                String taxName = jsonObj.optString("TaxName");
 
+//                                discountPercent = 1;
+                                double priceDiscount = priceMRP - (priceMRP * discountPercent / 100);
+
                                 ArrayList<String> listProdImages = new ArrayList<>();
                                 listProdImages.add(productImage);
 
@@ -518,7 +522,9 @@ public class ProductListActivity extends AppCompatActivity implements OnRecycler
                                 productObject.setProductName(productName);
                                 productObject.setProductDescription(productDesc);
                                 productObject.setListProductImage(listProdImages);
-                                productObject.setPrice(price);
+                                productObject.setDiscountPercentage(discountPercent);
+                                productObject.setPrice(priceDiscount);
+                                productObject.setPriceMRP(priceMRP);
                                 productObject.setCategoryID(categoryID);
                                 productObject.setCategoryName(categoryName);
                                 productObject.setFoodTypeID(foodTypeID);
